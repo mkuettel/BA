@@ -1,0 +1,10 @@
+Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task                                                                              ,Notes
+24-02-2021,Homeoffice,09:30,10:30,   01:00,-                 ,Kick-Off-Meeting und aufarbeiten und sammeln von Notizen                          ,Wichtig sind im Moment die Grobplanung und die Aufgabenstellung sowie die Projektinitialisierung sowie Methoden und Tools.
+24-02-2021,Im Büro   ,11:30,12:30,   01:00,-                 ,Repository mit Tasks und KanBan Board aufsetzen                                   ,Gehostet auf codeberg.org und beinhaltet auch ein Projektboard.
+24-02-2021,Im Büro   ,13:30,14:30,   01:00,3                 ,Repository füllen und Bericht anhand von Template erstellen                       ,
+24-02-2021,Im Büro   ,13:40,15:00,   00:30,3                 ,Tasks erstellen und im Board organisieren                                         ,
+24-02-2021,Im Büro   ,15:00,16:30,   01:30,3                 ,CI für die Repository im EnterpriseLab erstellenrstellen                          ,
+24-02-2021,Im Büro   ,16:30,17:00,   00:30,3                 ,Docker-Installieren, container starten und ausprobieren                           ,
+24-20-2020,Im Büro   ,18:00,18:30,   00:30,-                 ,Mail an die Projektteilnehmer bezüglich Issue-Tracker/Board/Repo/CI               ,
+24-20-2020,Im Büro   ,18:30,19:30,   01:00,4  11             ,Meeting notes organisieren/aufarbeiten/vorbereiten in Anhang                      ,
+24-02-2021,Im Büro   ,19:30,21:00,   01:30,3                 ,Arbeitsjournal erstellen und in den Anhang einbinden                              ,
