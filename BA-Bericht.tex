@@ -1,5 +1,6 @@
 \documentclass[
-	a4paper
+	a4paper,
+    dvipsnames, % more color names with xcolor
 ]{scrreprt}
 
 %%% PACKAGES %%%
@@ -50,6 +51,16 @@
 \usepackage{siunitx}
 
 \usepackage{csquotes}
+
+% clickable links to websites and chapters
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true, %colours links instead of ugly boxes
+  urlcolor     = royalpurple, %colour for external hyperlinks
+  % linkcolor    = sepia, %colour of internal links
+  % citecolor    = sepia, %colour of citations
+  breaklinks   = true
+}
 
 % Change page rotation
 \usepackage{pdflscape}
