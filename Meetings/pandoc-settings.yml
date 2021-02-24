@@ -1,0 +1,6 @@
+mainfont: qpl
+lang: en-US
+documentclass: article
+fontenc: T1
+geometry:
+  - margin=3cm
