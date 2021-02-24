@@ -250,3 +250,5 @@ _markdown_Testing_A_Legacy_Application/
 
 # the generated PDF for the whole Bericht
 BA-Bericht.pdf
+# the generated pdfs for the meetings
+Meetings/*.pdf
