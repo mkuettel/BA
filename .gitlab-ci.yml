@@ -1,0 +1,21 @@
+image: ubuntu:20.04
+# pandoc 2.3 required
+
+before_script:
+  - apt update && apt install -y pandoc
+  - pandoc -V
+
+stages:
+  - doc
+
+latex:
+  stage: doc
+  image: aergus/latex
+  before_script:
+    - apt update && apt install -y pandoc plantuml
+  script:
+    - make all
+
+  artifacts:
+    paths:
+      - ./BA-Bericht.pdf
