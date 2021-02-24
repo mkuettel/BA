@@ -1,0 +1,38 @@
+
+\clearpage% Flush earlier floats (otherwise order might not be correct)
+\begin{landscape}% Landscape page
+\chapter{Journal}
+\label{sec:journal}
+
+    Die folgende Tabelle \fullref{tab:journal} listet die geleisteten Stunden für diese Bachelorarbeit auf. Jede Zeile beinhaltet einen Task und ist unter umständen mit einem oder mehreren Issues auf codeberg.org verbunden.
+
+    \scriptsize
+
+    \begin{longtable}{r l r r r p{2.2cm} l p{4.5cm} p{4.5cm} }
+        \toprule
+        \bfseries Datum & \bfseries Ort & \bfseries Von &
+        \bfseries Bis & \bfseries Stunden &
+        \bfseries Issue \# & \bfseries Task & \bfseries Notizen \\
+        \midrule
+
+        \endhead{}
+
+        \csvreader[
+            late after line=\\\midrule,
+            late after last line=\\\midrule,
+        ]{include/journal.csv}{}
+        {\csvlinetotablerow}
+
+       \csvreader[
+           head to column names,
+           late after line=\\\midrule,
+           late after last line=\\\bottomrule,
+         ]{include/journal-total-hours.csv}{}
+         {& & \bfseries Total (Ist)  & \bfseries hours & \Hours{} \\
+          & & \bfseries Total (Soll) & \bfseries hours & 360:00
+         }
+        \caption{Journal}\label{tab:journal}
+    \end{longtable}
+
+\end{landscape}
+\clearpage% Flush page
