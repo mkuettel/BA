@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -e
+set -u
+
+d="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+calc() {
+    ( echo "scale=2;"; cat ) | bc -l
+}
+
+hour_to_float() {
+    local h="$1"
+    local m="$2"
+    printf "%02d.%02d\n" "$h" "$(echo "($m / 60) * 100" | calc | cut -d. -f1)"
+}
+
+float_to_hour() {
+    IFS= read l
+    h="$(echo "$l" | cut -d'.' -f1)"
+    m="$(echo "$l" | cut -d'.' -f2)"
+    printf "%02d:%02d\n" "$h" "$(echo "($m / 100) * 60 + 0.5" | calc | cut -d. -f1)"
+}
+
+sum() {
+    paste -sd+ - | calc
+}
+
+sum_hours() {
+    while IFS= read l; do
+        h="$(echo "$l" | cut -d':' -f1 | sed 's/^0\{1,\}//g')"
+        m="$(echo "$l" | cut -d':' -f2)"
+        hour_to_float "$h" "$m"
+    done | sum
+}
+
+
+infile="$d"/include/journal.csv
+hours_total="$(sed -n '2,$p' "$infile" | cut -d',' -f5 | sum_hours)"
+
+printf "%s\n%s" \
+    "Hours" \
+    "$(echo "$hours_total" | float_to_hour)" \
+    > "$d"/include/journal-total-hours.csv
+
