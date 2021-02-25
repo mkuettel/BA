@@ -12,7 +12,7 @@ latex:
   stage: doc
   image: aergus/latex
   before_script:
-    - apt update && apt install -y pandoc plantuml
+    - apt update && apt install -y pandoc plantuml bc
   script:
     - make all
 
