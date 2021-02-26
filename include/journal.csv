@@ -1,4 +1,4 @@
-Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task                                                                              ,Notes
+Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task                                                                              ,Notizen
 24-02-2021,Homeoffice,09:30,10:30,   01:00,-                 ,Kick-Off-Meeting und aufarbeiten und sammeln von Notizen                          ,Wichtig sind im Moment die Grobplanung und die Aufgabenstellung sowie die Projektinitialisierung sowie Methoden und Tools.
 24-02-2021,Im Büro   ,11:30,12:30,   01:00,-                 ,Repository mit Tasks und KanBan Board aufsetzen                                   ,Gehostet auf codeberg.org und beinhaltet auch ein Projektboard.
 24-02-2021,Im Büro   ,13:30,14:30,   01:00,3                 ,Repository füllen und Bericht anhand von Template erstellen                       ,
@@ -7,4 +7,10 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 24-02-2021,Im Büro   ,16:30,17:00,   00:30,3                 ,Docker-Installieren, container starten und ausprobieren                           ,
 24-20-2020,Im Büro   ,18:00,18:30,   00:30,-                 ,Mail an die Projektteilnehmer bezüglich Issue-Tracker/Board/Repo/CI               ,
 24-20-2020,Im Büro   ,18:30,19:30,   01:00,4  11             ,Meeting notes organisieren/aufarbeiten/vorbereiten in Anhang                      ,
-24-02-2021,Im Büro   ,19:30,21:00,   01:30,3                 ,Arbeitsjournal erstellen und in den Anhang einbinden                              ,
+24-02-2021,Im Büro   ,19:30,21:00,   01:30,3 6               ,Das erste Arbeitsjournal erstellen und in den Anhang einbinden                    ,
+25-02-2021,Im Büro   ,14:00,14:30,   00:30,11 2              ,Reglement lesen und Notizen machen                                                ,
+25-02-2021,Im Büro   ,14:30,15:30,   01:00,11 2              ,Erster Wurf für die Grobplanung / Definition der Meilensteine                     ,
+25-02-2021,Im Büro   ,15:30,16:30,   01:00,20                ,Dokumentation der Projektorganisation                                             ,
+25-02-2021,Im Büro   ,16:30,17:30,   01:00,11                ,Fragen notieren fürs Meeting                                                      ,
+25-02-2021,Homeoffice,21:00,23:00,   02:00,7                 ,Bibliographie / Recherche Wissenschaftliches arbeiten / Lesen                     ,
+25-02-2021,Homeoffice,09:00,09:30,   00:30,11                ,Vorbereiten fürs Meeting                                                          ,Ich habe keinen Zugriff auf die aktuelle Version der Aufgabenstellung
