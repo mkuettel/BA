@@ -15,11 +15,11 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 25-02-2021,Homeoffice,21:00,23:00,   02:00,7                 ,Bibliographie / Recherche Wissenschaftliches arbeiten / Lesen und Sammeln         ,
 26-02-2021,Homeoffice,09:00,09:30,   00:30,11                ,Vorbereiten fürs Meeting                                                          ,Ich habe keinen Zugriff auf die aktuelle Version der Aufgabenstellung
 26-02-2021,Homeoffice,09:30,10:30,   01:00,-                 ,Meeting                                                                           ,
-26-02-2021,Homeoffice,10:30,11:00,   00:30,-                 ,Meeting Notizen verarbeiten                                                       ,
-26-02-2021,Homeoffice,12:30,13:00,   00:30,-                 ,Neue Issues erstellen und bestehende in Meilensteine Kategorisieren               ,
-26-02-2021,Homeoffice,13:00,14:30,   01:30,-                 ,Notizen machen zum Aufbau vom Bericht. Buch "Wissenschaftliches Arbeiten" Lesen   ,
-26-02-2021,Homeoffice,15:00,15:30,   00:30,-                 ,Tools installieren / Bibliographie erstellen                                       ,
-26-02-2021,Homeoffice,15:30,16:00,   00:30,-                 ,Fragen zur Aufgabenstellung aufschreiben                                          ,
-26-02-2021,Homeoffice,16:00,17:00,   01:00,-                 ,Aufbau des Berichts anpassen / vorbereiten fürs nächste Meeting                   ,
-26-02-2021,Homeoffice,17:30,18:00,   00:30,-                 ,Aufarbeiten der Meeting Notes / vorbereiten fürs nächste Meeting                  ,
-26-02-2021,Homeoffice,18:00,19:00,   01:00,-                 ,Provisorische liste von Requirements erstellen                                    ,Bezgl. Requirements an den Teststand ist noch nicht viel bekannt
+26-02-2021,Homeoffice,10:30,11:00,   00:30,26                ,Meeting Notizen verarbeiten                                                       ,
+26-02-2021,Homeoffice,12:30,13:00,   00:30,2                 ,Neue Issues erstellen und bestehende in Meilensteine Kategorisieren               ,
+26-02-2021,Homeoffice,13:00,14:30,   01:30,18                ,Notizen machen zum Aufbau vom Bericht. Buch "Wissenschaftliches Arbeiten" Lesen   ,
+26-02-2021,Homeoffice,15:00,15:30,   00:30,7                 ,Tools installieren / Bibliographie                                                 ,
+26-02-2021,Homeoffice,15:30,16:00,   00:30,26                ,Fragen zur Aufgabenstellung aufschreiben                                          ,
+26-02-2021,Homeoffice,16:00,17:00,   01:00,18                ,Aufbau des Berichts anpassen / vorbereiten fürs nächste Meeting                   ,
+26-02-2021,Homeoffice,17:30,18:00,   00:30,26                ,Aufarbeiten der Meeting Notes / vorbereiten fürs nächste Meeting                  ,
+26-02-2021,Homeoffice,18:00,19:00,   01:00,30                ,Provisorische liste von Requirements erstellen                                    ,Bezgl. Requirements an den Teststand ist noch nicht viel bekannt
