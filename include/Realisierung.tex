@@ -1,2 +1,46 @@
 \chapter{Realisierung}
 % TODO Beschreibung der Umsetzung der definierten Ziele, einschliesslich der aufgetretenen Schwierigkeiten und Einschränkungen
+
+% Dies ist das Hauptkapitel Ihrer Arbeit! Hier wird die Umsetzung der eigenen Ideen und Konzepte
+% (Kapitel 3) anhand der gewählten Methoden (Kapitel 4) beschrieben, inkl. der dabei aufgetretenen
+% Schwierigkeiten und Einschränkungen.
+
+\section{Projektmanagement}
+
+\subsection{Anforderungen}
+\label{sec:Anforderungen}
+
+Die Anforderungen an das Projekt haben sich aus der Aufgabenstellung (siehe Appendix~\ref{ch:assignment}) sowie aus dem Requirement Engineering (siehe Dazu den Abschnitt~\ref{sub:RequirementsEngineering}).
+
+Die folgende Tabelle~\ref{tab:requirements} zeigt alle Anforderungen auf.
+Die erste Spalte ''Id'' gibt jeder Anforderung einen eindeutigen Kennzeichner, um diese einfacher zu Referenzieren.
+Die Anforderung selber ist in der Spalte ''Anforderung'' genauer beschrieben.
+Die Spalte ''Art'' gibt an, ob es sich bei der Anforderung um eine funktionale oder nicht-funktionale Anforderung handelt.
+Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die Spalte ''Optional'', ob die jeweilige Anforderung zwingend erfüllt werden muss.
+
+\newcommand*{\reqref}[1]{
+    \hyperref[{req:#1}]{\ref{req:#1}-#1}
+}
+\newcommand*{\seereq}[1]{(siehe Anforderung \reqref{#1})}
+\newcommand*{\rid}[1]{\label{req:#1}-#1}
+\begin{longtable}{N p{8.5cm} l l}
+    \toprule
+    \multicolumn{1}{r}{\bfseries Id} & \bfseries Anforderung                                                                                                                                                           & \bfseries Art & \bfseries Optional \\ \midrule
+    \endhead
+    \rid{SDTF}  & Der Stand der Technik/Forschung muss ermittelt werden und in den Bericht eingebunden werden.
+                & Nicht Funktional & Nein  \\ \midrule
+    \rid{TINF}  & Es ein Teststand muss aufgebaut werden welches es erlaubt verschiedene? Performance-Messungen (Bandbreite und Latenz?) von mehreren (wie vielen?) i2pd-Knoten messen kann. & Funktional & Nein \\ \midrule
+    \rid{TKON}  & Es muss ein Konzept erstellt werden wie der Teststand genau aussieht und was genau gemessen werden soll. & Funktional & Nein \\ \midrule
+    \rid{TLIM}  & Es muss möglich sein im Teststand die Bandbreite von einzelnen Knoten einzustellen. & Funktional & Nein \\ \midrule
+    \rid{DOCS}  & Am Ende des Projekts muss dieser Bachelorarbeit abgegeben werden. Dieser Bericht soll das Projekt, die verwendeten Methoden, Evaluationsprozesse, die Umsetzung und Resultate beschreiben.
+                & Nicht Funktional & Nein \\ \midrule
+    \rid{ITER}  & Ein iteratives Projektmanagement wird bevorzugt für kurze Feedback-Zyklen. Da ich alleine am Projekt arbeite sollte so auch weniger Overhead entstehen. & Nicht Funktional & Ja \\ \midrule
+    \rid{PRES}  & Es muss eine Zwischenpräsentation gehalten werden, welche das Projekt und das weitere Vorgehen erklärt.
+                & Nicht Funktional & Nein \\ \midrule
+    \rid{WEBA}  & Es muss ein Web-Abstract erstellt werden, der das Projekt kurz zusammenfasst. Der Web-Abstract wird veröffentlicht und muss eine Woche vor Projektende vom Betreuer abgenommen werden.
+                & Nicht Funktional & Nein \\ \midrule
+    \rid{PVID}  & Es muss ein 90 Sekunden Video erstellt werden, welches diese Bachelorarbeit kurz erklärt. Das Video wird am Start der Schlusspräsentation abgespielt.
+                & Nicht Funktional & Nein \\ \midrule
+    \bottomrule
+    \caption{Requirements}\label{tab:requirements}
+\end{longtable}

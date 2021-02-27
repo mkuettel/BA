@@ -24,6 +24,17 @@
 \usepackage{colortbl} % color cells
 \usepackage{booktabs} % \midrule & \toprule & \bottomrule
 \usepackage{multirow} % multi-row cells in tables
+% reference table rows
+% https://tex.stackexchange.com/questions/356815/reference-table-row-in-latex
+\newcounter{rowcntr}[table]
+\renewcommand{\therowcntr}{\arabic{rowcntr}}
+% A new columntype to apply automatic stepping
+\newcolumntype{N}{>{\refstepcounter{rowcntr}\therowcntr}l}
+% required for \AtBeginEnvironment
+\usepackage{etoolbox}
+% Reset the rowcntr counter at each new tabular
+\AtBeginEnvironment{tabular}{\setcounter{rowcntr}{0}}
+
 
 % Use have more float options
 \usepackage{float}
