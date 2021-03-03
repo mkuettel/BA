@@ -1,5 +1,5 @@
 FILE_NAME=BA-Bericht
-MEETING_NOTES=Meetings/24-02-2021.pdf Meetings/26-02-2021.pdf Meetings/03-03-2021.md Meetings/05-03-2021.md
+MEETING_NOTES=Meetings/24-02-2021.pdf Meetings/26-02-2021.pdf Meetings/03-03-2021.pdf Meetings/03-03-2021-1400.pdf Meetings/05-03-2021.pdf
 PDFLATEXOPTS=-shell-escape -interaction=nonstopmode -halt-on-error
 
 
