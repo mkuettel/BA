@@ -1,4 +1,4 @@
-MEETING_NOTES= Meetings/24-02-2021.pdf Meetings/26-02-2021.pdf
+MEETING_NOTES= Meetings/24-02-2021.pdf Meetings/26-02-2021.pdf Meetings/03-03-2021.md Meetings/05-03-2021.md
 
 all: $(wildcard *.tex) Referenzen.bib $(MEETING_NOTES) include/journal-total-hours.csv
 	pdflatex BA-Bericht.tex
