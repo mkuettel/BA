@@ -153,11 +153,9 @@
 % Define the path were images are found
 \graphicspath{{./img/}{./appendix/}}
 
-%%% GLOSSARY ENTRIES %%%
-\makeglossaries
-% \newacronym{RFID}{RFID}{Radio-Frequency Identification}
-% \newglossaryentry{HF}{name={HF},description={High Frequency, RFID Tags im Frequenzbereich von 3-30MHz}}
 
+%%% GLOSSARY ENTRIES %%%
+\input{./include/glossary}
 
 %%% DOCUMENT %%%
 
@@ -165,13 +163,20 @@
 
 \include{include/HSLU_Preamble}
 
+\KOMAoptions{headings=normal}
+\KOMAoptions{DIV=12}
 \pagenumbering{Roman}
+
 
 \begin{abstract}
 	% TODO Abstract schreiben =)
 \end{abstract}
 
 \tableofcontents
+
+\glsaddall
+\printglossaries
+\newpage
 
 \clearpage
 \pagenumbering{arabic}
