@@ -19,3 +19,4 @@ latex:
   artifacts:
     paths:
       - ./BA-Bericht.pdf
+      - ./Meetings/*.pdf
