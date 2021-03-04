@@ -32,13 +32,16 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
 
 
     \rid{TINF}  & Es ein Teststand muss aufgebaut werden welches es erlaubt verschiedene Performance-Messungen
-                  an einem Netzwerk bestehend mehreren 256 i2pd-Knoten. & Funktional & Nein \\ \midrule
+                  an einem Netzwerk bestehend mehreren i2pd-Knoten. & Funktional & Nein \\ \midrule
     \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand, wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-Funktional & Ja \\ \midrule
     \rid{TINF}  & Die am Teststand durchgeführten Messungen sollten so gut wie möglich reproduzierbar sein. Die gleiche Messung sollte soweit wie möglich dieselben Resultate liefern. & Nicht-Funktional & Nein \\ \midrule
-    \rid{TCNF}  & Der Teststand muss konfigurierbar sein (inwiefern?), damit verschieden Messungen durchgeführt werden können.  & Funktional & Nein \\ \midrule
+    \rid{TCNF}  & Der Teststand muss konfigurierbar sein (inwiefern?), damit verschiedene Messungen durchgeführt werden können.  & Funktional & Nein \\ \midrule
     \rid{TSCL}  & Das Testnetzwerk soll zwischen 8 Knoten bis maximal 256 i2pd-Knoten unterstützen. Dies muss konfigurierbar sein, dass Testnetzwerk sollte skalieren können. & Funktional & Nein \\ \midrule
+    \rid{TISO}  & Das Testnetzwerk soll isoliert sein vom realen I2P-Netzwerk. & Nicht-Funktional & Nein \\ \midrule
     \rid{TLAT}  & Die Latenz von Nachrichten die über das I2P-Testnetzwerk gesendet werden, soll gemessen werden. & Funktional & Nein \\ \midrule
     \rid{TLIM}  & Es muss möglich sein im Teststand die verfügbare Bandbreite von einzelnen i2pd-Knoten einzustellen. & Funktional & Nein \\ \midrule
+    \rid{TVRS}  & Man soll schnell (wie schnell?) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-Funktional & Nein \\ \midrule
+    \rid{TPER}  & Man geht davon aus das die Messungen lange dauern könnten, da jeweils ein ganzes Netzwerk und dessen Traffic erstellt und gehandhabt werden muss. Es macht Sinn die Ausführungszeiten von Messungen kurz zu halten, damit mehr Messungen durchgeführt werden können. & Nicht-Funktional & Ja \\ \midrule
     \rid{DOCS}  & Am Ende des Projekts muss dieser Bachelorarbeit abgegeben werden. Dieser Bericht soll das Projekt, die verwendeten Methoden, Evaluationsprozesse, die Umsetzung und Resultate beschreiben.
                 & Nicht Funktional & Nein \\ \midrule
     \rid{ITER}  & Ein iteratives Projektmanagement wird bevorzugt für kurze Feedback-Zyklen. Da ich alleine am Projekt arbeite sollte so auch weniger Overhead entstehen. & Nicht Funktional & Ja \\ \midrule
