@@ -36,9 +36,25 @@ Auch wird aufgezeigt wie das Projekt organisiert ist.
 
 \subsection{Vorgehensmodell}
 
-% TODO: vorgehensmodell festsetzen
-% SoDa? KanBan? Quellen?
+ In den Besprechungen hat sich ergeben, dass wir inkrementell und iterativ arbeiten möchten
+(siehe Anhang~\ref{sec:meeting_03_03_2021}, Abschnitt ''Projektmanagementmethode).
+Das Projektmanagement soll schlank gehalten werden und nicht viel Aufwand erzeugen, auch da ich alleine an diesem Bericht arbeite.
 
+Dementsprechend habe ich als Vorgehensmodell wurde Kanban ausgewählt.
+
+Folgendes sind einige Kernpraktiken von Kanban kurz erklärt:
+
+\begin{enumerate}
+    \item \textbf{Arbeit sichtbar machen}: Arbeit muss sichtbar gemacht werden, um zu sehen wo der Arbeitsfluss im Gesamtsystem stockt.
+        Auch arbeitet man bei Kanban nicht nach dem Push-Prinzip sondern dem Pull-Prinzip. Das 
+        Das heisst es wird keine Arbeit zugewiesen, sondern neue Arbeit wird abgeholt sobald die letzte Aufgabe (oder Issue/Task) fertiggestellt wurde.
+    \item \textbf{Limitiere den Work in Progress (WIP)}: Es ist schwierig ständig zwischen Aufgaben zu wechseln. Deshalb soll nur an einer Aufgabe auf einmal gearbeitet werden. Tritt ein Problem auf bei einer Aufgabe, legt man diese auf die Seite, um diese später mit jemandem anzuschauen, oder erledigt erst eine andere Aufgabe welche eine Voraussetzung ist.
+    \item \textbf{Manage Flow}: Arbeitsfluss ist wichtig in Kanban. Es soll Aufmerksamkeit gelegt werden auf Engpässe oder gar Blockaden im System. Dabei hilft es zu unterscheiden was für verschiedene Arbeitstypen das Team erledigen muss und das verschiedene Arbeiten einen anderen Grad an Dringlichkeit haben.
+    \item \textbf{Explizite Prozessregeln}: Die Regeln sollen offen gelegt und explizit gemacht werden, damit man merkt wann diese gebrochen oder nicht mehr sinnvoll sind.
+    \item \textbf{Feedback Mechanismen}: Um die Arbeitsprozesse kontinuierlich verbessern zu können, benötigt es Feedback-Mechanismen. Dies kann z.B. an täglichen Stand-Ups oder an Retrospektiven. Dies sind Meetings wo darauf abgezielt wird dazuzulernen, den Arbeitsprozess zu reflektieren und  zu Verbessern.
+\end{enumerate}
+
+(\cite[p.~17-22]{siegfried_kaltenecker_kanban_2013})
 
 \subsection{Projektteam}
 
@@ -74,23 +90,24 @@ Der \LaTeX-Quellcode für diesen Bericht ist auf codeberg.org in diesem Reposito
 \subsection{Projektboard und Issue-Tracker}
 
 Die Abbildung~\ref{fig:projectboard} zeigt das Projektboard, welches für Projektmanagement und Controlling verwendet wird.
-Jede Karte auf dem Projektboard ist ein Issue aus dem Issue-Tracker:
+Jede Karte auf dem Projektboard ist eine Aufgabe oder auch Issue aus dem folgenden Issue-Tracker:
 
 \url{https://codeberg.org/mkuettel/ba/issues}
 
-Der Issue-Tracker ist zugleich ein Backlog. Issues können nach Bedarf aus dem BackLog entnommen werden und zum Projektboard hinzugefügt werden.
+Der Issue-Tracker ist zugleich ein Backlog. Issues können nach Bedarf aus dem Issue-Tracker entnommen werden und zum Projektboard hinzugefügt werden.
 
-Das Projektboard ist ein KanBan-Board und enthält drei Spalten: ''To Do'', ''In Progress'' und ''Done''.
+Das Projektboard ist ein Kanban-Board und enthält drei Spalten: ''To Do'', ''In Progress'' und ''Done''.
 Diese Issues aus dem Issue-Tracker können dann je nach fortschritt in die Spalten einsortiert werden. 
-Ziel von KanBan ist es eines nach dem anderen zu machen und sich auf einen Task zu fokussieren. Man sollte also nie mehr als einen Issue in der Spalte ''In Progress'' haben.
+Ziel von Kanban ist es eines nach dem anderen zu machen und sich auf einen Task zu fokussieren. Man sollte also nie mehr als einen Issue in der Spalte ''In Progress'' haben.
 %TODO: definition of done
 % https://de.wikipedia.org/wiki/Kanban_(Softwareentwicklung)
 
 %TODO: describe how issues are categorized (labels, milestones, projects etc.)
 
-Das KanBan-Board ist hier zu finden:
+Das Kanban-Board ist hier zu finden:
 
 \url{https://codeberg.org/mkuettel/BA/projects/125}
+
 
 
 \begin{figure*}[ht]
@@ -106,7 +123,7 @@ Wird an einem Issue gearbeitet wird dies im Journal vermerkt \& in der Git-Histo
 Das Arbeitsjournal ist im Anhang~\ref{sec:journal} zu finden.
 
 
-Die Länge eines Sprints in KanBan ist nicht genau definiert, sondern der Sprint ist fertig wenn alle Arbeit für den jeweiligen Sprint erledigt wurde.
+Die Länge eines Sprints in Kanban ist nicht genau definiert, sondern der Sprint ist fertig wenn alle Arbeit für den jeweiligen Sprint erledigt wurde.
 
 \subsection{Ermittlung offener Projektrahmenbedingungen}
 \label{sub:RequirementsEngineering}
