@@ -7,50 +7,131 @@
 
 \section{Projektmanagement}
 
-\subsection{Anforderungen}
-\label{sec:Anforderungen}
+\subsection{Resultate}
 
-Die Anforderungen an das Projekt haben sich aus der Aufgabenstellung (siehe Appendix~\ref{ch:assignment}) sowie aus dem Requirement Engineering (siehe Dazu den Abschnitt~\ref{sub:RequirementsEngineering}).
+Die folgende Tabelle~\fullref{tab:resultate} beschreibt alle Resultate und Unterresultate die während dieser Bachelorarbeit erstellt werden.
+Diese Tabelle wurde zusammengestellt anhand der Anforderungen im Abschnitt~\ref{sec:Anforderungen}.
 
-Die folgende Tabelle~\ref{tab:requirements} zeigt alle Anforderungen auf.
-Die erste Spalte ''Id'' gibt jeder Anforderung einen eindeutigen Kennzeichner, um diese einfacher zu Referenzieren.
-Die Anforderung selber ist in der Spalte ''Anforderung'' genauer beschrieben.
-Die Spalte ''Art'' gibt an, ob es sich bei der Anforderung um eine funktionale oder nicht-funktionale Anforderung handelt.
-Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die Spalte ''Optional'', ob die jeweilige Anforderung zwingend erfüllt werden muss.
+Jedes Resultat hat einen eindeutigen Identifier in  der Spalte ''Nr'' aufgelistet.
+Die Spalte ``Anforderung'' bezieht sich darauf, welche Anforderungen für das jeweilige Resultat massgebend sind.
+In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Projekts abgeschätzt wie viel Arbeitsaufwand (in Stunden) das Resultat verursacht.
 
-\newcommand*{\reqref}[1]{
-    \hyperref[{req:#1}]{\ref{req:#1}-#1}
-}
-\newcommand*{\seereq}[1]{(siehe Anforderung \reqref{#1})}
-\newcommand*{\rid}[1]{\label{req:#1}-#1}
-\begin{longtable}{N p{8.5cm} l l}
+\begin{longtable}{p{0.8cm} l p{3.5cm} p{2cm}}
     \toprule
-    \multicolumn{1}{r}{\bfseries Id} & \bfseries Anforderung                                                                                                                                                           & \bfseries Art & \bfseries Optional \\ \midrule
-    \endhead
-    \rid{SDTF}  & Der Stand der Technik/Forschung muss ermittelt werden und in den Bericht eingebunden werden.
-                & Nicht Funktional & Nein  \\ \midrule
-
-
-    \rid{TINF}  & Es ein Teststand muss aufgebaut werden welches es erlaubt verschiedene Performance-Messungen
-                  an einem Netzwerk bestehend mehreren i2pd-Knoten. & Funktional & Nein \\ \midrule
-    \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand, wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-Funktional & Ja \\ \midrule
-    \rid{TINF}  & Die am Teststand durchgeführten Messungen sollten so gut wie möglich reproduzierbar sein. Die gleiche Messung sollte soweit wie möglich dieselben Resultate liefern. & Nicht-Funktional & Nein \\ \midrule
-    \rid{TCNF}  & Der Teststand muss konfigurierbar sein (inwiefern?), damit verschiedene Messungen durchgeführt werden können.  & Funktional & Nein \\ \midrule
-    \rid{TSCL}  & Das Testnetzwerk soll zwischen 8 Knoten bis maximal 256 i2pd-Knoten unterstützen. Dies muss konfigurierbar sein, dass Testnetzwerk sollte skalieren können. & Funktional & Nein \\ \midrule
-    \rid{TISO}  & Das Testnetzwerk soll isoliert sein vom realen I2P-Netzwerk. & Nicht-Funktional & Nein \\ \midrule
-    \rid{TLAT}  & Die Latenz von Nachrichten die über das I2P-Testnetzwerk gesendet werden, soll gemessen werden. & Funktional & Nein \\ \midrule
-    \rid{TLIM}  & Es muss möglich sein im Teststand die verfügbare Bandbreite von einzelnen i2pd-Knoten einzustellen. & Funktional & Nein \\ \midrule
-    \rid{TVRS}  & Man soll schnell (wie schnell?) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-Funktional & Nein \\ \midrule
-    \rid{TPER}  & Man geht davon aus das die Messungen lange dauern könnten, da jeweils ein ganzes Netzwerk und dessen Traffic erstellt und gehandhabt werden muss. Es macht Sinn die Ausführungszeiten von Messungen kurz zu halten, damit mehr Messungen durchgeführt werden können. & Nicht-Funktional & Ja \\ \midrule
-    \rid{DOCS}  & Am Ende des Projekts muss dieser Bachelorarbeit abgegeben werden. Dieser Bericht soll das Projekt, die verwendeten Methoden, Evaluationsprozesse, die Umsetzung und Resultate beschreiben.
-                & Nicht Funktional & Nein \\ \midrule
-    \rid{ITER}  & Ein iteratives Projektmanagement wird bevorzugt für kurze Feedback-Zyklen. Da ich alleine am Projekt arbeite sollte so auch weniger Overhead entstehen. & Nicht Funktional & Ja \\ \midrule
-    \rid{PRES}  & Es muss eine Zwischenpräsentation gehalten werden, welche das Projekt und das weitere Vorgehen erklärt.
-                & Nicht Funktional & Nein \\ \midrule
-    \rid{WEBA}  & Es muss ein Web-Abstract erstellt werden, der das Projekt kurz zusammenfasst. Der Web-Abstract wird veröffentlicht und muss eine Woche vor Projektende vom Betreuer abgenommen werden.
-                & Nicht Funktional & Nein \\ \midrule
-    \rid{PVID}  & Es muss ein 90 Sekunden Video erstellt werden, welches diese Bachelorarbeit kurz erklärt. Das Video wird am Start der Schlusspräsentation abgespielt.
-                & Nicht Funktional & Nein \\ \midrule
+    \bfseries Nr & \bfseries Resultat & \bfseries Anforderung& \multicolumn{1}{p{3cm}}{\bfseries Geschätzter Arbeitsaufwand} \\
+    \midrule \endhead
+    D            & \textbf{Dokumentation}                                       & \reqref{DOCS} & \textbf{Total 44h}  \\
+    \midrule                                                               
+    D.1          & \; Dokumenten Layout                                &       & 8h   \\
+    D.2          & \; Aufbau des Berichts                              &       & 4h   \\
+    D.3          & \; Titelseite                                       &       & 2h   \\
+    D.4          & \; Zusammenfassung / Abstract                       &       & 2h   \\
+    D.5          & \; Einleitung                                       &       & 4h   \\
+    D.6          & \; Beschreibung Motivation / Problem                &       & 2h   \\
+    D.7          & \; Beschreibung der Aufgabenstellung                &       & 2h   \\
+    D.8          & \; Beschreibung der Ziele / Vision                  &       & 1h   \\
+    D.9          & \; Fragestellungen / Hypothesen                     &       & 2h   \\
+    D.11         & \; Reflektion / Fazit                               &       & 3h   \\
+    D.12         & \; Persönliches Projektfazit                        &       & 1h   \\
+    D.13         & \; Ausblick                                         &       & 4h   \\
+    D.14         & \; Anhang                                           &       & 3h   \\
+    D.15         & \; Zwischenpräsentation                             & \reqref{PRES}  & 6h  \\
+    \midrule                                                               
+    R            & \textbf{Research State of the Art}                           & \reqref{SDTF} \reqref{DOCS}  & \textbf{Total 40h} \\
+    \midrule                                                               
+    R.1          & \; Literatur sammeln (Recherche)                    &       & 12h  \\
+    R.2          & \; Bibliographie erstellen                          &       &  4h  \\
+    R.3          & \; P2P Networks                                     &       &  2h  \\
+    R.3.1        & \;   - Latenz / Bandbreite / Performanz             &       &  2h  \\
+    R.4          & \; Beschreibung I2P                                 &       & 10h  \\
+    R.4.1        & \; -- Begrifflichkeiten                              &       &  4h  \\
+    R.4.2        & \; -- Funktionsweise                                 &       &  2h  \\
+    R.4.3        & \; -- Bandbreite                                     &       &  2h  \\
+    R.4.4        & \; -- Latenz                                         &       &  2h  \\
+    R.5          & \; Deployment von Testnetzwerken                    &       &  4h  \\
+    R.6          & \; Beschreibung der Wissenschaftlichen Methode      &       &  2h  \\
+    R.7          & \; Metriken für die Auswertung                      & \reqref{TPER} \reqref{TISO} \reqref{TREP}  &  6h  \\
+    \midrule                                                               
+    K            & \textbf{Testkonzept          }                               & \reqref{TKON} \reqref{DOCS}  & \textbf{Total 46h}  \\
+    \midrule                                                               
+    K.1          & \; Beschreibung Ideen / Konzepte                    &       &  4h  \\
+    K.2          & \; Anforderungen an den Teststand                   &       &  4h  \\
+    K.3          & \; Teststrategie                                    &       &  4h  \\
+    K.4          & \; Architektur Teststand                            &       &  4h  \\
+    K.5          & \; Komponentendiagramm                              &       &  2h  \\
+    K.6          & \; Beschreibung was gemessen werden soll            &       &  8h  \\
+    K.7.1        & \; -- Bandbreite                                     & \reqref{TLIM} &  2h  \\
+    K.7.1        & \; -- Anzahl Tunnels                                 & \reqref{TCNF}    &  2h  \\
+    K.7.1        & \; -- Latenz von Nachrichten                         & \reqref{TLAT}    &  2h  \\
+    K.7.1        & \; -- Ressourcenauslastung eines Knotens             & \reqref{TPER}    &  2h  \\
+    K.8          & \; Beschreibung wie gemessen wird                   &       & 10h  \\
+    K.8.1        & \; -- Isolation des Netzwerks                        & \reqref{ORDR}    &  2h  \\
+    K.8.1        & \; -- Verschiedene Netzwerksegmente                  & \reqref{ORDR}    &  2h  \\
+    K.8.2        & \; -- Latenz                                         & \reqref{ORDR}    &  2h  \\
+    K.8.3        & \; -- Bandbreite                                     &       &  2h  \\
+    K.8.4        & \; -- Konfigurationsmöglichkeiten                    & \reqref{TCNF} &  2h  \\
+    K.9.5        & \; \glsname{ci}                                     & \reqref{TVRS} &  6h  \\
+    K.9.6        & \; Beschreibung der Auswertungsmethode              &               &  4h  \\
+    \midrule                                                               
+    S            & \textbf{Teststand Design und Implementation}                 & \reqref{TINF} \reqref{DOCS} & \textbf{Total 124h} \\
+    \midrule
+    S.1          & \; Software Design                                  &       &  16h \\
+    S.1          & \; Implementation                                   &       &  72h \\
+    S.2.1        & \; -- Deployment des Testnetzwerkes                  & \reqref{TVRS} \reqref{TPER} &  8h \\
+    S.2.2        & \; -- Netzwerksegmentierung                          & \reqref{TISO} &  8h \\
+    S.2.3        & \; -- Konfigurationsmöglichkeiten                    & \reqref{TCNF} &  8h \\
+    S.2.4        & \; -- Skalierung                                     & \reqref{TSCL} &  8h \\
+    S.2.5        & \; -- Bandbreitenbeschränkung                        & \reqref{TLIM} &  8h \\
+    S.2.6        & \; -- Reproduzierbarkeit                             & \reqref{TREP} &  8h \\
+    S.2.7        & \; -- Latenzmessung                                  & \reqref{TLAT} &  8h \\
+    S.2.8        & \; -- Messung der Ressourcenauslastung               & \reqref{TPER} &  8h \\
+    S.2.9        & \; -- Verschiedene Testaufbauten                     & \reqref{TVRS} &  8h \\
+    S.3          & \; Test des Labors                                  &       &  24h \\
+    S.4          & \; Handbuch für den Teststand                       &       &  12h \\
+    S.4.1        & \; -- Installation                                   &       &   2h \\
+    S.4.3        & \; -- Konfiguration                                  &       &   2h \\
+    S.4.3        & \; -- Ausführen von Messungen                        &       &   2h \\
+    S.4.3        & \; -- Beschreibung der gesammelten Messdaten         &       &   4h \\
+    S.4.3        & \; -- Beispiele                                      &       &   2h \\
+    \midrule                                                                        
+    A            & \textbf{Messung und Auswertung}                              & \reqref{EVAL} \reqref{DOCS}   & \textbf{Total 52h}  \\
+    \midrule
+    A.1          & \; Sammlung an Messdaten für die Auswertung         &        &  12h  \\
+    A.2          & \; Beschreibung der Auswertungsmethode              &        &   4h  \\
+    A.3          & \; Auswertung der Messungen                         &                    & 20h  \\
+    A.3.1        & \; -- Einfluss der Knoten auf die Latenz             & \reqref{TLAT}      &  6h  \\
+    A.3.2        & \; -- Einfluss der Anzahl Verbindungen auf die Latenz& \reqref{TLAT} \reqref{TLIM} &  6h  \\
+    A.3.3        & \; -- Einfluss der Bandbreite auf Latenz             & \reqref{TLAT} \reqref{TLIM} &  6h  \\
+    A.3.4        & \; -- Äussere Einflüsse / Unreinheiten               & \reqref{TREP} \reqref{TISO} &  2h  \\
+    A.4          & \; Verschiedene Diagramme/Grafiken                  &       &  8h  \\
+    A.5          & \; Auswertung der Anforderungen an den Teststand    & \reqref{TINF} &  4h  \\
+    A.6          & \; Zusammenfassung der Auswertung                   &       &  4h  \\
+    \midrule                                                               
+    P            & \textbf{Project Management Dokumentation}                    & \reqref{DOCS} \reqref{ITER}  &  \textbf{Total 54h}  \\
+    \midrule
+    P.1          & \; Beschreibung Projektorganisation                 &       &  1h  \\
+    P.3          & \; Projektmanagement Methode                        &       &  2h  \\
+    P.2          & \; Beschreibung Projektumfang                       &       &  2h  \\
+    P.4          & \; Projektplanung                                   &       &  8h  \\
+    P.5          & \; Liste von Requirements                           &       &  4h  \\
+    P.6          & \; Liste von Resultaten                             &       &  4h  \\
+    P.9          & \; Arbeitsjournal                                   &       &  4h  \\
+    P.10         & \; Meeting-Protokolle und Notizen                   &       & 29h  \\
+    \midrule                                                               
+                 & \bfseries  Geschätzter Arbeitsaufwand               & \textbf{Total} & \bfseries 360h \\
+    \midrule
     \bottomrule
-    \caption{Requirements}\label{tab:requirements}
+    \caption{Resultate}
+    \label{tab:resultate}
 \end{longtable}
+
+Diese Liste von Resultaten ist auch ein guter Ausgangspunkt um davon Issues für den Issue-Tracker zu erstellen.
+Jeder issue kann nun auch sortiert werden nach Resultat-Kategorien z.B. ''Recherche'', ''Projektmanagement'', ''Dokumentation'', ''Evaluation'', ''Präsentation'', etc.
+
+\section{Systemarchitektur}
+
+\section{Komponentendesign}
+
+\section{Umsetzung / Programmierung}
+
+\section{Testing}
