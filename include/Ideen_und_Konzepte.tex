@@ -17,3 +17,55 @@
 % eigentliche Kern Ihrer Arbeit).
 % - Besteht z.B. ein wesentliches Ziel der Arbeit darin, eine passende Software-Architektur zu
 % evaluieren, dann gehören die entsprechenden Beschreibungen ins Kapitel 5.
+
+\section{Reproduzierbatkeit}
+
+\begin{itemize}
+    \item Isoliertes Netzwerk
+    \item Configuration as Code
+    \item Nix
+    \item Container
+\end{itemize}
+
+\section{Deployment-Tool}
+
+\begin{itemize}
+    \item Mehrere Maschinen auf einmal
+    \item Reproduzierbatkeit
+    \item verschiedene Konfigurationsänderungen
+    \item Verschiedene Deployment möglichkeiten (HW/VM/Container)
+\end{itemize}
+
+\section{Latenzmessung von Nachrichten}
+
+\begin{itemize}
+    \item (Empfangszeitpunkt - Absendezeitpunkt)
+    \item Clock Synch?
+\end{itemize}
+
+\section{Limitieren der Bandbreite}
+
+\begin{itemize}
+    \item Die Bandbreite eines i2pd Knoten kann limitiert werden in der Konfiguration mit der Einstellung bandwidth.  
+    \item \cite{noauthor_i2p_nodate-3}
+    \item Tc - Traffic control tool
+    \item Nix Tooling
+\end{itemize}
+
+\section{Isolierung des Testnetzwerks}
+
+\begin{itemize}
+    \item Firewall
+    \item Container
+    \item VM Network?
+    \item Segmentierte Netzwerke?
+\end{itemize}
+
+\section{Messen der Ressourcenauslastung der Knoten}
+
+\begin{itemize}
+    \item Uplink/Downlink Bandwith
+    \item Bandwidth of I2P traffic
+    \item CPU usage
+    \item RAM Usage
+\end{itemize}
