@@ -193,7 +193,7 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
 
 \subsection{Einschränkungen und Abgrenzungen}
 
-Es soll nur die Performance des I2P layer untersucht werden und nicht die darüberliegende Software von DIVA.EXCHANGE.
+Es soll nur die Performance des I2P-Netzwerks mit der i2pd-Software untersucht werden und nicht von darüberliegenden Applikationen.
 
 % TODO: Scope in der Einleitung
 % TODO: Scope definieren
@@ -207,11 +207,45 @@ Im Schnitt bedeutet dies acht Stunden Arbeit an jeweils 3 Wochentagen (meistens 
 % 15 Wochen * 3 Tage * 8h = 360h
 
 \subsubsection{Meilensteine}
+\label{sec:meilensteine}
+
+Die Meilensteine sind im Projektkalender (\fullref{tab:projektkalender}) hellblau gekennzeichnet und hier aufgelistet.
+
+\begin{enumerate}
+    \item \textbf{Startdatum}: Mittwoch 24. Februar 2021, Kick-Off-Meeting
+    \item \textbf{Zwischenpräsentation}: 14. April 2021
+    \item \textbf{Abgabe Web-Abstract}: 21. Mai 2021
+    \item \textbf{Abgabedatum}: 4. Juni 2021
+    \item \textbf{Schlusspräsentation}: 13.6 - 3.7 2021
+\end{enumerate}
+
+Die Meilensteine sollen ein Controlling-Mechanismus, um zu merken, wann das Projekt im Verzug ist.
+An den jeweiligen Meilensteine müssen folgende Resultate erzeugt worden sein:
 
 
-\subsection{Projektkalender}
+Diese Meilensteine wurden auch in den Issue-Tracker aufgenommen:
 
-Regalmässige Meetings finden jeweils am Mittwoch Morgen, am Start der Projektwoche, und am Freitag Morgen.
+\url{https://codeberg.org/mkuettel/BA/milestones}
+
+\subsubsection{Phasen}
+\label{sec:phasen}
+
+Das Projekt wird in 4 Phasen durchgeführt die im der \fullref{tab:projektkalender} aufgezeigt sind.
+Dabei sind die Phasen jeweils durch Meilensteine voneinander abgegrenzt.
+
+\begin{enumerate}
+    \item \textbf{Konzeptionsphase}: Die Konzeptionsphase beginnt mit dem Kick-Off Meeting
+        In dieser Phase wird das Projekt geplant, recherchiert, der Bericht wird strukturiert, die Anforderungen werden eruiert und  ein Konzept für einen Teststand wird erstellt.
+    \item \textbf{Aufbau des Teststands}: Ein Teststand aufbauen nach Konzept um Performance-Experimente und Messungen mit der i2pd-Software in einem Netzwerk machen zu können.
+Analyze what needs to be tested and determine testing criteria, create a test plan.
+    \item \textbf{Auswertungsphase}: Verschiedene Performance-Experimente und Messungen werden in dieser Phase ausgeführt und ausgewertet.
+    \item \textbf{Abschlussphase}: Vervollständigen des Berichts, Fazit erstellen, Korrekturlesen, Erstellung des Web-Abstracts.
+\end{enumerate}
+
+
+\subsubsection{Projektkalender}
+
+Regelmässige Meetings finden jeweils am Mittwoch Morgen, am Start der Projektwoche, und am Freitag Morgen.
 
 Die Spalte ''PW'' gibt die Projektwoche an. Die Spalte ''KW'' die Kalenderwoche.
 
@@ -258,41 +292,6 @@ Die Spalte ''PW'' gibt die Projektwoche an. Die Spalte ''KW'' die Kalenderwoche.
     \label{tab:projektkalender}
 \end{table}
 
-Dies Meilensteine wurden auch in den Issue-Tracker aufgenommen:
-
-\url{https://codeberg.org/mkuettel/BA/milestones}
-
 Es gilt zu beachten das dies eine Planung ist, wie das Projekt effektiv verlaufen ist ist ersichtlich aus dem Issue-Tracker und dem Arbeitsjournal im Anhang~\ref{sec:journal}.
 
-Die Meilensteine sollen ein Controlling-Mechanismus, um zu merken, wann das Projekt im Verzug ist.
-An den jeweiligen Meilensteine müssen folgende Resultate erzeugt worden sein:
-
-\subsection{Meilensteine}
-\label{sec:meilensteine}
-
-Die Meilensteine sind im Projektkalender (\fullref{tab:projektkalender}) hellblau gekennzeichnet und hier aufgelistet.
-
-\begin{enumerate}
-    \item \textbf{Startdatum}: Mittwoch 24. Februar 2021, Kick-Off-Meeting
-    \item \textbf{Zwischenpräsentation}: 14. April 2021
-    \item \textbf{Abgabe Web-Abstract}: 21. Mai 2021
-    \item \textbf{Abgabedatum}: 4. Juni 2021
-    \item \textbf{Schlusspräsentation}: 13.6 - 3.7 2021
-\end{enumerate}
-
-
-\subsection{Phasen}
-\label{sec:phasen}
-
-Das Projekt wird in 4 Phasen durchgeführt die im der \fullref{tab:projektkalender} aufgezeigt sind.
-Dabei sind die Phasen jeweils durch Meilensteine voneinander abgegrenzt.
-
-\begin{enumerate}
-    \item \textbf{Konzeptionsphase}: Die Konzeptionsphase beginnt mit dem Kick-Off Meeting
-        In dieser Phase wird das Projekt geplant, recherchiert, der Bericht wird strukturiert, die Anforderungen werden eruiert und  ein Konzept für einen Teststand wird erstellt.
-    \item \textbf{Aufbau des Teststands}: Ein Teststand aufbauen nach Konzept um Performance-Experimente und Messungen mit der i2pd-Software in einem Netzwerk machen zu können.
-Analyze what needs to be tested and determine testing criteria, create a test plan.
-    \item \textbf{Auswertungsphase}: Verschiedene Performance-Experimente und Messungen werden in dieser Phase ausgeführt und ausgewertet.
-    \item \textbf{Abschlussphase}: Vervollständigen des Berichts, Fazit erstellen, Korrekturlesen, Erstellung des Web-Abstracts.
-\end{enumerate}
 
