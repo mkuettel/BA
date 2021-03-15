@@ -153,11 +153,6 @@ Die Anforderung selber ist in der Spalte ''Anforderung'' genauer beschrieben.
 Die Spalte ''Art'' gibt an, ob es sich bei der Anforderung um eine funktionale oder nicht-funktionale Anforderung handelt.
 Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die Spalte ''Optional'', ob die jeweilige Anforderung zwingend erfüllt werden muss.
 
-\newcommand*{\reqref}[1]{
-    \hyperref[{req:#1}]{\ref{req:#1}-#1}
-}
-\newcommand*{\seereq}[1]{(siehe Anforderung \reqref{#1})}
-\newcommand*{\rid}[1]{\label{req:#1}-#1}
 \begin{longtable}{N p{8.5cm} l l}
     \toprule
     \multicolumn{1}{r}{\bfseries Id} & \bfseries Anforderung                                                                                                                                                           & \bfseries Art & \bfseries Optional \\ \midrule

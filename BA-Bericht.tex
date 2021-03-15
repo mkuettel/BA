@@ -65,6 +65,46 @@
 \usepackage{siunitx}
 
 \usepackage{csquotes}
+% be able to include source code listings
+\usepackage{listings}
+\usepackage{inconsolata}
+\definecolor{dkgreen}{rgb}{0,0.5,0}
+\definecolor{dkblue}{rgb}{0,0,.6}
+\definecolor{dkyellow}{cmyk}{0.2,0,0.8,0.3}
+\lstset{
+    basicstyle         = \footnotesize{\ttfamily},         % Code font, Examples: \footnotesize, \ttfamily
+    breaklines         = true,                           % automatic line breaking only at whitespace
+    captionpos         = b,                              % sets the caption-position to bottom
+    backgroundcolor    = \color{white},                  % Choose background color
+    frame              = tb,                         % A frame around the code
+    tabsize            = 4,                              % Default tab size
+    captionpos         = b,                              % Caption-position = bottom
+    % postbreak          = \mbox{$\hookrightarrow$\space},
+    showspaces         = false,                          % Dont make spaces visible
+    showtabs           = false,                          % Dont make tabs visible
+    inputencoding      = utf8,
+    extendedchars      = true,                           % i have some special chars...
+    mathescape         = false,                          % i do not like fancy formulas
+    escapeinside       = {},                             % i do not like to escape something
+    escapechar         = {},                             % so i have no char defined
+    texcl              = false,                          % and i do not wanna make fancy comments too..
+    numbers            = left,
+    language           = php,
+    numberstyle        = \ttfamily,
+    basicstyle         = \small\ttfamily,
+    keywordstyle       = \color{dkblue},
+    stringstyle        = \color{red},
+    identifierstyle    = \color{black},
+    commentstyle       = \color{gray},
+    % emph               = [1]{php,if,and,or,else,for,if,foreach,as,function,echo,break,continue,switch,case},
+    % emphstyle          = [1]\color{dkyellow},
+    % emph               = [2]{public,class,abstract,private,protected,interface,use,trait,namespace,static,this,$this,extends,implements},
+    % emphstyle          = [2]\color{dkblue},
+    % emph               = [3]{int,string,array,mixed,float,double},
+    % emphstyle          = [4]\color{dkgreen},
+}
+
+\usepackage{listingsutf8}
 
 % clickable links to websites and chapters
 \usepackage{hyperref}
@@ -78,6 +118,9 @@
 
 % shortcut to create refrences
 \newcommand*{\fullref}[1]{\hyperref[{#1}]{\ref*{#1}~``\nameref*{#1}''}}
+\newcommand*{\reqref}[1]{\hyperref[{req:#1}]{\ref{req:#1}-#1}}
+\newcommand*{\seereq}[1]{(siehe Anforderung \reqref{#1})}
+\newcommand*{\rid}[1]{\label{req:#1}-#1}
 
 % Change page rotation
 \usepackage{pdflscape}
