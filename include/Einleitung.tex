@@ -2,26 +2,77 @@
 \label{ch:Einleitung}
 % TODO Allgemeine Einleitung in die Arbeit
 
-\section{Aufgabenstellung und Zielsetzung}
 
-Siehe auch die komplette Aufgabenstellung im Anhang \fullref{ch:aufgabenstellung}
+
+
+\section{Aufgabenstellung}
+
+Das freie Software- und Netzwerkprojekt DIVA.EXCHANGE\footnote{Webauftritt: \url{https://diva.exchange}} entwickelt einen Softwareprototypen DIVA.
+Der Softwareprototyp soll aufzeigen, dass es möglich ist eine sichere und dezentrale Handelsplattform für digitale Werte zu erstellen, welche auch die Privatsphäre der Benutzer schützt.
+
+Der Softwareprototyp besteht aus drei Schichten.
+Einer Anonymisierungsschicht auf Netzwerkebene (\glsname{i2p}), einer Datenhaltungsschicht basierend auf einer Blockchain und eine darüberliegende Handels- und Verwaltungssoftware.
+
+Siehe auch die komplette Aufgabenstellung im Anhang \fullref{ch:aufgabenstellung}.
 
 \section{Problem}
 
-Man hat festgestellt das Aplikationen auf dem I2P-Netzwerk für Endbenuzter langsam erscheinen.
-Damit Applikationen auf dem I2P-Netzkwerk gut funktioniern, soll ermittelt werden wie die Performance
-verbesswert werden soll.
+Es besteht die Annahme, dass die Performance des \glsname{i2p}-Netzwerk's nicht ausreichend ist, um für Endbenutzer schnell reagierende Applikationen auf dem Netzwerk anbieten zu können.
+Kurz vor Beginn dieser Arbeit dauerte das Hin- und Zurücksenden einer Nachricht durch das \glsname{i2p}-Netzwerk (Roundtrip) etwa drei bis acht Sekunden.
+
+Das Netzwerk ist verglichen mit dem \glsname{tor} klein und es können grössere Latenzen entstehen, um Anonymität für die Teilnehmer zu bieten:
+
+\begin{itemize}
+    \item Eine Nachricht wird über mehrere Hops versendet und wird mehrmals weitergeleitet bevor diese bei ihrem Ziel ankommt.
+    \item Fallen Hops aus müssen die Nachrichten neu über eine andere Route übermittelt werden.
+    \item Jede Nachricht ist mehrfach verschlüsselt und jeder Knoten muss jeweils eine Verschlüsselungsschicht beim weiterleiten einer Nachricht entfernen was viele CPU-Zyklen kostet.
+\end{itemize}
+
 
 \section{Fragestellung}
 
-Verringert sich die Latenz im I2P Netzwerk je mehr Knoten es gibt?
-Verringert sich die Latenz im I2P Netzwerk je mehr Bandbreite es gibt?
+Im Rahmen dieses Projekts soll folgende Problemstellung erarbeitet werden:
+
+\begin{hyp}[H\ref{hyp:first}] \label{hyp:first}
+    Ist eine steigende Anzahl von I2P-Knoten für die I2P-Netzwerk-Latenz (tiefer) vorteilhaft?
+    Können Nachrichten schneller vom Sender zum Empfänger gelangen je mehr Knoten das I2P-Netzwerk hat?
+\end{hyp}
+
+\begin{hyp}[H\ref{hyp:second}] \label{hyp:second}
+    Führt eine steigende Anzahl von I2P-Knoten für eine Vergrösserung der I2P-Netzwerk-Bandbreite?
+\end{hyp}
+
+\begin{hyp}[H\ref{hyp:third}] \label{hyp:third}
+    Führt eine grössere Anzahl an Verbindungen zwischen den I2P-Knoten zu einer Verringerung der Latenz?
+\end{hyp}
+
+\begin{hyp}[H\ref{hyp:fourth}] \label{hyp:fourth}
+    Führt eine grössere Anzahl an Verbindungen zwischen den I2P-Knoten zu einer Vergrösserung der I2P-Netzwerk-Bandbreite?
+\end{hyp}
+
+Damit Applikationen auf dem I2P-Netzkwerk gut funktioniern, soll ermittelt werden wie die Performance
+verbesswert werden soll.
+
+\section{Ziel}
+
+Es gilt aufzuzeigen unter welchen Umständen und Rahmenbedingungen Anwendungen auf dem \glsname{i2p}-Netzwerk kürzere Latenzzeiten aufweisen
+und somit für Endbenutzer schneller reagieren können. Das Niveau an Anonymität soll aber beibehalten bleiben.
+
 
 \section{Vision}
 
-Wird in dieser festgestellt, das mehr Knoten oder verschiedene Arten von Knoten, könnte man mit diese Erkenntnissen in i2p-Netzkwerk aufnehmen.
-Diese Erkenntnis könnte auch unter umständen mehr Personen dazu bewegen selber i2p-Knoten zu betreiben.
+Wird festgestellt, dass mehr Knoten oder verschiedene Arten von Knoten, könnte man mit diese Erkenntnissen in \glsname{i2p}-Netzkwerk aufnehmen.
+Diese Erkenntnis könnte auch unter Umständen mehr Personen dazu bewegen selber \glsname{i2p}-Knoten zu betreiben.
 
 % Welche Ziele, Fragestellungen werden mit dem Projekt verfolgt? Die Bedeutung, Auswirkung und
 % Relevanz dieses Projektes für die unterschiedlichen Beteiligten soll aufgeführt werden.
 % Typischerweise wird hier ein Verweis auf die Aufgabenstellung im Anhang gemacht.
+
+
+\section{Struktur des Berichts}
+% outline the order of information in the thesis
+
+Im nächsten Kapitel~\fullref{ch:standdertechnik} ....
+
+Im Kapitel~\fullref{ch:methode} wird beschrieben welche Methoden .... 
+
