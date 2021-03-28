@@ -90,16 +90,51 @@ Tunnels Configuration
 
 \subsection{Garlic-Routing}
 
+Im Gegensatz zum \glsname{tor}-Netzwerk setzt
+
 \begin{itemize}
     \item
 \end{itemize}
 
-\subsection{Netzwerk-Bootstrapping / Netdb}
+\subsection{NetDB}
+
+\subsection{Reseeding}
 
 Seeding etc.
 
 Reseed Access
 \cite{noauthor_i2p_nodate-7}
+
+
+\section{Technische Konzepte}
+\label{sec:technischeKonzepte}
+% TODO Konzepte in diesem Feld welche für den Leser relevant sind
+
+\subsection{Das Anonymitätstrilemma}\label{sec:anonymitytrilemma}
+
+Beim Design eines anonymen Kommunikationsprotokoll gibt es gründsätzliche Einschränkungen. Es gilt die folgenden drei Aspekte abzuwägen:
+
+\begin{itemize}
+    \item Hoher Anonymiätsgrad von Sender und Empfänger einer Nachricht
+    \item Tiefer Netzwerkbandbreiten Overhead
+    \item Tiefer Latenz Overhead
+\end{itemize}
+
+Dabei ist es nicht möglich ein Protokoll zu designen welches alle diese drei Aspekte komplett erfüllt.
+Es muss entschieden werden, welche zwei Aspekte wichtiger sind (siehe auch die Abbildung~\fullref{fig:anonimitytrilemma}). \parencite{das_anonymity_2018}
+
+\begin{figure*}[h]
+    \begin{tikzpicture}
+      \draw (0,0) node[anchor=north]{hohe Anonymität}
+        -- (4,0) node[anchor=north]{tiefe Latenz}
+        -- (2,4) node[anchor=south]{wenig Bandbreite}
+        -- cycle;
+    \end{tikzpicture}
+    \caption{Das Anonymitätstrilemma}\label{fig:anonimitytrilemma}
+\end{figure*}
+
+Zum Beispiel wenn ein hoher Anonymitätsgrad erwünscht ist, kann dies nur erreicht werden mit entweder mehr Netzwerkbandbreiten-Overhead oder mehr Latenz-Overhead.
+
 
 \section{Stand im Bezug auf eigenes Projekt}
 % TODO Welche Forschung wurde in jüngster Zeit gemacht welche relevant für das eigene Projekt sind
