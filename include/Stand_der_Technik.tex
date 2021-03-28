@@ -1,5 +1,4 @@
-\chapter{Stand der Technik}
-\label{ch:StandDerTechnik}
+\chapter{Stand der Technik}\label{ch:StandDerTechnik}
 % Auch "Stand der Forschung" oder "Stand der Praxis"
 
 % Bezogen auf die eigenen Zielsetzungen und Fragestellungen soll aufgezeigt werden, wie andere
@@ -61,6 +60,25 @@ Latency vs Tor Usability Bandwith and Latency Comparision
 % TODO Konzepte in diesem Feld welche für den Leser relevant sind
 
 \subsection{Tunnels}
+
+Jeder I2P-Router kann eine beliebige Anzahl Inbound- und Outbound Tunnels erstellen.
+Wobei die Inbound Tunnels zum Empfang und die Outbound-Tunnels zum Versand dienen.
+
+%TODO: inbound outbound nicht verwechseln
+
+Jedes Tunnel hat eine Länge.
+Diese gibt an durch wie viele Knoten eine Nachricht, die durch das Tunnel verschickt wird, geroutet wird.
+Für jeden Hop im Tunnel wird die Nachricht eine zusätzliche Verschlüsselungsschicht eingehüllt. (vgl. Onion Routing)
+Somit wissen die Router jeweils nur Bescheid von welchem anderen Router sie eine Nachricht erhalten haben und an welchen Router die Nachricht weitergeleitet werden soll.
+Ein Roter im Tunnel weiss also schlussendlich nie von wem an wen eine Nachricht verschickt wurde.
+
+Die Länge eines Tunnels kann auch \lstinline|0| betragen.
+In diesem Fall wird eine Nachricht die durch das Tunnel verschickt wird, durch keine weitere Knoten geroutet.
+
+Hierbei kann jeder Knoten selber festlegen wie lange diese Tunnels sind.
+
+Je Länger ein Tunnel ist, desto mehr Anonymität bietet dieser.
+Jedoch geht dies auf Kosten der Latenz aufgrund der zusätzlichen Hops.
 
 Tunnels Configuration
 \cite{noauthor_i2p_nodate-3}
