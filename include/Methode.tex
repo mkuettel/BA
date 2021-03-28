@@ -170,17 +170,18 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
     \toprule
     \multicolumn{1}{r}{\bfseries Id} & \bfseries Anforderung                                                                                                                                                           & \bfseries Art & \bfseries Optional \\ \midrule
     \endhead
-    \rid{SDTF}  & Der Stand der Technik/Forschung muss ermittelt werden und in den Bericht eingebunden werden.
+    \rid{SDTF}  & Der Stand der Technik/Forschung bezüglich I2P muss ermittelt werden und in den Bericht eingebunden werden.
                 & Nicht Funktional & Nein  \\ \midrule
 
 
     \rid{TINF}  & Es ein Teststand muss aufgebaut werden welches es erlaubt verschiedene Performance-Messungen
                   an einem Netzwerk bestehend mehreren i2pd-Knoten. & Funktional & Nein \\ \midrule
-    \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand, wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-Funktional & Ja \\ \midrule
+    \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand, wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-Funktional & Nein \\ \midrule
     \rid{TREP}  & Die am Teststand durchgeführten Messungen sollten so gut wie möglich reproduzierbar sein. Die gleiche Messung sollte soweit wie möglich dieselben Resultate liefern. & Nicht-Funktional & Nein \\ \midrule
-    \rid{TCNF}  & Der Teststand muss konfigurierbar sein (inwiefern?), damit verschiedene Messungen durchgeführt werden können.  & Funktional & Nein \\ \midrule
-    \rid{TSCL}  & Das Testnetzwerk soll zwischen 8 Knoten bis maximal 256 i2pd-Knoten unterstützen. Dies muss konfigurierbar sein, dass Testnetzwerk sollte skalieren können. & Funktional & Nein \\ \midrule
-    \rid{TISO}  & Das Testnetzwerk soll isoliert sein vom realen I2P-Netzwerk. & Nicht-Funktional & Nein \\ \midrule
+    \rid{TCNF}  & Gewisse Aspekte des Teststands und der i2pd-Knoten müssen konfigurierbar sein, damit verschiedene Messungen durchgeführt werden können.  & Funktional & Nein \\ \midrule
+    \rid{TSCL}  & Der Teststand soll zwischen 8 bis maximal 256 i2pd-Knoten unterstützen. Dies muss konfigurierbar sein, um dass I2P-Testnetzwerk für verschiedene Tests zu skalieren zu können. & Funktional & Nein \\ \midrule
+    \rid{TISO}  & Das I2P-Testnetzwerk soll isoliert sein vom realen I2P-Netzwerk. & Nicht-Funktional & Nein \\ \midrule
+    \rid{TNET}  & Das I2P-Testnetzwerk soll als Knotenfamilie auch dem realen I2P-Netzwerk beitreten können. & Nicht-Funktional & Ja \\ \midrule
     \rid{TLAT}  & Die Latenz von Nachrichten die über das I2P-Testnetzwerk gesendet werden, soll gemessen werden. & Funktional & Nein \\ \midrule
     \rid{TLIM}  & Es muss möglich sein im Teststand die verfügbare Bandbreite von einzelnen i2pd-Knoten einzustellen. & Funktional & Nein \\ \midrule
     \rid{TVRS}  & Man soll schnell (wie schnell?) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-Funktional & Nein \\ \midrule
