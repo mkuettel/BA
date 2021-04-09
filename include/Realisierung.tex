@@ -128,10 +128,158 @@ In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Proje
 Diese Liste von Resultaten ist auch ein guter Ausgangspunkt um davon Issues für den Issue-Tracker zu erstellen.
 Jeder issue kann nun auch sortiert werden nach Resultat-Kategorien z.B. ''Recherche'', ''Projektmanagement'', ''Dokumentation'', ''Evaluation'', ''Präsentation'', etc.
 
+\newpage
+
 \section{Systemarchitektur}
 
 \section{Komponentendesign}
 
+
+\subsection{Bootstrapping}
+
+Es wird Boostrapping-Prozess benötigt, dass sich die I2P-Router sich anfangs Gegenseitig im privaten und abgeschotteten Testnetzwerk überhaupt finden können.
+Erst anschliessend ist es möglich Tunnels aufzubauen, damie die I2P-Router miteinander kommunizieren können.
+
+Die I2P-Router im öffentlichem I2P-Netzwerk können sich hier einfach an den öffentlich verfügbaren Reseeder eine \lstinline|su3|-Datei herunterladen.
+Diese \lstinline|su3|-Datei beinhaltet RouterInfos. 
+Diese RouterInfos beinhalten die nötigen Informationen wie public-key und Netzwerkadresse, um die Kommunikation zu starten.
+
+Im privaten und abgeschotteten Testnetzwerk sind die öffentlichen Reseed-Server jedoch nicht erreichbar.
+Deshalb muss ein anderer Weg gefunden werden das private I2P-Netzwerk zu bootstrappen.
+
+Einerseits gibt es hier den Floodfill-Ansatz oder einen eigen Reseed-Server zu im privaten Testnetzwerk zu haben.
+%TODO: reference bootstrapping site
+
+
+Um bessere empirische Aussagen machen zu können, sollte das Testnetzwerk so gut wie möglich das öffentliche I2P-Netzwerk abbilden \seereq{EVAL}.
+
+Denn der Floodfill-Anstatz entspricht nicht umbedingt der realität, denn die Reseeder-Knoten können liefern nicht allen I2P-Routern dieselbe Liste an Peers.
+
+Auch kann die Konfiguration des Reseeders eine wichtige Rolle spielen, denn dieser bestimmt mit der Liste an Peers die er den I2P-Routern liefert den Konnektivitätsgrad der Knoten.
+
+
+\subsection{Konfiguration}
+
+Die Konfiguration des Teststands kann mittels einer json-Konfigurationsdatei einfach angepasst werden.
+Diese kann, falls nötig einfach von verschiedenen Orten gelesen werden.
+
+\subsection{Resultate zurücklesen}
+
+Just read logs? Use some Docker cp magic?
+
 \section{Umsetzung / Programmierung}
 
+Der Quellcode für das Testnetzwerk ist im folgenden Repository zu finden:
+
+\subsection{VM / Container Netzwerk}
+
+NixOS erlaubt es deklarativ Container zu definieren.
+
+% \begin{lstlisting*}[language=nix,label=src:nixos-container,caption=Beispiel wie Nixos Container definiert werden können]
+%
+%     boot.enableContainers = true;
+%     containers = {
+%         "container1" = {
+%             config = { config, pkgs, ... }:
+%                 {
+%                     # NixOS system configuration for this container
+%                     services.httpd.enable = true;
+%                 }
+%             # more container settings ... 
+%         };
+%         # "container2" .... 
+%     }
+% \end{lstlisting*}
+
+Wichtig dabei ist, dass es sich hierbei nicht um einen Docker-Container, sondern um NixOS-Container handelt.
+Im Hintergrund brauchen jedoch beide Container-Arten die gleichen Linux-Kernel-Features (namespaces, cgroups, ... ).
+
+
+Siehe \lstinline|containers.nix| in der \lstinline|i2p-testnet| Repository für die Effektive implementation
+
+
+\url{https://codeberg.org/mkuettel/i2p-testnet}.
+
+\subsection{Bootstrapping}
+
+\subsubsection{Reseed-Server}
+
+Dieser Ansatz hat den Vorteil, das so das Testnetzwerk schnell aufgebaut werden kann.
+
+Die \lstinline|i2pd|-Implementation beinhaltet selber keinen 
+
+Die Go-Implementation dieses Reseed-Servers ist hier zu finden:
+
+\url{https://codeberg.org/diva.exchange/i2p-tools}
+
+Diese version basiert auf der folgenden GitHub version:
+
+\url{https://github.com/MDrollette/i2p-tools}
+
+\subsubsection{Ablauf}
+
+
+Der Bootstrapping-Vorgang im Testnetzwerk wird wie folgt abgehandelt:
+
+\begin{enumerate}
+    \item Erstellen der Container für den Reseed-Sever und den I2P-Knoten
+    \item Der Reseed-Server erstellt die nötigen Schlüssel und Zertifikate, um einerseits später den HTTPS-Reseed-Server zu starten und andererseits die su3-Dateien zu signieren.
+    \item Der Reseed-Server-Container fängt an zu warten bis er alle RouterInfo's von allen I2P-Knoten erhalten hat
+    \item Die I2P-Router werden kurzzeitig gestartet, bis diese Ihre RouterInfo Datei erstellen. Die I2P-Router werden anschliessend wieder gestoppt, da der Reseed-Server im Moment noch nicht in Betrieb ist, da ihm die RouterInfos noch fehlen.
+    \item Die I2P-Knoten-Container warten anschliessend bis der HTTPS-Reseed-Server verfügbar ist.
+    \item Auf der Test-VM kopiert ein Hintergrund-Job alle RouterInfos vom I2P-Container in die NetDb des Reseed-Server-Containers.
+    \item Nach kurzer Zeit hat der Reseed-Server-Container alle benötigten RouterInfos. Nun generiert dieser die su3-Datei aus den RouterInfos und startet anschliessend nun effektiv den HTTPS-Reseed-Server.
+    \item Die I2P-Knoten-Container können nun den HTTPS-Reseed-Server erreichen und somit wird der I2P-Router gestartet.
+    \item Die I2P-Router laden nun die su3-Datei herunter und können so die anderen Knoten ausfindig machen und Ihre Arbeit starten.
+\end{enumerate}
+
+Welche Reseeder ein I2P-Router anfragt, kann mittels der \lstinline|i2pd|-Konfigurationsoption \lstinline|urls| festgelegt werden.
+
+
+\clearpage
+\begin{landscape}% Landscape page
+\begin{figure*}[ht]
+  \includegraphics[height=0.85\textwidth]{bootstrap-diagram.png}
+  \caption{Der Boostrapping Prozess}\label{fig:bootstrap-diagram}
+\end{figure*}
+\end{landscape}% Landscape page
+
+
+\subsection{Reproduzierbarkeit}
+
+* Nix
+* Pinning
+    
+\cite{noauthor_nixops_nodate-5}
+
+
+\subsection{Isolieren}
+
+Während unserer Tests wollen wir nur Traffic unserer eigenen Knoten im Netzwerk 
+
+docker-compose respektive docker hat die option ein eigenes Netzwerk zu erstellen:
+
+\subsubsection{Abgrenzen vom Haupt-Netzwerk}
+
+Die Konfigurationsoption \lstinline|netid| erlaubt es die Netzwerknummer zu definieren.
+Beim realen I2P-Netzwerk ist diese standardmässig auf \lstinline|2| gesetzt.
+
+VM / Container, Konfigurationsoption \lstinline|nat|
+
+Nix für container scheint nicht so gut zu funktionieren
+
+Weil:
+
+Das Builder der systemkonfigurationen inkl. der container getestet mit 100 konnte nicht durchlaufen da nix viel memory braucht (ich habe nach 16GB und 20min warten aufgehört da mein Laptop am swappen war)
+Fehlerhafte netzwerkkonfiguration by default, falsche routen und ip konfigurationen (fehlende definition der netzwerkmaske)
+Container selber sind unnötig gross
+
 \section{Testing}
+
+CI? most don't allow this...
+
+have a machine to deploy to
+
+\section{Benutzerhandbuch}
+
+
