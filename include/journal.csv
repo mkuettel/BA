@@ -81,4 +81,22 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 25-03-2021,Homeoffice,22:00,23:00,   00:30,-                 ,Meeting Vorbereitung                                                              ,
 25-03-2021,Büro      ,09:30,10:30,   01:00,                  ,Meeting / Notizen                                                                 ,
 25-03-2021,Büro      ,10:30,12:00,   01:30,52                ,Softwarepakete konfigurieren / Stabile und kompatible Pakete auswählen            ,
-25-03-2021,Büro      ,13:00,18:30,   05:30,52                ,Netzwerkkonfiguration und Isolierung der Knoten                                   ,Mühsam IPv4 zu konfigurieren / Netzwerkkonfiguration von containern nicht gut unterstützt
+25-03-2021,Büro      ,13:00,18:30,   05:30,52                ,Netzwerkkonfiguration und Isolierung der Knoten                                   ,Mühsam IPv4 zu konfigurieren / Netzwerkkonfiguration von Containern nicht gut unterstützt
+28-03-2021,Homeoffice,17:00,19:00,   02:00,                  ,Stand der Technik / Beschreibung Tunnels / Anonymitäts-Trilemma                   ,
+28-03-2021,Homeoffice,19:00,21:00,   02:00,                  ,Kapitel Einleitung überarbeiten / Besser an Aufgabenstellung anpassen             ,
+28-03-2021,Homeoffice,21:00,22:00,   01:00,                  ,Anforderungen / Testkonzept überarbeiten                                          ,
+31-03-2021,Büro      ,10:30,12:00,   01:30,52                ,Container-Netzwerkkonfiguration                                                   ,Klappt nicht mit IPv6/IPv4 / Immer falsche Netzwerkmaske mit NixOS/nspawn containern
+31-03-2021,Büro      ,13:00,13:30,   00:30,                  ,Meeting vorbereitung                                                              ,
+31-03-2021,Büro      ,13:30,14:30,   01:00,                  ,Meeting                                                                           ,
+31-03-2021,Büro      ,15:00,18:30,   03:30,52                ,Container-Netzwerkkonfiguration / Ausschau nach alternativer Container-Technologie,Kubernetes? docker-compose?
+01-04-2021,Büro      ,10:30,12:00,   01:30,                  ,Container-Netzwerkkonfiguration / weitere Versuche                                ,
+01-04-2021,Büro      ,13:00,17:00,   04:00,                  ,Container-Netzwerkkonfiguration / Ausschau nach alternativer Container-Technologie,
+07-04-2021,Büro      ,09:00,10:00,   01:00,                  ,Pinning einer Nixpkgs Version für Reproduzierbarkeit                              ,
+07-04-2021,Büro      ,10:00,11:30,   01:30,                  ,Korrektur des NixOS-Container-Moduls bezüglich Routen                             ,
+07-04-2021,Büro      ,12:30,16:00,   03:30,                  ,Korrektur des NixOS-Container-Moduls bezüglich Addressen / Routen / Nezwerkmaske  ,Die Container können nun endlich miteinander kommunizieren. Aber Nix braucht aber enorme Mengen an RAM für die Erstellung der Container-Konfigurationen (bevor dem deployment!). Dies ist nicht skalierbar auf mehr als ca. 30 Container. Ein anderer Lösungsansatz muss her.
+07-04-2021,Büro      ,16:00,18:30,   02:30,                  ,Grundsätzliche Umstellung von NixOS-Container nach docker-compose                 ,Keine Erfahrung mit Kubernetes / wahrscheinlich to much
+08-04-2021,Büro      ,09:30,11:30,   02:00,                  ,Skript zum automatischen Auf- und Abbau des docker-compose Netzwerks              ,
+08-04-2021,Büro      ,12:00,16:00,   04:00,                  ,Netzwerkbootstrapping / Reseeder mit Router Infos von Knoten initialisieren       ,
+08-04-2021,Büro      ,16:00,17:00,   01:00,                  ,Erstellung einer eigenen Docker-Container für den Reseeder                        ,
+08-04-2021,Büro      ,17:00,18:30,   01:30,                  ,Erstellung einer eigenen Docker-Container für den I2Pd-Knoten                     ,
+09-04-2021,Büro      ,09:30,11:30,   02:00,                  ,Problembehebung HTTPS-Verbindung mit Reseed-Server / Zertifikathandhabung         ,Erstes erfolgreiches Bootstrapping mit eigenem Reseed Server im Testnetzwerk!
