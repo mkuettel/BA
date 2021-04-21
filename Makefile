@@ -11,6 +11,12 @@ all: $(wildcard *.tex) Referenzen.bib $(MEETING_NOTES) include/journal-total-hou
 	pdflatex ${PDFLATEXOPTS} ${FILE_NAME}.tex
 	pdflatex ${PDFLATEXOPTS} ${FILE_NAME}.tex
 
+pres: ${PRESENTATION_FILE_NAME}.tex Referenzen.bib
+	pdflatex ${PDFLATEXOPTS} ${PRESENTATION_FILE_NAME}.tex
+	biber *.bcf
+	pdflatex ${PDFLATEXOPTS} ${PRESENTATION_FILE_NAME}.tex
+	pdflatex ${PDFLATEXOPTS} ${PRESENTATION_FILE_NAME}.tex
+
 Meetings/%.pdf: Meetings/%.md
 	pandoc --from markdown --to latex $< \
 		--metadata-file=Meetings/pandoc-settings.yml \
@@ -27,3 +33,9 @@ open:
 
 watch:
 	find . -iname '*.tex' -or -iname '*.csv' -or -iname '*.txt' -or -iname '*.md' -or -iname 'References.bib' | entr make -f Makefile
+
+open-pres:
+	open ${PRESENTATION_FILE_NAME}.pdf
+
+watch-pres:
+	find . -iname '*.tex' -or -iname '*.csv' -or -iname '*.txt' -or -iname '*.md' -or -iname 'References.bib' | entr make -f Makefile pres
