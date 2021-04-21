@@ -100,3 +100,19 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 08-04-2021,Büro      ,16:00,17:00,   01:00,                  ,Erstellung einer eigenen Docker-Container für den Reseeder                        ,
 08-04-2021,Büro      ,17:00,18:30,   01:30,                  ,Erstellung einer eigenen Docker-Container für den I2Pd-Knoten                     ,
 09-04-2021,Büro      ,09:30,11:30,   02:00,                  ,Problembehebung HTTPS-Verbindung mit Reseed-Server / Zertifikathandhabung         ,Erstes erfolgreiches Bootstrapping mit eigenem Reseed Server im Testnetzwerk!
+09-04-2021,Büro      ,12:30,16:00,   03:30,                  ,Beschreibung und Diagram über den Boostrapping-Vorgang                            ,
+09-04-2021,Büro      ,16:00,17:30,   01:30,                  ,Einleitung / Stand der Technik                                                    ,
+14-04-2021,Büro      ,13:30,14:30,   01:00,                  ,Umstrukturierung der Repo / entfernen von NixOS-Container                         ,
+14-04-2021,Büro      ,14:30,16:00,   02:00,                  ,Überlegungen und erste Versuche für Testnachrichten im Netzwerk                   ,
+14-04-2021,Büro      ,16:00,17:00,   01:00,                  ,Meeting                                                                           ,
+14-04-2021,Büro      ,17:00,19:30,   02:30,                  ,Beginn implementation eines TCP clients mit socks5 support                        ,Socks5 Proxy Support benötigt um TCP-Nachrichten über das I2P-Overlay-Netzwerk zu verschicken
+14-04-2021,Büro      ,19:30,20:30,   01:00,                  ,Beginn Implementation Servers der Latenz von Nachrichten misst und loggt          ,Benötigt wenn Knoten mehrere Verbindungen annehmen will
+15-04-2021,Büro      ,10:30,13:00,   01:30,                  ,Implementation des Servers der Latenz von Nachrichten misst und loggt             ,
+15-04-2021,Büro      ,13:30,15:00,   01:30,                  ,Implementation des Servers der Latenz von Nachrichten misst und loggt             ,
+16-04-2021,Büro      ,10:30,12:30,   01:30,                  ,Erste Implementation Servers der Latenz von Nachrichten misst und loggt           ,
+16-04-2021,Büro      ,13:00,16:30,   03:30,                  ,Erste Implementation Servers der Latenz von Nachrichten misst und loggt           ,
+16-04-2021,Büro      ,19:00,20:30,   01:30,                  ,Debugging wieso Knoten im privaten Netzwerk nicht kommunizieren können            ,Private Adressen werden nicht angenommen von i2pd um Tunnels aufzubauen
+18-04-2021,Homeoffice,14:00,17:00,   03:00,                  ,Abändern von i2pd das private Adressen zugelassen werden / weiteres Debugging     ,
+18-04-2021,Homeoffice,18:00,23:00,   05:00,                  ,Debugging / diverse versuche mit docker-compose Netzwerkkonfiguration             ,Knoten können nicht miteinander reden. Es scheint das docker-compose --scale ist broken dies bezüglich.
+19-04-2021,Homeoffice,12:00,18:00,   06:00,                  ,Zusammenstellen der Zwischenpräsentation                                          ,
+20-04-2021,Homeoffice,22:00,24:00,   02:00,                  ,Fertigstellung der Zwischenpräsentation                                           ,
