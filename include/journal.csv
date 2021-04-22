@@ -119,3 +119,8 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 21-04-2021,Homeoffice,10:30,11:30,   01:00,                  ,Aufbereiten Meeting Notes                                                         ,
 21-04-2021,Homeoffice,12:00,13:00,   01:00,                  ,Aufbereiten Meeting Notes / Planung                                               ,
 21-04-2021,Homeoffice,13:00,14:00,   01:00,                  ,Vorbereitung Präsentation                                                         ,
+21-04-2021,Homeoffice,14:00,15:00,   01:00,                  ,Zwischenpräsentation                                                              ,
+21-04-2021,Homeoffice,15:00,18:30,   03:30,                  ,Generieren von docker-compose Konfigurationen für i2pd / Tests                    ,Zum Lösen der Netzwerkonfigurationsprobleme
+21-04-2021,Homeoffice,10:30,11:30,   01:00,                  ,Fertigstellung der generierten docker-compose Konfigurationen für i2pd            ,
+21-04-2021,Homeoffice,12:00,14:00,   02:00,                  ,Erstellen von Netzwerktests / lösen der Netzwerkkonfigurationsprobleme            ,
+21-04-2021,Homeoffice,14:00,15:00,   01:00,                  ,Erste Kommunikation über das private I2P-Overlaynetzwerk / Erstellen eines Tests  ,
