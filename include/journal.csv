@@ -45,7 +45,7 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 04-03-2021,Homeoffice,20:00,22:00,   02:00,24                ,Resultate auflisten                                                               ,
 04-03-2021,Homeoffice,22:00,23:00,   01:00,31                ,Aufwand schätzen für die Resultate                                                ,
 05-03-2021,Homeoffice,09:30,10:00,   00:30,-                 ,Meeting                                                                           ,
-05-03-2021,Homeoffice,10:00,12:00,   02:00,2                 ,Wochentagplan                                                                     ,
+05-03-2021,Homeoffice,10:00,12:00,   02:00,2 39              ,Wochentagplan                                                                     ,
 05-03-2021,Homeoffice,13:00,13:30,   00:30,-                 ,Meeting-Notizen                                                                   ,
 05-03-2021,Homeoffice,14:30,15:00,   00:30,21 22 2 33        ,Aufbau Kapital Projektmanagement / Planung / Anforderungen / Resultate            ,
 05-03-2021,Homeoffice,15:00,16:30,   01:30,10                ,Aufbau Kapital Einleitung / Aufgabenstellung anhängen und referenzieren           ,
@@ -79,48 +79,50 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 25-03-2021,Büro      ,13:00,15:00,   02:00,50 48             ,Teststand Konfiguration von Anzahl Knoten /                                       ,
 25-03-2021,Büro      ,15:00,18:30,   03:30,51                ,i2p-tools paketieren / Reseeder Knoten erstellen                                  ,
 25-03-2021,Homeoffice,22:00,23:00,   00:30,-                 ,Meeting Vorbereitung                                                              ,
-25-03-2021,Büro      ,09:30,10:30,   01:00,                  ,Meeting / Notizen                                                                 ,
+25-03-2021,Büro      ,09:30,10:30,   01:00,-                 ,Meeting / Notizen                                                                 ,
 25-03-2021,Büro      ,10:30,12:00,   01:30,52                ,Softwarepakete konfigurieren / Stabile und kompatible Pakete auswählen            ,
 25-03-2021,Büro      ,13:00,18:30,   05:30,52                ,Netzwerkkonfiguration und Isolierung der Knoten                                   ,Mühsam IPv4 zu konfigurieren / Netzwerkkonfiguration von Containern nicht gut unterstützt
-28-03-2021,Homeoffice,17:00,19:00,   02:00,                  ,Stand der Technik / Beschreibung Tunnels / Anonymitäts-Trilemma                   ,
-28-03-2021,Homeoffice,19:00,21:00,   02:00,                  ,Kapitel Einleitung überarbeiten / Besser an Aufgabenstellung anpassen             ,
-28-03-2021,Homeoffice,21:00,22:00,   01:00,                  ,Anforderungen / Testkonzept überarbeiten                                          ,
+28-03-2021,Homeoffice,17:00,19:00,   02:00,40 38             ,Stand der Technik / Beschreibung Tunnels / Anonymitäts-Trilemma                   ,
+28-03-2021,Homeoffice,19:00,21:00,   02:00,59                ,Kapitel Einleitung überarbeiten / Besser an Aufgabenstellung anpassen             ,
+28-03-2021,Homeoffice,21:00,22:00,   01:00,37                ,Anforderungen / Testkonzept überarbeiten                                          ,
 31-03-2021,Büro      ,10:30,12:00,   01:30,52                ,Container-Netzwerkkonfiguration                                                   ,Klappt nicht mit IPv6/IPv4 / Immer falsche Netzwerkmaske mit NixOS/nspawn containern
-31-03-2021,Büro      ,13:00,13:30,   00:30,                  ,Meeting vorbereitung                                                              ,
-31-03-2021,Büro      ,13:30,14:30,   01:00,                  ,Meeting                                                                           ,
+31-03-2021,Büro      ,13:00,13:30,   00:30,-                 ,Meeting vorbereitung                                                              ,
+31-03-2021,Büro      ,13:30,14:30,   01:00,-                 ,Meeting                                                                           ,
 31-03-2021,Büro      ,15:00,18:30,   03:30,52                ,Container-Netzwerkkonfiguration / Ausschau nach alternativer Container-Technologie,Kubernetes? docker-compose?
-01-04-2021,Büro      ,10:30,12:00,   01:30,                  ,Container-Netzwerkkonfiguration / weitere Versuche                                ,
-01-04-2021,Büro      ,13:00,17:00,   04:00,                  ,Container-Netzwerkkonfiguration / Ausschau nach alternativer Container-Technologie,
-07-04-2021,Büro      ,09:00,10:00,   01:00,                  ,Pinning einer Nixpkgs Version für Reproduzierbarkeit                              ,
-07-04-2021,Büro      ,10:00,11:30,   01:30,                  ,Korrektur des NixOS-Container-Moduls bezüglich Routen                             ,
-07-04-2021,Büro      ,12:30,16:00,   03:30,                  ,Korrektur des NixOS-Container-Moduls bezüglich Addressen / Routen / Nezwerkmaske  ,Die Container können nun endlich miteinander kommunizieren. Aber Nix braucht aber enorme Mengen an RAM für die Erstellung der Container-Konfigurationen (bevor dem deployment!). Dies ist nicht skalierbar auf mehr als ca. 30 Container. Ein anderer Lösungsansatz muss her.
-07-04-2021,Büro      ,16:00,18:30,   02:30,                  ,Grundsätzliche Umstellung von NixOS-Container nach docker-compose                 ,Keine Erfahrung mit Kubernetes / wahrscheinlich to much
-08-04-2021,Büro      ,09:30,11:30,   02:00,                  ,Skript zum automatischen Auf- und Abbau des docker-compose Netzwerks              ,
-08-04-2021,Büro      ,12:00,16:00,   04:00,                  ,Netzwerkbootstrapping / Reseeder mit Router Infos von Knoten initialisieren       ,
-08-04-2021,Büro      ,16:00,17:00,   01:00,                  ,Erstellung einer eigenen Docker-Container für den Reseeder                        ,
-08-04-2021,Büro      ,17:00,18:30,   01:30,                  ,Erstellung einer eigenen Docker-Container für den I2Pd-Knoten                     ,
-09-04-2021,Büro      ,09:30,11:30,   02:00,                  ,Problembehebung HTTPS-Verbindung mit Reseed-Server / Zertifikathandhabung         ,Erstes erfolgreiches Bootstrapping mit eigenem Reseed Server im Testnetzwerk!
-09-04-2021,Büro      ,12:30,16:00,   03:30,                  ,Beschreibung und Diagram über den Boostrapping-Vorgang                            ,
-09-04-2021,Büro      ,16:00,17:30,   01:30,                  ,Einleitung / Stand der Technik                                                    ,
-14-04-2021,Büro      ,13:30,14:30,   01:00,                  ,Umstrukturierung der Repo / entfernen von NixOS-Container                         ,
-14-04-2021,Büro      ,14:30,16:00,   02:00,                  ,Überlegungen und erste Versuche für Testnachrichten im Netzwerk                   ,
-14-04-2021,Büro      ,16:00,17:00,   01:00,                  ,Meeting                                                                           ,
-14-04-2021,Büro      ,17:00,19:30,   02:30,                  ,Beginn implementation eines TCP clients mit socks5 support                        ,Socks5 Proxy Support benötigt um TCP-Nachrichten über das I2P-Overlay-Netzwerk zu verschicken
-14-04-2021,Büro      ,19:30,20:30,   01:00,                  ,Beginn Implementation Servers der Latenz von Nachrichten misst und loggt          ,Benötigt wenn Knoten mehrere Verbindungen annehmen will
-15-04-2021,Büro      ,10:30,13:00,   01:30,                  ,Implementation des Servers der Latenz von Nachrichten misst und loggt             ,
-15-04-2021,Büro      ,13:30,15:00,   01:30,                  ,Implementation des Servers der Latenz von Nachrichten misst und loggt             ,
-16-04-2021,Büro      ,10:30,12:30,   01:30,                  ,Erste Implementation Servers der Latenz von Nachrichten misst und loggt           ,
-16-04-2021,Büro      ,13:00,16:30,   03:30,                  ,Erste Implementation Servers der Latenz von Nachrichten misst und loggt           ,
-16-04-2021,Büro      ,19:00,20:30,   01:30,                  ,Debugging wieso Knoten im privaten Netzwerk nicht kommunizieren können            ,Private Adressen werden nicht angenommen von i2pd um Tunnels aufzubauen
-18-04-2021,Homeoffice,14:00,17:00,   03:00,                  ,Abändern von i2pd das private Adressen zugelassen werden / weiteres Debugging     ,
-18-04-2021,Homeoffice,18:00,23:00,   05:00,                  ,Debugging / diverse versuche mit docker-compose Netzwerkkonfiguration             ,Knoten können nicht miteinander reden. Es scheint das docker-compose --scale ist broken dies bezüglich.
-19-04-2021,Homeoffice,12:00,18:00,   06:00,                  ,Zusammenstellen der Zwischenpräsentation                                          ,
-20-04-2021,Homeoffice,22:00,24:00,   02:00,                  ,Fertigstellung der Zwischenpräsentation                                           ,
-21-04-2021,Homeoffice,10:30,11:30,   01:00,                  ,Aufbereiten Meeting Notes                                                         ,
-21-04-2021,Homeoffice,12:00,13:00,   01:00,                  ,Aufbereiten Meeting Notes / Planung                                               ,
-21-04-2021,Homeoffice,13:00,14:00,   01:00,                  ,Vorbereitung Präsentation                                                         ,
-21-04-2021,Homeoffice,14:00,15:00,   01:00,                  ,Zwischenpräsentation                                                              ,
-21-04-2021,Homeoffice,15:00,18:30,   03:30,                  ,Generieren von docker-compose Konfigurationen für i2pd / Tests                    ,Zum Lösen der Netzwerkonfigurationsprobleme
-21-04-2021,Homeoffice,10:30,11:30,   01:00,                  ,Fertigstellung der generierten docker-compose Konfigurationen für i2pd            ,
-21-04-2021,Homeoffice,12:00,14:00,   02:00,                  ,Erstellen von Netzwerktests / lösen der Netzwerkkonfigurationsprobleme            ,
-21-04-2021,Homeoffice,14:00,15:00,   01:00,                  ,Erste Kommunikation über das private I2P-Overlaynetzwerk / Erstellen eines Tests  ,
+01-04-2021,Büro      ,10:30,12:00,   01:30,52                ,Container-Netzwerkkonfiguration / weitere Versuche                                ,
+01-04-2021,Büro      ,13:00,17:00,   04:00,52                ,Container-Netzwerkkonfiguration / Ausschau nach alternativer Container-Technologie,
+07-04-2021,Büro      ,09:00,10:00,   01:00,-                 ,Pinning einer Nixpkgs Version für Reproduzierbarkeit                              ,
+07-04-2021,Büro      ,10:00,11:30,   01:30,52                ,Korrektur des NixOS-Container-Moduls bezüglich Routen                             ,
+07-04-2021,Büro      ,12:30,16:00,   03:30,52                ,Korrektur des NixOS-Container-Moduls bezüglich Addressen / Routen / Nezwerkmaske  ,Die Container können nun endlich miteinander kommunizieren. Aber Nix braucht aber enorme Mengen an RAM für die Erstellung der Container-Konfigurationen (bevor dem deployment!). Dies ist nicht skalierbar auf mehr als ca. 30 Container. Ein anderer Lösungsansatz muss her.
+07-04-2021,Büro      ,16:00,18:30,   02:30,36 48             ,Grundsätzliche Umstellung von NixOS-Container nach docker-compose                 ,Keine Erfahrung mit Kubernetes / wahrscheinlich too much
+08-04-2021,Büro      ,09:30,11:30,   02:00,49 50 48 36       ,Skript zum automatischen Auf- und Abbau des docker-compose Netzwerks              ,
+08-04-2021,Büro      ,12:00,16:00,   04:00,51                ,Netzwerkbootstrapping / Reseeder mit Router Infos von Knoten initialisieren       ,
+08-04-2021,Büro      ,16:00,17:00,   01:00,51                ,Erstellung einer eigenen Docker-Container für den Reseeder                        ,
+08-04-2021,Büro      ,17:00,18:30,   01:30,51                ,Erstellung einer eigenen Docker-Container für den I2Pd-Knoten                     ,
+09-04-2021,Büro      ,09:30,11:30,   02:00,51                ,Problembehebung HTTPS-Verbindung mit Reseed-Server / Zertifikathandhabung         ,Erstes erfolgreiches Bootstrapping mit eigenem Reseed Server im Testnetzwerk!
+09-04-2021,Büro      ,12:30,16:00,   03:30,51                ,Beschreibung und Diagram über den Bootstrapping-Vorgang                           ,
+09-04-2021,Büro      ,16:00,17:30,   01:30,40                ,Einleitung / Stand der Technik                                                    ,
+14-04-2021,Büro      ,13:30,14:30,   01:00,46                ,Umstrukturierung der Repo / entfernen von NixOS-Container                         ,
+14-04-2021,Büro      ,14:30,16:00,   02:00,35                ,Überlegungen und erste Versuche für Testnachrichten im Netzwerk                   ,
+14-04-2021,Büro      ,16:00,17:00,   01:00,-                 ,Meeting                                                                           ,
+14-04-2021,Büro      ,17:00,19:30,   02:30,57                ,Beginn implementation eines TCP clients mit Socks5-Support                        ,Socks5-Proxy-Support benötigt um TCP-Nachrichten über das I2P-Overlay-Netzwerk zu verschicken
+14-04-2021,Büro      ,19:30,20:30,   01:00,35 47 56          ,Beginn Implementation Servers der Latenz von Nachrichten misst und loggt          ,Benötigt wenn Knoten mehrere Verbindungen annehmen will
+15-04-2021,Büro      ,10:30,13:00,   01:30,56                ,Implementation des Servers der Latenz von Nachrichten misst und loggt             ,
+15-04-2021,Büro      ,13:30,15:00,   01:30,56                ,Implementation des Servers der Latenz von Nachrichten misst und loggt             ,
+16-04-2021,Büro      ,10:30,12:30,   01:30,56                ,Erste Implementation Servers der Latenz von Nachrichten misst und loggt           ,
+16-04-2021,Büro      ,13:00,16:30,   03:30,56                ,Erste Implementation Servers der Latenz von Nachrichten misst und loggt           ,
+16-04-2021,Büro      ,19:00,20:30,   01:30,52                ,Debugging wieso Knoten im privaten Netzwerk nicht kommunizieren können            ,Private Adressen werden nicht angenommen von i2pd um Tunnels aufzubauen
+18-04-2021,Homeoffice,14:00,17:00,   03:00,52                ,Abändern von i2pd das private Adressen zugelassen werden / weiteres Debugging     ,
+18-04-2021,Homeoffice,18:00,23:00,   05:00,52 48             ,Debugging / diverse versuche mit docker-compose Netzwerkkonfiguration             ,Knoten können nicht miteinander reden. Es scheint das docker-compose --scale ist broken dies bezüglich.
+19-04-2021,Homeoffice,12:00,18:00,   06:00,23                ,Zusammenstellen der Zwischenpräsentation                                          ,
+20-04-2021,Homeoffice,22:00,24:00,   02:00,23                ,Fertigstellung der Zwischenpräsentation                                           ,
+21-04-2021,Büro      ,10:30,11:30,   01:00,-                 ,Aufbereiten Meeting Notes                                                         ,
+21-04-2021,Büro      ,12:00,13:00,   01:00,39                ,Aufbereiten Meeting Notes / Planung                                               ,
+21-04-2021,Büro      ,13:00,14:00,   01:00,-                 ,Vorbereitung Präsentation                                                         ,
+21-04-2021,Büro      ,14:00,15:00,   01:00,-                 ,Zwischenpräsentation                                                              ,
+21-04-2021,Büro      ,15:00,18:30,   03:30,52 49 50 48       ,Generieren von docker-compose Konfigurationen für i2pd / Tests                    ,Zum Lösen der Netzwerkkonfigurationsprobleme
+21-04-2021,Büro      ,10:30,11:30,   01:00,48                ,Fertigstellung der generierten docker-compose Konfigurationen für i2pd            ,
+21-04-2021,Büro      ,12:00,14:00,   02:00,52                ,Erstellen von Netzwerktests / lösen der Netzwerkkonfigurationsprobleme            ,
+21-04-2021,Büro      ,14:00,15:00,   01:00,52                ,Erste Kommunikation über das private I2P-Overlaynetzwerk / Erstellen eines Tests  ,
+21-04-2021,Büro      ,15:00,16:30,   01:30,56 57             ,TCP client und server implementation / hinzufügen zum i2pd-Container              ,
+21-04-2021,Büro      ,12:30,14:30,   02:00,-                 ,Backlog-Grooming / Planung                                                        ,
