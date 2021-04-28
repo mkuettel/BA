@@ -1,0 +1,113 @@
+/'
+vim: syntax=plantuml
+'/
+@startuml
+skinparam dpi 96
+skinparam scale 5/5
+skinparam defaultFontName "Arial"
+
+skinparam nodesep 40
+skinparam ranksep 40
+skinparam BoxPadding 10
+skinparam Padding 10
+
+skinparam component {
+    BackgroundColor Orange
+}
+
+' legend bottom left
+    ' Legende
+    ' | Farbe | Feature |
+    ' |<#Yellow>| Excel Import |
+    ' |<#LawnGreen>| Metrik: Dichte |
+    ' |<#Aqua>| Metrik: Kritische Knoten |
+    ' |<#Orange>| Verwendet von mehreren Features |
+' endlegend
+
+
+
+frame "Tester" as tester {
+  [nixops] .> testhost : erstellt
+}
+
+
+
+frame "Testhost VM" as testhost {
+  package "Docker" {
+    database logs as "
+    **Log-Dateien**
+    ===
+    Container Ausgaben
+    Nachrichten-Log
+    "
+
+    database reseed_netdb as "
+    **reseed NetDb**
+    ===
+    Sammlung von
+    Router-Infos
+    der Knoten
+    "
+
+    () "Docker Socket" as dockersock
+    [Docker Daemon] as dockerd
+
+    dockersock - dockerd
+    dockerd .> container : erstellt
+    dockerd ..> logs : füllt
+    dockerd ..> reseed_netdb : erstellt
+  }
+
+  package "Container Deployment" as containerdeployment {
+    database compose_config as "
+    **Konfigurationsdateien**
+    **für docker-compose**
+    "
+
+    [recompose script] as recompose
+    [docker-compose]
+
+    [docker-compose] ..> compose_config : verwendet
+    [docker-compose] .right.> dockersock : benutzt
+
+    recompose ..> reseed_netdb : befüllt
+    recompose ..> compose_config : generiert
+    recompose .right.> dockersock : benutzt
+  }
+
+
+}
+
+
+
+
+frame "Testnetzwerk der Container" as container {
+    () "HTTPS" as reseed_https
+
+    node "reseed Container" as reseed {
+        [Reseed Server] as reseeder
+
+        reseeder -left- reseed_https
+        reseeder .up.> reseed_netdb : benutzt
+    }
+
+    node "i2pd Container" as i2pd {
+        () "TCP Tunnel" as sertun
+        () "Socks5" as socks5
+
+        [TCP Server] ..> sertun : benutzt
+        [TCP Server] ..> logs : füllt
+        [TCP Client] ..> socks5 : benutzt
+
+        [I2P Router] as i2p
+
+        socks5 -left- i2p
+        i2p -left- sertun
+
+        i2p ..> reseed_https : benutzt
+
+    }
+}
+
+
+@enduml
