@@ -25,6 +25,10 @@ Meetings/%.pdf: Meetings/%.md
 include/journal-total-hours.csv: include/journal.csv
 	bin/calc-journal-hours
 
+uml.out: $(wildcard include/uml/*.txt)
+	plantuml include/uml/*.txt
+	touch uml.out
+
 clean:
 	rm -f *.aux *.glo *.idx *.log *.toc *.ist *.acn *.acr *.alg *.bbl *.blg *.dvi *.glg *.gls *.ilg *.ind *.loa *.lof *.lot *.lol *.maf *.mtc *.mtc1 *.out *.synctex.gz BA-Bericht.pdf build/* $(MEETING_NOTES) include/journal-total-hours.csv
 
