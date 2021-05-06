@@ -17,16 +17,18 @@
 % eigentliche Testdurchführung ist dann unter Realisierung, im Anhang oder einem selbstständigen
 % Testdokument beschrieben.
 
-Dieses Kapitel erläutert die während des Projektes verwendeten Methoden und Vorgehensmodelle.
+Dieses Kapitel erläutert das Vorgehen und die verwendete Methoden.
 
 % TODO Nach eigenen Bedürfnissen erweitern
 % ------------------------------------- TEIL Wissenschaftliche Arbeiten ----------------------------------------------------
 \section{Prototyping}
 
-Für die ausarbeitung des Konzepts für den Teststand mussten einige Sachen erst in Software ausprobiert werden, um schnell zu merken, ob man auf dem richtigen Weg ist bevor zu viel Zeit vergangen ist.
+Für die Ausarbeitung des Konzepts für den Teststand mussten einige Sachen erst in Software ausprobiert werden, um schnell zu merken, ob man auf dem richtigen Weg ist bevor zu viel Zeit vergangen ist.
 
 
-\section{Experiment}
+\parencite{helmut_balzert_wissenschaftliches_nodate}
+
+\section{Experiment}\label{sec:experiment}
 % quantitaiv, ehter verhaltenswissenschaftlich als konstruktiv
 
 % Das Experiment untersucht Kausalzusammenhängein kontrollierter Umgebung, indem
@@ -36,14 +38,16 @@ Für die ausarbeitung des Konzepts für den Teststand mussten einige Sachen erst
 % »Labor«) untersucht, wodurch wesentlichdie Möglichkeiten der Umgebungskontrolle
 % beeinflusstwerden. (Balzert, S. 286)
 
-Es soll ein Experiment durchgeführt werden um eine quantitative analyse durchführen zu können.
+Es soll ein Experiment durchgeführt werden, um eine quantitative Analyse durchführen zu können.
 Dieses Experiment soll in einem Labor durchgeführt werden.
 Dies ist ein Teststand der ein isoliertes I2P Netzwerk erstellt, welches mit Messpunkten für Performance-Messungen versehen werden kann.
+
+\parencite{helmut_balzert_wissenschaftliches_nodate}
 
 % ------------------------------------- TEIL Ingenieurlastige Arbeiten ----------------------------------------------------
 
 
-\section{Projektinformationen}
+\section{Projektinformationen}\label{sec:projektinformationen}
 
 In diesem Abschnitt wird aufgezeigt welches Vorgehensmodell und welche Methoden verwendet wurden zur Abwicklung dieses Projektes.
 Auch wird aufgezeigt wie das Projekt organisiert ist.
@@ -81,14 +85,13 @@ Die folgende Tabelle~\ref{tab:projectmembers} listet alle Personen auf die an di
         \toprule
         \bfseries Person   & \bfseries Rollen \\
         \midrule
-        Konrad Bächler     & Auftraggeber \\
+        Carolyn Bächler-Schenk    & Auftraggeber \\
         \midrule
-        Carolyn Bächler    & Auftraggeber \\
+        Konrad Bächler     & Auftraggeber \\
         \midrule
         Arnold Dieter      & Betreuungsperson \\
         \midrule
-        tbd.               & Experte \\
-        % TODO: find out who's the expert
+        Urs Rufer          & Experte \\
         \midrule
         Moritz Küttel      & Student \\
         \bottomrule
@@ -144,6 +147,7 @@ Die Länge eines Sprints in Kanban ist nicht genau definiert, sondern der Sprint
 \subsection{Ermittlung offener Projektrahmenbedingungen}
 \label{sub:RequirementsEngineering}
 
+Regelmässige Meetings finden jeweils am Mittwoch Morgen, am Start der Projektwoche, und am Freitag Morgen.
 Zweimal pro Woche trifft sich das Projektteam wo Fragen und das Weitere
 Vorgehen besprochen wird. Es wird jeweils ein Meeting-Protokoll erstellt (siehe
 Anhang~\ref{ch:meetingnotes}), worin festgehalten wird was besprochen wurde.
@@ -185,8 +189,8 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
     \rid{TNET}  & Das I2P-Testnetzwerk soll als Knotenfamilie auch dem realen I2P-Netzwerk beitreten können. & Nicht-Funktional & Ja \\ \midrule
     \rid{TLAT}  & Die Latenz von Nachrichten die über das I2P-Testnetzwerk gesendet werden, soll gemessen werden. & Funktional & Nein \\ \midrule
     \rid{TLIM}  & Es muss möglich sein im Teststand die verfügbare Bandbreite von einzelnen i2pd-Knoten einzustellen. & Funktional & Nein \\ \midrule
-    \rid{TVRS}  & Man soll schnell (wie schnell?) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-Funktional & Nein \\ \midrule
-    \rid{EVAL}  & Die am Teststand durchgeführten Messungen müssen evaluiert und aufgearbeitet werden.  & Nicht Funktional & Nein \\ \midrule
+    \rid{TVRS}  & Man soll schnell (innerhalb von 2h) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-Funktional & Nein \\ \midrule
+    \rid{EVAL}  & Die am Teststand durchgeführten Messungen müssen qualitativ evaluiert und aufgearbeitet werden.  & Nicht Funktional & Nein \\ \midrule
     \rid{TPER}  & Man geht davon aus das die Messungen lange dauern könnten, da jeweils ein ganzes Netzwerk und dessen Traffic erstellt und gehandhabt werden muss. Es macht Sinn die Ausführungszeiten von Messungen kurz zu halten, damit mehr Messungen durchgeführt werden können. & Nicht-Funktional & Ja \\ \midrule
     \rid{DOCS}  & Am Ende des Projekts muss dieser Bachelorarbeit abgegeben werden. Dieser Bericht soll das Projekt, die verwendeten Methoden, Evaluationsprozesse, die Umsetzung und Resultate beschreiben.
                 & Nicht Funktional & Nein \\ \midrule
@@ -201,9 +205,11 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
     \caption{Requirements}\label{tab:requirements}
 \end{longtable}
 
+
+\newpage
 \subsection{Einschränkungen und Abgrenzungen}
 
-Es soll nur die Performance des I2P-Netzwerks mit der i2pd-Software untersucht werden und nicht von darüberliegenden Applikationen.
+Es soll nur die Performance des I2P-Netzwerks mit der i2pd-Software (der C++ implementation) untersucht werden und nicht von darüberliegenden Applikationen.
 
 % TODO: Scope in der Einleitung
 % TODO: Scope definieren
@@ -212,7 +218,7 @@ Es soll nur die Performance des I2P-Netzwerks mit der i2pd-Software untersucht w
 \label{sec:Planung}
 
 Für diese Bachelorarbeit werden 360 Stunden Arbeit während den 15. Projektwochen geleistet.
-Im Schnitt bedeutet dies acht Stunden Arbeit an jeweils 3 Wochentagen (meistens jeweils Mittwoch-Freitag).
+Im Schnitt bedeutet dies acht Stunden Arbeit an jeweils drei Wochentagen (meistens jeweils Mittwoch-Freitag).
 
 % 15 Wochen * 3 Tage * 8h = 360h
 
@@ -223,10 +229,10 @@ Die Meilensteine sind im Projektkalender (\fullref{tab:projektkalender}) hellbla
 
 \begin{enumerate}
     \item \textbf{Startdatum}: Mittwoch 24. Februar 2021, Kick-Off-Meeting
-    \item \textbf{Zwischenpräsentation}: 14. April 2021
+    \item \textbf{Zwischenpräsentation}: 21. April 2021, 14:00
     \item \textbf{Abgabe Web-Abstract}: 21. Mai 2021
     \item \textbf{Abgabedatum}: 4. Juni 2021
-    \item \textbf{Schlusspräsentation}: 13.6 - 3.7 2021
+    \item \textbf{Schlusspräsentation}: 26. Juni 2021, 14:00
 \end{enumerate}
 
 Die Meilensteine sollen ein Controlling-Mechanismus, um zu merken, wann das Projekt im Verzug ist.
@@ -240,7 +246,7 @@ Diese Meilensteine wurden auch in den Issue-Tracker aufgenommen:
 \subsubsection{Phasen}
 \label{sec:phasen}
 
-Das Projekt wird in 4 Phasen durchgeführt die im der \fullref{tab:projektkalender} aufgezeigt sind.
+Das Projekt wird in 4 Phasen durchgeführt, welche im \fullref{tab:projektkalender} aufgezeigt sind.
 Dabei sind die Phasen jeweils durch Meilensteine voneinander abgegrenzt.
 
 \begin{enumerate}
@@ -252,10 +258,22 @@ Analyze what needs to be tested and determine testing criteria, create a test pl
     \item \textbf{Abschlussphase}: Vervollständigen des Berichts, Fazit erstellen, Korrekturlesen, Erstellung des Web-Abstracts.
 \end{enumerate}
 
+\subsubsection{Meilensteine}
+
+
+\begin{enumerate}
+    \item \textbf{Konzept Teststand}: 
+        In dieser Phase wird das Projekt geplant, recherchiert, der Bericht wird strukturiert, die Anforderungen werden eruiert und  ein Konzept für einen Teststand wird erstellt.
+    \item \textbf{Aufbau des Teststands}: Ein Teststand aufbauen nach Konzept um Performance-Experimente und Messungen mit der i2pd-Software in einem Netzwerk machen zu können.
+Analyze what needs to be tested and determine testing criteria, create a test plan.
+    \item \textbf{Auswertungsphase}: Verschiedene Performance-Experimente und Messungen werden in dieser Phase ausgeführt und ausgewertet.
+    \item \textbf{Abschlussphase}: Vervollständigen des Berichts, Fazit erstellen, Korrekturlesen, Erstellung des Web-Abstracts.
+\end{enumerate}
+
+Die Meilensteine sind ebenfalls im \fullref{tab:projektkalender} ersichtlich.
 
 \subsubsection{Projektkalender}
 
-Regelmässige Meetings finden jeweils am Mittwoch Morgen, am Start der Projektwoche, und am Freitag Morgen.
 
 Die Spalte ''PW'' gibt die Projektwoche an. Die Spalte ''KW'' die Kalenderwoche.
 
