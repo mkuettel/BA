@@ -7,29 +7,81 @@
 % angehen? Wodurch unterscheidet sich Ihre Lösung von anderen Lösungen? Für wissenschaftlich
 % orientierte Arbeiten sei hier explizit auf (Balzert, S. 66 ff) verwiesen.
 
+
 % TODO Historie des betroffenen Feld
+
 
 \section{Technologische Grundlagen}
 % TODO Wichtige technologischen Grundlagen / Wissenswertes
 
-\subsection{P2P Netzwerke}
+\subsection{Anonymisierungs-Netzwerke}
 
-Scope: Nur I2P
+Es gibt eine vielzahl an verschiedenen Anonymisierungsnetzwerken, wobei \glstext{tor} (\glsname{tor}) wahrscheinlich das bekannteste davon ist.
 
-\subsection{Performance / Bandwidth / Latency}
+In dieser Arbeit wird aber lediglich das Anonymisierungsnetzwerk \glsname{i2p} behandelt und nicht weiter auf andere Anonymisierungsnetzwerke eingegangen, da dieses das Netzwerklayer von diva.exchange darstellt.
 
-\subsection{I2P}
+\subsection{Anonymität, Privatsphäre und Datenschutz}
 
-I2P ist ein \glsname{p2p}-Netzwerk.
+ Anonymität und Privatsphäre ist nicht das gleiche.
+ Jedoch kann durch Anonymität die Privatsphäre geschützt werden.
+
+
+ Auch ist Anonymität wichtig für Whistle-Blower und für Leute die unter totalitären Regimen.
+
+\subsection{Das Anonymitätstrilemma}\label{sec:anonymitytrilemma}
+
+Beim Design eines anonymen Kommunikationsprotokoll gibt es grundsätzliche Einschränkungen. Es gilt die folgenden drei Aspekte abzuwägen :
 
 \begin{itemize}
-    \item Unabhängiges Netzwerk
-    \item Low-Latency
-    \item \glstext{e2e}
+    \item Der Anonymitätsgrad von Sender und Empfänger einer Nachricht
+    \item Die benötigte Netzwerkbandbreite
+    \item Die Latenzzeiten der Nachrichten
 \end{itemize}
 
+
+Dabei ist es nicht möglich ein Protokoll zu designen, welches einen hohen Anonymitätsgrad bietet, wenig Netzwerkbandbreite benötigt und tiefe Latenzzeiten vorweist.
+Die Anonymität geht also immer auf Kosten von höherer Latenzzeiten und/oder mehr benötigter Netzwerkbandbreite (siehe auch Abbildung~\fullref{fig:anonimitytrilemma}).
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \draw (0,0) node[anchor=north]{hoher Anonymitätsgrad}
+        -- (4,0) node[anchor=north]{tiefe Latenzzeiten}
+        -- (2,4) node[anchor=south]{wenig Netzwerkbandbreite}
+        -- cycle;
+    \end{tikzpicture}
+    \caption{Das Anonymitätstrilemma}\label{fig:anonimitytrilemma}
+\end{figure}
+
+Ein Anonymisierungsnetzwerk kann beispielsweise auf Kosten der Netzwerkbandbreite implementiert werden, indem Nachrichten einfach an alle im Netzwerk versendet werden. Somit könnte mindestens der Empfänger verschleiert werden.
+Umgekehrt könnte ein Anonymisierungsnetzwerk auf Kosten der Latenz implementiert werden. Wenn Nachrichten über mehrere Netzwerkknoten geleitet werden, könnte man Empfänger und Sender verschleiern, aber hätte höhere Latenzzeiten da dieselbe Nachricht mehrmals nacheinander von verschiedenen Netzwerkknoten bearbeitet werden muss.
+Letzteres gibt es Netzwerke bei welchen Anonymität keine Rolle spielt, wie beispielsweise beim üblichen UDP Protokoll. Es ist dann möglich hohe Bandbreite sowie niedrige Latenzzeiten zu erreichen.
+
+Es gilt abzuwägen, welche der Aspekte für das zu designende Protokoll wichtig sind und wo ein Schwerpunkt gelegt wird und welche Aspekte somit auch vernachlässigt werden, um einen guten Kompromiss zu finden. \parencite{das_anonymity_2018}
+
+\subsection{\glstext{i2p} (\glsname{i2p})}
+
+Kurz gesagt ist \glstext{i2p} (\glsname{i2p}) ein dezentrales Mischnetzwerk mit niedriger Latenz indem verschlüsselte Nachrichten ausgetauscht werden können.
+\parencite{zantout_i2p_2011}
+Es handelt sich hier um ein eigenständiges Overlay-Netzwerk, welches auf den darunterliegenden Protokollen UDP und TCP aufbaut.  \parencite{de_boer_invisible_2019,astolfi_i2p_2015}.
+
+Mit einem Mischnetzwerk ist gemeint, dass Nachrichten an durch Knoten des Netzwerks weitergeleitet werden, um den Sender und den Empfänger einer Nachricht zu verschleiern. Dieser Mischvorgang wird bei I2P Garlic-Routing genannt.
+\parencite[S.~1]{zantout_i2p_2011}.
+
+Auch gilt es zu unterstreichen, dass \textit{Nachrichten} ausgetauscht werden.
+I2P ist \textit{Nachrichtenbasiert} und verhält sich in diesem Sinne ähnlich wie UDP.
+Es gibt dementsprechend keine Garantien, dass wenn eine Nachricht versendet wird, dass die Daten in der richtigen Reihenfolge, komplett oder überhaupt ankommen.
+Es gibt jedoch Erweiterungen auf dem Netzwerk, welche diese Garantien (ähnlich wie sie diese bei TCP gibt) wieder herstellen können.
+Zudem bietet I2P eine Ende-zu-Ende-Verschlüsselung für die Nachrichten. Die Nachrichten sind also vom Sender bis zum Empfänger verschlüsselt.
+
+Während das TOR-Netzwerk ursprünglich entwickelt wurde auf das öffentliche Internet via Out-Proxies zuzugreifen,
+liegt bei I2P der Fokus darin anonym auf Dienste, die innerhalb des Netzwerks angeboten werden, zuzugreifen.
+Jedoch besteht bei TOR ebenfalls die Möglichkeit Netzwerkinterne Dienste anzubieten mittels TOR Hidden Services, auch aber gibt es bei I2P die Möglichkeit, mit Hilfe von sogenannten Outproxies, auf das normale Internet zuzugreifen.
+
+Dienste die innerhalb des Netzwerks angeboten werden, sind zum Beispiel Bit-Torrent für File-Sharing, Webseiten (sogenannte ``eepsites''), oder auch Chat-Dienste wie IRC (Internet Relay Chat).
+\parencite[p.~3-4]{de_boer_invisible_2019}
+
 \cite{astolfi_i2p_2015}
-\cite{astolfi_i2p_nodate}
 
 \cite{timpanaro_birds_2012}
 
