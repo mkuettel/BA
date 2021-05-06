@@ -226,9 +226,15 @@ Just read logs? Use some Docker cp magic?
 
 \section{Umsetzung / Programmierung}
 
-Der Quellcode für das Testnetzwerk ist im folgenden Repository zu finden:
+Der Komplette Quellcode für das Deployment der Test-VM, die Erstellung des Testnetzwerk's und die Messanlage ist im folgenden Repository zu finden:
 
-\subsection{VM / Container Netzwerk}
+\url{https://codeberg.org/mkuettel/i2p-testnet}.
+
+\section{Test-VM}
+
+Die Test-VM wurde so umgesetzt, das diese mittels nixops deployed werden kann.
+
+\section{1. Lösungsansatz: NixOS-Container}
 
 NixOS erlaubt es deklarativ Container zu definieren.
 
@@ -254,10 +260,9 @@ Im Hintergrund brauchen jedoch beide Container-Arten die gleichen Linux-Kernel-F
 
 Siehe \lstinline|containers.nix| in der \lstinline|i2p-testnet| Repository für die Effektive implementation
 
-
-\url{https://codeberg.org/mkuettel/i2p-testnet}.
-
 \subsection{Bootstrapping}
+
+Da das Testnetzwerk
 
 \subsubsection{Reseed-Server}
 
@@ -269,14 +274,13 @@ Die Go-Implementation dieses Reseed-Servers ist hier zu finden:
 
 \url{https://codeberg.org/diva.exchange/i2p-tools}
 
-Diese version basiert auf der folgenden GitHub version:
+Diese Version basiert auf der folgenden GitHub version:
 
 \url{https://github.com/MDrollette/i2p-tools}
 
 \subsubsection{Ablauf}
 
-
-Der Bootstrapping-Vorgang im Testnetzwerk wird wie folgt abgehandelt:
+Der Bootstrapping-Vorgang im Testnetzwerk wird wie folgt abgehandelt (vgl. mit Abbildung~\fullref{fig:bootstrap-diagram}):
 
 \begin{enumerate}
     \item Erstellen der Container für den Reseed-Sever und den I2P-Knoten
@@ -297,7 +301,7 @@ Welche Reseeder ein I2P-Router anfragt, kann mittels der \lstinline|i2pd|-Konfig
 \begin{landscape}% Landscape page
 \begin{figure*}[ht]
   \includegraphics[height=0.85\textwidth]{bootstrap-diagram.png}
-  \caption{Der Boostrapping Prozess}\label{fig:bootstrap-diagram}
+  \caption{Der Bootstrapping Prozess}\label{fig:bootstrap-diagram}
 \end{figure*}
 \end{landscape}% Landscape page
 
@@ -314,7 +318,7 @@ Welche Reseeder ein I2P-Router anfragt, kann mittels der \lstinline|i2pd|-Konfig
 
 Während unserer Tests wollen wir nur Traffic unserer eigenen Knoten im Netzwerk 
 
-docker-compose respektive docker hat die option ein eigenes Netzwerk zu erstellen:
+docker-compose respektive docker hat die option ein internes Netzwerk zu erstellen.
 
 \subsubsection{Abgrenzen vom Haupt-Netzwerk}
 
@@ -331,12 +335,90 @@ Das Builder der systemkonfigurationen inkl. der container getestet mit 100 konnt
 Fehlerhafte netzwerkkonfiguration by default, falsche routen und ip konfigurationen (fehlende definition der netzwerkmaske)
 Container selber sind unnötig gross
 
+
+\subsection{I2Pd-Container}
+
+Hauptsächlich wird in diesem Container der \lstinline|i2pd|-Prozess ausgeführt.
+Um andere Knoten zu kontaktieren zu können muss dieser zu Beginn den Reseed-Container anfragen nach einer Liste von RouterInfos.
+
+Der TCP-Client und TCP-Server sind ebenfalls in diesem Container angesiedelt.
+Dies verletzt zwar das Prinzip, dass man nur einen Prozess in einem Docker-Container ausführen sollte,
+jedoch ist das Ziel hiermit Messungenauigkeiten durch das Netzwerk, sowie die Netzwerkkonfiguration zu vereinfachen.
+
+\subsection{Der I2Pd-Prozess}
+
+\subsubsection{TCP Server Tunnel}
+
+Diese Tunnel-Konfiguration führt dazu, dass I2P eine neue Destination mit einer .b32-Addresse erstellt.
+
+Mit der folgenden Tunnel-Konfigurations-Datei wird der \lstinline|i2pd| konfiguriert, um einen TCP-Server-Tunnel zur Verfügung zu stellen:
+\begin{lstlisting}
+# serve some tcp service to others in the network
+[tcp-in]
+type = server
+host = 127.0.0.1
+port = 2323
+keys = tcp-in.dat
+gzip = false
+enableuniquellocal = true
+\end{lstlisting}
+
+Hierbei gilt es zu beachten, das die Schlüssel angegeben mit der \lstinline|keys|-Option, beim Aufstarten generiert werden.
+Auch wurde mittels der Option \lstinline|gzip| die Komprimierung-Deaktiviert, damit auch wirklich die richtigen Nachrichten-Grössen übermittelt werden.
+Die Option\lstinline|enableuniquellocal| wurde noch aktiviert, um die Auswertung zu vereinfachen. Denn diese führt dazu das der TCP-Server nicht immer dieselbe Ausgangsadresse \lstinline|127.0.0.1| bekommt, sondern je nach Sender der Nachricht eine andere \lstinline|127.0.0.0/8|-Adresse anhand der ersten Bytes des Public-Keys erhält.
+
+%TODO: Reference config, especiallfor for enableuniquellocal.
+
+
+\subsubsection{Socks5-Proxy für den TCP-Client}
+
+Dieser Socks5-Proxy ist der Gateway um innerhalb des I2P-Overlaynetzwerk zu kommunizieren.
+
+Der folgende Ausschnitt aus der \lstinline|i2pd.conf| zeigt auf wie der Socks5-Proxy konfiguriert wurde:
+
+\begin{lstlisting}
+[socksproxy]
+## Uncomment and set to 'false' to disable SOCKS Proxy
+enabled = true
+## Address and port service will listen on, like 127.0.0.1
+address = 127.0.0.1
+port = 4445
+\end{lstlisting}
+
+\subsection{TCP-Server}
+
+
+\subsection{TCP-Client}
+
+Damit der TCP-Client in das I2P-Overlaynetzwerk verbinden kann muss dieser fähig sein mit einem Socks5-Proxy zu kommunizieren.
+
+
+
 \section{Testing}
 
 CI? most don't allow this...
 
 have a machine to deploy to
 
+\subsection{BATS-Tests}
+
+Diese Tests sind im Verzeichnis \lstinline|tests/| in der \lstinline|i2p-testnet|-Repository zu finden.
+
+Um schnell zu prüfen ob das Netzwerk korrekt konfiguriert wurde gibt es das Test-Modul \lstinline|tests/networking.bats|.
+
+\subsection{CI für den Bericht}
+
+Da der Bericht mit Hilfe von \LaTex umgesetzt wurde, verhält sich dieser 
+
 \section{Benutzerhandbuch}
 
+Dieser Abschnitt erklärt wie ein Tester selber neue Testnetzwerke erstellen, die Tests-Konfigurieren und selber
 
+\subsection{Deployment der Test-VM}
+
+Für genauere Anweisungen und weitere Möglichkeiten welche durch nixops geboten werden, siehe das ``NixOps User's Guide''\footnote{\url{https://releases.nixos.org/nixops/nixops-1.5/manual/manual.html}}.
+
+
+\subsection{Konfiguration einer Messung}
+
+\subsection{Ausführen einer Messung}
