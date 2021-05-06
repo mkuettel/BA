@@ -201,9 +201,6 @@ Dieser Ansatz wurde verworfen, weil dies dazu geführt hat, das die i2pd-Contain
 
 \subsection{Bootstrapping}
 
-Es wird Boostrapping-Prozess benötigt, dass sich die I2P-Router sich anfangs Gegenseitig im privaten und abgeschotteten Testnetzwerk überhaupt finden können.
-Erst anschliessend ist es möglich Tunnels aufzubauen, damie die I2P-Router miteinander kommunizieren können.
-
 Die I2P-Router im öffentlichem I2P-Netzwerk können sich hier einfach an den öffentlich verfügbaren Reseeder eine \lstinline|su3|-Datei herunterladen.
 Diese \lstinline|su3|-Datei beinhaltet RouterInfos. 
 Diese RouterInfos beinhalten die nötigen Informationen wie public-key und Netzwerkadresse, um die Kommunikation zu starten.
@@ -211,13 +208,9 @@ Diese RouterInfos beinhalten die nötigen Informationen wie public-key und Netzw
 Im privaten und abgeschotteten Testnetzwerk sind die öffentlichen Reseed-Server jedoch nicht erreichbar.
 Deshalb muss ein anderer Weg gefunden werden das private I2P-Netzwerk zu bootstrappen.
 
-Einerseits gibt es hier den Floodfill-Ansatz oder einen eigen Reseed-Server zu im privaten Testnetzwerk zu haben.
-%TODO: reference bootstrapping site
 
 
-Um bessere empirische Aussagen machen zu können, sollte das Testnetzwerk so gut wie möglich das öffentliche I2P-Netzwerk abbilden \seereq{EVAL}.
-
-Denn der Floodfill-Anstatz entspricht nicht umbedingt der realität, denn die Reseeder-Knoten können liefern nicht allen I2P-Routern dieselbe Liste an Peers.
+Denn der Floodfill-Anstatz entspricht nicht unbedingt der Realität, denn die Reseeder-Knoten können liefern nicht allen I2P-Routern dieselbe Liste an Peers.
 
 Auch kann die Konfiguration des Reseeders eine wichtige Rolle spielen, denn dieser bestimmt mit der Liste an Peers die er den I2P-Routern liefert den Konnektivitätsgrad der Knoten.
 
