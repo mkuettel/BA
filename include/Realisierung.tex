@@ -158,6 +158,46 @@ Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diag
 
 \section{Komponentendesign}
 
+\subsection{Deployment der Test-VM}
+
+NixOps erlaubt es eine NixOS-Systemkonfiguration auf diverse Arten von Maschinen zu deployen.
+
+\subsection{Konfiguration}
+
+Die Konfiguration für
+
+\subsection{Recompose-Skript}
+
+Das Recompose-Skript ist dafür verantwortlich das Docker-Netzwerk aufzubauen und zu managen.
+
+Als wichtigster Punkt wird hier der 
+
+
+
+\subsection{Deployment von der Container}
+
+Da ich bereits NixOps zum deployment der Container verwendet habe, schien es naheliegend die NixOS-Container Technologie zu verwenden.
+
+Jedoch bin ich mit diesem Ansatz an mehreren Stellen an Grenzen gestossen.
+
+Als erstes traten Probleme mit der Netzwerkkonfiguration. Die NixOS-Container implementation scheinte die 
+
+• Erst Probleme mit der Netzwerkkonfiguration
+• Probleme mit Docker-Kompatibilität
+• Skaliert nicht auf mehr als ein paar dutzend Container. Zu viel
+RAM benötigt lediglich zum Berechnen der verschiedenen
+Container-Konfigurationen.
+
+Es hat 
+
+Anfangs wurde auf ein Ansatz mit 
+
+
+\subsection{Skalierung der i2pd-Container}
+
+Der erste Lösungsansatz mit NixOS-Containern hat sich als ungeeignet herausgestellt. \seereq{TSCL}
+
+Dieser Ansatz wurde verworfen, weil dies dazu geführt hat, das die i2pd-Container untereinander nicht kommunizieren konnten.
 
 \subsection{Bootstrapping}
 
