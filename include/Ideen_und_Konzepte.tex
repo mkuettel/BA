@@ -1,6 +1,9 @@
+% !TEX root = BA-Bericht.tex
 \chapter{Ideen und Konzepte}
 
-Dieses Kapitel soll aufzeigen wie ein Teststand erstellt werden soll um die Performance eines I2P-Netzwerkes zu messen. Es wird ein Konzept für einen Testand vorgestellt der den Anforderungen (siehe Abschnitt~\ref{sec:Anforderungen}) gerecht werden soll.
+Dieses Kapitel soll aufzeigen wie ein Teststand erstellt werden soll, um die Performance eines I2P-Testnetzwerkes unter verschiedenen Bedingungen und Umständen zu messen.
+
+Es wird ein Konzept für einen Teststand vorgestellt, der den Anforderungen (siehe Abschnitt~\fullref{sub:Anforderungen}) gerecht werden soll.
 
 Angefangen mit dem Abschnitt \ref{sec:grundidee} werden verschiedene Lösungsansätze für verschieden Aspekte vorgestellt.
 
@@ -32,12 +35,11 @@ Dabei gibt es verschiedene Herausforderungen und Aspekte die es zu beachten gilt
 Um ein Test auf einem solchen Testnetzwerk wiederholbar und reproduzierbar zu machen gibt es folgendes zu beachten \seereq{TREP}.
 
 \begin{itemize}
-    \item Das Testnetzwerk soll isoliert werden um äussere einflüsse durch das Netzwerk (auch das offizielle I2P Netzwerk) zu vermeiden (siehe auch Abschnitt~\ref{sec:isolierung}).
+    \item Das Testnetzwerk soll isoliert werden, um äussere Einflüsse durch das Netzwerk (auch das offizielle I2P-Netzwerk) zu vermeiden (siehe auch Abschnitt~\ref{sec:isolierung}).
     \item Infrastructure as Code: Ist die Testinfrastruktur als Programmcode beschrieben, kann dieser zu einem späteren Zeitpunkt wieder ausgeführt werden, um das Testnetzwerk wieder zu erstellen. Mehr dazu im Abschnitt~\ref{sec:deployment}.
     \item Reproduzierbarer Build von \lstinline|i2pd| und der Software auf einem Knoten
 \end{itemize}
 
-Dies könnte mit verschiedenen Tools gelöst werden. Nix könnte hier insbesondere hilfreich werden, da reproduzierbare builds, wie auch mit nixops ein ''Infrastructure as Code''-Tool angeboten wird.
 
 \section{Deployment}\label{sec:deployment}
 
@@ -47,18 +49,12 @@ Die im Vorherigen Abschnitt bereits erwähnt soll das Deployment auch reproduzie
 Es soll auch möglich sein verschieden grosse Testnetzwerke zu erstellen \seereq{TSCL}.
 
 
-
 \subsection{Container oder Virtuelle Maschinen}
 
 Um Ressourcen zu schonen aufgrund von kleinerem Overhead und Start-Up-Time von Containern im Gegensatz zu VMs sind diese wohl zu bevorzugen.
 Container erlauben es schneller tests durchzuführen \seereq{TPER} aufgrund der Start-Up/Deployment-Time
-aber auch Tests mit mehr Knoten zu machen, da weniger Ressoucen für einen einzellnen Knoten benötigt wird.
-Dies ist der Fall weil bei Containerlösungen (oder auch OS-Virtualisierung) im Gegensatz zu Virtuellen Maschinen der Betriebsystemkernel zwischen den Instanzen geteilt wird.
-
-\subsection{Bootstrapping}
-
-Ganz zu Beginn, wenn ein Knoten dem I2P Netzwerk beitritt muss dieser Wissen wo mindestens ein anderer Knoten ist.
-Um die erste Liste von Knoten zu erhalten damit Knoten dem Netzwerk beitreten können, muss die liste von Knoten im Netzwerk zu beginn des Tests ''geseedet'' werden. TODO: Explain this better
+aber auch Tests mit mehr Knoten zu machen, da weniger Ressourcen für einen einzelnen Knoten benötigt wird, da der Betriebssystemkernel geteilt wird.
+Dies ist der Fall weil bei Containerlösungen (oder auch OS-Virtualisierung) im Gegensatz zu Virtuellen Maschinen der Betriebssystemkernel zwischen den Instanzen geteilt wird.
 
 \subsection{Tools}
 
@@ -79,12 +75,18 @@ Folgendes soll im Teststand konfigurierbar sein (\reqref{TCNF}):
 Nix als konfigurationssprache würde es erlauben beliebige aspekte des Setups konfigurierbar zu machen.
 Die meisten oben erwähnten Konfigurationsmöglichkeiten werden bereits durch verschiedene NixOS-Module (\lstinline|i2pd|, \lstinline|firewall|, ... ) angeboten.
 
-\section{Latenzmessung von Nachrichten}
+\section{Latenzmessung}
+
+\subsection{Latenzmessung einer Nachricht}
 
 Um die Latenz oder Verzögerung einer Nachricht im Testnetzwerks zu messen \seereq{TLAT}, könnte man jeweils den Empfangs- sowie Sendezeitpunkt einer Nachricht speichern und voneinander subtrahieren.
+
+\begin{equation}
+    Latenz = Empfangszeitpunkt - Sendezeitpunkt
+\end{equation}
+
 Jedoch muss so sichergestellt werden, dass die Uhrzeiten zwischen allen Knoten synchron ist.
-Dies ist jedoch ein komplexes und bekanntes Problem mit verteilten Systemen.
-Je nach dem muss eventuell auf Lamport-Zeitstempel zurückgegriffen werden?
+
 
 \section{Limitieren der Bandbreite}
 
@@ -117,7 +119,22 @@ Am Ende des Tests müssen die Testresultate an einem sicheren Ort ausserhalb des
 
 In der \lstinline|i2pd| Konfiguration gibt es zusätzlich das \lstinline|familiy| tag, welches die Knoten als zusammenhängend markieren würde, würden diese aus Versehen mit dem echten I2P Netzwerk reden. Dies ist auch interessant bezüglich Tests die am echten Netzwerk durchgeführt werden sollen.
 
-TODO: Verschiedene Netzwerksegmente mit verschiedenen Knoten?
+%TODO: fullmesh?
+
+\section{Bootstrapping und Verbindungsgrad der Knoten}
+
+Ganz zu Beginn, wenn ein Knoten dem I2P Netzwerk beitritt muss dieser Wissen wo mindestens ein anderer Knoten ist.
+Um die erste Liste von Knoten zu erhalten damit Knoten dem Netzwerk beitreten können, muss die liste von Knoten im Netzwerk zu beginn des Tests ''geseedet'' mit einer liste von Bekannten Knoten.
+
+Ohne einen Reseed server ist dies möglich mit einem floodfill reseed:
+
+\url{https://i2pd.readthedocs.io/en/latest/tutorials/floodfill-bootstrap/}
+
+Dies würde es auch erlauben ein Testnetzwerk zu erstellen, deren Knoten nicht von allen anderen Knoten Bescheid wissen.
+
+
+Um bessere empirische Aussagen machen zu können, sollte das Testnetzwerk so gut wie möglich das öffentliche I2P-Netzwerk abbilden \seereq{EVAL}.
+
 
 \section{Messen der Ressourcenauslastung der Knoten}
 
@@ -126,7 +143,7 @@ Gerät ein Knoten oder die Hostsysteme für das Testnetzwerk in Ressourcenengpä
 
 \begin{itemize}
     \item Somit kann sichergestellt werden, dass das Testnetzwerk nicht so gross skaliert wurde, bzw. wie weit es skaliert werden kann \seereq{TSCL}.
-    \item Um sicherzustellen das ein Flaschenhals im Netzwerk nicht durch zu wenig ressourcen verursacht sind \seereq{TPER}.
+    \item Um sicherzustellen das ein Flaschenhals im Netzwerk nicht durch zu wenig Ressourcen verursacht sind \seereq{TPER}.
     \item Äussere einflüsse wie Ressource-Exhaustion vermeiden, dies verbessert auch die Reproduzierbarkeit \seereq{TREP}.
     \item Messung der Test-Performance
 \end{itemize}
