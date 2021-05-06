@@ -207,67 +207,50 @@ Jedoch geht dies auf Kosten der Latenz aufgrund der zusätzlichen Hops.
 Tunnels Configuration
 \cite{noauthor_i2p_nodate-3}
 
+
 \begin{itemize}
     \item Jeder Knoten kann die länge seiner Tunnel selber bestimmen. (Standardwert 3)
-    \item Mehrere Verschlüsslungslayer je nach Tunnellänge (vgl. Onion-Routing)
+    \item Mehrere Verschlüsselungsschichten je nach Tunnellänge (vgl. Onion-Routing)
 \end{itemize}
 
 \subsection{Garlic-Routing}
 
-Im Gegensatz zum \glsname{tor}-Netzwerk setzt
+Inspiriert vom Onion-Routing des \glsname{tor}-Netzwerk's gibt es im I2P-Netzwerk der Begriff
+
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{img/i2prouting.png}
+    \caption{Garlic-Routing (vgl. \url{https://geti2p.net/de/docs/how/intro})}
+\end{figure}
 
 \begin{itemize}
     \item
 \end{itemize}
 
-\subsection{NetDB}
+\cite{de_boer_invisible_2019}
 
-\subsection{Reseeding}
+\cite{noauthor_intro_nodate}
 
-Seeding etc.
-
-Reseed Access
-\cite{noauthor_i2p_nodate-7}
-
-
-\section{Technische Konzepte}
-\label{sec:technischeKonzepte}
-% TODO Konzepte in diesem Feld welche für den Leser relevant sind
-
-\subsection{Das Anonymitätstrilemma}\label{sec:anonymitytrilemma}
-
-Beim Design eines anonymen Kommunikationsprotokoll gibt es gründsätzliche Einschränkungen. Es gilt die folgenden drei Aspekte abzuwägen:
-
-\begin{itemize}
-    \item Hoher Anonymiätsgrad von Sender und Empfänger einer Nachricht
-    \item Tiefer Netzwerkbandbreiten Overhead
-    \item Tiefer Latenz Overhead
-\end{itemize}
-
-Dabei ist es nicht möglich ein Protokoll zu designen welches alle diese drei Aspekte komplett erfüllt.
-Es muss entschieden werden, welche zwei Aspekte wichtiger sind (siehe auch die Abbildung~\fullref{fig:anonimitytrilemma}). \parencite{das_anonymity_2018}
-
-\begin{figure*}[h]
-    \begin{tikzpicture}
-      \draw (0,0) node[anchor=north]{hohe Anonymität}
-        -- (4,0) node[anchor=north]{tiefe Latenz}
-        -- (2,4) node[anchor=south]{wenig Bandbreite}
-        -- cycle;
-    \end{tikzpicture}
-    \caption{Das Anonymitätstrilemma}\label{fig:anonimitytrilemma}
-\end{figure*}
-
-Zum Beispiel wenn ein hoher Anonymitätsgrad erwünscht ist, kann dies nur erreicht werden mit entweder mehr Netzwerkbandbreiten-Overhead oder mehr Latenz-Overhead.
 
 
 \section{Stand im Bezug auf eigenes Projekt}
 % TODO Welche Forschung wurde in jüngster Zeit gemacht welche relevant für das eigene Projekt sind
 
+\subsection{Bootstrapping und Reseed-Servers}
+
+Es wird Bootstrapping-Prozess benötigt, dass sich die I2P-Router sich anfangs Gegenseitig im privaten und abgeschotteten Testnetzwerk überhaupt finden können.
+Erst anschliessend ist es möglich Tunnels aufzubauen, damit die I2P-Router miteinander kommunizieren können.
+
+
+Einerseits gibt es hier den Floodfill-Ansatz oder einen eigen Reseed-Server zu im privaten Testnetzwerk zu haben.
+%TODO: reference bootstrapping site
+
+Reseed Access
+\cite{noauthor_i2p_nodate-7}
+
 Usability Inspection of Anonmity Networks
 (\cite{abou-tair_usability_2009})
 
 Usability Tetsts
-
 (\cite{schomburg_anonymity_2009})
 
 Evaluation of Anonymity Networks
@@ -287,24 +270,31 @@ Performance History I2P Webseite
 
 Auf der Webseite von I2P auf der Seite ''Future Performance Improvements'' sind zudem zukünftige Performance Verbesserungsmöglichkeiten aufgelistet.
 \cite{noauthor_future_nodate}
-On I2P's website the page 
 
 Improving I2P (2012)
 \cite{timpanaro_improving_2012}
 
+Latency vs Tor Usability Bandwitdh and Latency Comparision
+\cite{ehlert_i2p_2021}
 
-\subsection{I2P-Testnetzwerke}
+
+\subsection{Testen mit dem I2P-Netzwerk}
 
 \subsection{Metriken zur Messung}
-
-Towards Measuring on the I2P Netzwork
-\cite{wang_towards_2013}
 
 \begin{itemize}
     \item Latenzmessung (abschicken/empfangen (Laport-Zeitstempel im schlimmsten fall))
     \item Messung der Bandbreite (ab welchem Layer)
     \item Ressourcenauslastung
 \end{itemize}
+
+Towards Measuring on the I2P Netzwerk
+\cite{wang_towards_2013}
+
+
+Es sind auch diverse Metriken über das öffentliche \glsname{i2p}-Netzwerk verfügbar auf
+Im öffentlichen \glsname{i2p} Es werden bereits verschiedene Dinge gemessen
+
 
 \cite{timpanaro_monitoring_nodate}
 
@@ -315,5 +305,9 @@ Towards Measuring on the I2P Netzwork
     \item verfälscht resultate
     \item deshalb isolieren
     \item öffentliche Metriken  I2P Metrics: \cite{noauthor_i2p_nodate-4}
-    \item Netzwerk ist klein (deshalb braucht es so ein beweis wie hier)
+    \item Netzwerk ist klein (deshalb braucht es so ein Beweis wie hier)
 \end{itemize}
+
+\subsection{Flooding von Blockchain-Updates}
+
+Es werden 64Kb Nachrichten verteilt über verschiedene Knoten.
