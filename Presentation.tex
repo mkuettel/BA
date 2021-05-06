@@ -309,7 +309,7 @@
         \begin{itemize}
             \item Konfigurierbare Anzahl-Knoten
             \item Isolierung vom öffentlichen Netzwerk
-            \item Boostrapping / Reseeding erfolgreich
+            \item Bootstrapping / Reseeding erfolgreich
             \item Angefangen mit TCP-Server zum Messen der Latenz
             \item Probleme mit der Netzwerkkonfiguration
         \end{itemize}
@@ -347,76 +347,76 @@
     \end{frame}
     \egroup
 
-    % \begin{frame}
-    %     \frametitle{I2P Konzepte und Begrifflichkeiten}
-    %
-    %     \begin{itemize}
-    %         \item \textbf{Router-Info} Beinhaltet u.a. Public-Keys und Netzwerkkoordinaten eines I2P-Routers
-    %         \item \textbf{Network Database:} kurz NetDb. Eine DHT wo jeder Knoten Informationen über seine Peers (u.a. Router-Infos) ablegt.
-    %         \item \textbf{Reseeder} Benötigt zum Boostrappen (erstellen eines I2P-Netzwerks) und wenn ein I2P-Router einem Netzwerkbeitritt. Liefert Router-Infos aus.
-    %         \item \textbf{Tunnel} Eine Verbindung über (normalerweise) mehrere Knoten. Tunneltypen:
-    %             \begin{itemize}
-    %             \item \textbf{Inbound:} Eingehende Verbindung
-    %             \item \textbf{Outbound:} Ausgehende Verbindung
-    %             \item \textbf{Exploratory:} Werden verwendet zum Aufbauen von Tunnels
-    %             \item \textbf{Client/Server:} Gateway der in und aus dem I2P-Overlay Netzwerk führen
-    %             \end{itemize}
-    %     \end{itemize}
-    % \end{frame} % 5 min
-    %
-    %
-    % \begin{frame}[allowframebreaks]
-    %     \frametitle{Routing im I2P-Netzwerk}
-    %
-    %     \begin{figure}[t]
-    %         \includegraphics[height=0.69\textheight]{img/i2prouting.png}
-    %         \caption{Garlic-Routing (vgl. \url{https://geti2p.net/de/docs/how/intro})}
-    %     \end{figure}
-    %
-    %     Wichtiges:
-    %
-    %     \begin{itemize}
-    %         \item Dieser Routing-Mechanismus (Garlic-Routing) ist zur Anonymisierung und Verschlüsselung von Nachrichten
-    %         \item Je länger die Tunnels desto grösser die Latenz, da mehr Hops/I2P-Router sind darin verwickelt.
-    %         \item Jeder Knoten bestimmt die Länge seiner Tunnels selbst
-    %         \item Somit auch den Anonymisierungsgrad und die Latenz
-    %     \end{itemize}
-    %
-    % \end{frame}
-    %
-    %
-    % \begin{frame}
-    %     \frametitle{Projektmanagement}
-    %
-    %     KanBan wird benutzt als Projektmangament Methode
-    %
-    %     \begin{itemize}
-    %         \item Iterativ
-    %         \item Pull-Prinzip
-    %         \item Nur 1 Task auf einmal bearbeiten
-    %         \item Projektboard mit drei spalten (Todo, Doing, Done)
-    %     \end{itemize}
-    % \end{frame} % 6min
-    %
-    %
-    % \begin{frame}
-    %     \frametitle{Wochentagplan}
-    %
-    %     \begin{figure}[t]
-    %         \includegraphics[height=0.8\textheight]{img/wochentagplan.png}
-    %     \end{figure}
-    %
-    % \end{frame} % 6min
-    %
-    %
-    % \begin{frame}
-    %     \frametitle{Methode Teststand}
-    %
-    %     \begin{itemize}
-    %         \item Qualitative Analyse mit Laborexperiment (E.g. Teststand)
-    %         \item Aufbau des Teststands ist jedoch ein Prototyping Verfahren
-    %     \end{itemize}
-    % \end{frame} % 6min
+    \begin{frame}
+        \frametitle{I2P Konzepte und Begrifflichkeiten}
+
+        \begin{itemize}
+            \item \textbf{Router-Info} Beinhaltet u.a. Public-Keys und Netzwerkkoordinaten eines I2P-Routers
+            \item \textbf{Network Database:} kurz NetDb. Eine DHT wo jeder Knoten Informationen über seine Peers (u.a. Router-Infos) ablegt.
+            \item \textbf{Reseeder} Benötigt zum Boostrappen (erstellen eines I2P-Netzwerks) und wenn ein I2P-Router einem Netzwerkbeitritt. Liefert Router-Infos aus.
+            \item \textbf{Tunnel} Eine Verbindung über (normalerweise) mehrere Knoten. Tunneltypen:
+                \begin{itemize}
+                \item \textbf{Inbound:} Eingehende Verbindung
+                \item \textbf{Outbound:} Ausgehende Verbindung
+                \item \textbf{Exploratory:} Werden verwendet zum Aufbauen von Tunnels
+                \item \textbf{Client/Server:} Gateway der in und aus dem I2P-Overlay Netzwerk führen
+                \end{itemize}
+        \end{itemize}
+    \end{frame} % 5 min
+
+
+    \begin{frame}[allowframebreaks]
+        \frametitle{Routing im I2P-Netzwerk}
+
+        \begin{figure}[t]
+            \includegraphics[height=0.69\textheight]{img/i2prouting.png}
+            \caption{Garlic-Routing (vgl. \url{https://geti2p.net/de/docs/how/intro})}
+        \end{figure}
+
+        Wichtiges:
+
+        \begin{itemize}
+            \item Dieser Routing-Mechanismus (Garlic-Routing) ist zur Anonymisierung und Verschlüsselung von Nachrichten
+            \item Je länger die Tunnels desto grösser die Latenz, da mehr Hops/I2P-Router sind darin verwickelt.
+            \item Jeder Knoten bestimmt die Länge seiner Tunnels selbst
+            \item Somit auch den Anonymisierungsgrad und die Latenz
+        \end{itemize}
+
+    \end{frame}
+
+
+    \begin{frame}
+        \frametitle{Projektmanagement}
+
+        KanBan wird benutzt als Projektmangament Methode
+
+        \begin{itemize}
+            \item Iterativ
+            \item Pull-Prinzip
+            \item Nur 1 Task auf einmal bearbeiten
+            \item Projektboard mit drei spalten (Todo, Doing, Done)
+        \end{itemize}
+    \end{frame} % 6min
+
+
+    \begin{frame}
+        \frametitle{Wochentagplan}
+
+        \begin{figure}[t]
+            \includegraphics[height=0.8\textheight]{img/wochentagplan.png}
+        \end{figure}
+
+    \end{frame} % 6min
+
+
+    \begin{frame}
+        \frametitle{Methode Teststand}
+
+        \begin{itemize}
+            \item Qualitative Analyse mit Laborexperiment (E.g. Teststand)
+            \item Aufbau des Teststands ist jedoch ein Prototyping Verfahren
+        \end{itemize}
+    \end{frame} % 6min
 
 \end{document}
 
