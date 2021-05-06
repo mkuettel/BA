@@ -8,6 +8,10 @@
 
 \section{Projektmanagement}
 
+\subsection{Meilenstein 1: Grobkonzept}
+
+\subsection{Meilenstein 2: Zwischenpräsentation}
+
 \subsection{Resultate}
 
 Die folgende Tabelle~\fullref{tab:resultate} beschreibt alle Resultate und Unterresultate die während dieser Bachelorarbeit erstellt werden.
@@ -132,6 +136,25 @@ Jeder issue kann nun auch sortiert werden nach Resultat-Kategorien z.B. ''Recher
 \newpage
 
 \section{Systemarchitektur}
+
+Grob besteht die entwickelte Software für den Teststand aus drei teilen.
+
+\begin{enumerate}
+    \item \textbf{Tester-Software}: Hier ist die Deployment-Konfiguration für die Test-VM zu finden, sowie die verwendeten Tools zur Auswertung.
+    \item \textbf{Test-VM:} Hier ist die Konfiguration für das 
+    \item \textbf{Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
+\end{enumerate}
+
+Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diagram die Systemarchitektur auf.
+
+
+\begin{landscape}% Landscape page
+\begin{figure*}[ht]
+  \includegraphics[height=0.85\textwidth]{include/uml/componentDiagram.png}
+  \caption{Architektur-Diagramm}\label{fig:architektur-diagramm}
+\end{figure*}
+\end{landscape}% Landscape page
+
 
 \section{Komponentendesign}
 

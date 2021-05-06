@@ -6,10 +6,10 @@ skinparam dpi 96
 skinparam scale 5/5
 skinparam defaultFontName "Arial"
 
-skinparam nodesep 40
-skinparam ranksep 40
-skinparam BoxPadding 10
-skinparam Padding 10
+skinparam nodesep 20
+skinparam ranksep 20
+skinparam BoxPadding 8
+skinparam Padding 8
 
 skinparam component {
     BackgroundColor Orange
@@ -27,7 +27,10 @@ skinparam component {
 
 
 frame "Tester" as tester {
+  database deployconfig as "Deployment Konfiguration"
   [nixops] .> testhost : erstellt
+  [nixops] ..> deployconfig : verwendet
+
 }
 
 
@@ -67,6 +70,8 @@ frame "Testhost VM" as testhost {
     [recompose script] as recompose
     [docker-compose]
 
+    recompose .> [docker-compose] : startet
+
     [docker-compose] ..> compose_config : verwendet
     [docker-compose] .right.> dockersock : benutzt
 
@@ -74,8 +79,6 @@ frame "Testhost VM" as testhost {
     recompose ..> compose_config : generiert
     recompose .right.> dockersock : benutzt
   }
-
-
 }
 
 
@@ -84,14 +87,14 @@ frame "Testhost VM" as testhost {
 frame "Testnetzwerk der Container" as container {
     () "HTTPS" as reseed_https
 
-    node "reseed Container" as reseed {
+    package "reseed Container" as reseed {
         [Reseed Server] as reseeder
 
         reseeder -left- reseed_https
         reseeder .up.> reseed_netdb : benutzt
     }
 
-    node "i2pd Container" as i2pd {
+    package "i2pd Container" as i2pd {
         () "TCP Tunnel" as sertun
         () "Socks5" as socks5
 
