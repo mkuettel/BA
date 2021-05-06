@@ -96,34 +96,105 @@ A scaleable framework for anonymous communication
 
 \cite{de_boer_invisible_2019}
 
-\cite{zantout_i2p_2011}
 
-Latency vs Tor Usability Bandwith and Latency Comparision
-\cite{ehlert_i2p_2021}
+\subsection{I2P Router}
 
-\subsection{Wie I2P funktioniert}
+Ein I2P-Router ist ein einzelner Teilnehmer oder auch ein Knoten im I2P-Netzwerk.
+Ein Router kann einerseits Nachrichten weiterleiten und diese somit im Netzwerk mischen, aber auch Nachrichten empfangen, oder diese versenden.
 
-\begin{itemize}
-    \item Jeder Knoten leitet auch traffic für das Netzwerk weiter
-    \item Jeder Knoten kann die länge 
-\end{itemize}
+Es gibt zwei verschiedene Implementationen von I2P-Routern.
+Der ursprüngliche Implementation des I2P-Router wurde in Java Implementiert.
+
+In dieser Arbeit wird jedoch lediglich die später entwickelte und schlankere C++-Implementation auch genannt \lstinline|i2pd| (Invisible Internet Protocol Daemon) untersucht. (\cite{noauthor_i})
+
 
 \section{Technische Konzepte}
 \label{sec:technischeKonzepte}
 % TODO Konzepte in diesem Feld welche für den Leser relevant sind
 
+In diesem Abschnitt gehen wird nun genauer auf I2P spezifische Begrifflichkeiten Eingegangen und erklärt die I2P technisch funktioniert.
+
+\subsection{NetDb}
+
+Da I2P dezentral und verteilt ist, jedoch aber trotzdem Daten zwischen den Knoten geteilt werden müssen wird eine Art verteilte Datenbank benötigt.
+
+Diese verteilte Netzwerkdatenbank wird  NetDb genannt.
+Es handelt sich hier um eine \glstext{dht} (\glsname{DHT}) basierend auf dem Kademlia-Algorithmus.
+
+Die I2P-NetDb ist eine verteilte Netzwerkdatenbank, genauer gesagt eine DHT (Distributed Hash Table).
+
+kurz NetDb. Eine DHT wo jeder Knoten
+Informationen über seine Peers (u.a. Router-Infos) ablegt.
+
+\cite[noauthor_network_nodate]
+
+\subsubsection{Router-Infos}
+
+Beinhaltet u.a. Public-Keys und
+Netzwerkkoordinaten eines I2P-Routers
+
+Jeder I2P-Router generiert beim aufstarten eine Router-Info-Datei, falls noch keine Vorhanden ist.
+Diese Beinhaltet einen Identifier (ein Public-Key) sowie die öffentliche IP-Adresse wo dieser Router erreichbar ist.
+
+\subsubsection{LeaseSet's und Destinations}
+
+Um nun Services auf dem I2P-Netzwerk zur Verfügung zu stellen werde benötigt 
+
+Ein LeaseSet ist eine Sammlung von Tunnel-Eingangspunkten (auch Leases genannt) für eine bestimmte 
+
+
+Um Tunnels miteinander zu Verbinden werden LeaseSet's benötigt. Diese Verbinden ein Out-und Inbound tunnel miteinander. \cite{noauthor_intro_nodate}
+
 \subsection{Tunnels}
 
+Wenn man im Bereich vom Netzwerken über Tunneling-Redet geht es immer Darum ein Kommunikationsprotokoll in ein anderes einzubetten. \cite{noauthor_duden_nodate}
+Im I2P ist ein Tunnel ein Kommunikationsweg durch eine ausgewählte Liste an I2P-Routern.
+
+Ähnlich wie beim Onion-Routing wird hier die Nachricht mehrfach verschlüsselt, damit die Zwischenknoten nicht in die Nachricht hineinsehen können, jedoch trotzdem die benötigen Routing-Informationen haben, um diese an den richtigen Ort weiterzuleiten.
+
+\cite{noauthor_intro_nodate}
+
+Um nun auf Basis von IP ein Overlaynetzwerk zu bilden werden in I2P-Verschlüsselte Tunnels verwendet ähnlich wie dies bei Onion Routing der Fall ist.
+
+Bei I2P gibt es verschiedene Arten von Tunnels, welche in den folgenden Abschnitten genauer differenziert werden.
+
+
+\subsubsection{Inbound- und Outbound-Tunnels}
 Jeder I2P-Router kann eine beliebige Anzahl Inbound- und Outbound Tunnels erstellen.
-Wobei die Inbound Tunnels zum Empfang und die Outbound-Tunnels zum Versand dienen.
+Wobei die Inbound-Tunnels zum Empfang und die Outbound-Tunnels zum Versand von Nachrichten dienen.
+\cite{noauthor_intro_nodate}
+
+    \item \textbf{Inbound-Tunnels}: Diese dienen zum Empfang vom Nachrichten.
+    \item \textbf{Outbound-Tunnels}: Diese dienen zum Versand vom Nachrichten.
+    \item Exploratory Tunnels
+
+\cite{noauthor_intro_nodate}
+
+\subsubsection{Exploratory--Tunnels}
+
+Exploratory-Tunnels werden dazu verwendet Tunnels aufzubauen.
+Um Tunnels zu aufzubauen werden Exploratory-Tunnels verwendet.
+
+Client-Tunnels haben jeweils immer eine Destination. Diese Destination ist innerhalb des I2P-Netzwerks ansprechbar mit einer Netzwerkinternen-Adresse.
+
+\cite{de_boer_invisible_2019}
+
+\subsubsection{Client-Tunnels}
+
+Um Services über das I2P
+
+Für jedes Client-Tunnel gibt kann es eines oder mehrere LeaseSets geben.
+
 
 %TODO: inbound outbound nicht verwechseln
+
+\subsubsection{Länge der Tunnels}
 
 Jedes Tunnel hat eine Länge.
 Diese gibt an durch wie viele Knoten eine Nachricht, die durch das Tunnel verschickt wird, geroutet wird.
 Für jeden Hop im Tunnel wird die Nachricht eine zusätzliche Verschlüsselungsschicht eingehüllt. (vgl. Onion Routing)
 Somit wissen die Router jeweils nur Bescheid von welchem anderen Router sie eine Nachricht erhalten haben und an welchen Router die Nachricht weitergeleitet werden soll.
-Ein Roter im Tunnel weiss also schlussendlich nie von wem an wen eine Nachricht verschickt wurde.
+Ein Router im Tunnel weiss also schlussendlich nie von wem an wen eine Nachricht verschickt wurde.
 
 Die Länge eines Tunnels kann auch \lstinline|0| betragen.
 In diesem Fall wird eine Nachricht die durch das Tunnel verschickt wird, durch keine weitere Knoten geroutet.
