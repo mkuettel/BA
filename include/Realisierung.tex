@@ -345,6 +345,39 @@ Der TCP-Client und TCP-Server sind ebenfalls in diesem Container angesiedelt.
 Dies verletzt zwar das Prinzip, dass man nur einen Prozess in einem Docker-Container ausführen sollte,
 jedoch ist das Ziel hiermit Messungenauigkeiten durch das Netzwerk, sowie die Netzwerkkonfiguration zu vereinfachen.
 
+\subsection{Addressbuch}
+
+%TODO: add to state of the art?
+
+Standardmässig wird jeder i2pd-Destination eine b32-Adresse gegeben.
+Diese Adresse wird abgeleitet vom Public-Key der generierten Destination.
+
+Diese ist eine 52-Zeichen-lange aus kleinbuchstaben und zahlen bestehender Name um eine Destination zu adressieren. (z.b. \lstinline|b2cdodoyqg5v6go56bkaevvw777e2wyiflqh6zyyyxugy4cqlzuq.i2p|)
+
+Zudem hat diese die Endung \lstinline|.i2p| damit klar ist, das dieser Name innerhalb des Overlaynetzwerks aufgelöst werden muss.
+
+Diese ist jedoch nicht einfach zu handhaben und anstatt es ist einfacher die Knoten direkt anhand ihrer Nummer zu adressieren. Damit kann das Messskript vereinfacht werden, da es dieses dann nicht die 
+
+Auch wird die Auswertung damit vereinfacht weil, der TCP-Client den verwendeten Namen des TCP-Servers auch in die Nachricht hineinpackt und der TCP-Server diesen als Messausgabe abspeichert.
+
+Es wird beim Startvorgang des Netzwerks für jede erstellte destination für den TCP-Server ein Adressbucheintrag erstellt. Dieses Adressbuch ist eine einfache CSV-Datei wird wird 
+im Bootstrapvorgang an alle Knoten verteilt.
+
+Im falle von acht Knoten im Netzwerk sieht diese Datei beispielsweise so aus:
+
+\begin{lstlisting}
+tcpsrv-1.i2p,b2cdodoyqg5v6go56bkaevvw777e2wyiflqh6zyyyxugy4cqlzuq
+tcpsrv-2.i2p,r6axddltht76mrtp5lrxtdxncilhgp7bcajkqtsj7l7fmoebgs3a
+tcpsrv-3.i2p,ddhznqpxtgac7qa6yg6uzfpd55xoa2zfc4dwg4rh4qucx7veswlq
+tcpsrv-4.i2p,3tyncnh7j4akqirrbdi4ek7nlysqmuvyav3ix326vwixvgoviz3q
+tcpsrv-5.i2p,xj3qduyqur54v3mjgsxn6xa56q2ojyysf5n3bonpxyfxy5trnoja
+tcpsrv-6.i2p,pt64eojrsvrp5w5izgwlide7j6vuw5td6g2pfrkurwsnmb4i7q2q
+tcpsrv-7.i2p,aat6wqge3o7k2nabpwxrcu2vbbiydf3mj6n5k2zrrtozkrrpyfoa
+tcpsrv-8.i2p,4wm4pqautqqb3a6yw3xif4zgwwu4v5tvpwv6onha27p5pkcqqepq
+\end{lstlisting}
+
+In der ersten Spalte ist der vereinfachte Name anzugeben und in der Zweiten Spalte die b32-Addresse, jedoch ohne die Endung \lstinline|.i2p|
+
 \subsection{Der I2Pd-Prozess}
 
 \subsubsection{TCP Server Tunnel}
