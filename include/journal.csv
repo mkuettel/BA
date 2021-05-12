@@ -140,5 +140,18 @@ Datum      ,Ort      ,Von  ,Bis  ,Stunden,Issue              ,Task              
 05-05-2021,Büro      ,13:00,14:00,   01:00,-                 ,Vorbereitung Meeting / Meeting                                                    ,
 05-05-2021,Büro      ,14:00,17:00,   03:00,-                 ,TCP-Server Ankunftszeit messen und in ein Logfile schreiben                       ,
 05-05-2021,Büro      ,17:00,20:00,   03:00,-                 ,Client Sendezeit messen und über socks5 an server senden                          ,
-05-05-2021,Büro      ,10:30,12:30,   02:00,-                 ,Adressbuch generieren für einfacheres Mess-Skript                                 ,
-05-05-2021,Büro      ,13:00,15:00,   02:00,-                 ,TCP Server und Client in i2pd-Container einbinden / Docker-Volume für Messdaten   ,Bereinigen von Berechtigungsproblemen mit dem Volume
+06-05-2021,Büro      ,10:30,12:30,   02:00,-                 ,Adressbuch generieren für einfacheres Mess-Skript                                 ,
+06-05-2021,Büro      ,13:00,15:00,   02:00,-                 ,TCP Server und Client in i2pd-Container einbinden / Docker-Volume für Messdaten   ,Bereinigen von Berechtigungsproblemen mit dem Volume
+06-05-2021,Büro      ,15:00,17:30,   02:30,-                 ,Anpassen des Messskripts zur Verwendung des TCP-Servers / Erste Messversuche      ,Probleme mit der Stabilität der Messungen
+06-05-2021,Büro      ,17:30,18:30,   02:00,-                 ,Meeting mit Konrad / Debugging der Messprobleme                                   ,
+07-05-2021,Büro      ,10:00,11:30,   01:30,-                 ,Stabilität von Bootstrapping mit Volumes / mehrfaches aufstarten                  ,
+07-05-2021,Büro      ,12:30,15:00,   02:30,-                 ,Stabilität mehrfaches Aufstarten / Erster Messvorgang starten                     ,
+07-05-2021,Büro      ,15:00,17:00,   02:00,-                 ,Beschreibung von Konfigurationsoptionen und Nachrichtenformat                     ,
+11-05-2021,Büro      ,11:00,12:30,   01:30,-                 ,Stabilität von Bootstrapping mit Volumes und erneutes Aufstarten                  ,
+11-05-2021,Büro      ,12:30,14:00,   01:30,-                 ,Umstrukturierung Realisierungsteil / Beschreibung TCP-Client                      ,
+11-05-2021,Büro      ,14:00,15:00,   01:00,-                 ,Beschreibung Adressbuch / Realisierung                                            ,
+11-05-2021,Büro      ,15:00,17:00,   02:00,-                 ,Beschreibung Nachrichten / Realisierung                                           ,
+11-05-2021,Büro      ,22:00,23:00,   02:00,-                 ,Ausprobieren mit 256 / 128 / 64 Knoten / Berechnung starten mit 32 Knoten         ,Die Knoten können nicht kommunizieren bei einem 64 Knoten Netzwerk
+11-05-2021,Büro      ,10:30,11:30,   01:00,-                 ,Problembehebung mit mehr Anzahl Knoten / Knoten in zufällig verzögert starten     ,Löst das grundsätzliche Problem nicht
+11-05-2021,Büro      ,12:30,15:30,   01:00,-                 ,Problembehebung mit mehr Anzahl Knoten / ARP-Netzwerkeinstellungen                ,ARP-Neighbor Table zu klein
+11-05-2021,Büro      ,15:30,16:30,   01:00,-                 ,Meeting                                                                           ,
