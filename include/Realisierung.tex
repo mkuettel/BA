@@ -137,11 +137,12 @@ Jeder issue kann nun auch sortiert werden nach Resultat-Kategorien z.B. ''Recher
 
 \section{Systemarchitektur}
 
-Grob besteht die entwickelte Software für den Teststand aus drei teilen.
+Grob besteht die entwickelte Software für den aus drei teilen.
 
 \begin{enumerate}
     \item \textbf{Tester-Software}: Hier ist die Deployment-Konfiguration für die Test-VM zu finden, sowie die verwendeten Tools zur Auswertung.
     \item \textbf{Test-VM:} Hier ist die Konfiguration für das 
+    \item \textbf{Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
     \item \textbf{Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
 \end{enumerate}
 
@@ -162,17 +163,19 @@ Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diag
 
 NixOps erlaubt es eine NixOS-Systemkonfiguration auf diverse Arten von Maschinen zu deployen.
 
+\subsection{Deployment der Knoten}
+
+
 \subsection{Konfiguration}
 
-Die Konfiguration für
+Die Konfiguration des Teststands kann mittels einer json-Konfigurationsdatei einfach angepasst werden.
+Diese kann, falls nötig einfach von verschiedenen Orten gelesen werden.
 
 \subsection{Recompose-Skript}
 
-Das Recompose-Skript ist dafür verantwortlich das Docker-Netzwerk aufzubauen und zu managen.
+Das Recompose-Skript ist dafür verantwortlich das Docker-Netzwerk anhand der Konfiguration aufzubauen und zu managen. Es ist das Kernstück der entwickelten Software.
 
 Als wichtigster Punkt wird hier der 
-
-
 
 \subsection{Deployment von der Container}
 
@@ -199,26 +202,18 @@ Der erste Lösungsansatz mit NixOS-Containern hat sich als ungeeignet herausgest
 
 Dieser Ansatz wurde verworfen, weil dies dazu geführt hat, das die i2pd-Container untereinander nicht kommunizieren konnten.
 
-\subsection{Bootstrapping}
+\subsection{Reseed-Server und Bootstrapping}
 
-Die I2P-Router im öffentlichem I2P-Netzwerk können sich hier einfach an den öffentlich verfügbaren Reseeder eine \lstinline|su3|-Datei herunterladen.
+Die I2P-Router im öffentlichem I2P-Netzwerk können sich hier einfach an den öffentlich verfügbaren Reseeder eine \lstinline|su3|-Datei via HTTPS herunterladen.
 Diese \lstinline|su3|-Datei beinhaltet RouterInfos. 
 Diese RouterInfos beinhalten die nötigen Informationen wie public-key und Netzwerkadresse, um die Kommunikation zu starten.
 
 Im privaten und abgeschotteten Testnetzwerk sind die öffentlichen Reseed-Server jedoch nicht erreichbar.
 Deshalb muss ein anderer Weg gefunden werden das private I2P-Netzwerk zu bootstrappen.
 
-
-
 Denn der Floodfill-Anstatz entspricht nicht unbedingt der Realität, denn die Reseeder-Knoten können liefern nicht allen I2P-Routern dieselbe Liste an Peers.
 
 Auch kann die Konfiguration des Reseeders eine wichtige Rolle spielen, denn dieser bestimmt mit der Liste an Peers die er den I2P-Routern liefert den Konnektivitätsgrad der Knoten.
-
-
-\subsection{Konfiguration}
-
-Die Konfiguration des Teststands kann mittels einer json-Konfigurationsdatei einfach angepasst werden.
-Diese kann, falls nötig einfach von verschiedenen Orten gelesen werden.
 
 \subsection{Resultate zurücklesen}
 
@@ -254,8 +249,11 @@ NixOS erlaubt es deklarativ Container zu definieren.
 %     }
 % \end{lstlisting*}
 
-Wichtig dabei ist, dass es sich hierbei nicht um einen Docker-Container, sondern um NixOS-Container handelt.
+Wichtig dabei ist, dass es sich hierbei nicht um einen Docker-Container, sondern um NixOS-Container handelt technologie handelt, welche auf systemd-nspawn Containern basiert..
+
 Im Hintergrund brauchen jedoch beide Container-Arten die gleichen Linux-Kernel-Features (namespaces, cgroups, ... ).
+
+\section{2. Lösungsansatz Docker-Compose mit scale option}
 
 
 Siehe \lstinline|containers.nix| in der \lstinline|i2p-testnet| Repository für die Effektive implementation
@@ -274,9 +272,12 @@ Die Go-Implementation dieses Reseed-Servers ist hier zu finden:
 
 \url{https://codeberg.org/diva.exchange/i2p-tools}
 
+Diese Implementation wurde angepasst insofern, das alle verfügbaren router infos verwendet werden. Standardmässig werden nur 75\% davon verwendet. Grund unbekannt, jedoch macht dies keinen Sinn im Testnetzwerk, man kann ja die numRi und su3 files option anpassen. Man braucht so nur unnötig mehr Knoten.
+
 Diese Version basiert auf der folgenden GitHub version:
 
 \url{https://github.com/MDrollette/i2p-tools}
+
 
 \subsubsection{Ablauf}
 
@@ -335,16 +336,6 @@ Das Builder der systemkonfigurationen inkl. der container getestet mit 100 konnt
 Fehlerhafte netzwerkkonfiguration by default, falsche routen und ip konfigurationen (fehlende definition der netzwerkmaske)
 Container selber sind unnötig gross
 
-
-\subsection{I2Pd-Container}
-
-Hauptsächlich wird in diesem Container der \lstinline|i2pd|-Prozess ausgeführt.
-Um andere Knoten zu kontaktieren zu können muss dieser zu Beginn den Reseed-Container anfragen nach einer Liste von RouterInfos.
-
-Der TCP-Client und TCP-Server sind ebenfalls in diesem Container angesiedelt.
-Dies verletzt zwar das Prinzip, dass man nur einen Prozess in einem Docker-Container ausführen sollte,
-jedoch ist das Ziel hiermit Messungenauigkeiten durch das Netzwerk, sowie die Netzwerkkonfiguration zu vereinfachen.
-
 \subsection{Addressbuch}
 
 %TODO: add to state of the art?
@@ -378,7 +369,15 @@ tcpsrv-8.i2p,4wm4pqautqqb3a6yw3xif4zgwwu4v5tvpwv6onha27p5pkcqqepq
 
 In der ersten Spalte ist der vereinfachte Name anzugeben und in der Zweiten Spalte die b32-Addresse, jedoch ohne die Endung \lstinline|.i2p|
 
-\subsection{Der I2Pd-Prozess}
+\subsection{I2Pd-Container}
+
+Hauptsächlich wird in diesem Container der \lstinline|i2pd|-Prozess ausgeführt.
+Um andere Knoten zu kontaktieren zu können muss dieser zu Beginn den Reseed-Container anfragen nach einer Liste von RouterInfos.
+
+Der TCP-Client und TCP-Server sind ebenfalls in diesem Container angesiedelt.
+Dies verletzt zwar das Prinzip, dass man nur einen Prozess in einem Docker-Container ausführen sollte,
+jedoch ist das Ziel hiermit Messungenauigkeiten durch das Netzwerk, sowie die Netzwerkkonfiguration zu vereinfachen.
+
 
 \subsubsection{TCP Server Tunnel}
 
@@ -439,13 +438,40 @@ address = 127.0.0.1
 port = 4445
 \end{lstlisting}
 
+Zusätzlich wird in diesem Abschnitt auch die Länge der Tunnels bestimmt.
+
 \subsection{TCP-Server}
+
+
+Für Tests am Anfang wurde nc verwendet. Dies hat gut funktioniert um die konnektivität im Netzwerk zu testen. Hat aber zur effektiven messung einen Nachteil.
+Um genauere Messresultate zu erhalten wurde eine e-poll basierte C-Implementation eines TCP-Servers erstellt, um die komplette Kontrolle über die Netzwerksocket zu bekommen.
+Auch wurde C und nicht z.B. Python gewählt um den Arbeitsspeicher und CPU Gebrauch des Containers so tief wie möglich zu halten.
+Dies erlaubt es die Latenz genauer zu messen und auch den TCP-Verbindungsaufbau nicht mitzumessen
+
+Wie auch die Verbindung sofort nach Erhalt einer Nachricht wieder zu schliessen.
+
+Auch erlaubt es nc nicht mehrere TCP-Verbindungen anzunehmen und die Verbindungen korrekt zu schliessen.
+
+Der TCP-Server nimmt jeweils eine einzell
 
 
 \subsection{TCP-Client}
 
-Damit der TCP-Client in das I2P-Overlaynetzwerk verbinden kann muss dieser fähig sein mit einem Socks5-Proxy zu kommunizieren.
+Damit der TCP-Client in das I2P-Overlaynetzwerk verbinden kann, muss dieser fähig sein mit einem Socks5-Proxy zu kommunizieren.
+Zudem muss die Namensauflösung auch über das I2P-Overlaynetzwerk stattfinden, da nur dieses die \lstinline|.i2p|-Adressen auflösen kann und nur dieses die Namen im Adressbuch kennt.
 
+
+\subsection{Konfigurationsoptionen}
+
+\begin{itemize}
+    \item Anzahl Knoten im Testnetzwerk. Diese Option bestimmt wie viele I2Pd-Knoten ins Testnetzwerk eingebunden werden.
+    \item Zu verwendendes I2Pd-Konfigurationsdatei.
+    \item Reseeder Optionen:
+        \begin{itemize}
+        \item Anzahl RouterInfos pro Su3-Datei. welcher Knoten beim starten des Netzwerks kennt.
+        \item Anzahl Verschiedene Su3-Dateien. Sets an RouterInfos. welcher Knoten beim starten des Netzwerks kennt.
+        \end{itemize}
+\end{itemize}
 
 
 \section{Testing}
@@ -462,7 +488,11 @@ Um schnell zu prüfen ob das Netzwerk korrekt konfiguriert wurde gibt es das Tes
 
 \subsection{CI für den Bericht}
 
-Da der Bericht mit Hilfe von \LaTex umgesetzt wurde, verhält sich dieser 
+Dieser Bericht ist mit Hilfe von \LaTex umgesetzt.
+Es handelt sich hier dementsprechend auch eine Art Programm darstellt mit einem Build-Vorgang.
+Dieser Build-Vorgang wurde mit dem GitLab CI Service vom Enterpriselab automatisiert.
+
+\subsection{Validation der R}
 
 \section{Benutzerhandbuch}
 
