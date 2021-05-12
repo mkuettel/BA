@@ -402,6 +402,27 @@ Die Option\lstinline|enableuniquellocal| wurde noch aktiviert, um die Auswertung
 
 %TODO: Reference config, especiallfor for enableuniquellocal.
 
+\subsection{Nachrichten}
+
+Die darüberliegende Blockchain-Schicht von diva.exchange versendet mittels eines Gossip-Protokolls die neuen Blocks der Blockchain an alle Knoten.
+%TODO: add gossip protocol to glossary
+Diese 64Kb grossen Blocks werden über eine Web-Socket-Verbindung an die Nachbarknoten übermittelt.
+Die Nachbarknoten leiten diese dann wieder weiter an ihre jeweiligen Nachbarknoten.
+Dieser Prozess wird solange wiederholt bis alle Knoten im Netzwerk den neuen Block erhalten haben.
+
+Nach Absprache mit dem Auftraggeber wird dies im Testnetzwerk mittels versenden von TCP-Nachrichten nachgestellt.
+Bei Web-Sockets handelt es sich vereinfacht ausgedrückt wiederum um eine TCP-ähnliche Verbindung über HTTP. HTTP selber TCP auch als Transportschicht.
+
+
+\begin{itemize}
+    \item Originator Node Id
+    \item Destination Address
+    \item Grösse der versendeten Nachricht in Bytes
+    \item Zeitpunkt in nanosekunden seit 1.1.1970 
+\end{itemize}
+
+\subsection{Nachrichten-Log}
+
 
 \subsubsection{Socks5-Proxy für den TCP-Client}
 
