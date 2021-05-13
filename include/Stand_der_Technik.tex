@@ -117,24 +117,41 @@ In diesem Abschnitt gehen wird nun genauer auf I2P spezifische Begrifflichkeiten
 \subsection{NetDb}
 
 Da I2P dezentral und verteilt ist, jedoch aber trotzdem Daten zwischen den Knoten geteilt werden müssen wird eine Art verteilte Datenbank benötigt.
-
-Diese verteilte Netzwerkdatenbank wird  NetDb genannt.
+Diese verteilte Netzwerkdatenbank wird NetDb genannt.
 Es handelt sich hier um eine \glstext{dht} (\glsname{DHT}) basierend auf dem Kademlia-Algorithmus.
 
-Die I2P-NetDb ist eine verteilte Netzwerkdatenbank, genauer gesagt eine DHT (Distributed Hash Table).
+Nur sogenannte Floodfill-Router 
+\parencite[S.~5-6]{timpanaro_monitoring_nodate}
+
 
 kurz NetDb. Eine DHT wo jeder Knoten
 Informationen über seine Peers (u.a. Router-Infos) ablegt.
 
 \cite[noauthor_network_nodate]
 
-\subsubsection{Router-Infos}
 
-Beinhaltet u.a. Public-Keys und
-Netzwerkkoordinaten eines I2P-Routers
 
-Jeder I2P-Router generiert beim aufstarten eine Router-Info-Datei, falls noch keine Vorhanden ist.
-Diese Beinhaltet einen Identifier (ein Public-Key) sowie die öffentliche IP-Adresse wo dieser Router erreichbar ist.
+\subsubsection{Router-Info}
+
+Eine RouterInfo Datei beinhaltet den öffentlichen Schlüssel und die Netzwerkkoordinaten eines einzelnen I2P-Routers.
+Jeder I2P-Router erstellt diese Datei beim Aufstarten, falls diese noch nicht vorhanden ist.
+Beim erstellen dieser Datei wird auch ein Schlüsselpaar generiert, damit der öffentliche Schlüssel in die Datei abgelegt werden kann.
+Zusätzlich werden auch die öffentlichen IP-Addressen ermittelt sowie zufällige Ports ausgewählt über welche der I2P-Router erreicht werden kann.
+
+Diese Informationen werden benötigt damit ein anderer I2P-Router die Kommunikation mit dem I2P-Router aufnehmen kann, der die RouterInfo-Datei erstellt hat.
+Anhand der Netzwerkoordinaten (IPv4 und IPv6 Adressen, sowie Ports) ist bekannt wohin eine Anfrage zur Tunnelerstellung gesendet werden muss.
+Mit Hilfe des öffentlichen Schlüssels kann die Anfrage zur Tunnelerstellung auch bereits schon Verschlüsselt werden.
+
+% TODO: reference Router info
+
+Es gilt zu erwähnen, die öffentlichen IP-Adressen eines I2P-Knotens somit nicht geheim sind.
+Jeder der einen Knoten betreibt, oder einfach nur die NetDb eines Floodfill-Routers anfragt, kann somit  
+I2P wurde dazu auch nicht designt. Es wurde designt wurde das Teilnnehmer Nachrichten innerhalb des Netzwerks austauschen 
+
+Ein Beobachter kann also herausfinden, ob ein Rechner am I2P-Netzwerk beteiligt ist, kann jedoch nicht aussagen, ob eine Nachricht für den Knoten bestimmt ist, ob er eine Nachricht versendet, oder ob er diese lediglich weiterleitet.
+
+% TODO: reference FAQ question
+
 
 \subsubsection{LeaseSet's und Destinations}
 
