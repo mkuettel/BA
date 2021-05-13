@@ -473,6 +473,27 @@ Zudem muss die Namensauflösung auch über das I2P-Overlaynetzwerk stattfinden, 
         \end{itemize}
 \end{itemize}
 
+\subsection{Das Messskript}\label{sec:messskript}
+
+Das Messskript ist dafür verantwortlich Nachrichten durch das Testnetzwerk zu senden, damit Messdaten erstellt werden.
+Die Nachrichten werden von einem zufälligem Knoten zu einem anderen zufälligen Knoten verschickt.
+Somit kann sichergestellt werden, dass die Latenzmessungen repräsentativ sind für das gesamte Netzwerk.
+Um das Netzwerk nicht zu überlasten (siehe (TODO: ref)) werden die Nachrichten sequentiell versendet und es wird nur eine Nachricht auf einmal versendet.
+Nach jeder versendeter Nachricht wird 10 Sekunden gewartet.
+
+Die Nachrichten werden versendet unter Verwendung von \lstinline|docker exec|.
+Damit wird innerhalb des zufällig ausgewählten I2Pd-Containers ein TCP-Client-Prozess gestartet.
+Dieser verbindet dann auf den Socks5-Proxy im gleichen Container.
+Anschliessend schickt der TCP-Client die Nachricht der gewählten Grösse ins I2P Netzwerk.
+
+Bevor das Messskript gestartet werden kann, müssen jedoch einige Bedingungen erfüllt werden.
+Erstens muss mittels dem Recompose-Skript das Testnetzwerk in Betrieb genommen werden.
+Zweitens muss gewartet werden, bis der Bootstrapping-Vorgang im Testnetzwerk abgeschlossen wurde.
+Zu guter letzt muss noch einige Zeit gewartet werden und sichergestellt werden, dass das Netzwerk 
+Dies ist um sicherzustellen, dass keine Messungenauigkeiten auftreten.
+Einerseits gehen so keine Messpakete verloren. Andererseits könnten die Latenzmessungen verfälscht werden, wenn die Tunnels erst noch aufgebaut werden müssen.
+
+Das Messskript ist in der i2p-testnet Repository in der Datei \lstinline|bin/measure-message-latency| zu finden.
 
 \section{Testing}
 
