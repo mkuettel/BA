@@ -161,8 +161,6 @@ In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Proje
 Diese Liste von Resultaten ist auch ein guter Ausgangspunkt um davon Issues für den Issue-Tracker zu erstellen.
 Jeder issue kann nun auch sortiert werden nach Resultat-Kategorien z.B. ''Recherche'', ''Projektmanagement'', ''Dokumentation'', ''Evaluation'', ''Präsentation'', etc.
 
-\newpage
-
 \section{Systemarchitektur}
 
 Grob besteht die entwickelte Software für den aus drei teilen.
@@ -171,7 +169,7 @@ Grob besteht die entwickelte Software für den aus drei teilen.
     \item \textbf{Tester-Software}: Hier ist die Deployment-Konfiguration für die Test-VM zu finden, sowie die verwendeten Tools zur Auswertung.
     \item \textbf{Test-VM:} Hier ist die Konfiguration für das 
     \item \textbf{Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
-    \item \textbf{Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
+    \item \textbf{Messanlage} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
 \end{enumerate}
 
 Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diagram die Systemarchitektur auf.
@@ -471,7 +469,7 @@ Zusätzlich wird in diesem Abschnitt auch die Länge der Tunnels bestimmt.
 \subsection{TCP-Server}
 
 
-Für Tests am Anfang wurde nc verwendet. Dies hat gut funktioniert um die konnektivität im Netzwerk zu testen. Hat aber zur effektiven messung einen Nachteil.
+Für Tests am Anfang wurde nc verwendet. Dies hat gut funktioniert um die Konnektivität im Netzwerk zu testen. Hat aber zur effektiven messung einen Nachteil.
 Um genauere Messresultate zu erhalten wurde eine e-poll basierte C-Implementation eines TCP-Servers erstellt, um die komplette Kontrolle über die Netzwerksocket zu bekommen.
 Auch wurde C und nicht z.B. Python gewählt um den Arbeitsspeicher und CPU Gebrauch des Containers so tief wie möglich zu halten.
 Dies erlaubt es die Latenz genauer zu messen und auch den TCP-Verbindungsaufbau nicht mitzumessen
@@ -507,7 +505,7 @@ Das Messskript ist dafür verantwortlich Nachrichten durch das Testnetzwerk zu s
 Die Nachrichten werden von einem zufälligem Knoten zu einem anderen zufälligen Knoten verschickt.
 Somit kann sichergestellt werden, dass die Latenzmessungen repräsentativ sind für das gesamte Netzwerk.
 Um das Netzwerk nicht zu überlasten (siehe (TODO: ref)) werden die Nachrichten sequentiell versendet und es wird nur eine Nachricht auf einmal versendet.
-Nach jeder versendeter Nachricht wird 10 Sekunden gewartet.
+Zudem wird nach jeder versendeter Nachricht wird 10 Sekunden gewartet.
 
 Die Nachrichten werden versendet unter Verwendung von \lstinline|docker exec|.
 Damit wird innerhalb des zufällig ausgewählten I2Pd-Containers ein TCP-Client-Prozess gestartet.
@@ -533,7 +531,8 @@ have a machine to deploy to
 
 Diese Tests sind im Verzeichnis \lstinline|tests/| in der \lstinline|i2p-testnet|-Repository zu finden.
 
-Um schnell zu prüfen ob das Netzwerk korrekt konfiguriert wurde gibt es das Test-Modul \lstinline|tests/networking.bats|.
+Um schnell zu prüfen, ob das Netzwerk korrekt konfiguriert wurde gibt es das Test-Modul \lstinline|tests/networking.bats|.
+Dieses führt verschiedene Tests durch. Ob
 
 \subsection{CI für den Bericht}
 
