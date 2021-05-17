@@ -6,9 +6,50 @@
 
 Quantitative Auswertung
 
-\section{Validation}
+\section{Validation der Testumgebung}
 
-Damit weitere 
+Um Aussagen machen zu können über das Testnetzwerk muss erst sichergestellt werden, dass die Messwerte Sinn ergeben.
+Deshalb wurden erste Tests durchgeführt, um zu prüfen, ob die Testumgebung auch richtig funktioniert.
+
+Diese Messungen bieten auch eine Basis und einen Referenzpunkt für die weiteren Messungen.
+
+\subsection{Wiederholbarkeit von Messungen}
+
+Als Teil dieser Messung wird erst ein Netzwerk mit 8 Knoten getestet und die Latenz von 1000 Nachrichten gemessen.
+Alle Knoten haben in diesem Test keine Bandbreitenbeschränkung.
+Eine Nachricht wird hier jeweils von einem zufälligen Knoten an einen anderen zufälligen Knoten versendet.
+Die Konfigurierte Nachrichtengrösse wurde jeweils auf 64kB festgelegt.
+Die Messung wird so festgehalten.
+Anschliessend wird derselbe Test noch einmal gestartet, wobei das Testnetzwerk jedoch aber neu erstellt wird.
+
+Grundsätzlich wird hier erwartet, dass die Messungen vergleichbar sind und ähnliche Resultate liefern.
+
+% TODO: add measurements
+
+
+Somit kann ausgesagt werden das die Messungen so gut wie möglich reproduzierbar sind \seereq{TREP}.
+
+
+\subsection{Gleichbleibende Latenz bei Skalierung des Netzwerks}
+
+Um sicherzustellen, dass kein Fehler beispielsweise im implementieren Testnetzwerk oder gar in der i2pd-Software aufzufinden ist, wird diese Messung zu Validierungszwecken durchgeführt.
+
+Alle Knoten haben in diesem Test keine Bandbreitenbeschränkung.
+Eine Nachricht wird hier jeweils von einem zufälligen Knoten an einen anderen zufälligen Knoten versendet.
+Die Konfigurierte Nachrichtengrösse wurde jeweils auf 64kB festgelegt.
+Die Messung wird so festgehalten.
+
+Anschliessend wird die gleiche Messung noch einmal gestartet.
+Jedoch wird die Anzahl Knoten im Testnetzwerk jeweils verdoppelt.
+
+Es wird angenommen, dass sich die Latenz der Nachrichten im Netzwerk nicht hier verändert.
+Dies mag auf den ersten Blick der Hyptothese wiedersprechen, jedoch gilt es zu beachten, dass hier alle Knoten dieselbe Bandbreitenbeschränkung haben.
+%TODO: ref hypothese
+
+
+
+\section{}
+
 
 
 \section{Vergleich mit Anforderungen}
