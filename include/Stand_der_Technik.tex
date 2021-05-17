@@ -8,25 +8,34 @@
 % orientierte Arbeiten sei hier explizit auf (Balzert, S. 66 ff) verwiesen.
 
 
-% TODO Historie des betroffenen Feld
-
 
 \section{Technologische Grundlagen}
 % TODO Wichtige technologischen Grundlagen / Wissenswertes
 
+\subsection{Privatsphäre und Anonymität}
+
+Im diva.exchange Netzwerk sollen digitale Güter austauscht werden können.
+Dies ohne sich zu kennen und ohne sich gegenseitig Vertrauen zu müssen.
+die Privatsphäre der Teilnehmer geschützt werden.
+
+
+Der Begriff Anonymität ist oft negativ behaftet.
+Unter dem Deckmantel der Anonymiät
+Jedoch gibt es auch 
+
+Anonymität und Privatsphäre ist nicht das gleiche.
+
+Wobei
+
+Jedoch kann durch Anonymität die Privatsphäre geschützt werden.
+Auch ist Anonymität wichtig für Whistle-Blower und für Leute die unter totalitären Regimen.
+
 \subsection{Anonymisierungs-Netzwerke}
 
-Es gibt eine vielzahl an verschiedenen Anonymisierungsnetzwerken, wobei \glstext{tor} (\glsname{tor}) wahrscheinlich das bekannteste davon ist.
+Es gibt eine vielzahl an verschiedenen Anonymisierungsnetzwerken, wobei \glstext{tor} (\glsname{tor}) wahrscheinlich das bekannteste und meist genutzte ist.
 
 In dieser Arbeit wird aber lediglich das Anonymisierungsnetzwerk \glsname{i2p} behandelt und nicht weiter auf andere Anonymisierungsnetzwerke eingegangen, da dieses das Netzwerklayer von diva.exchange darstellt.
 
-\subsection{Anonymität, Privatsphäre und Datenschutz}
-
- Anonymität und Privatsphäre ist nicht das gleiche.
- Jedoch kann durch Anonymität die Privatsphäre geschützt werden.
-
-
- Auch ist Anonymität wichtig für Whistle-Blower und für Leute die unter totalitären Regimen.
 
 \subsection{Das Anonymitätstrilemma}\label{sec:anonymitytrilemma}
 
@@ -53,7 +62,8 @@ Die Anonymität geht also immer auf Kosten von höherer Latenzzeiten und/oder me
     \caption{Das Anonymitätstrilemma}\label{fig:anonimitytrilemma}
 \end{figure}
 
-Ein Anonymisierungsnetzwerk kann beispielsweise auf Kosten der Netzwerkbandbreite implementiert werden, indem Nachrichten einfach an alle im Netzwerk versendet werden. Somit könnte mindestens der Empfänger verschleiert werden.
+Ein Anonymisierungsnetzwerk könnte beispielsweise auf Kosten der Netzwerkbandbreite implementiert werden, indem die Nachrichten jeweils an alle Netzwerkteilnehmer versendet werden.
+Somit könnte mindestens der Empfänger verschleiert werden.
 Umgekehrt könnte ein Anonymisierungsnetzwerk auf Kosten der Latenz implementiert werden. Wenn Nachrichten über mehrere Netzwerkknoten geleitet werden, könnte man Empfänger und Sender verschleiern, aber hätte höhere Latenzzeiten da dieselbe Nachricht mehrmals nacheinander von verschiedenen Netzwerkknoten bearbeitet werden muss.
 Letzteres gibt es Netzwerke bei welchen Anonymität keine Rolle spielt, wie beispielsweise beim üblichen UDP Protokoll. Es ist dann möglich hohe Bandbreite sowie niedrige Latenzzeiten zu erreichen.
 
@@ -72,11 +82,12 @@ Auch gilt es zu unterstreichen, dass \textit{Nachrichten} ausgetauscht werden.
 I2P ist \textit{Nachrichtenbasiert} und verhält sich in diesem Sinne ähnlich wie UDP.
 Es gibt dementsprechend keine Garantien, dass wenn eine Nachricht versendet wird, dass die Daten in der richtigen Reihenfolge, komplett oder überhaupt ankommen.
 Es gibt jedoch Erweiterungen auf dem Netzwerk, welche diese Garantien (ähnlich wie sie diese bei TCP gibt) wieder herstellen können.
-Zudem bietet I2P eine Ende-zu-Ende-Verschlüsselung für die Nachrichten. Die Nachrichten sind also vom Sender bis zum Empfänger verschlüsselt.
+Zudem bietet I2P eine Ende-zu-Ende-Verschlüsselung von Nachrichten.
+Die Nachrichten sind also vom Sender bis zum Empfänger verschlüsselt.
 
 Während das TOR-Netzwerk ursprünglich entwickelt wurde auf das öffentliche Internet via Out-Proxies zuzugreifen,
 liegt bei I2P der Fokus darin anonym auf Dienste, die innerhalb des Netzwerks angeboten werden, zuzugreifen.
-Jedoch besteht bei TOR ebenfalls die Möglichkeit Netzwerkinterne Dienste anzubieten mittels TOR Hidden Services, auch aber gibt es bei I2P die Möglichkeit, mit Hilfe von sogenannten Outproxies, auf das normale Internet zuzugreifen.
+Jedoch besteht bei TOR ebenfalls die Möglichkeit netzwerkinterne Dienste anzubieten mittels TOR Hidden Services, auch aber gibt es bei I2P die Möglichkeit, mit Hilfe von sogenannten Outproxies, auf das normale Internet zuzugreifen.
 
 Dienste die innerhalb des Netzwerks angeboten werden, sind zum Beispiel Bit-Torrent für File-Sharing, Webseiten (sogenannte ``eepsites''), oder auch Chat-Dienste wie IRC (Internet Relay Chat).
 \parencite[p.~3-4]{de_boer_invisible_2019}
@@ -157,7 +168,7 @@ Ein Beobachter kann also herausfinden, ob ein Rechner am I2P-Netzwerk beteiligt 
 
 Um nun Services auf dem I2P-Netzwerk zur Verfügung zu stellen werde benötigt 
 
-Ein LeaseSet ist eine Sammlung von Tunnel-Eingangspunkten (auch Leases genannt) für eine bestimmte 
+Ein LeaseSet ist eine Sammlung von Tunnel-Eingangspunkten (auch Leases genannt) für eine bestimmte Destination
 
 
 Um Tunnels miteinander zu Verbinden werden LeaseSet's benötigt. Diese Verbinden ein Out-und Inbound tunnel miteinander. \cite{noauthor_intro_nodate}
@@ -171,10 +182,10 @@ Im I2P ist ein Tunnel ein Kommunikationsweg durch eine ausgewählte Liste an I2P
 
 \cite{noauthor_intro_nodate}
 
-Um nun auf Basis von IP ein Overlaynetzwerk zu bilden werden in I2P-Verschlüsselte Tunnels verwendet ähnlich wie dies bei Onion Routing der Fall ist.
+Um nun auf Basis von IP ein Overlaynetzwerk zu bilden werden in I2P-Verschlüsselte Tunnels verwendet ähnlich wie dies beim Onion-Routing der Fall ist.
+
 
 Bei I2P gibt es verschiedene Arten von Tunnels, welche in den folgenden Abschnitten genauer differenziert werden.
-
 
 \subsubsection{Inbound- und Outbound-Tunnels}
 Jeder I2P-Router kann eine beliebige Anzahl Inbound- und Outbound Tunnels erstellen.
@@ -226,7 +237,7 @@ Tunnels Configuration
 
 
 \begin{itemize}
-    \item Jeder Knoten kann die länge seiner Tunnel selber bestimmen. (Standardwert 3)
+    \item Jeder Knoten kann die länge seiner Tunnel selber bestimmen. (Standardwert 2)
     \item Mehrere Verschlüsselungsschichten je nach Tunnellänge (vgl. Onion-Routing)
 \end{itemize}
 
@@ -275,6 +286,14 @@ Evaluation of Anonymity Networks
 
 \subsection{Performance}
 
+In der Vergangenheit wurde schon vielfach an der Performance von I2P gearbeitet.
+
+Es ist jedoch unklar welche der Vorschläge bereits implementiert wurden, weil die Webseiten schon lange nicht mehr aktualisiert wurde.
+Zudem könnte es sich hier auch nur um Performance Verbesserungen, welche die Java-Implementation von I2P betreffen aufgelistet sein.
+Es ist unklar welche dabei spezifisch in i2pd (der C++ Implementation implementiert wurden).
+
+Während es öffentlich zugängliche Metriken gibt über die 
+
 
 Performance improvement using SSL IN I2P
 \cite{vashi_performance_2015}
@@ -295,7 +314,16 @@ Latency vs Tor Usability Bandwitdh and Latency Comparision
 \cite{ehlert_i2p_2021}
 
 
-\subsection{Peer profiling..}
+\subsection{Peer-Profiling und Tunnel-Erstellung}
+
+Die einfachste Möglichkeiten Nachbarknoten (oder Peers) zur Tunnelerstellung auszuwählen, wäre zufällig Knoten auszuwählen. 
+Jedoch wird dies aus Performanzgründen nicht so gehandhabt.
+Jeder I2P-Knoten testet seine Nachbarknoten auf Performanz, Latenzzeiten und ob diese Verfügbar sind und kategorisiert diese.
+
+Natürlich hat dies auch einen Einfluss auf den Anonymitätsgrad.
+\parencite[S.~4-5]{timpanaro_monitoring_nodate}
+
+Die Auswahl von welchen Knoten welche für die Tunnelers
 
 Jeder I2P-Knoten
 
