@@ -1,5 +1,5 @@
 \documentclass[
-	a4paper
+	a4paper,10pt
 ]{scrartcl}
 
 %%% PACKAGES %%%
@@ -55,8 +55,7 @@
 \usepackage{amssymb}
 \usepackage{pifont}
 
-% TODO Remove this after you wrote the WebAbstract - Only dummy text
-\usepackage{lipsum}
+\usepackage{float}
 
 \usepackage[absolute]{textpos}
 
@@ -79,7 +78,7 @@
 \vspace*{2cm}
 
 \noindent
-\textbf{\LARGE{The Title Of The Work}} \\
+\textbf{\LARGE{Untersuchung der Performanz des Invisible Internet Protocols (I2P)}} \\
 
 \vspace{0.5em}
 
@@ -91,30 +90,60 @@
 \begin{large}
 \noindent
 \begin{tabularx}{\textwidth}{p{5cm}X}
-	\textbf{Themenbereiche:} & \\
-	\textbf{Studierende:} & Pascal Baumann, Dane Wicki\\
-	\textbf{Betreuungsperson:} & Betreuer\\
-	\textbf{Experte:} & Experte\\
-	\textbf{Auftraggebende:} & Auftraggeber\\
-	\textbf{Keywords:} & Tag1, Tag2, Tag3, Tag4\\
+    \textbf{Themenbereiche:} & ICT-Infrastrukturen, Security/Privacy,
+                    Softwareerstellung, I2P-Netzwerk \\
+	\textbf{Student:} & Moritz Küttel\\
+	\textbf{Betreuungsperson:} & Dr. Dieter Arnold, HSLU\\
+	\textbf{Experte:} & Urs Rufer, TerreActive AG\\
+    \textbf{Auftraggebende:} & Carolyn 
+    \& Konrad Bächler, DIVA.EXCHANGE\\
+	\textbf{Keywords:} & I2P, Netzwerke, Teststand, Performanz, Infrastruktur, Security, Privacy, Anonymität \\
 \end{tabularx}
 \end{large}
 \egroup
 
 \section{Aufgabenstellung}
-\lipsum[2-4]
 
-\newpage
+Der Verein DIVA.EXCHANGE entwickelt einen Software-Prototypen für eine Handelsplattform, um digitale Werte auszutauschen.
+Die Handelsplattform soll vollkommen verteilt sein, sowie die Sicherheit und die Privatsphäre der Benutzer sicherstellen.
+Es sollen digitale Werte ausgetauscht werden können, ohne sich kennen und ohne sich vertrauen zu müssen.
+Um dies umzusetzen wurde auf das Anonymisierungsnetzwerk ``Invisible Internet Protocol'' (I2P) als Grundstein auf der Netzwerkebene gesetzt.
+Jedoch hat die Anonymität, Privatsphäre und Sicherheit die durch I2P geboten wird ihren Preis: Performanz.
+In dieser Arbeit soll empirisch untersucht werden unter welchen Umständen sich die Performanz des I2P-Netzwerks verbessert.
+Insbesondere wurden die Latenzzeiten von TCP-Nachrichten untersucht.
 
-\lipsum[2-4]
+\section{Vorgehen}
 
-\section{Lösungskonzept}
-\lipsum[1-1]
+Damit die Performance-Messungen empirisch durchgeführt werden können, wurde ein Teststand erstellt.
+Die Infrastruktur des Teststands wurde als Code abgelegt, damit die Messungen reproduziert werden können.
+In einem privatem I2P-Netzwerk können Messungen und Tests ohne äussere Einflüsse ausgeführt werden.
+In der folgenden Abbildung wird der Aufbau des Testnetzwerks schematisch dargestellt:
 
-\section{Spezielle Herausforderungen}
-\lipsum[1-1]
+
+\begin{figure}[H]
+  \includegraphics[width=1.0\textwidth]{i2p-testnetwork.png}
+\end{figure}
+
+
+\section{Herausforderungen}
+
+Um ein privates I2P-Testnetzwerk zu erstellen, muss dieses zu Beginn iniitiert werden. Dies nennt sich Bootstrap-Vorgang. Dieser Bootstrap-Vorgang erfordert einen eignen Reseed-Server, welcher die Initialisierungsdaten liefert.
+Um die Reproduzierbarkeit von Messungen zu gewährleisten, wurde das Netzwerk automatisiert auf- und abgebaut.
+Somit kann dieselbe Messung beliebig oft wiederholt werden.
+% Zusätzlich gilt es zu beachten, dass das Testnetzwerk nicht zu viele Ressourcen beansprucht und den Testhost überlastet. Nur so ist es möglich saubere Latenzmessungen zu tätigen die sich wiederholen lassen.
+
+\section{Ergebnisse}
+
+Im Rahmen des Aufbaus der Testumgebung wurden zwei verschiedene Container-Technologien eingesetzt. Zum Einsatz kamen NixOS-Container und Docker-Container.
+NixOS-Container beanspruchten zu viele Ressourcen und deshalb wurden schlussendlich Docker-Container eingesetzt.
+Damit konnte ein Testnetzwerk bestehend aus bis zu 128 I2P-Knoten erstellt werden.
+Somit konnten Latenzmessungen durchgeführt werden,
+welche als Grundlage und Referenz für zukünftige Messungen dienen.
 
 \section{Ausblick}
-\lipsum[1-4]
+
+Anhand des entwickelten Teststands können nun weitere Messungen getätigt und miteinander verglichen werden.
+Grundsätzlich können so auch verschiedene I2P-Konfigurationen miteinander verglichen werden.
+Auch aber sind Tests in Zukunft Tests mit anderen Protokollen oder Nachrichtentypen möglich.
 
 \end{document}

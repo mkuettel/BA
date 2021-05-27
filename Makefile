@@ -23,6 +23,12 @@ pres: ${PRESENTATION_FILE_NAME}.tex Referenzen.bib
 	pdflatex ${PDFLATEXOPTSDRAFT} ${PRESENTATION_FILE_NAME}.tex
 	pdflatex ${PDFLATEXOPTS} ${PRESENTATION_FILE_NAME}.tex
 
+webabstract: web-abstract/WebAbstract.tex
+	pdflatex ${PDFLATEXOPTSDRAFT} web-abstract/WebAbstract.tex
+	biber *.bcf
+	pdflatex ${PDFLATEXOPTSDRAFT} web-abstract/WebAbstract.tex
+	pdflatex ${PDFLATEXOPTS} web-abstract/WebAbstract.tex
+
 Meetings/%.pdf: Meetings/%.md
 	pandoc --from markdown --to latex $< \
 		--metadata-file=Meetings/pandoc-settings.yml \
