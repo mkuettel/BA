@@ -106,18 +106,18 @@
 
 Der Verein DIVA.EXCHANGE entwickelt einen Software-Prototypen für eine Handelsplattform, um digitale Werte auszutauschen.
 Die Handelsplattform soll vollkommen verteilt sein, sowie die Sicherheit und die Privatsphäre der Benutzer sicherstellen.
-Es sollen digitale Werte ausgetauscht werden können, ohne sich kennen und ohne sich vertrauen zu müssen.
-Um dies umzusetzen wurde auf das Anonymisierungsnetzwerk ``Invisible Internet Protocol'' (I2P) als Grundstein auf der Netzwerkebene gesetzt.
-Jedoch hat die Anonymität, Privatsphäre und Sicherheit die durch I2P geboten wird ihren Preis: Performanz.
-In dieser Arbeit soll empirisch untersucht werden unter welchen Umständen sich die Performanz des I2P-Netzwerks verbessert.
+Es sollen digitale Werte ausgetauscht werden können, ohne sich kennen oder vertrauen zu müssen.
+Um dies umzusetzen, wurde auf das Anonymisierungsnetzwerk ``Invisible Internet Protocol'' (I2P) als Grundstein auf der Netzwerkebene gesetzt.
+Jedoch hat die Anonymität, Privatsphäre und Sicherheit, die durch I2P geboten wird, ihren Preis: Performanz.
+In dieser Arbeit soll empirisch untersucht werden, unter welchen Umständen sich die Performanz des I2P-Netzwerks verbessert.
 Insbesondere wurden die Latenzzeiten von TCP-Nachrichten untersucht.
 
 \section{Vorgehen}
 
-Damit die Performance-Messungen empirisch durchgeführt werden können, wurde ein Teststand erstellt.
+Damit die Performance-Messungen empirisch durchgeführt werden konnten, wurde ein Teststand erstellt.
 Die Infrastruktur des Teststands wurde als Code abgelegt, damit die Messungen reproduziert werden können.
-In einem privatem I2P-Netzwerk können Messungen und Tests ohne äussere Einflüsse ausgeführt werden.
-In der folgenden Abbildung wird der Aufbau des Testnetzwerks schematisch dargestellt:
+In einem privaten I2P-Netzwerk können Messungen und Tests ohne äussere Einflüsse ausgeführt werden.
+Der Aufbau des Testnetzwerks wird in der folgenden Abbildung schematisch dargestellt:
 
 
 \begin{figure}[H]
@@ -127,7 +127,7 @@ In der folgenden Abbildung wird der Aufbau des Testnetzwerks schematisch dargest
 
 \section{Herausforderungen}
 
-Um ein privates I2P-Testnetzwerk zu erstellen, muss dieses zu Beginn iniitiert werden. Dies nennt sich Bootstrap-Vorgang. Dieser Bootstrap-Vorgang erfordert einen eignen Reseed-Server, welcher die Initialisierungsdaten liefert.
+Um ein privates I2P-Testnetzwerk zu erstellen, muss dieses zu Beginn initiiert werden. Dies nennt sich Bootstrap-Vorgang. Dieser Bootstrap-Vorgang erfordert einen eigenen Reseed-Server, welcher die Initialisierungsdaten liefert.
 Um die Reproduzierbarkeit von Messungen zu gewährleisten, wurde das Netzwerk automatisiert auf- und abgebaut.
 Somit kann dieselbe Messung beliebig oft wiederholt werden.
 % Zusätzlich gilt es zu beachten, dass das Testnetzwerk nicht zu viele Ressourcen beansprucht und den Testhost überlastet. Nur so ist es möglich saubere Latenzmessungen zu tätigen die sich wiederholen lassen.
@@ -135,7 +135,7 @@ Somit kann dieselbe Messung beliebig oft wiederholt werden.
 \section{Ergebnisse}
 
 Im Rahmen des Aufbaus der Testumgebung wurden zwei verschiedene Container-Technologien eingesetzt. Zum Einsatz kamen NixOS-Container und Docker-Container.
-NixOS-Container beanspruchten zu viele Ressourcen und deshalb wurden schlussendlich Docker-Container eingesetzt.
+NixOS-Container beanspruchten zu viele Ressourcen, weswegen schlussendlich Docker-Container eingesetzt wurden .
 Damit konnte ein Testnetzwerk bestehend aus bis zu 128 I2P-Knoten erstellt werden.
 Somit konnten Latenzmessungen durchgeführt werden,
 welche als Grundlage und Referenz für zukünftige Messungen dienen.
@@ -144,6 +144,6 @@ welche als Grundlage und Referenz für zukünftige Messungen dienen.
 
 Anhand des entwickelten Teststands können nun weitere Messungen getätigt und miteinander verglichen werden.
 Grundsätzlich können so auch verschiedene I2P-Konfigurationen miteinander verglichen werden.
-Auch aber sind Tests in Zukunft Tests mit anderen Protokollen oder Nachrichtentypen möglich.
+Es sind aber in Zukunft auch Tests mit anderen Protokollen oder Nachrichtentypen möglich.
 
 \end{document}
