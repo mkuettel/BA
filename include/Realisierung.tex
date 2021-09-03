@@ -20,7 +20,7 @@ Zudem wird erklärt warum gewisse Ziele nicht erreicht wurden. Auch wird aufgeze
 
 Zu diesem Zeitpunkt habe ich ein Grobkonzept erstellt welches aufzeigt wie ich grob die Aufgabenstellung zu lösen bedenke.
 Jedoch bin nach dem Arbeitsjournal ich etwa zwei Arbeitstage im Rückstand und der Stand der Technik wurde zwar recherchiert aber noch nicht in den Bericht niedergeschrieben.
-Wir haben nach diesem Meilenstein beschlossen, dass ich in das Büro der Konpanyo AG arbeiten kann aufgrund der erheblichen Lärmemissionen bei mir Zuhause im Home-Office. Dies hat es extrem schwierig gemacht sich zu konzentrieren und bei der Sache zu bleiben.
+Wir haben nach diesem Meilenstein beschlossen, dass ich in das Büro der Kopanyo AG arbeiten kann aufgrund der erheblichen Lärmemissionen bei mir Zuhause im Home-Office. Dies hat es extrem schwierig gemacht sich zu konzentrieren und bei der Sache zu bleiben.
 
 \subsection{Meilenstein 2: Zwischenpräsentation}
 
@@ -40,168 +40,81 @@ Jedoch wird das
 
 \subsection{Abgabe}
 
-\subsection{Resultate}
-
-Die folgende Tabelle~\fullref{tab:resultate} beschreibt alle Resultate und Unterresultate die während dieser Bachelorarbeit erstellt werden.
-Diese Tabelle wurde zusammengestellt anhand der Anforderungen im Abschnitt~\ref{sec:Anforderungen}.
-
-Jedes Resultat hat einen eindeutigen Identifier in  der Spalte ''Nr'' aufgelistet.
-Die Spalte ``Anforderung'' bezieht sich darauf, welche Anforderungen für das jeweilige Resultat massgebend sind.
-In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Projekts abgeschätzt wie viel Arbeitsaufwand (in Stunden) das Resultat verursacht.
-
-\begin{longtable}{p{0.8cm} l p{3.5cm} p{2cm}}
-    \toprule
-    \bfseries Nr & \bfseries Resultat & \bfseries Anforderung& \multicolumn{1}{p{3cm}}{\bfseries Geschätzter Arbeitsaufwand} \\
-    \midrule \endhead
-    D            & \textbf{Dokumentation}                                       & \reqref{DOCS} & \textbf{Total 44h}  \\
-    \midrule                                                               
-    D.1          & \; Dokumenten Layout                                &       & 8h   \\
-    D.2          & \; Aufbau des Berichts                              &       & 4h   \\
-    D.3          & \; Titelseite                                       &       & 2h   \\
-    D.4          & \; Zusammenfassung / Abstract                       &       & 2h   \\
-    D.5          & \; Einleitung                                       &       & 4h   \\
-    D.6          & \; Beschreibung Motivation / Problem                &       & 2h   \\
-    D.7          & \; Beschreibung der Aufgabenstellung                &       & 2h   \\
-    D.8          & \; Beschreibung der Ziele / Vision                  &       & 1h   \\
-    D.9          & \; Fragestellungen / Hypothesen                     &       & 2h   \\
-    D.11         & \; Reflektion / Fazit                               &       & 3h   \\
-    D.12         & \; Persönliches Projektfazit                        &       & 1h   \\
-    D.13         & \; Ausblick                                         &       & 4h   \\
-    D.14         & \; Anhang                                           &       & 3h   \\
-    D.15         & \; Zwischenpräsentation                             & \reqref{PRES}  & 6h  \\
-    \midrule                                                               
-    R            & \textbf{Recherche}                                           & \reqref{SDTF} \reqref{DOCS}  & \textbf{Total 40h} \\
-    \midrule                                                               
-    R.1          & \; Literatur sammeln (Recherche)                    &       & 12h  \\
-    R.2          & \; Bibliographie erstellen                          &       &  4h  \\
-    R.3          & \; P2P Networks                                     &       &  2h  \\
-    R.3.1        & \;   - Latenz / Bandbreite / Performanz             &       &  2h  \\
-    R.4          & \; Beschreibung I2P                                 &       & 10h  \\
-    R.4.1        & \; -- Begrifflichkeiten                              &       &  4h  \\
-    R.4.2        & \; -- Funktionsweise                                 &       &  2h  \\
-    R.4.3        & \; -- Bandbreite                                     &       &  2h  \\
-    R.4.4        & \; -- Latenz                                         &       &  2h  \\
-    R.5          & \; Deployment von Testnetzwerken                    &       &  4h  \\
-    R.6          & \; Beschreibung der Wissenschaftlichen Methode      &       &  2h  \\
-    R.7          & \; Metriken für die Auswertung                      & \reqref{TPER} \reqref{TISO} \reqref{TREP}  &  6h  \\
-    \midrule                                                               
-    K            & \textbf{Testkonzept          }                               & \reqref{TKON} \reqref{DOCS}  & \textbf{Total 46h}  \\
-    \midrule                                                               
-    K.1          & \; Beschreibung Ideen / Konzepte                    &       &  4h  \\
-    K.2          & \; Anforderungen an den Teststand                   &       &  4h  \\
-    K.3          & \; Teststrategie                                    &       &  4h  \\
-    K.4          & \; Architektur Teststand                            &       &  4h  \\
-    K.5          & \; Komponentendiagramm                              &       &  2h  \\
-    K.6          & \; Beschreibung was gemessen werden soll            &       &  8h  \\
-    K.7.1        & \; -- Bandbreite                                     & \reqref{TLIM} &  2h  \\
-    K.7.1        & \; -- Anzahl Tunnels                                 & \reqref{TCNF}    &  2h  \\
-    K.7.1        & \; -- Latenz von Nachrichten                         & \reqref{TLAT}    &  2h  \\
-    K.7.1        & \; -- Ressourcenauslastung eines Knotens             & \reqref{TPER}    &  2h  \\
-    K.8          & \; Beschreibung wie gemessen wird                   &       & 10h  \\
-    K.8.1        & \; -- Isolation des Netzwerks                        & \reqref{ORDR}    &  2h  \\
-    K.8.1        & \; -- Verschiedene Netzwerksegmente                  & \reqref{ORDR}    &  2h  \\
-    K.8.2        & \; -- Latenz                                         & \reqref{ORDR}    &  2h  \\
-    K.8.3        & \; -- Bandbreite                                     &       &  2h  \\
-    K.8.4        & \; -- Konfigurationsmöglichkeiten                    & \reqref{TCNF} &  2h  \\
-    K.9.5        & \; \glsname{ci}                                     & \reqref{TVRS} &  6h  \\
-    K.9.6        & \; Beschreibung der Auswertungsmethode              &               &  4h  \\
-    \midrule                                                               
-    S            & \textbf{Teststand Design und Implementation}                 & \reqref{TINF} \reqref{DOCS} & \textbf{Total 124h} \\
-    \midrule
-    S.1          & \; Software Design                                  &       &  16h \\
-    S.1          & \; Implementation                                   &       &  72h \\
-    S.2.1        & \; -- Deployment des Testnetzwerkes                  & \reqref{TVRS} \reqref{TPER} &  8h \\
-    S.2.2        & \; -- Netzwerksegmentierung                          & \reqref{TISO} &  8h \\
-    S.2.3        & \; -- Konfigurationsmöglichkeiten                    & \reqref{TCNF} &  8h \\
-    S.2.4        & \; -- Skalierung                                     & \reqref{TSCL} &  8h \\
-    S.2.5        & \; -- Bandbreitenbeschränkung                        & \reqref{TLIM} &  8h \\
-    S.2.6        & \; -- Reproduzierbarkeit                             & \reqref{TREP} &  8h \\
-    S.2.7        & \; -- Latenzmessung                                  & \reqref{TLAT} &  8h \\
-    S.2.8        & \; -- Messung der Ressourcenauslastung               & \reqref{TPER} &  8h \\
-    S.2.9        & \; -- Verschiedene Testaufbauten                     & \reqref{TVRS} &  8h \\
-    S.3          & \; Test des Labors                                  &       &  24h \\
-    S.4          & \; Handbuch für den Teststand                       &       &  12h \\
-    S.4.1        & \; -- Installation                                   &       &   2h \\
-    S.4.3        & \; -- Konfiguration                                  &       &   2h \\
-    S.4.3        & \; -- Ausführen von Messungen                        &       &   2h \\
-    S.4.3        & \; -- Beschreibung der gesammelten Messdaten         &       &   4h \\
-    S.4.3        & \; -- Beispiele                                      &       &   2h \\
-    \midrule                                                                        
-    A            & \textbf{Messung und Auswertung}                              & \reqref{EVAL} \reqref{DOCS}   & \textbf{Total 52h}  \\
-    \midrule
-    A.1          & \; Sammlung an Messdaten für die Auswertung         &        &  12h  \\
-    A.2          & \; Beschreibung der Auswertungsmethode              &        &   4h  \\
-    A.3          & \; Auswertung der Messungen                         &                    & 20h  \\
-    A.3.1        & \; -- Einfluss der Knoten auf die Latenz             & \reqref{TLAT}      &  6h  \\
-    A.3.2        & \; -- Einfluss der Anzahl Verbindungen auf die Latenz& \reqref{TLAT} \reqref{TLIM} &  6h  \\
-    A.3.3        & \; -- Einfluss der Bandbreite auf Latenz             & \reqref{TLAT} \reqref{TLIM} &  6h  \\
-    A.3.4        & \; -- Äussere Einflüsse / Unreinheiten               & \reqref{TREP} \reqref{TISO} &  2h  \\
-    A.4          & \; Verschiedene Diagramme/Grafiken                  &       &  8h  \\
-    A.5          & \; Auswertung der Anforderungen an den Teststand    & \reqref{TINF} &  4h  \\
-    A.6          & \; Zusammenfassung der Auswertung                   &       &  4h  \\
-    \midrule                                                               
-    P            & \textbf{Project Management Dokumentation}                    & \reqref{DOCS} \reqref{ITER}  &  \textbf{Total 54h}  \\
-    \midrule
-    P.1          & \; Beschreibung Projektorganisation                 &       &  1h  \\
-    P.3          & \; Projektmanagement Methode                        &       &  2h  \\
-    P.2          & \; Beschreibung Projektumfang                       &       &  2h  \\
-    P.4          & \; Projektplanung                                   &       &  8h  \\
-    P.5          & \; Liste von Requirements                           &       &  4h  \\
-    P.6          & \; Liste von Resultaten                             &       &  4h  \\
-    P.9          & \; Arbeitsjournal                                   &       &  4h  \\
-    P.10         & \; Meeting-Protokolle und Notizen                   &       & 29h  \\
-    \midrule                                                               
-                 & \bfseries  Geschätzter Arbeitsaufwand               & \textbf{Total} & \bfseries 360h \\
-    \midrule
-    \bottomrule
-    \caption{Resultate}
-    \label{tab:resultate}
-\end{longtable}
-
 Diese Liste von Resultaten ist auch ein guter Ausgangspunkt um davon Issues für den Issue-Tracker zu erstellen.
 Jeder issue kann nun auch sortiert werden nach Resultat-Kategorien z.B. ''Recherche'', ''Projektmanagement'', ''Dokumentation'', ''Evaluation'', ''Präsentation'', etc.
 
-\section{Systemarchitektur}
+\section{Systemarchitektur}\label{sec:systemarchitektur}
 
-Grob besteht die entwickelte Software für den aus drei teilen.
+Wie Kapitel~\fullref{ch:ideen_und_konzepte} wurde konzeptionell ausgeführt die der Teststand und die Messanlage für das I2P-Testnetzwerk aussehen soll.
+In diesem Abschnitt wird nun die resultierende Softwarearchitektur aufgezeigt.
+Die entwickelte Software besteht grob aus fünf Teilen:
 
 \begin{enumerate}
-    \item \textbf{Tester-Software}: Hier ist die Deployment-Konfiguration für die Test-VM zu finden, sowie die verwendeten Tools zur Auswertung.
-    \item \textbf{Test-VM:} Hier ist die Konfiguration für das 
-    \item \textbf{Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
-    \item \textbf{Messanlage} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container der verwendet wird zum Bootstrapping des Testnetzwerks.
+    \item \textbf{Deployment:} Hier ist die Deployment-Konfiguration für die Test-VM zu finden. Mittels NixOps kann dieselbe Test-VM reproduzierbar erstellt werden.
+    \item \textbf{Test-VM \& deren Deployment}: Die Test-VM stellt eine reproduzierbare und isolierte Umgebung zur Verfügung, um darin die Messungen durchführen zu können.
+     Die Virtuelle Maschine grenzt die Ressourcen des Testnetzwerks klar ein.
+     Es handelt sich hier um ein Linux-System welches Docker installiert hat,
+	 um darin die benötigen Container zu erstellen.
+    \item \textbf{Container-Deployment}: Dieser Bestandteil ist verantwortlich die anhand der Testkonfiguration das I2P-Testnetzwerk, inklusive den Shared-Volumes, mit Hilfe von Docker zu erstellen. Dazu wird das \lstinline|recompose|-Skript verwendet.
+	 Hierbei handelt es sich um einen Wrapper, der intern docker-compose verwendet.
+    \item \textbf{I2P-Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container. Dieser wird benötigt wird, um das Testnetzwerk zu bootstrappen.
+    \item \textbf{Messanlage:} Die Messanlage besteht aus einem TCP-Server und TCP-Client die zusätzlich in den i2pd-Containern angesiedelt sind.
+        Zudem gibt es ein Messskript welches den Nachrichtenversand vom TCP-Client zum TCP-Server anstossen kann und die Messresultate sammelt.
 \end{enumerate}
 
 Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diagram die Systemarchitektur auf.
 
-
-\begin{landscape}% Landscape page
-\begin{figure*}[ht]
-  \includegraphics[height=0.85\textwidth]{include/uml/componentDiagram.png}
+\begin{figure*}[htp]
+  \includegraphics[width=1.1\textwidth]{include/uml/componentDiagram.png}
   \caption{Architektur-Diagramm}\label{fig:architektur-diagramm}
 \end{figure*}
-\end{landscape}% Landscape page
 
 
-\section{Komponentendesign}
+\section{Komponentendesign}\label{sec:komponentendesign}
 
-\subsection{Deployment der Test-VM}
+In diesem Abschnitt werden die einzelnen Komponenten, wie aufgezeigt der Abbildung~\fullref{fig:architektur-diagramm}, genauer beschrieben.
 
-NixOps erlaubt es eine NixOS-Systemkonfiguration auf diverse Arten von Maschinen zu deployen.
+\subsection{Deployment}
 
-\subsection{Deployment der Knoten}
+NixOps erlaubt es mittlels einer NixOS-Systemkonfiguration ein komplettes Linux auf diverse Arten von Maschinen zu deployen. Dies kann physische Hardware oder wie auch in diesem Falle eine VM sein.
 
+Anstatt die Maschine
 
 \subsection{Konfiguration}
 
 Die Konfiguration des Teststands kann mittels einer json-Konfigurationsdatei einfach angepasst werden.
-Diese kann, falls nötig einfach von verschiedenen Orten gelesen werden.
+Da es sich hier um eine JSON-Datei handelt, kann diese falls nötig einfach von verschiedenen Programmen gelesen werden.
+Einerseits wird diese vom Messkript gelesen, wie aber auch vom recompose Skript.
+
 
 \subsection{Recompose-Skript}
 
-Das Recompose-Skript ist dafür verantwortlich das Docker-Netzwerk anhand der Konfiguration aufzubauen und zu managen. Es ist das Kernstück der entwickelten Software.
+Das Recompose-Skript ist dafür verantwortlich das Docker-Netzwerk anhand der Konfiguration aufzubauen und zu verwalten.
+Es ist das Kernstück der entwickelten Software.
+
+Es handelt sich hier um einen Wrapper um \lstinlline|docker-compose|
 
 Als wichtigster Punkt wird hier der 
+
+\subsection{Deployment der Knoten}
+
+Die I2P-Knoten werden mittels docker-compose deployed.
+\lstinline|docker-compose| erlaubt das automatisierte erstellen und abbauen von Netzwerken bestehend aus mehreren Docker-Containern.
+Dazu liest \lstinline|docker-compose| jeweils eine oder mehrere YAML-Dateien.
+In diesen YAML-Dateien können die verschiedenen Container, Netzwerke und Volumes und diverse Optionen deklariert werden, welche das zu erstellende Container-Netzwerk beschreibt.
+
+Anfangs wurde versucht die Knoten unter Verwendung des \lstinline|scale|-Features zu skalieren.
+Unter Verwendung dieses Feature muss der \lstinline|i2pd|-Knoten nur einmal deklariert werden und kann beim ausführen des \lstinline|docker-compose|-Befehls mehrfach instanziiert werden.
+Jedoch hat dieses Feature zu Problemen geführt, sodass die \lstinline|i2pd|-Knoten nicht untereinander kommunizieren konnten.
+Es kann gut sein das dieses Feature nicht für P2P-Netzwerke geeignet ist, da dieses normalerweise gebraucht wird um z.B. Datenbank- oder Webserverinstanzen zu skalieren.
+Diese müssen normalerweise auch nicht untereinander kommunizieren.
+Ausserdem verweist die Dokumentation auch immer mehr auf docker-swarm, um Knoten zu skalieren.
+
+Schlussendlich wurde eine Lösung für dieses Problem gefunden,
+indem das \lstinline|recompose|-Skript ein Teil der YAML-Konfiguration beim Ausführen generiert.
+Für jeden Knoten der im Netzwerk sein sollte wird ein neuer Knoten deklariert.
+
+% TODO: Referenziere generieren der Knoofen-Konifugrationen
 
 \subsection{Deployment von der Container}
 
@@ -245,44 +158,72 @@ Auch kann die Konfiguration des Reseeders eine wichtige Rolle spielen, denn dies
 
 Just read logs? Use some Docker cp magic?
 
-\section{Umsetzung / Programmierung}
+\section{Umsetzung}\label{sec:umsetzung}
 
-Der Komplette Quellcode für das Deployment der Test-VM, die Erstellung des Testnetzwerk's und die Messanlage ist im folgenden Repository zu finden:
+In diesem Abschnitt wird nun beschrieben,
+wie die im vorherigen Abschnitt aufgezeigte \nameref{sec:systemarchitektur} und das dazugehörige \nameref{sec:komponentendesign} schlussendlich effektiv umgesetzt wurde.
+Zudem wird der Weg zur schlussendlichen Lösung genauer beschrieben.
+Zuerst wurde versucht ein Prototyp für das I2P-Testnetzwerk unter Verwendung von NixOS-Containern zu erstellen (siehe \nameref{sec:la1_nixos}).
+Jedoch wurde schlussendlich eine andere Lösung gefunden, welche den Anforderungen gerecht wurde, unter Verwendung von Docker-Compose.
+Der erzeugte Quellcode zur Erstellung des I2P-Testnetzwerk's sowie der Quellcode für die Messanlage ist im folgenden Repository zu finden:
 
-\url{https://codeberg.org/mkuettel/i2p-testnet}.
-
-\section{Test-VM}
-
-Die Test-VM wurde so umgesetzt, das diese mittels nixops deployed werden kann.
-
-\section{1. Lösungsansatz: NixOS-Container}
-
-NixOS erlaubt es deklarativ Container zu definieren.
-
-% \begin{lstlisting*}[language=nix,label=src:nixos-container,caption=Beispiel wie Nixos Container definiert werden können]
-%
-%     boot.enableContainers = true;
-%     containers = {
-%         "container1" = {
-%             config = { config, pkgs, ... }:
-%                 {
-%                     # NixOS system configuration for this container
-%                     services.httpd.enable = true;
-%                 }
-%             # more container settings ... 
-%         };
-%         # "container2" .... 
-%     }
-% \end{lstlisting*}
-
-Wichtig dabei ist, dass es sich hierbei nicht um einen Docker-Container, sondern um NixOS-Container handelt technologie handelt, welche auf systemd-nspawn Containern basiert..
-
-Im Hintergrund brauchen jedoch beide Container-Arten die gleichen Linux-Kernel-Features (namespaces, cgroups, ... ).
-
-\section{2. Lösungsansatz Docker-Compose mit scale option}
+\url{https://codeberg.org/mkuettel/i2p-testnet}
 
 
-Siehe \lstinline|containers.nix| in der \lstinline|i2p-testnet| Repository für die Effektive implementation
+\section{Lösungsansatz: NixOS-VMs und NixOS-Container}\label{sec:la1_nixos}
+
+Zu beginn des Projekts wurde versucht ein I2P-Testnetzwerk aufzubauen mit Hilfe von nixops.
+Nixops ist ein Tool zum deployment von Netzwerken bestehend aus NixOS-Maschinen.
+\cite{noauthor_nixops_nodate-5}
+NixOS ist eine Linux-Distribution basierend auf dem Paket-Manager Nix.
+Nix erlaubt es reproduzierbare Softwarepakete zu erzeugen und kann mit einer deklarativen und funktionalen Programmiersprache konfiguriert werden.
+% TODO: reference nix
+
+Dieser Ansatz wurde zu Beginn aus mehreren Gründen ausgewählt.
+Einerseits setze ich auch selber NixOS seit mehreren Jahren ein und nixops ist somit das  native Deployment-Tool.
+Andererseits Nix legt enormen Wert auf Reproduzierbarkeit und das gesamte Netzwerk bis hin zum OS könnte anhand einer Nix-Konfiguration wiedererstellt werden.
+Auch könnten Konfigurationen für I2P-Knoten wiederverwendet werden, egal ob diese nun in Container, VMs oder auf echter Hardware deployed werden.
+Dies ist möglich da System-Konfigurationen oder Teile davon bei NixOS unabhängig von der Konfiguration der effektiven Infrastruktur sind.
+Ich habe angefangen mit NixOps ein Netzwerk bestehend aus einzelnen VirtualBox-VM zu erstellen.
+Um weniger Ressourcen-Overhead zu haben, habe ich dann angefangen mehrere i2p-Knoten als NixOS-Container innerhalb dieser VM zu erstellen.
+Auch habe ich damit angefangen eine Lösung für das Bootstrapping Problem zu finden.
+Jedoch bin ich mit diesem Ansatz immer wieder auf Probleme gestossen:
+
+\begin{itemize}
+    \item \textbf{Netzwerkkonfiguration:} Die Knoten konnten nicht korrekt untereinander kommunizieren. Es war nicht möglich einen anderen Container mittels einem \lstinline|ping|-Befehl zu erreichen.
+        Es hat sich herausgestellt, dass das Routing zwischen den Containern sowie die Netzwerkmasken nicht korrekt konfiguriert wurde und es keine Option gab diese richtig zu setzen innerhalb der Nix-Deklaration.
+        Aufgrund dessen habe ich das NixOS-Modul für NixOS-Container erst selbst angepasst.
+        Somit konnte ich die Routing-Probleme beheben und Optionen hinzufügen, um die Netzwerkmasken der Knoten korrekt zu setzen. %TODO: reference commit
+        Das NixOS-Container Modul scheint also nicht ausgereift zu sein.
+    \item \textbf{Probleme mit Docker-Kompatibilität:} Auch habe ich versucht anstatt von NixOS-Containern, Docker-Container auf NixOS zu erstellen.
+        Dies hätte es erlaubt die bestehenden Container von DIVA.EXCHANGE wiederzuverwenden. Jedoch schien der Support für Docker auch nicht ausgereift genug.
+        Ich konnte auf meinem Laptop keine Docker-Images bauen für das Testnetzwerk, da dies libvirt/QEMU-Support benötigt.
+        Dies war unter gleichzeitiger Verwendung von VirutalBox nicht möglich, da nur ein Hypervisor gleichzeitig ausgeführt werden kann.
+        Auch habe ich versucht den Hypervisor auf libvirt/QEMU zu wechseln, was aber schon am deployment der VM scheiterte.
+    \item \textbf{Skalierungsprobleme:} Während dem entwickeln habe ich jeweils 2 oder 8 Knoten auf einmal erstellt, um schnell ein Feedback zu erhalten.
+        Um den Reseeder zu testen hatte ich jedoch auf einmal versucht 103 Knoten zu erstellen.
+        Jedoch hat nur schon das generieren und auswerten der NixOS-Systemkonfigurationen für alle diese NixOS-Container extrem viel Arbeitsspeicher benötigt.
+        Meine 16GB Arbeitsspeicher in meinem Laptop wurden nach mehreren Sekunden gefüllt. Ich konnte somit die Knoten nicht einmal deployen und ausführen.
+\end{itemize}
+Somit war klar das dieser Lösungsansatz nicht funktionieren konnte und es musste ein grundsätzlich anderer Ansatz zur Erstellung der Container gefunden werden.
+
+
+\section{Lösungsansatz Docker-Compose mit scale option}\label{sec:la2_docker_scale}
+
+Um die bestehenden Docker-Container von DIVA.EXCHANGE wiederzuverwenden
+
+
+
+
+\section{Lösung mit Docker-Compose}
+
+Nachdem sich herausgestellt hat, das der Lösungsansatz mit NixOS-Container nicht funktioniert, wurde auf eine Container-Orchestration Lösung gesucht.
+Um unnötige Komplexität zu vermeiden wurde auf das einfache Tool \lstinline|docker-compose| gesetzt.Zudem hat der Auftraggeber bereits Erfahrungen mit diesem Tool gemacht und es auch schon eingesetzt.
+Zuerst konnte ein kleines öffentliches I2P-Testnetzwerk mit acht festkodierten i2pd-Container gestartet werden.
+Dies wurde anschliessend als Ausgangspunkt verwendet.
+
+\subsection{Skalierung}
+
 
 \subsection{Bootstrapping}
 
@@ -333,14 +274,6 @@ Welche Reseeder ein I2P-Router anfragt, kann mittels der \lstinline|i2pd|-Konfig
 \end{landscape}% Landscape page
 
 
-\subsection{Reproduzierbarkeit}
-
-* Nix
-* Pinning
-    
-\cite{noauthor_nixops_nodate-5}
-
-
 \subsection{Isolieren}
 
 Während unserer Tests wollen wir nur Traffic unserer eigenen Knoten im Netzwerk 
@@ -362,6 +295,14 @@ Das Builder der systemkonfigurationen inkl. der container getestet mit 100 konnt
 Fehlerhafte netzwerkkonfiguration by default, falsche routen und ip konfigurationen (fehlende definition der netzwerkmaske)
 Container selber sind unnötig gross
 
+\subsection{Generieren der Knoten-Konfigurationen}
+
+ Welcher anhand einer Vorlage in einer JSON-Datei 
+
+
+Dies funktioniert da YAML ein Superset von JSON ist. Vereinfacht gesagt: Jede JSON-Datei ist auch eine gültige YAML-Datei.
+
+
 \subsection{Addressbuch}
 
 %TODO: add to state of the art?
@@ -377,7 +318,7 @@ Diese ist jedoch nicht einfach zu handhaben und anstatt es ist einfacher die Kno
 
 Auch wird die Auswertung damit vereinfacht weil, der TCP-Client den verwendeten Namen des TCP-Servers auch in die Nachricht hineinpackt und der TCP-Server diesen als Messausgabe abspeichert.
 
-Es wird beim Startvorgang des Netzwerks für jede erstellte destination für den TCP-Server ein Adressbucheintrag erstellt. Dieses Adressbuch ist eine einfache CSV-Datei wird wird 
+Es wird beim Startvorgang des Netzwerks für jede erstellte Destination für den TCP-Server ein Adressbucheintrag erstellt. Dieses Adressbuch ist eine einfache CSV-Datei wird wird 
 im Bootstrapvorgang an alle Knoten verteilt.
 
 Im falle von acht Knoten im Netzwerk sieht diese Datei beispielsweise so aus:
@@ -393,17 +334,15 @@ tcpsrv-7.i2p,aat6wqge3o7k2nabpwxrcu2vbbiydf3mj6n5k2zrrtozkrrpyfoa
 tcpsrv-8.i2p,4wm4pqautqqb3a6yw3xif4zgwwu4v5tvpwv6onha27p5pkcqqepq
 \end{lstlisting}
 
-In der ersten Spalte ist der vereinfachte Name anzugeben und in der Zweiten Spalte die b32-Addresse, jedoch ohne die Endung \lstinline|.i2p|
+In der ersten Spalte ist der vereinfachte Name anzugeben und in der Zweiten Spalte die b32-Adresse, jedoch ohne die Endung \lstinline|.i2p|
 
 \subsection{I2Pd-Container}
 
 Hauptsächlich wird in diesem Container der \lstinline|i2pd|-Prozess ausgeführt.
 Um andere Knoten zu kontaktieren zu können muss dieser zu Beginn den Reseed-Container anfragen nach einer Liste von RouterInfos.
-
 Der TCP-Client und TCP-Server sind ebenfalls in diesem Container angesiedelt.
 Dies verletzt zwar das Prinzip, dass man nur einen Prozess in einem Docker-Container ausführen sollte,
-jedoch ist das Ziel hiermit Messungenauigkeiten durch das Netzwerk, sowie die Netzwerkkonfiguration zu vereinfachen.
-
+jedoch ist das Ziel hiermit Messungenauigkeiten aufgrund eines zusätzlichen Container zu vermeiden, sowie die Netzwerkkonfiguration zu vereinfachen.
 
 \subsubsection{TCP Server Tunnel}
 
@@ -423,7 +362,8 @@ enableuniquellocal = true
 
 Hierbei gilt es zu beachten, das die Schlüssel angegeben mit der \lstinline|keys|-Option, beim Aufstarten generiert werden.
 Auch wurde mittels der Option \lstinline|gzip| die Komprimierung-Deaktiviert, damit auch wirklich die richtigen Nachrichten-Grössen übermittelt werden.
-Die Option\lstinline|enableuniquellocal| wurde noch aktiviert, um die Auswertung zu vereinfachen. Denn diese führt dazu das der TCP-Server nicht immer dieselbe Ausgangsadresse \lstinline|127.0.0.1| bekommt, sondern je nach Sender der Nachricht eine andere \lstinline|127.0.0.0/8|-Adresse anhand der ersten Bytes des Public-Keys erhält.
+
+Die Option\lstinline|enableuniquellocal| wurde noch aktiviert, um die Auswertung zu vereinfachen. Denn diese führt dazu das der TCP-Server nicht immer dieselbe Ausgangsadresse \lstinline|127.0.0.1| bekommt, sondern je nach Sender der Nachricht eine andere \lstinline|127.0.0.0/8|-Adresse anhand der ersten Bytes des Public-Keys erhält. Jedoch wurde schlussendlich nicht auf diese Möglichkeit die Knoten zu identifizieren zurückgegriffen, da das Adressbuch 
 
 %TODO: Reference config, especiallfor for enableuniquellocal.
 
@@ -446,8 +386,6 @@ Bei Web-Sockets handelt es sich vereinfacht ausgedrückt wiederum um eine TCP-ä
     \item Zeitpunkt in nanosekunden seit 1.1.1970 
 \end{itemize}
 
-\subsection{Nachrichten-Log}
-
 
 \subsubsection{Socks5-Proxy für den TCP-Client}
 
@@ -468,8 +406,8 @@ Zusätzlich wird in diesem Abschnitt auch die Länge der Tunnels bestimmt.
 
 \subsection{TCP-Server}
 
-
 Für Tests am Anfang wurde nc verwendet. Dies hat gut funktioniert um die Konnektivität im Netzwerk zu testen. Hat aber zur effektiven messung einen Nachteil.
+
 Um genauere Messresultate zu erhalten wurde eine e-poll basierte C-Implementation eines TCP-Servers erstellt, um die komplette Kontrolle über die Netzwerksocket zu bekommen.
 Auch wurde C und nicht z.B. Python gewählt um den Arbeitsspeicher und CPU Gebrauch des Containers so tief wie möglich zu halten.
 Dies erlaubt es die Latenz genauer zu messen und auch den TCP-Verbindungsaufbau nicht mitzumessen
@@ -478,14 +416,28 @@ Wie auch die Verbindung sofort nach Erhalt einer Nachricht wieder zu schliessen.
 
 Auch erlaubt es nc nicht mehrere TCP-Verbindungen anzunehmen und die Verbindungen korrekt zu schliessen.
 
-Der TCP-Server nimmt jeweils eine einzell
+Der TCP-Server nimmt jeweils eine einzellne Verbin
+
+
+\lstinline|docker/i2p/messenger/epoll-server.c|
 
 
 \subsection{TCP-Client}
 
 Damit der TCP-Client in das I2P-Overlaynetzwerk verbinden kann, muss dieser fähig sein mit einem Socks5-Proxy zu kommunizieren.
-Zudem muss die Namensauflösung auch über das I2P-Overlaynetzwerk stattfinden, da nur dieses die \lstinline|.i2p|-Adressen auflösen kann und nur dieses die Namen im Adressbuch kennt.
+Zudem gilt es den Socks5-Proxy richtig zu konfigurieren.
+Denn die Namensauflösung muss auch über I2P-Netzwerk abgehandelt werden.
+Nur so können die \lstinline|.i2p|-Adressen aufgelöst werden.
+Ist diese im Addressbuch und hat diese eine zugehörige \lstinline|.b32.i2p|-Addresse.
+Anhand einer \lstinline|.b32.i2p|-Adresse kann die netDb nach einem zugehörigen LeaseSet abgefragt werden, welches Zugriff auf die gewünschte Destination bietet.
 
+Der TCP-Client ist ein kleines C-Programm welches in der 
+i2p-testnet Repository in der Datei \lstinline|docker/i2p/messenger/client.c| zu finden ist.
+
+Zusammengefasst macht es nichts anderes als
+eine Verbindung mit einem Socks5-Proxy aufzubauen, eine  Nachricht der derinierten
+
+Es bietet folgende Kommandozeilenoptionen:
 
 \subsection{Konfigurationsoptionen}
 
@@ -496,6 +448,12 @@ Zudem muss die Namensauflösung auch über das I2P-Overlaynetzwerk stattfinden, 
         \begin{itemize}
         \item Anzahl RouterInfos pro Su3-Datei. welcher Knoten beim starten des Netzwerks kennt.
         \item Anzahl Verschiedene Su3-Dateien. Sets an RouterInfos. welcher Knoten beim starten des Netzwerks kennt.
+        \end{itemize}
+    \item Mess-Optionen:
+        \begin{itemzie}
+        \item Mess-Interval: 
+        \item Anzahl Samples: 
+        \item Nachrichtengrösse:
         \end{itemize}
 \end{itemize}
 
@@ -538,9 +496,12 @@ Dieses führt verschiedene Tests durch. Ob
 
 Dieser Bericht ist mit Hilfe von \LaTex umgesetzt.
 Es handelt sich hier dementsprechend auch eine Art Programm darstellt mit einem Build-Vorgang.
-Dieser Build-Vorgang wurde mit dem GitLab CI Service vom Enterpriselab automatisiert.
+Dieser Build-Vorgang wurde mit dem GitLab CI Service vom EnterpriseLab automatisiert.
 
-\subsection{Validation der R}
+\subsection{Validation der Resultate}
+
+
+Zur validation der Resultate
 
 \section{Benutzerhandbuch}
 
