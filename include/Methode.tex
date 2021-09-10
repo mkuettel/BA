@@ -21,13 +21,7 @@ Dieses Kapitel erläutert das Vorgehen und die verwendete Methoden.
 
 % TODO Nach eigenen Bedürfnissen erweitern
 % ------------------------------------- TEIL Wissenschaftliche Arbeiten ----------------------------------------------------
-\section{Prototyping}
 
-Für die Ausarbeitung des Konzepts für den Teststand mussten einige Sachen erst in Software ausprobiert werden, um schnell zu merken, ob man auf dem richtigen Weg ist bevor zu viel Zeit vergangen ist.
-
-
-
-\parencite{helmut_balzert_wissenschaftliches_nodate}
 
 \section{Experiment}\label{sec:experiment}
 % quantitaiv, ehter verhaltenswissenschaftlich als konstruktiv
@@ -41,7 +35,6 @@ Für die Ausarbeitung des Konzepts für den Teststand mussten einige Sachen erst
 
 Es soll ein Experiment durchgeführt werden, um eine quantitative Analyse durchführen zu können.
 Spezifischer soll ein Laborexperiment durchgeführt werden.
-
 Qualitätskriterien:
 \begin{itemize}
     \item Messbarkeit
@@ -49,14 +42,27 @@ Qualitätskriterien:
     \item Überprüfbarkeit
 \end{itemize}
 
-\parencite[S.~276]{helmut_balzert_wissenschaftliches_nodate}
+Nach \parencite[S.~276]{helmut_balzert_wissenschaftliches_2017} soll 
 
 Dies ist ein Teststand der ein isoliertes I2P-Netzwerk erstellt, welches mit Messpunkten für Performance-Messungen versehen werden kann.
 
+% TODO: Wo ist hier die Grenze zwischen der
+
+
+\section{Prototyping}
+
+
+% TODO: Welche Zeit? Wird/wurde?
+
+Für die Ausarbeitung des Konzepts für den Teststand müssen einige Sachen erst in Software ausprobiert werden,
+um schnell zu merken, ob man auf dem richtigen Weg ist bevor zu viel Zeit vergangen ist.
+Deshalb wird zur Entwicklung des Teststands ein Prototyping Verfahren eingesetzt.
+Dabei wird ein Lösungsansatz ausprobiert. 
+
+\parencite{helmut_balzert_wissenschaftliches_nodate}
+
 
 % ------------------------------------- TEIL Ingenieurlastige Arbeiten ----------------------------------------------------
-
-
 \section{Projektinformationen}\label{sec:projektinformationen}
 
 In diesem Abschnitt wird aufgezeigt welches Vorgehensmodell und welche Methoden verwendet wurden zur Abwicklung dieses Projektes.
@@ -74,10 +80,12 @@ Folgendes sind einige Kernpraktiken von Kanban kurz erklärt:
 
 \begin{enumerate}
     \item \textbf{Arbeit sichtbar machen}: Arbeit muss sichtbar gemacht werden, um zu sehen wo der Arbeitsfluss im Gesamtsystem stockt.
-        Auch arbeitet man bei Kanban nicht nach dem Push-Prinzip sondern dem Pull-Prinzip. Das 
-        Das heisst es wird keine Arbeit zugewiesen, sondern neue Arbeit wird abgeholt sobald die letzte Aufgabe (oder Issue/Task) fertiggestellt wurde.
-    \item \textbf{Limitiere den Work in Progress (WIP)}: Es ist schwierig ständig zwischen Aufgaben zu wechseln. Deshalb soll nur an einer Aufgabe auf einmal gearbeitet werden. Tritt ein Problem auf bei einer Aufgabe, legt man diese auf die Seite, um diese später mit jemandem anzuschauen, oder erledigt erst eine andere Aufgabe welche eine Voraussetzung ist.
-    \item \textbf{Manage Flow}: Arbeitsfluss ist wichtig in Kanban. Es soll Aufmerksamkeit gelegt werden auf Engpässe oder gar Blockaden im System. Dabei hilft es zu unterscheiden was für verschiedene Arbeitstypen das Team erledigen muss und das verschiedene Arbeiten einen anderen Grad an Dringlichkeit haben.
+        Auch arbeitet man bei Kanban nicht nach dem Push-Prinzip sondern dem Pull-Prinzip.
+        Das heisst es wird keine Arbeit zugewiesen, sondern neue Arbeit wird abgeholt, sobald die letzte Aufgabe (oder Issue/Task) fertiggestellt wurde.
+    \item \textbf{Limitiere den Work in Progress (WIP)}: Es ist schwierig ständig zwischen Aufgaben zu wechseln. Deshalb soll nur an einer Aufgabe auf einmal gearbeitet werden.
+    Tritt ein Problem auf bei einer Aufgabe, legt man diese auf die Seite, um diese später mit jemandem anzuschauen, oder erledigt erst eine andere Aufgabe welche eine Voraussetzung ist.
+    \item \textbf{Manage Flow}: Arbeitsfluss ist wichtig in Kanban.
+    Es soll Aufmerksamkeit gelegt werden auf Engpässe oder gar Blockaden im System. Dabei hilft es zu unterscheiden was für verschiedene Arbeitstypen das Team erledigen muss und das verschiedene Arbeiten einen anderen Grad an Dringlichkeit haben.
     \item \textbf{Explizite Prozessregeln}: Die Regeln sollen offen gelegt und explizit gemacht werden, damit man merkt wann diese gebrochen oder nicht mehr sinnvoll sind.
     \item \textbf{Feedback Mechanismen}: Um die Arbeitsprozesse kontinuierlich verbessern zu können, benötigt es Feedback-Mechanismen. Dies kann z.B. an täglichen Stand-Ups oder an Retrospektiven. Dies sind Meetings wo darauf abgezielt wird dazuzulernen, den Arbeitsprozess zu reflektieren und  zu Verbessern.
 \end{enumerate}
@@ -184,37 +192,36 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
     \multicolumn{1}{r}{\bfseries Id} & \bfseries Anforderung                                                                                                                                                           & \bfseries Art & \bfseries Optional \\ \midrule
     \endhead
     \rid{SDTF}  & Der Stand der Technik/Forschung bezüglich I2P muss ermittelt werden und in den Bericht eingebunden werden.
-                & Nicht Funktional & Nein  \\ \midrule
+                & Nicht-funktional & Nein  \\ \midrule
 
 
     \rid{TINF}  & Es ein Teststand muss aufgebaut werden welches es erlaubt verschiedene Performance-Messungen
                   an einem Netzwerk bestehend mehreren i2pd-Knoten. & Funktional & Nein \\ \midrule
-    \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand, wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-Funktional & Nein \\ \midrule
-    \rid{TREP}  & Die am Teststand durchgeführten Messungen sollten so gut wie möglich reproduzierbar sein. Die gleiche Messung sollte soweit wie möglich dieselben Resultate liefern. & Nicht-Funktional & Nein \\ \midrule
+    \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand, wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-funktional & Nein \\ \midrule
+    \rid{TREP}  & Die am Teststand durchgeführten Messungen sollten so gut wie möglich reproduzierbar sein. Die gleiche Messung sollte soweit wie möglich dieselben Resultate liefern. & Nicht-funktional & Nein \\ \midrule
     \rid{TCNF}  & Gewisse Aspekte des Teststands und der i2pd-Knoten müssen konfigurierbar sein, damit verschiedene Messungen durchgeführt werden können.  & Funktional & Nein \\ \midrule
     \rid{TSCL}  & Der Teststand soll zwischen 8 bis maximal 256 i2pd-Knoten unterstützen. Dies muss konfigurierbar sein, um dass I2P-Testnetzwerk für verschiedene Tests zu skalieren zu können. & Funktional & Nein \\ \midrule
-    \rid{TISO}  & Das I2P-Testnetzwerk soll isoliert sein vom realen I2P-Netzwerk. & Nicht-Funktional & Nein \\ \midrule
-    \rid{TNET}  & Das I2P-Testnetzwerk soll als Knotenfamilie auch dem realen I2P-Netzwerk beitreten können. & Nicht-Funktional & Ja \\ \midrule
+    \rid{TISO}  & Das I2P-Testnetzwerk soll isoliert sein vom realen I2P-Netzwerk. & Nicht-funktional & Nein \\ \midrule
+    \rid{TNET}  & Das I2P-Testnetzwerk soll als Knotenfamilie auch dem öffentlichen I2P-Netzwerk beitreten können. & Funktional & Ja \\ \midrule
     \rid{TLAT}  & Die Latenz von Nachrichten die über das I2P-Testnetzwerk gesendet werden, soll gemessen werden. & Funktional & Nein \\ \midrule
     \rid{TLIM}  & Es muss möglich sein im Teststand die verfügbare Bandbreite von einzelnen i2pd-Knoten einzustellen. & Funktional & Nein \\ \midrule
-    \rid{TVRS}  & Man soll schnell (innerhalb von 2h) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-Funktional & Nein \\ \midrule
-    \rid{EVAL}  & Die am Teststand durchgeführten Messungen müssen qualitativ evaluiert und aufgearbeitet werden.  & Nicht Funktional & Nein \\ \midrule
-    \rid{TPER}  & Man geht davon aus das die Messungen lange dauern könnten, da jeweils ein ganzes Netzwerk und dessen Traffic erstellt und gehandhabt werden muss. Es macht Sinn die Ausführungszeiten von Messungen kurz zu halten, damit mehr Messungen durchgeführt werden können. & Nicht-Funktional & Ja \\ \midrule
+    \rid{TVRS}  & Man soll schnell (innerhalb von 2h) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-funktional & Nein \\ \midrule
+    \rid{EVAL}  & Die am Teststand durchgeführten Messungen müssen qualitativ evaluiert und aufgearbeitet werden.  & Nicht-funktional & Nein \\ \midrule
+    \rid{TPER}  & Man geht davon aus das die Messungen lange dauern könnten, da jeweils ein ganzes Netzwerk und dessen Traffic erstellt und gehandhabt werden muss. Es macht Sinn die Ausführungszeiten von Messungen kurz zu halten, damit mehr Messungen durchgeführt werden können. & Nicht-funktional & Ja \\ \midrule
     \rid{DOCS}  & Am Ende des Projekts muss dieser Bachelorarbeit abgegeben werden. Dieser Bericht soll das Projekt, die verwendeten Methoden, Evaluationsprozesse, die Umsetzung und Resultate beschreiben.
-                & Nicht Funktional & Nein \\ \midrule
-    \rid{ITER}  & Ein iteratives Projektmanagement wird bevorzugt für kurze Feedback-Zyklen. Da ich alleine am Projekt arbeite sollte so auch weniger Overhead entstehen. & Nicht Funktional & Ja \\ \midrule
+                & Nicht-funktional & Nein \\ \midrule
+    \rid{ITER}  & Ein iteratives Projektmanagement wird bevorzugt für kurze Feedback-Zyklen. Da ich alleine am Projekt arbeite sollte so auch weniger Overhead entstehen. & Nicht-funktional & Ja \\ \midrule
     \rid{PRES}  & Es muss eine Zwischenpräsentation gehalten werden, welche das Projekt und das weitere Vorgehen erklärt.
-                & Nicht Funktional & Nein \\ \midrule
+                & Nicht-funktional & Nein \\ \midrule
     \rid{WEBA}  & Es muss ein Web-Abstract erstellt werden, der das Projekt kurz zusammenfasst. Der Web-Abstract wird veröffentlicht und muss eine Woche vor Projektende vom Betreuer abgenommen werden.
-                & Nicht Funktional & Nein \\ \midrule
+                & Nicht-funktional & Nein \\ \midrule
     \rid{PVID}  & Es muss ein 90 Sekunden Video erstellt werden, welches diese Bachelorarbeit kurz erklärt. Das Video wird am Start der Schlusspräsentation abgespielt.
-                & Nicht Funktional & Nein \\ \midrule
+                & Nicht-funktional & Nein \\ \midrule
     \bottomrule
     \caption{Requirements}\label{tab:requirements}
 \end{longtable}
 
 
-\newpage
 \subsection{Einschränkungen und Abgrenzungen}
 
 Es soll nur die Performance des I2P-Netzwerks mit der i2pd-Software (der C++ implementation) untersucht werden und nicht von darüberliegenden Applikationen.
@@ -312,8 +319,8 @@ Die Spalte ''PW'' gibt die Projektwoche an. Die Spalte ''KW'' die Kalenderwoche.
           11               & 18                      &                       & 3. Auswertung            & 3                                       & 4  & 5   & 6  & 7  & 8  & 9  \\
           \midrule
           12               & 19                      & \textbf{Abschluss}             &                       & 10                                      & 11 & 12  & 13 & 14 & 15 & 16 \\
-          13               & 20                      &                       & 4. Web-Abstract          & 17                                      & 18 & 19  & 20 & \cellblue{21} & 22 & 23 \\
-          14               & 21                      &                       &                          & 24                                      & 25 & 26  & 27 & 28 & 29 & 30 \\
+          13               & 20                      &                       & 4. Web-Abstract          & 17                                      & 18 & 19  & 20 & 21 & 22 & 23 \\
+          14               & 21                      &                       &                          & 24                                      & 25 & 26  & 27 & \cellblue{28} & 29 & 30 \\
           15               & 22                      &                       &                       & 31                                      &    &     &    &    &    &    \\
            |               & |                       &                       &                       & \multicolumn{7}{c}{\textit{Juni}}      \\
           15               & 22                      &                       & 5. Abgabe                &                                         & 1  & 2   & 3  & \cellblue{4} & 5  & 6  \\

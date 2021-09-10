@@ -1,11 +1,15 @@
 % !TEX root = BA-Bericht.tex
 \chapter{Ideen und Konzepte}
+\label{ch:ideen_und_konzepte}
 
 Dieses Kapitel soll aufzeigen wie ein Teststand erstellt werden soll, um die Performance eines I2P-Testnetzwerkes unter verschiedenen Bedingungen und Umständen zu messen.
 
 Es wird ein Konzept für einen Teststand vorgestellt, der den Anforderungen (siehe Abschnitt~\fullref{sub:Anforderungen}) gerecht werden soll.
 
 Angefangen mit dem Abschnitt \ref{sec:grundidee} werden verschiedene Lösungsansätze für verschieden Aspekte vorgestellt.
+
+% Spiel zwischen Testen und Hypothesen anpassen
+
 
 \section{Grundidee}\label{sec:grundidee}
 % TODO Beschreibung wie das Problem im Ansatz gelöst werden soll
@@ -29,6 +33,12 @@ Angefangen mit dem Abschnitt \ref{sec:grundidee} werden verschiedene Lösungsans
 Grundsätzlich soll ein Teststand aufgebaut werden an dem empirische Performance Messungen an einem I2P-Testnetzwerk durchgeführt werden können \seereq{TINF}.
 Dabei gibt es verschiedene Herausforderungen und Aspekte die es zu beachten gilt.
 
+%TODO: Hyptohesen kann man testen, bestätigen, neue hyptothesen & und oder neue Tests
+%TODO: das empirische
+%TODO: hat nichts mit I2P
+
+%TODO: 2. isolieres netzwerk
+%TODO: 3. technologie ideen / Realisierungsvariianten
 
 \section{Reproduzierbarkeit}
 
@@ -58,6 +68,8 @@ Dies ist der Fall weil bei Containerlösungen (oder auch OS-Virtualisierung) im 
 
 \subsection{Tools}
 
+%TODO: Dies ist eine realisierungsfrage
+
 Es gibt verschiedene Tools für deployment von Netzwerken wie z.B. \lstinline|docker-compose|, \lstinline|kubernetes|, \lstinline|terraform|, oder auch \lstinline|nixops|.
 
 
@@ -77,8 +89,6 @@ Die meisten oben erwähnten Konfigurationsmöglichkeiten werden bereits durch ve
 
 \section{Latenzmessung}
 
-\subsection{Latenzmessung einer Nachricht}
-
 Um die Latenz oder Verzögerung einer Nachricht im Testnetzwerks zu messen \seereq{TLAT}, könnte man jeweils den Empfangs- sowie Sendezeitpunkt einer Nachricht speichern und voneinander subtrahieren.
 
 \begin{equation}
@@ -87,8 +97,11 @@ Um die Latenz oder Verzögerung einer Nachricht im Testnetzwerks zu messen \seer
 
 Jedoch muss so sichergestellt werden, dass die Uhrzeiten zwischen allen Knoten synchron ist.
 
+%TODO: grundlage für latenzmessung ist das der host nicht über 
 
 \section{Limitieren der Bandbreite}
+
+%TODO: in den Ausblick
 
 \lstinline|i2pd|
 erlaubt es die Bandbreite eines Knotens \seereq{TLIM} mittels der \lstinline|bandwidth| Konfigurationseinstellung \seereq{TCNF} zu limitieren.
@@ -102,6 +115,8 @@ erlaubt es die Bandbreite eines Knotens \seereq{TLIM} mittels der \lstinline|ban
 
 \section{Isolierung des Testnetzwerks}
 \label{sec:isolierung}
+
+% äussere einflüsse / idealisierte umgebung
 
 Das Diagramm~\fullref{fig:i2p-testnetwork} zeigt den Aufbau des Testnetzwerks auf. Das Testnetzwerk soll standardmässig weder mit dem Internet verbunden noch mit dem System des Testers, um äussere Einflüsse zu verringern und durch isolation bessere Reproduzierbarkeit zu erreichen.
 
@@ -123,6 +138,7 @@ In der \lstinline|i2pd| Konfiguration gibt es zusätzlich das \lstinline|familiy
 
 \section{Bootstrapping und Verbindungsgrad der Knoten}
 
+% TODO: in 3.2.1 Nötig weil isoliert
 Ganz zu Beginn, wenn ein Knoten dem I2P Netzwerk beitritt muss dieser Wissen wo mindestens ein anderer Knoten ist.
 Um die erste Liste von Knoten zu erhalten damit Knoten dem Netzwerk beitreten können, muss die liste von Knoten im Netzwerk zu beginn des Tests ''geseedet'' mit einer liste von Bekannten Knoten.
 
@@ -138,8 +154,11 @@ Um bessere empirische Aussagen machen zu können, sollte das Testnetzwerk so gut
 
 \section{Messen der Ressourcenauslastung der Knoten}
 
+%TODO: in kapitel latenz
+
 Die Messung der Ressourcenauslastung der Knoten könnte sinnvoll sein aus mehreren Gründen.
-Gerät ein Knoten oder die Hostsysteme für das Testnetzwerk in Ressourcenengpässe beeinflusst dies wahrscheinlich auch die Resultate.
+Gerät ein Knoten oder die Hostsysteme für das Testnetzwerk in Ressourcenengpässe beeinflusst dies auch die Resultate.
+Dies ist insbesondere wichtig enorm wichtig bei Latenzmessungen, denn diese werden somit Nutzlos.
 
 \begin{itemize}
     \item Somit kann sichergestellt werden, dass das Testnetzwerk nicht so gross skaliert wurde, bzw. wie weit es skaliert werden kann \seereq{TSCL}.

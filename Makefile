@@ -48,10 +48,10 @@ open:
 	evince ${FILE_NAME}.pdf &
 
 watch:
-	find . -iname '*.tex' -or -iname '*.csv' -or -iname '*.txt' -or -iname '*.md' -or -iname 'References.bib' | entr -a make -f Makefile
+	find . -iname '*.tex' -or -iname '*.csv' -or -iname '*.txt' -or -iname '*.md' -or -iname 'Referenzen.bib' -or -iname '*.png' | entr -a make -f Makefile
 
 open-pres:
 	open ${PRESENTATION_FILE_NAME}.pdf
 
 watch-pres:
-	find . -iname '*.tex' -or -iname '*.csv' -or -iname '*.txt' -or -iname '*.md' -or -iname 'References.bib' | entr -a make -f Makefile pres
+	find . -iname '*.tex' -or -iname '*.csv' -or -iname '*.txt' -or -iname '*.md' -or -iname 'Referenzen.bib' -or -iname '*.png' | entr -a make -f Makefile pres

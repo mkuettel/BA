@@ -8,14 +8,14 @@
 \newglossaryentry{refactoring}         { name={Refactoring},                   text={refactoring},            description={{
     ``The process of changing a software system in such a way that it does
         not alter the external behavior of the code yet improves its internal
-        structure'' ---\cite{Fowler2018}
+        structure'' ---\cite{fowler_refactoring_2018}
 }}}
 \newglossaryentry{ci}                  { name={Continuous Integration},        text={continuous integration}, description={{
     ``Continuous Integration is a software development practice where members
     of a team integrate their work frequently,                                 usually each person integrates
     at least daily - leading to multiple integrations per day. Each integration
     is verified by an automated build (including test) to detect integration
-    errors as quickly as possible.'' -- \cite{Fowler2014}
+    errors as quickly as possible.'' -- \cite{fowler_continuos_2014}
 }}}
 \newglossaryentry{pr}                  { name={Pull Request},                  text={pull request},           description={{
     Eine Funktion von Code-Hosting Plattformen und ein Prozess worin ein Entwickler einen andern anfragen kann ob er Änderungen in sein Software-Projekt aufnehmen will.
@@ -33,7 +33,12 @@
 \newglossaryentry{tor}                 { name={TOR},        text={The Onion Router},                          description={{
     Von Endgerät zu Endgerät verschlüsselt. Das heisst ein Man-in-the-Middle Angreifer könnte nur verschlüsselten Traffic mitlesen.
 }}}
-\newglossaryentry{i2p}                 { name={I2P},        text={The Invisible Internet Project},                          description={{
-        Dezentrales nachrichtenorientiertes Mischnetzwerk indem anonym verschlüsselte Nachrichten ausgetauscht werden können. \parencite[p.~1]
+\newglossaryentry{i2p}                 { name={I2P},        text={The Invisible Internet Protocol},                          description={{
+            Dezentrales nachrichtenorientiertes Mischnetzwerk indem anonym verschlüsselte Nachrichten ausgetauscht werden können \parencite[p.~1]{zantout_i2p_2011}. Die Abkürzung I2P wird auch als the Invisible Internet Project ausgelegt, um das gesamte Projekt nicht nur das Protokoll zu beschreiben.
+}}}
+\newglossaryentry{nixos-container}    { name={}, text={}, description={{{
+    Containertechnologie ähnlich wie docker.
+    Wichtig dabei ist, dass es sich hierbei nicht um einen Docker-Container, sondern um NixOS-Container handelt technologie handelt, welche auf systemd-nspawn Containern basiert..
+    Im Hintergrund brauchen jedoch beide Container-Arten die gleichen Linux-Kernel-Features (namespaces, cgroups, ... ).
 }}}
 % TODO: add vm / container here?

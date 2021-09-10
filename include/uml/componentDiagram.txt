@@ -2,14 +2,14 @@
 vim: syntax=plantuml
 '/
 @startuml
-skinparam dpi 300
-skinparam scale 5/5
+skinparam dpi 200
+skinparam scale 27/21
 skinparam defaultFontName "Arial"
 
-skinparam nodesep 25
-skinparam ranksep 15
-skinparam BoxPadding 8
-skinparam Padding 8
+skinparam ranksep 5
+skinparam nodesep 40
+skinparam padding 8
+
 
 skinparam component {
     BackgroundColor Orange
@@ -26,20 +26,24 @@ skinparam component {
 
 
 
-frame "Tester" as tester {
+frame "Deployment" as deployment {
   database deployconfig as "**Deployment Konfiguration**"
 
-  [nixops] .left.> testhost : erstellt
+  [nixops]
+
+  testhost <.right. [nixops] : erstellt
   [nixops] .right.> deployconfig : verwendet
 }
 
 
 
-frame "Testhost VM" as testhost {
+frame "Test-VM" as testhost {
   database testconfig as "
-    **Konfiguration**
+    **Testkonfiguration**
     ===
-    - Testkonfiguration
+
+    - Einstellungen fürs Testnetzwerk
+    - Einstellungen für die Messung
     - I2Pd-Konfigurationsdateien
     - Server-Tunnel Konfiguration
   "
@@ -51,6 +55,7 @@ frame "Testhost VM" as testhost {
     database shared_volumes as "
     **Shared Volumes**
     ===
+
     **reseed-netdb**:
     Router-Infos zum
     Bootstrapping
@@ -70,10 +75,11 @@ frame "Testhost VM" as testhost {
     dockerd ..> shared_volumes : erzeugt
   }
 
-  package "Messen" {
+  package "Messanlage" {
     database messresultate as "
     **Messresultate**
     ===
+
     Container Ausgaben
     Nachrichten-Logs
     Ressourcenauslastung
@@ -108,7 +114,6 @@ frame "Testhost VM" as testhost {
 
 
 }
-
 
 
 frame "I2P-Testnetzwerk" as container {
