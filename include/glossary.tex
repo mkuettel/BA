@@ -10,7 +10,7 @@
         not alter the external behavior of the code yet improves its internal
         structure'' ---\cite{fowler_refactoring_2018}
 }}}
-\newglossaryentry{ci}                  { name={Continuous Integration},        text={continuous integration}, description={{
+\newglossaryentry{ci}                  { name={CI},        text={Continuous Integration}, description={{
     ``Continuous Integration is a software development practice where members
     of a team integrate their work frequently,                                 usually each person integrates
     at least daily - leading to multiple integrations per day. Each integration
@@ -36,9 +36,12 @@
 \newglossaryentry{i2p}                 { name={I2P},        text={The Invisible Internet Protocol},                          description={{
             Dezentrales nachrichtenorientiertes Mischnetzwerk indem anonym verschlüsselte Nachrichten ausgetauscht werden können \parencite[p.~1]{zantout_i2p_2011}. Die Abkürzung I2P wird auch als the Invisible Internet Project ausgelegt, um das gesamte Projekt nicht nur das Protokoll zu beschreiben.
 }}}
-\newglossaryentry{nixos-container}    { name={}, text={}, description={{{
+\newglossaryentry{iac}                { name={IaC}, text={Infrastructure as Code}, description={{
+    Das Verwalten und Bereitstellen von Infrastruktur wie Netzwerke, Dienste physische und virtuelle Maschinen unter Verwendung von maschinenlesbaren Definitionen oder Programmcode.
+    Somit kann die Infrastruktur automatisiert aufgebaut werden und Versionierungssysteme können einfach eingesetzt werden.
+}}}
+\newglossaryentry{nixos-container}    { name={nixos-container}, text={NixOS Container}, description={{
     Containertechnologie ähnlich wie docker.
     Wichtig dabei ist, dass es sich hierbei nicht um einen Docker-Container, sondern um NixOS-Container handelt technologie handelt, welche auf systemd-nspawn Containern basiert..
     Im Hintergrund brauchen jedoch beide Container-Arten die gleichen Linux-Kernel-Features (namespaces, cgroups, ... ).
 }}}
-% TODO: add vm / container here?

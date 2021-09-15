@@ -7,8 +7,8 @@
 % angehen? Wodurch unterscheidet sich Ihre Lösung von anderen Lösungen? Für wissenschaftlich
 % orientierte Arbeiten sei hier explizit auf (Balzert, S. 66 ff) verwiesen.
 
-Dieses Kapitel zeigt nun der Stand der Technik der ermittelt wurde aufgrund der Zielsetzungen und Fragestellung.
-Dies beinhaltet die Resultate der Recherche, sowie ein Beschrieb der Technologien auf dem diese Arbeit aufbaut.
+Dieses Kapitel zeigt den aufgrund der Zielsetzung und Fragestellung ermittelten Stand der Technik auf.
+Dies beinhaltet die Resultate der Recherche, sowie ein Beschrieb der Technologien auf welchen diese Arbeit aufbaut.
 Im ersten Abschnitt~\fullref{sec:techintro} gibt es einen Einstieg in Anonymisierungsnetzwerke und die Begrifflichkeiten allgemein.
 Im Abschnitt~\fullref{sec:technischeKonzepte} wird genauer auf die Technologie von I2P eingegangen.
 Darin werden relevante Konzepte erklärt und ins Technische Detail eingegangen.
@@ -85,16 +85,16 @@ Auch gibt es die Möglichkeit mehr Anonymität zu schaffen indem der Netzwerkver
 
 Umgekehrt könnte ein Anonymisierungsnetzwerk auf Kosten der Latenz implementiert werden. Wenn Nachrichten über mehrere Netzwerkknoten geleitet werden, könnte man Empfänger und Sender verschleiern.
 Jedoch hätte dies höhere Latenzzeiten zur Folge, da dieselbe Nachricht mehrmals nacheinander von verschiedenen Netzwerkknoten bearbeitet werden muss.
-Zusätzlich könnte bei diesem Anstatz ein Netzwerkknoten extra ein Netzwerkpaket zwischenspeichern und Zeitverzögert weiterschicken.
+Zusätzlich könnte bei diesem Ansatz ein Netzwerkknoten extra ein Netzwerkpaket zwischenspeichern und zeitverzögert weiterschicken.
 Dies würde das Anonymisierungsnetzwerk noch besser gegen timing-basierte Deanonymisierungsangriffe und Korrelation von Netzwerkverkehr schützen.
 Letzteres gibt es Netzwerke bei welchen Anonymität keine Rolle spielt, wie beispielsweise beim üblichen UDP Protokoll. Es ist dann möglich hohe Bandbreite sowie niedrige Latenzzeiten zu erreichen.
 
 Es gilt abzuwägen, welche der Aspekte für das zu designende Protokoll wichtig sind.
 Wo wird ein Schwerpunkt gelegt und welche Aspekte somit auch vernachlässigt werden, um einen guten Kompromiss zu finden. \parencite{das_anonymity_2018}
 
-\subsection{\glstext{i2p} (\glsname{i2p})}
+\subsection{The Invisible Internet Protocol (\glsname{i2p}) }
 
-Kurz gesagt ist \glstext{i2p} (\glsname{i2p}) ein dezentrales Mischnetzwerk mit niedriger Latenz indem verschlüsselte Nachrichten ausgetauscht werden können.
+Kurz gesagt ist \glstext{i2p} (\glsname{i2p}) ein dezentrales Mischnetzwerk indem verschlüsselte Nachrichten ausgetauscht werden können.
 \parencite{zantout_i2p_2011}
 Es handelt sich hier um ein eigenständiges Overlay-Netzwerk, welches auf den darunterliegenden Protokollen UDP und TCP aufbaut.  \parencite{de_boer_invisible_2019,astolfi_i2p_2015}.
 Mit einem Mischnetzwerk ist gemeint, dass Nachrichten an durch Knoten des Netzwerks weitergeleitet werden, um den Sender und den Empfänger einer Nachricht zu verschleiern. Dieser Mischvorgang wird bei I2P Garlic-Routing genannt.
@@ -139,6 +139,20 @@ Es gibt zwei verschiedene Implementationen von I2P-Router-Software, welche auch 
 Der ursprüngliche Implementation des I2P-Router wurde in Java Implementiert.
 In dieser Arbeit wird jedoch lediglich die später entwickelte und schlankere C++-Implementation auch genannt \lstinline|i2pd| (Invisible Internet Protocol Daemon) untersucht. (\cite{noauthor_i})
 
+\subsection{Destinations}
+
+Ein I2P-Router kann eine beliebige Anzahl an Destinations (Zielorten) im I2P-Netzwerk zur Verfügung stellen.
+Eine Destination hat immer mindestens eine Adresse, mit welcher andere Netzwerkteilnehmer einen Service erreichen können.
+Wurde eine Destination mit einem Service definiert, erstellt der I2P-Router beim Aufstarten ein Schlüsselpaar.
+Dieses wird für die Verschlüsselte Kommunikation mit dem Service benötigt.
+Zudem wird aus dem Public-Key immer auch eine netzwerkinterne Adresse für den Service abgeleitet.
+Diese Adresse nennt sich eine b32-Addresse.
+Dies ist eine 52-Zeichen-lange aus Kleinbuchstaben und Zahlen bestehender Name.
+Zudem hat diese die Endung \lstinline|.b32.i2p| damit klar ist, dass dieser Name innerhalb des Overlay-Netzwerks aufgelöst werden muss.
+Eine b32-Adresse sieht also zum Beispiel so aus:
+
+\lstinline|b2cdodoyqg5v6go56bkaevvw777e2wyiflqh6zyyyxugy4cqlzuq.b32.i2p|.
+
 \subsection{Tunnels}
 
 Wenn man im Bereich vom Netzwerken über Tunneling-Redet geht es immer darum ein Kommunikationsprotokoll in ein anderes einzubetten. \parencite{noauthor_duden_nodate}
@@ -171,13 +185,8 @@ um weitere Teilnehmer oder Peers zu finden, mit welchen dann Tunnels aufgebaut w
 
 \subsubsection{Client-Tunnels}
 
-Client-Tunnels werden benötigt Services innerhalb des I2P-Netzwerk anzubieten.
-Für jedes Client-Tunnel gibt kann es eines oder mehrere LeaseSets geben.
-Client-Tunnels haben jeweils immer eine Destination.
-Diese Destination ist innerhalb des I2P-Netzwerks ansprechbar mit einer netzwerkinternen b32-Adresse. 
-Diese Adresse wird abgeleitet vom Public-Key der generierten Destination.
-Diese ist eine 52-Zeichen-lange aus Kleinbuchstaben und Zahlen bestehender Name um eine Destination zu adressieren. (z.b. \lstinline|b2cdodoyqg5v6go56bkaevvw777e2wyiflqh6zyyyxugy4cqlzuq.b32.i2p|)
-Zudem hat diese die Endung \lstinline|.b32.i2p| damit klar ist, das dieser Name innerhalb des Overlay-Netzwerks aufgelöst werden muss.
+Client-Tunnels werden benötigt, um die Services welche durch die Destinations Adressierbar werden effektiv innerhalb des I2P-Netzwerk anzubieten.
+Um nun Services auf im I2P-Netzwerk zur Verfügung zu stellen wird ein Client-Tunnels und die dazugehörige Destination benötigt.
 
 \subsubsection{Länge der Tunnels}
 
@@ -221,17 +230,18 @@ Mit Hilfe des öffentlichen Schlüssels kann die Anfrage zur Tunnelerstellung au
 
 Es gilt zu erwähnen, die öffentlichen IP-Adresse eines I2P-Knotens somit nicht geheim sind.
 Jeder der einen Knoten betreibt, oder einfach nur die NetDb eines Floodfill-Routers abfragt, kann somit die öffentliche IP-Adressen von I2P-Knoten ausfindig machen.
-I2P mit der Absicht den Fakt zu verschleiern, dass I2P eingesetzt wird. Es wurde designt wurde das Teilnnehmer Nachrichten innerhalb des Netzwerks austauschen 
+I2P mit der Absicht den Fakt zu verschleiern, dass I2P eingesetzt wird. Es wurde designt wurde das Teilnehmer Nachrichten innerhalb des Netzwerks austauschen 
 
 Ein Beobachter kann also herausfinden, ob ein Rechner am I2P-Netzwerk beteiligt ist, kann jedoch nicht aussagen, ob eine Nachricht für den Knoten bestimmt ist, ob er eine Nachricht versendet, oder ob er diese lediglich weiterleitet.
 
-\subsubsection{LeaseSet's und Destinations}
+\subsubsection{LeaseSet's}
 
-Um nun Services auf im I2P-Netzwerk zur Verfügung zu stellen wird ein Client-Tunnels und die dazugehörige Destination benötigt.
 Ein LeaseSet ist eine Sammlung von Tunnel-Eingangspunkten (auch Leases genannt) für eine bestimmte Destination.
 Wenn nun ein I2P-Router auf einen bestimmten Service oder Destination zugreifen will, weiss dieser nach dem Abfragen der NetDB anhand eines LeaseSets
 wo die richtigen Tunnel-Eingangspunkte sind.
 LeaseSets werden also benötigt um ein Inbound- und Outbound-Tunnel miteinander zu verbinden.
+
+Für jedes Client-Tunnel gibt kann es eines oder mehrere LeaseSets geben.
 
 \subsection{Floodfill-Router}
 
@@ -244,7 +254,7 @@ Denn Router welche genug Bandbreite zur Verfügung haben, sollten sich automatis
 Dies konnte jedoch nicht bei der i2pd-Implementierung beobachtet werden.
 Ein Router kann aber auch vom Administrator kann ein manuell als Floodfill-Router konfiguriert werden.
 \parencite[S.~5-6]{timpanaro_monitoring_nodate}
-$% TODO: check reference
+% TODO: check reference
 
 \subsection{Peer-Profiling, Selektion und Tunnel-Erstellung}\label{sec:tunnelerstellung}
 
@@ -310,27 +320,27 @@ Latency vs Tor Usability Bandwitdh and Latency Comparision
 \cite{ehlert_i2p_2011}
 
 
-\subsection{Metriken zur Messung}
-
-Während es öffentlich zugängliche Metriken gibt über die 
-
-\begin{itemize}
-    \item Latenzmessung (abschicken/empfangen (Laport-Zeitstempel im schlimmsten fall))
-    \item Messung der Bandbreite (ab welchem Layer)
-    \item Ressourcenauslastung
-\end{itemize}
-
-Towards Measuring on the I2P Netzwerk
-\cite{wang_towards_2013}
-
-
-Es sind auch diverse Metriken über das öffentliche \glsname{i2p}-Netzwerk verfügbar auf
-Im öffentlichen \glsname{i2p} Es werden bereits verschiedene Dinge gemessen anhand der Floodfill router.
-
-Jedoch ist dies in einem öffentlichen Netzwerk und die Messungen sind somit nicht isoliert und empirisch.
-
-
-\cite{timpanaro_monitoring_nodate}
+% \subsection{Metriken zur Messung}
+%
+% Während es öffentlich zugängliche Metriken gibt über die 
+%
+% \begin{itemize}
+%     \item Latenzmessung (abschicken/empfangen (Laport-Zeitstempel im schlimmsten fall))
+%     \item Messung der Bandbreite (ab welchem Layer)
+%     \item Ressourcenauslastung
+% \end{itemize}
+%
+% Towards Measuring on the I2P Netzwerk
+% \cite{wang_towards_2013}
+%
+%
+% Es sind auch diverse Metriken über das öffentliche \glsname{i2p}-Netzwerk verfügbar auf
+% Im öffentlichen \glsname{i2p} Es werden bereits verschiedene Dinge gemessen anhand der Floodfill router.
+%
+% Jedoch ist dies in einem öffentlichen Netzwerk und die Messungen sind somit nicht isoliert und empirisch.
+%
+%
+% \cite{timpanaro_monitoring_nodate}
 
 % \subsection{Testen im öffentlichen I2P Netzwerk}
 %
@@ -344,15 +354,13 @@ Jedoch ist dies in einem öffentlichen Netzwerk und die Messungen sind somit nic
 %
 % \cite{timpanaro_monitoring_nodate}
 
-\subsection{I2P-Testnetzwerke}
+\subsection{I2P-Testnetzwerke und Bootstrapping}
 
 Eine Recherche hat ergeben, das bereits Testnetzwerke erstellt wurden.
 
 Testnetzwerk mit 128 Knoten 
 \cite{noauthor_how_2018}
 \parencite[S. 25-26]{muller_analysis_2016}
-
-\subsection{Bootstrapping und Reseed-Servers}
 
 Es wird Bootstrapping-Prozess benötigt, dass sich die I2P-Router sich anfangs Gegenseitig im privaten und abgeschotteten Testnetzwerk überhaupt finden können.
 Erst anschliessend ist es möglich Tunnels aufzubauen, damit die I2P-Router miteinander kommunizieren können.
@@ -374,24 +382,13 @@ Evaluation of Anonymity Networks
 (\cite{timpanaro_evaluation_2015})
 
 \subsection{Funktionsweise der DIVA.EXCHANGE Blockchain}\label{sec:divaxblockchain}
-%
-% %TODO: weg oder nach oben
 
-\begin{itemize}
-    \item Volle oder nicht volle Knoten
-    \item alles auf der blockchain ist öffentlich () Side chain die privacy issues lösen soll \parencite[S. 8-9]{parizi_integrating_2019})
-\end{itemize}
-
-%
-Zu beginn des Projekts hat das DIVA.EXCHANGE Projekt die Iroha Blockchain von Hyperledger untersucht.
-Jedoch wurde im Verlauf des Projekts auf eine eigen entwickelte Blockchain der Kompanyo AG eingesetzt.
-Basierend auf für Byzantischinischen Konsensusalgorithmus.
-Kurz zusammengefasst stimmen dabei die einzelnen Knoten über neue Blöcke die zur Blockchain hinzugefügt werden sollen ab.
-Stimmen mehr als $2/3$ der Knoten diesem neuen Block zu, so wird dieser angenommen.
-
-Damit dies funktioniert, müssen die Knoten die neuen Blöcke auch untereinander austauschen.
+Der Verein DIVA.EXCHANGE entwickelt ihre eigene Blockchain namens \lstinline|divachain|.
+Diese basiert auf dem byzantinischer Konsensusalgorithmus und es handelt sich hier somit um eine Proof-of-Stake basierende Blockchain.
+Kurz zusammengefasst stimmen beim byzantinischen Konsensusalgorithmus die einzelnen Knoten über neue Blöcke die zur Blockchain hinzugefügt werden sollen ab.
+Stimmen mehr als $2/3$ der Knoten diesem neuen Block zu, so wird dieser im Netzwerk angenommen.
+Damit dies funktioniert, müssen die Divachain-Knoten die neuen Blöcke auch untereinander austauschen.
 Jedoch müssen die einzelnen Knoten die Blöcke auch untereinander austauschen.
-
-Die maximale Blockgrösse beträgt 64KB (Kilobytes).
-%
+Um die Privatsphäre der Benutzer zu schützen, wird I2P als Netzwerkschicht verwendet.
+Dabei gilt es zu beachten, dass jeder Divachain-Knoten somit auch ein I2P-Knoten ist, aber viele andere I2P-Knoten nicht die Divachain-Software nicht betreiben. 
 

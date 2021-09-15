@@ -111,35 +111,6 @@
 \newcommand\YAMLcolonstyle{\color{red}\mdseries}
 \newcommand\YAMLkeystyle{\color{black}\bfseries}
 \newcommand\YAMLvaluestyle{\color{blue}\mdseries}
-% \makeatletter
-% here is a macro expanding to the name of the language
-% (handy if you decide to change it further down the road)
-\newcommand\language@yaml{yaml}
-\expandafter\expandafter\expandafter\lstdefinelanguage
-\expandafter{\language@yaml}
-{
-  keywords={true,false,null,y,n},
-  keywordstyle=\color{darkgray}\bfseries,
-  basicstyle=\YAMLkeystyle,                                 % assuming a key comes first
-  sensitive=false,
-  comment=[l]{\#},
-  morecomment=[s]{/*}{*/},
-  commentstyle=\color{purple}\ttfamily,
-  stringstyle=\YAMLvaluestyle\ttfamily,
-  moredelim=[l][\color{orange}]{\&},
-  moredelim=[l][\color{magenta}]{*},
-  moredelim=**[il][\YAMLcolonstyle{:}\YAMLvaluestyle]{:},   % switch to value style at :
-  morestring=[b]',
-  morestring=[b]",
-  literate =    {---}{{\ProcessThreeDashes}}3
-                {>}{{\textcolor{red}\textgreater}}1     
-                {|}{{\textcolor{red}\textbar}}1 
-                {\ -\ }{{\mdseries\ -\ }}3,
-}
-% switch to key style at EOL
-\lst@AddToHook{EveryLine}{\ifx\lst@language\language@yaml\YAMLkeystyle\fi}
-\makeatother
-\newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
 
 % Hypothesen
 \usepackage{ntheorem}
@@ -157,7 +128,7 @@
 }
 
 % shortcut to create refrences
-\newcommand*{\fullref}[1]{\hyperref[{#1}]{\ref*{#1}~``\nameref*{#1}''}}
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\ref*{#1} ``\nameref*{#1}''}}
 \newcommand*{\reqref}[1]{\hyperref[{req:#1}]{\ref{req:#1}-#1}}
 \newcommand*{\seereq}[1]{(siehe Anforderung \reqref{#1})}
 \newcommand*{\rid}[1]{\label{req:#1}-#1}
@@ -258,7 +229,28 @@
 
 
 \begin{abstract}
-	% TODO Abstract schreiben =)
+
+
+Der Verein DIVA.EXCHANGE entwickelt einen Software-Prototypen für eine Handelsplattform, um digitale Werte auszutauschen.
+Die Handelsplattform soll vollkommen verteilt sein und es sollen
+digitale Werte ausgetauscht werden können, ohne sich kennen oder vertrauen zu müssen.
+Um dies umzusetzen, wurde auf das Anonymisierungsnetzwerk ``Invisible Internet Protocol'' (I2P) als Grundstein auf der Netzwerkebene gesetzt.
+Jedoch hat die Anonymität, Privatsphäre und Sicherheit, die durch I2P geboten wird, ihren Preis: Performanz.
+In dieser Arbeit soll empirisch untersucht werden, unter welchen Umständen sich die Performanz des I2P-Netzwerks verbessert.
+Insbesondere wurden die Latenzzeiten von TCP-Nachrichten untersucht.
+
+Damit die Performance-Messungen empirisch durchgeführt werden konnten, wurde ein Teststand an dem Experimente durchgeführt wurden.
+In einem privaten I2P-Netzwerk konnten Latenzmessungen ohne äussere Einflüsse durchgeführt werden.
+Damit konnte ein Testnetzwerk bestehend aus bis zu 256 I2P-Knoten erstellt werden.
+Somit konnten Latenzmessungen durchgeführt werden, welche aufgezeigt haben,
+das sich entgegen unserer Erwartungen die Latenz bei einem grösseren Netzwerk nicht unbedingt verbessert.
+Die genauen Gründe sind jedoch unklar.
+
+Die gewonnenen Resulate dienen jedoch als Grundlage und Referenz für zukünftige Messungen und Experimente.
+Anhand des entwickelten Teststands können nun weitere Messungen getätigt und miteinander verglichen werden.
+Grundsätzlich können so auch verschiedene I2P-Konfigurationen miteinander verglichen werden.
+Es sind aber in Zukunft auch Tests mit anderen Protokollen oder Nachrichtentypen möglich.
+
 \end{abstract}
 
 \tableofcontents

@@ -2,11 +2,13 @@
 \chapter{Ideen und Konzepte}
 \label{ch:ideen_und_konzepte}
 
-Dieses Kapitel soll aufzeigen wie ein Teststand erstellt werden soll, um die Performance eines I2P-Testnetzwerkes unter verschiedenen Bedingungen und Umständen zu messen.
+Dieses Kapitel soll Ideen aufzeigen, wie die Fragestellung gelöst werden soll.
+
+ein Teststand erstellt werden soll, um die Performance eines I2P-Testnetzwerkes unter verschiedenen Bedingungen und Umständen zu messen.
 
 Es wird ein Konzept für einen Teststand vorgestellt, der den Anforderungen (siehe Abschnitt~\fullref{sub:Anforderungen}) gerecht werden soll.
 
-Angefangen mit dem Abschnitt \ref{sec:grundidee} werden verschiedene Lösungsansätze für verschieden Aspekte vorgestellt.
+Angefangen mit dem Abschnitt \ref{sec:grundidee} werden verschiedene Lösungsansätze für verschiedene Aspekte vorgestellt.
 
 % Spiel zwischen Testen und Hypothesen anpassen
 
@@ -32,6 +34,7 @@ Angefangen mit dem Abschnitt \ref{sec:grundidee} werden verschiedene Lösungsans
 
 Grundsätzlich soll ein Teststand aufgebaut werden an dem empirische Performance Messungen an einem I2P-Testnetzwerk durchgeführt werden können \seereq{TINF}.
 Dabei gibt es verschiedene Herausforderungen und Aspekte die es zu beachten gilt.
+In den folgenden Abschnitten werden nun Ideen vorgestellt und genauer erläutert, wie diese Herausforderungen angegangen werden.
 
 %TODO: Hyptohesen kann man testen, bestätigen, neue hyptothesen & und oder neue Tests
 %TODO: das empirische
@@ -42,22 +45,18 @@ Dabei gibt es verschiedene Herausforderungen und Aspekte die es zu beachten gilt
 
 \section{Reproduzierbarkeit}
 
-Um ein Test auf einem solchen Testnetzwerk wiederholbar und reproduzierbar zu machen gibt es folgendes zu beachten \seereq{TREP}.
+Um Messungen auf einem solchen Testnetzwerk wiederholbar und reproduzierbarer zu machen \seereq{TREP}, sind folgende zwei Ideen wichtig.
+Als erstes soll das Testnetzwerk sisoliert werden, um äussere Einflüsse durch das Netzwerk (auch das öffentliche I2P-Netzwerk) zu vermeiden (siehe auch Abschnitt~\ref{sec:isolierung}).
+Zweiteres soll die Testinfrastruktur als Programmcode beschrieben werden (auch bekannt als \glstext{iac} (\glsname{iac})).
+Somit kann dasselbe Testnetzwerk später wieder erneut wieder aufgebaut werden, anhand der versionierten Infrastrukturdefinition.
+Mehr dazu im Abschnitt~\ref{sec:infrastructure}.
 
-\begin{itemize}
-    \item Das Testnetzwerk soll isoliert werden, um äussere Einflüsse durch das Netzwerk (auch das offizielle I2P-Netzwerk) zu vermeiden (siehe auch Abschnitt~\ref{sec:isolierung}).
-    \item Infrastructure as Code: Ist die Testinfrastruktur als Programmcode beschrieben, kann dieser zu einem späteren Zeitpunkt wieder ausgeführt werden, um das Testnetzwerk wieder zu erstellen. Mehr dazu im Abschnitt~\ref{sec:deployment}.
-    \item Reproduzierbarer Build von \lstinline|i2pd| und der Software auf einem Knoten
-\end{itemize}
+\section{Infrastruktur}\label{sec:infrastructure}
 
-
-\section{Deployment}\label{sec:deployment}
-
-Wichtig für das Deployment ist das schnell neue Tests gestartet und neue Testnetzwerke erstellt werden \seereq{TPER}.
-Und dies mit verschiedenen Konfigurationen \seereq{TCNF}.
+Wichtig für das Deployment der Infrastruktur für das Testnetzwerk ist, dass man schnell neue Messungen starten und neue Testnetzwerke erstellen kann \seereq{TPER}.
+Und dies mit verschiedenen Konfigurationseinstellungen \seereq{TCNF}.
 Die im Vorherigen Abschnitt bereits erwähnt soll das Deployment auch reproduzierbar sein \seereq{TREP}.
 Es soll auch möglich sein verschieden grosse Testnetzwerke zu erstellen \seereq{TSCL}.
-
 
 \subsection{Container oder Virtuelle Maschinen}
 
@@ -66,7 +65,7 @@ Container erlauben es schneller tests durchzuführen \seereq{TPER} aufgrund der 
 aber auch Tests mit mehr Knoten zu machen, da weniger Ressourcen für einen einzelnen Knoten benötigt wird, da der Betriebssystemkernel geteilt wird.
 Dies ist der Fall weil bei Containerlösungen (oder auch OS-Virtualisierung) im Gegensatz zu Virtuellen Maschinen der Betriebssystemkernel zwischen den Instanzen geteilt wird.
 
-\subsection{Tools}
+\subsection{Deployment}
 
 %TODO: Dies ist eine realisierungsfrage
 
@@ -84,7 +83,7 @@ Folgendes soll im Teststand konfigurierbar sein (\reqref{TCNF}):
     \item In welchem Netzwerk (familiy netzwerk/öffentliches Netzwerk) (für Vergleich/optional)
 \end{itemize}
 
-Nix als konfigurationssprache würde es erlauben beliebige aspekte des Setups konfigurierbar zu machen.
+Nix als deklarative Konfigurationssprache würde es erlauben beliebige Aspekte des Setups konfigurierbar zu machen.
 Die meisten oben erwähnten Konfigurationsmöglichkeiten werden bereits durch verschiedene NixOS-Module (\lstinline|i2pd|, \lstinline|firewall|, ... ) angeboten.
 
 \section{Latenzmessung}
@@ -158,11 +157,11 @@ Um bessere empirische Aussagen machen zu können, sollte das Testnetzwerk so gut
 
 Die Messung der Ressourcenauslastung der Knoten könnte sinnvoll sein aus mehreren Gründen.
 Gerät ein Knoten oder die Hostsysteme für das Testnetzwerk in Ressourcenengpässe beeinflusst dies auch die Resultate.
-Dies ist insbesondere wichtig enorm wichtig bei Latenzmessungen, denn diese werden somit Nutzlos.
+Dies ist insbesondere wichtig enorm wichtig bei Latenzmessungen, denn diese werden somit nutzlos.
 
 \begin{itemize}
     \item Somit kann sichergestellt werden, dass das Testnetzwerk nicht so gross skaliert wurde, bzw. wie weit es skaliert werden kann \seereq{TSCL}.
-    \item Um sicherzustellen das ein Flaschenhals im Netzwerk nicht durch zu wenig Ressourcen verursacht sind \seereq{TPER}.
+    \item Um sicherzustellen, dass ein Flaschenhals im Netzwerk nicht durch zu wenig Ressourcen verursacht sind \seereq{TPER}.
     \item Äussere einflüsse wie Ressource-Exhaustion vermeiden, dies verbessert auch die Reproduzierbarkeit \seereq{TREP}.
     \item Messung der Test-Performance
 \end{itemize}
@@ -176,3 +175,7 @@ Gemessen werden sollte:
     \item Disk I/O (read/write, kbits/sec)
     \item Freier Speicherplatz
 \end{itemize}
+
+
+Es wird erwartet, dass der Workload von I2P vorallem Netzwerklastig (weiterleiten über mehrere Knoten) und Prozessorlastig (Verschlüsselung) ist.
+Zudem wird nicht wenig Arbeitsspeicher verwendet, um die benötigte Anzahl Knoten zu betreiben.
