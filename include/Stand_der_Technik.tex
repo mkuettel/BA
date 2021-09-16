@@ -9,9 +9,9 @@
 
 Dieses Kapitel zeigt den aufgrund der Zielsetzung und Fragestellung ermittelten Stand der Technik auf.
 Dies beinhaltet die Resultate der Recherche, sowie ein Beschrieb der Technologien auf welchen diese Arbeit aufbaut.
-Im ersten Abschnitt~\fullref{sec:techintro} gibt es einen Einstieg in Anonymisierungsnetzwerke und die Begrifflichkeiten allgemein.
-Im Abschnitt~\fullref{sec:technischeKonzepte} wird genauer auf die Technologie von I2P eingegangen.
-Darin werden relevante Konzepte erklärt und ins Technische Detail eingegangen.
+Im ersten Abschnitt~\fullref{sec:techintro} gibt es einen Einstieg in Anonymisierungsnetzwerke, wobei die Begrifflichkeiten Privatsphäre und Anonymität erklärt werden sowie grundsätzliche Einschränkungen von Anonymisierungsnetzwerken erläutert werden..
+Im zweiten Abschnitt~\fullref{sec:technischeKonzepte} wird genauer auf die Technologie von I2P eingegangen.
+Darin wird die funktionsweise von I2P genauer erläutert relevante technische Konzepte erklärt.
 
 \section{Einführung in die Technologie}\label{sec:techintro}
 % TODO Wichtige technologischen Grundlagen / Wissenswertes
@@ -27,42 +27,41 @@ Im DIVA.EXCHANGE Netzwerk sollen digitale Güter austauscht werden können.
 Dies ohne sich gegenseitig zu kennen und ohne sich gegenseitig vertrauen zu müssen.
 Das heisst in Folge, dass sowohl die Anonymität sowie die Privatsphäre der Benutzer gewährleistet werden muss.
 Anonymität und Privatsphäre ist jedoch nicht das gleiche. Im weiteren werden diese beiden Begriffe differenziert und verglichen.
-Diese Thematik wurde bereits in einer vorherigen Arbeit (siehe \cite[S. 8-9]{maric_untersuchung_2020}) mit DIVA.EXCHANGE behandelt,
+Diese Thematik wurde bereits in einer vorherigen Arbeit (siehe \cite[S. 9]{maric_untersuchung_2020}) mit DIVA.EXCHANGE behandelt,
 wobei bereits eine Definition von Privatsphäre und Anonymität erarbeitet wurde.
 
-Komplette Anonymität wäre dann erreicht, wenn nicht auf die wahre Identität eines Benutzers geschlossen werden kann.
+Komplette Anonymität ist dann erreicht, wenn nicht auf die wahre Identität eines Benutzers geschlossen werden kann.
 Das heisst es fehlen jegliche Identitätsmerkmale die einen Hinweis auf die reale Person geben würden.
 Anonymität ist jedoch auch ein Spektrum.
-Ein Internetbenutzer kann z.B. teilweise anonym sein, indem ein Pseudonym wie einen Benutzername verwendet wird.
+Ein Internetbenutzer kann zum Beispiel teilweise anonym sein, indem er ein Pseudonym wie einen Benutzername verwendet.
 Dabei handelt es sich bei einem Benutzernamen auch um ein Identitätsmerkmal.
-Wenn dieses Pseudonym jedoch mit Identitätsmerkmalen der richtigen echten Person in Zusammenhang gebracht werden würde,
-wäre die Anonymität wiederum verloren.
+Wenn dieses Pseudonym jedoch mit Identitätsmerkmalen der richtigen echten Person in Zusammenhang gebracht wird,
+ist die Anonymität wiederum verloren. \parencite[S. 8-9]{maric_untersuchung_2020}
 
 Mit Hilfe von Anonymität kann auch die Privatsphäre geschützt werden.
 Anonymität ist jedoch auch nicht zwingend notwendig, um die Privatsphäre der Benutzer oder den Datenschutz zu gewährleisten.
-Einfache Privatsphäre kann z.B. nur schon unter Verwendung von Verschlüsselung erreicht werden.
+Privatsphäre kann zum Beispiel nur schon durch Verwendung von Verschlüsselung erreicht werden.
 Auch kann die Anonymität sogar verloren gehen, versucht man die Privatsphäre zu schützen.
 Dies zum Beispiel wenn Verschlüsselung mit einer Signatur verwendet wird welche auf die wahre Identität eines Benutzers zurückschliessen lässt.
-Anonymität kann durch Verschlüsselung, sowie auch das weiterleiten oder durchmischen von Nachrichten erreicht werden.
-
+Anonymität kann durch Verschlüsselung, sowie auch durch Weiterleiten oder Durchmischen von Nachrichten erreicht werden.
 
 \subsection{Anonymisierungs-Netzwerke}
 
-Es gibt eine vielzahl an verschiedenen Anonymisierungsnetzwerken.
+Es gibt eine Vielzahl an verschiedenen Anonymisierungsnetzwerken.
 Wobei \glstext{tor} (\glsname{tor}) wahrscheinlich das Bekannteste und meist Genutzte ist.
-In einer vorherigen Arbeit wurde I2P mit TOR verglichen und es wurde festgestellt, dass I2P die Voraussetzungen für Privatsphäre und Anonymität des Software-Prototypen von DIVA.EXCHANGE \parencite[S~.28-30]{maric_untersuchung_2020} erfüllt.
+In einer vorherigen Arbeit wurde I2P mit TOR verglichen und es wurde festgestellt, dass I2P die Voraussetzungen für Privatsphäre und Anonymität des Software-Prototypen von DIVA.EXCHANGE \parencite[S.~28-30]{maric_untersuchung_2020} erfüllt.
 Deshalb wird I2P nun als Grundstein für das Netzwerklayer von DIVA.EXCHANGE eingesetzt.
 Somit wird in dieser Arbeit lediglich das Anonymisierungsnetzwerk \glsname{i2p} behandelt und nicht weiter auf andere Anonymisierungsnetzwerke eingegangen.
 
 \subsection{Das Anonymitätstrilemma}\label{sec:anonymitytrilemma}
 
-Beim Design eines anonymen Kommunikationsprotokoll gibt es grundsätzliche Einschränkungen, die zu beachten sind.
-Es gilt die folgenden drei Aspekte abzuwägen und ein Kompromiss zwischen den zu finden:
+Beim Design eines anonymen Kommunikationsprotokolls gibt es grundsätzliche Einschränkungen, die zu beachten sind.
+Es gilt die folgenden drei Aspekte abzuwägen und ein Kompromiss zwischen diesen zu finden:
 
 \begin{itemize}
-    \item Der Anonymitätsgrad von Sender und Empfänger einer Nachricht
-    \item Die zur Kommunikation benötigte Netzwerkbandbreite
-    \item Die Latenzzeiten und Verzögerung der zu übermittelnden Nachrichten
+    \item Der Anonymitätsgrad von Sender und Empfänger einer Nachricht.
+    \item Die zur Kommunikation benötigte Netzwerkbandbreite.
+    \item Die Latenzzeiten und Verzögerungen der zu übermittelnden Nachrichten.
 \end{itemize}
 
 Dabei ist es nicht möglich ein Protokoll zu designen, welches einen hohen Anonymitätsgrad bietet, wenig Netzwerkbandbreite benötigt und tiefe Latenzzeiten vorweist. \parencite[S.~1]{das_anonymity_2018}
@@ -80,23 +79,27 @@ Höhere Anonymität geht also immer auf Kosten von höherer Latenzzeiten oder me
     \caption{Das Anonymitätstrilemma}\label{fig:anonimitytrilemma}
 \end{figure}
 
-Ein Anonymisierungsnetzwerk könnte beispielsweise auf Kosten der Netzwerkbandbreite implementiert werden, indem die Nachrichten jeweils an alle Netzwerkteilnehmer versendet werden.  Somit könnte mindestens der Empfänger verschleiert werden.
-Auch gibt es die Möglichkeit mehr Anonymität zu schaffen indem der Netzwerkverkehr ergänzt wird mit oder vermischt wird mit anderem Netzwerkverkehr.
+Ein Anonymisierungsnetzwerk könnte beispielsweise auf Kosten der Netzwerkbandbreite implementiert werden, indem die Nachrichten jeweils an alle Netzwerkteilnehmer versendet werden.
+Somit könnte mindestens der Empfänger verschleiert werden.
+Auch gibt es die Möglichkeit mehr Anonymität zu schaffen indem der Netzwerkverkehr ergänzt wird
+oder vermischt wird mit anderem Netzwerkverkehr.
 
-Umgekehrt könnte ein Anonymisierungsnetzwerk auf Kosten der Latenz implementiert werden. Wenn Nachrichten über mehrere Netzwerkknoten geleitet werden, könnte man Empfänger und Sender verschleiern.
-Jedoch hätte dies höhere Latenzzeiten zur Folge, da dieselbe Nachricht mehrmals nacheinander von verschiedenen Netzwerkknoten bearbeitet werden muss.
+Umgekehrt könnte ein Anonymisierungsnetzwerk auf Kosten der Latenz implementiert werden.
+Werden Nachrichten über mehrere Netzwerkknoten geleitet, könnte man Empfänger und Sender verschleiern.
+Jedoch hätte dies höhere Latenzzeiten zur Folge,
+da dieselbe Nachricht mehrmals nacheinander von verschiedenen Netzwerkknoten bearbeitet werden müsste.
 Zusätzlich könnte bei diesem Ansatz ein Netzwerkknoten extra ein Netzwerkpaket zwischenspeichern und zeitverzögert weiterschicken.
 Dies würde das Anonymisierungsnetzwerk noch besser gegen timing-basierte Deanonymisierungsangriffe und Korrelation von Netzwerkverkehr schützen.
-Letzteres gibt es Netzwerke bei welchen Anonymität keine Rolle spielt, wie beispielsweise beim üblichen UDP Protokoll. Es ist dann möglich hohe Bandbreite sowie niedrige Latenzzeiten zu erreichen.
+Letzteres gibt es Netzwerke bei welchen Anonymität keine Rolle spielt, wie beispielsweise beim üblichen ``User Datagram Protocol'' (UDP).
+Es ist dann möglich hohe Bandbreite sowie niedrige Latenzzeiten zu erreichen.
 
 Es gilt abzuwägen, welche der Aspekte für das zu designende Protokoll wichtig sind.
-Wo wird ein Schwerpunkt gelegt und welche Aspekte somit auch vernachlässigt werden, um einen guten Kompromiss zu finden. \parencite{das_anonymity_2018}
+Es muss entschieden werden, wo man ein Schwerpunkt setzt und welche Aspekte man somit auch vernachlässigt, um einen guten Kompromiss zu finden. \parencites[S.~1-2]{das_anonymity_2018}
 
 \subsection{The Invisible Internet Protocol (\glsname{i2p}) }
 
-Kurz gesagt ist \glstext{i2p} (\glsname{i2p}) ein dezentrales Mischnetzwerk indem verschlüsselte Nachrichten ausgetauscht werden können.
-\parencite{zantout_i2p_2011}
-Es handelt sich hier um ein eigenständiges Overlay-Netzwerk, welches auf den darunterliegenden Protokollen UDP und TCP aufbaut.  \parencite{de_boer_invisible_2019,astolfi_i2p_2015}.
+Kurz gesagt ist ``\glstext{i2p}'' (\glsname{i2p}) ein dezentrales Mischnetzwerk, indem verschlüsselte Nachrichten ausgetauscht werden können.
+Es handelt sich hier um ein eigenständiges Overlay-Netzwerk, welches auf den darunterliegenden Protokollen UDP und TCP aufbaut.
 Mit einem Mischnetzwerk ist gemeint, dass Nachrichten an durch Knoten des Netzwerks weitergeleitet werden, um den Sender und den Empfänger einer Nachricht zu verschleiern. Dieser Mischvorgang wird bei I2P Garlic-Routing genannt.
 Auch gilt es zu unterstreichen, dass \textit{Nachrichten} ausgetauscht werden.
 I2P ist \textit{Nachrichtenbasiert} und verhält sich in diesem Sinne ähnlich wie UDP. \parencite[S.~1]{zantout_i2p_2011}.
@@ -107,22 +110,9 @@ Die Nachrichten sind also vom Sender bis zum Empfänger verschlüsselt.
 
 Während das TOR-Netzwerk ursprünglich entwickelt wurde auf das öffentliche Internet via Out-Proxies zuzugreifen,
 liegt bei I2P der Fokus darin anonym auf Dienste, die innerhalb des Netzwerks angeboten werden, zuzugreifen.
-Jedoch besteht bei TOR ebenfalls die Möglichkeit netzwerkinterne Dienste anzubieten mittels TOR Hidden Services, auch aber gibt es bei I2P die Möglichkeit, mit Hilfe von sogenannten Outproxies, auf das normale Internet zuzugreifen.
+Jedoch besteht bei TOR ebenfalls die Möglichkeit netzwerkinterne Dienste anzubieten mittels TOR Hidden Services, auch aber gibt es bei I2P die Möglichkeit, mit Hilfe von sogenannten Outproxies, auf das normale Internet zuzugreifen. \parencite[S. 2]{ehlert_i2p_2011} 
 Dienste die innerhalb des Netzwerks angeboten werden, sind zum Beispiel Bit-Torrent für File-Sharing, Webseiten (sogenannte ``eepsites''), oder auch Chat-Dienste wie IRC (Internet Relay Chat).
-\parencite[p.~3-4]{de_boer_invisible_2019}
-
-\cite{astolfi_i2p_2015}
-
-\cite{timpanaro_birds_2012}
-
-\cite{timpanaro_evaluation_2015}
-
-A scaleable framework for anonymous communication
-\cite{noauthor_i2p_nodate-8}
-
-
-\cite{hoang_measuring_2019}
-\cite{hoang_empirical_2018}
+\parencite[p.~3-4]{de_boer_invisible_2019,noauthor_i2p_nodate}
 
 
 \section{Technische Konzepte von I2P}
@@ -153,6 +143,8 @@ Eine b32-Adresse sieht also zum Beispiel so aus:
 
 \lstinline|b2cdodoyqg5v6go56bkaevvw777e2wyiflqh6zyyyxugy4cqlzuq.b32.i2p|.
 
+\parencite{noauthor_naming_nodate}
+
 \subsection{Tunnels}
 
 Wenn man im Bereich vom Netzwerken über Tunneling-Redet geht es immer darum ein Kommunikationsprotokoll in ein anderes einzubetten. \parencite{noauthor_duden_nodate}
@@ -161,7 +153,7 @@ Bei I2P ist ein Tunnel ein \textit{unidirektionaler} Kommunikationsweg durch ein
 Ähnlich wie beim Onion-Routing wird hier die Nachricht mehrfach verschlüsselt, damit die Zwischenknoten nicht in die Nachricht hineinsehen können, jedoch trotzdem die benötigen Routing-Informationen haben, um diese an den richtigen Ort weiterzuleiten.
 Es wird also eine Verschlüsselungsschicht nach der anderen bei jedem Hop durch das Netzwerk abgebaut.
 Ähnlich wie man die verschiedenen Schichten einer Zwiebel abnehmen könnte.
-\cite{noauthor_intro_nodate}
+\parencites{noauthor_intro_nodate}[S.~2]{liu_empirical_2014}
 
 \subsubsection{Arten von Tunnels}
 
@@ -212,17 +204,17 @@ Diese verteilte Netzwerkdatenbank wird NetDb genannt.
 Es handelt sich hier um eine \glstext{dht} (\glsname{DHT}) basierend auf dem Kademlia-Algorithmus.
 In dieser Netzwerkdatenbank sind einerseits die Router-Infos abgelegt.
 Andererseits sind hier auch die LeaseSets zu finden.
-\parencite{author_network_nodate}
+\parencite{noauthor_network_nodate}
 
 Nur sogenannte Floodfill-Router beantworten anfragen an die Netzwerkdatenbank.
-\parencite[S.~5-6]{timpanaro_monitoring_nodate}
+\parencite[S.~5-6]{timpanaro_monitoring_2011}
 
 \subsubsection{Router-Info}\label{sec:router_info}
 
 Eine RouterInfo-Datei beinhaltet den öffentlichen Schlüssel und die Netzwerkkoordinaten eines einzelnen I2P-Routers.
 Jeder I2P-Router erstellt diese Datei beim Aufstarten, falls diese noch nicht vorhanden ist.
 Beim erstellen dieser Datei wird auch ein Schlüsselpaar generiert, damit der öffentliche Schlüssel in die Datei abgelegt werden kann.
-Zusätzlich werden auch die öffentlichen IP-Addressen ermittelt sowie zufällige Ports ausgewählt über welche der I2P-Router erreicht werden kann.
+Zusätzlich werden auch die öffentlichen IP-Adressen ermittelt sowie zufällige Ports ausgewählt über welche der I2P-Router erreicht werden kann.
 
 Diese Informationen werden benötigt damit ein anderer I2P-Router die Kommunikation mit dem I2P-Router aufnehmen kann, der die RouterInfo-Datei erstellt hat.
 Anhand der Netzwerkoordinaten (IPv4 und IPv6 Adressen, sowie Ports) ist bekannt wohin eine Anfrage zur Tunnelerstellung gesendet werden muss.
@@ -230,94 +222,96 @@ Mit Hilfe des öffentlichen Schlüssels kann die Anfrage zur Tunnelerstellung au
 
 Es gilt zu erwähnen, die öffentlichen IP-Adresse eines I2P-Knotens somit nicht geheim sind.
 Jeder der einen Knoten betreibt, oder einfach nur die NetDb eines Floodfill-Routers abfragt, kann somit die öffentliche IP-Adressen von I2P-Knoten ausfindig machen.
-I2P mit der Absicht den Fakt zu verschleiern, dass I2P eingesetzt wird. Es wurde designt wurde das Teilnehmer Nachrichten innerhalb des Netzwerks austauschen 
+I2P mit der Absicht den Fakt zu verschleiern, dass I2P eingesetzt wird.
+Es wurde designt wurde das Teilnehmer Nachrichten innerhalb des Netzwerks austauschen 
 
 Ein Beobachter kann also herausfinden, ob ein Rechner am I2P-Netzwerk beteiligt ist, kann jedoch nicht aussagen, ob eine Nachricht für den Knoten bestimmt ist, ob er eine Nachricht versendet, oder ob er diese lediglich weiterleitet.
 
 \subsubsection{LeaseSet's}
 
 Ein LeaseSet ist eine Sammlung von Tunnel-Eingangspunkten (auch Leases genannt) für eine bestimmte Destination.
-Wenn nun ein I2P-Router auf einen bestimmten Service oder Destination zugreifen will, weiss dieser nach dem Abfragen der NetDB anhand eines LeaseSets
-wo die richtigen Tunnel-Eingangspunkte sind.
+Wenn nun ein I2P-Router auf einen bestimmten Service oder Destination zugreifen will, weiss dieser nach dem Abfragen der NetDb anhand eines LeaseSets
+wo die richtigen Tunnel-Eingangspunkte für den entsprechenden Service sind.
 LeaseSets werden also benötigt um ein Inbound- und Outbound-Tunnel miteinander zu verbinden.
-
-Für jedes Client-Tunnel gibt kann es eines oder mehrere LeaseSets geben.
+Für jedes Client-Tunnel kann es eines oder mehrere LeaseSets geben.
+\cite{astolfi_i2p_2015}
 
 \subsection{Floodfill-Router}
 
-Damit I2P-Router abfragen an die verteilte NetDb machen können, muss es einige sogenannte Flood-Fill-Router im Netzwerk geben.
+Damit I2P-Router abfragen an die verteilte NetDb machen können, muss es einige sogenannte Floodfill-Router im Netzwerk geben.
 Diese beantworten die anfragen für LeaseSets und Router-Infos von anderen Routern.
-Ein LeaseSet wird beispielsweise abgefragt, wenn ein anderer Router auf eine destination zugreifen will.
-Ein Floodfill-Router sollte normalerweise mehr Bandbreite für das Netzwerk zur Verfügung stellen, als ein normaler Router, da zusätzlich noch abfragen an die netDb hinzukommen.
+Ein LeaseSet wird beispielsweise abgefragt, wenn ein anderer Router auf eine Destination zugreifen will.
+Ein Floodfill-Router sollte normalerweise mehr Bandbreite für das Netzwerk zur Verfügung stellen, als ein normaler Router, da zusätzlich noch abfragen an die NetDb hinzukommen.
 Die Anzahl an Floodfill-Router im I2P Netzwerk sollte sich automatisch regulieren.
 Denn Router welche genug Bandbreite zur Verfügung haben, sollten sich automatisch zum Floodfill-Router umschalten, sofern nicht genügend (etwa 6 Prozent) Floodfill-Router im Netzwerk vorhanden sind.
 Dies konnte jedoch nicht bei der i2pd-Implementierung beobachtet werden.
 Ein Router kann aber auch vom Administrator kann ein manuell als Floodfill-Router konfiguriert werden.
-\parencite[S.~5-6]{timpanaro_monitoring_nodate}
+\parencite[S.~5-6]{timpanaro_monitoring_2011}
 % TODO: check reference
 
 \subsection{Peer-Profiling, Selektion und Tunnel-Erstellung}\label{sec:tunnelerstellung}
 
-Die einfachste Möglichkeiten Nachbarknoten (oder Peers) zur Tunnelerstellung auszuwählen, wäre zufällig Knoten auszuwählen. 
+Die einfachste Möglichkeiten Nachbarknoten (oder Peers) zur Tunnelerstellung auszuwählen, wäre zufällig Knoten auszuwählen.
 Jedoch wird dies aufgrund der Performanz anders gehandhabt.
-Jeder I2P-Knoten testet und kategorisiert seine Nachbarknoten anhand von drei Kriterien:
+Jeder I2P-Knoten testet seine Nachbarknoten unter Verwendung seiner Exploratory-Tunnels anhand von drei Kriterien:
 Performanz, Latenzzeiten und Verfügbarkeit.
-
+Diese werden dann wiederum in drei Kategorien eingeordnet: Hohe Kapazität, Schnell und Standard.
+Wobei alle Knoten, die eine höhere Kapazität als der Median der Knoten im Netzwerk haben, unter ``Hohe Kapazität`` eingeordnet werden.
+Alle Knoten mit hoher Kapazität und deren Geschwindigkeit höher ist als der Median im Netzwerk, werden als ``Schnell'' kategorisiert. Der Rest der Knoten landen in der ``Standard''-Kategorie.
+Hochperformante Knoten werden bevorzugt beim erstellen von Tunnels.
 Natürlich hat dies auch einen Einfluss auf den Anonymitätsgrad.
-\parencite[S.~4-5]{timpanaro_monitoring_nodate}
+\parencites[S.~4-5]{timpanaro_monitoring_2011}[S. 3]{liu_empirical_2014}
 
 \subsection{Garlic-Routing}\label{sec:garlic_routing}
 
 Inspiriert vom Onion-Routing des \glsname{tor}-Netzwerk's gibt es im I2P-Netzwerk der Begriff des Garlic-Routing.
 Ähnlich wie beim Onion-Routing wird eine Nachricht mehrfach verschlüsselt, und jeder Knoten entfernt eine schlicht.
 Im Gegensatz du den TOR-Circuits, wo Nachrichten bidirektional ausgetauscht werden können, gibt es bei I2P nur unidirektionale Tunnels.
-Um jedoch Nachrichten trotzdem beantworten zu können gibt es deshalb einfach zwei Tunnels ein Inbound- und ein Outbound-Tunnel.
-Diese Tunnels nehmen im gegensatz du einem Tor-Circuit aber nicht unbedingt den gleichen weg, sondern können über andere Knoten übermittelt werden.
+Nachrichten werden übermittelt indem ein Outbound-Tunnel mit einem Inbound-Tunnel verbunden wird.
+Um Nachrichten beantworten zu können gibt es deshalb einfach zwei Tunnels ein Inbound- und ein Outbound-Tunnel.
+Diese Tunnels nehmen im Gegensatz du einem Tor-Circuit aber nicht unbedingt den gleichen weg, sondern können über andere Knoten übermittelt werden.
+Die folgende Abbildung \fullref{fig:garlic_routing} veranschaulicht den Vorgang mit vier Benutzern:
 
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{img/i2prouting.png}
-    \caption{Garlic-Routing (vgl. \url{https://geti2p.net/de/docs/how/intro})}
+    \caption{Garlic-Routing (vgl. \url{https://geti2p.net/de/docs/how/intro})}\label{fig:garlic_routing}
 \end{figure}
 
-\begin{itemize}
-    \item
-\end{itemize}
+Garlic-Routing wird nun eine Garlic-Nachricht wie oben gezeigt durch das Netzwerk geroutet.
+Eine Garlic-Nachricht kann mehrere sogenannte ``Cloves'' enthalten.
+Cloves bestehen aus einer Nachricht und zusätzlichen Routing-Informationen wie zum Beispiel auch verzögerungen
+Das heisst eine Garlic-Nachricht kann mehrere Nachrichten von Applikationen enthalten.
 
-Auch werden mehrere Nachrichten in sogenannte Cloves zusammengefasst.
+\parencite[S. 4]{conrad_survey_2014,noauthor_intro_nodate}
 
-TODO: Beschreibung Cloves
+% \subsection{Performance}
 
-\cite{de_boer_invisible_2019}
-
-\cite{noauthor_intro_nodate}
-
-
-\subsection{Performance}
-
-In der Vergangenheit wurde schon vielfach an der Performance von I2P gearbeitet.
-Siehe dazu:
-
-Performance improvement using SSL IN I2P
-\cite{vashi_performance_2015}
-
-Performance I2P Webseite
-\cite{noauthor_performance_nodate}
-
-Performance History I2P Webseite
-\cite{noauthor_performance_nodate-1}
-Dies ist 
-
-Improving I2P (2012)
-\cite{timpanaro_improving_2012}
-
-Zudem werden auf der Webseite von I2P auf der Seite ''Future Performance Improvements'' sind zudem zukünftige Performance Verbesserungsmöglichkeiten aufgelistet.
-\cite{noauthor_future_nodate}
-Es ist jedoch unklar welche der Vorschläge bereits implementiert wurden, weil die Webseiten schon lange nicht mehr aktualisiert wurde.
-Zudem könnte es sich hier auch nur um Performance Verbesserungen, welche die Java-Implementation von I2P betreffen aufgelistet sein.
-Es ist unklar welche dabei spezifisch in i2pd (der C++ Implementation implementiert wurden).
-
-Latency vs Tor Usability Bandwitdh and Latency Comparision
-\cite{ehlert_i2p_2011}
+% Evaluation of the Anonymous I2P Network’s Design
+% Choices Against Performance and Securi
+% \cite{timpanaro_evaluation_2015}
+% %
+% In der Vergangenheit wurde schon vielfach an der Performance von I2P gearbeitet.
+% Diverse Verbesserungsmöglichkeiten
+% Siehe dazu:
+%
+% Performance improvement using SSL IN I2P
+% \cite{vashi_performance_2015}
+%
+% Performance I2P Webseite
+% \cite{noauthor_performance_nodate}
+%
+% Performance History I2P Webseite
+% \cite{noauthor_performance_nodate-1}
+% Dies ist 
+%
+% Improving I2P (2012)
+% \cite{timpanaro_improving_2012}
+%
+% Zudem werden auf der Webseite von I2P auf der Seite ''Future Performance Improvements'' sind zudem zukünftige Performance Verbesserungsmöglichkeiten aufgelistet.
+% \cite{noauthor_future_nodate}
+% Es ist jedoch unklar welche der Vorschläge bereits implementiert wurden, weil die Webseiten schon lange nicht mehr aktualisiert wurde.
+% Zudem könnte es sich hier auch nur um Performance Verbesserungen, welche die Java-Implementation von I2P betreffen aufgelistet sein.
+% Es ist unklar welche dabei spezifisch in i2pd (der C++ Implementation implementiert wurden).
 
 
 % \subsection{Metriken zur Messung}
@@ -356,10 +350,11 @@ Latency vs Tor Usability Bandwitdh and Latency Comparision
 
 \subsection{I2P-Testnetzwerke und Bootstrapping}
 
-Eine Recherche hat ergeben, das bereits Testnetzwerke erstellt wurden.
+Eine Recherche hat ergeben, das bereits in der Vergangenheit I2P-Testnetzwerke erstellt wurden. 
+\parencite\cite{noauthor_how_2018}
+Bei diesem Ansatz wurde direkt auf die Linux-Kernel-Funktionalitäten von namespac
 
 Testnetzwerk mit 128 Knoten 
-\cite{noauthor_how_2018}
 \parencite[S. 25-26]{muller_analysis_2016}
 
 Es wird Bootstrapping-Prozess benötigt, dass sich die I2P-Router sich anfangs Gegenseitig im privaten und abgeschotteten Testnetzwerk überhaupt finden können.
@@ -369,19 +364,7 @@ Erst anschliessend ist es möglich Tunnels aufzubauen, damit die I2P-Router mite
 Einerseits gibt es hier den Floodfill-Ansatz oder einen eigen Reseed-Server zu im privaten Testnetzwerk zu haben.
 %TODO: reference bootstrapping site
 
-Reseed Access
-\cite{noauthor_i2p_nodate-7}
-
-Usability Inspection of Anonmity Networks
-(\cite{abou-tair_usability_2009})
-
-Usability Tetsts
-(\cite{schomburg_anonymity_2009})
-
-Evaluation of Anonymity Networks
-(\cite{timpanaro_evaluation_2015})
-
-\subsection{Funktionsweise der DIVA.EXCHANGE Blockchain}\label{sec:divaxblockchain}
+\subsection{Funktionsweise der DIVA.EXCHANGE Blockchain}\label{sec:divachain}
 
 Der Verein DIVA.EXCHANGE entwickelt ihre eigene Blockchain namens \lstinline|divachain|.
 Diese basiert auf dem byzantinischer Konsensusalgorithmus und es handelt sich hier somit um eine Proof-of-Stake basierende Blockchain.

@@ -190,7 +190,7 @@
 \newcommand{\listequationsname}{\huge{Formelverzeichnis}}
 \newlistof{myequations}{equ}{\listequationsname}
 \newcommand{\myequations}[1]{
-	\addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}
+    \addcontentsline{equ}{myequations}{\protect\numberline{\theequation}#1}
 }
 \setlength{\cftmyequationsnumwidth}{2.3em}
 \setlength{\cftmyequationsindent}{1.5em}
@@ -232,21 +232,21 @@
 
 
 Der Verein DIVA.EXCHANGE entwickelt einen Software-Prototypen für eine Handelsplattform, um digitale Werte auszutauschen.
-Die Handelsplattform soll vollkommen verteilt sein und es sollen
-digitale Werte ausgetauscht werden können, ohne sich kennen oder vertrauen zu müssen.
-Um dies umzusetzen, wurde auf das Anonymisierungsnetzwerk ``Invisible Internet Protocol'' (I2P) als Grundstein auf der Netzwerkebene gesetzt.
+Die Handelsplattform soll \glstext{fullydistributed} sein und es sollen
+digitale Werte ausgetauscht werden können, ohne dass sich die Benutzer gegenseitig kennen oder vertrauen zu müssen.
+Um dies umzusetzen, wurde auf das Anonymisierungsnetzwerk ``The Invisible Internet Protocol'' (I2P) als Grundstein auf der Netzwerkebene gesetzt.
 Jedoch hat die Anonymität, Privatsphäre und Sicherheit, die durch I2P geboten wird, ihren Preis: Performanz.
 In dieser Arbeit soll empirisch untersucht werden, unter welchen Umständen sich die Performanz des I2P-Netzwerks verbessert.
 Insbesondere wurden die Latenzzeiten von TCP-Nachrichten untersucht.
 
-Damit die Performance-Messungen empirisch durchgeführt werden konnten, wurde ein Teststand an dem Experimente durchgeführt wurden.
+Damit die Performance-Messungen empirisch durchgeführt werden konnten, wurde ein Teststand entwickelt an dem Experimente durchgeführt wurden.
 In einem privaten I2P-Netzwerk konnten Latenzmessungen ohne äussere Einflüsse durchgeführt werden.
 Damit konnte ein Testnetzwerk bestehend aus bis zu 256 I2P-Knoten erstellt werden.
 Somit konnten Latenzmessungen durchgeführt werden, welche aufgezeigt haben,
 das sich entgegen unserer Erwartungen die Latenz bei einem grösseren Netzwerk nicht unbedingt verbessert.
 Die genauen Gründe sind jedoch unklar.
 
-Die gewonnenen Resulate dienen jedoch als Grundlage und Referenz für zukünftige Messungen und Experimente.
+Die gewonnenen Resultate dienen jedoch als Grundlage und Referenz für zukünftige Messungen und Experimente.
 Anhand des entwickelten Teststands können nun weitere Messungen getätigt und miteinander verglichen werden.
 Grundsätzlich können so auch verschiedene I2P-Konfigurationen miteinander verglichen werden.
 Es sind aber in Zukunft auch Tests mit anderen Protokollen oder Nachrichtentypen möglich.
@@ -289,7 +289,9 @@ Es sind aber in Zukunft auch Tests mit anderen Protokollen oder Nachrichtentypen
 
 \listoftables
 
+% \huge{Formelverzeichnis}
 \listofmyequations \pagebreak
+
 
 \printbibliography
 
