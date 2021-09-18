@@ -17,7 +17,8 @@
 % eigentliche Testdurchführung ist dann unter Realisierung, im Anhang oder einem selbstständigen
 % Testdokument beschrieben.
 
-Dieses Kapitel erläutert das Vorgehen und die verwendete Methoden.
+Als Wissenschaftliche Methode wurde ein Experiment durchgeführt.
+Als Vorgehensmodell für das Projektmanagement wurde KanBan ausgewählt.
 
 % TODO Nach eigenen Bedürfnissen erweitern
 % ------------------------------------- TEIL Wissenschaftliche Arbeiten ----------------------------------------------------
@@ -34,53 +35,50 @@ Dieses Kapitel erläutert das Vorgehen und die verwendete Methoden.
 % beeinflusstwerden. (Balzert, S. 286)
 
 Es soll ein Experiment durchgeführt werden, um eine quantitative Analyse durchführen zu können.
-Spezifischer soll ein Laborexperiment durchgeführt werden.
-Dabei gilt es die folgenden drei Qualitätskriterien zu beachten:
-\begin{itemize}
-    \item Messbarkeit
-    \item Wiederholbarkeit
-    \item Überprüfbarkeit
-\end{itemize}
+Spezifischer soll ein Laborexperiment durchgeführt werden, um die Hypothese \ref{hyp:first} zu testen.
+Dabei gilt es die folgenden drei Qualitätskriterien von Messbarkeit, Wiederholbarkeit und Überprüfbarkeit zu beachten.
+Damit die Performance-Experimente an I2P durchgeführt werden können, muss ein Testnetzwerk aufgebaut werden sowie eine Messanlage entwickelt werden.
+Die Konfigurationsoptionen können als unabhängige Variable gesehen werden, welche verändert werden.
+Diese haben somit auf die um die Auswirkung auf die abhängigen Variablen zu messen, wie die Latenzzeit von Nachrichten.
+\parencite[S.~276]{helmut_balzert_wissenschaftliches_2017}
 
-Nach \parencite[S.~276]{helmut_balzert_wissenschaftliches_2017} soll 
-
-Dies ist ein Teststand der ein isoliertes I2P-Netzwerk erstellt, welches mit Messpunkten für Performance-Messungen versehen werden kann.
-
-Um jedoch ein Experiment durchführen zu können benötigt es
-eine Software. für die Ausarbeitung des Konzepts für den Teststand müssen einige Sachen erst in Software ausprobiert werden,
-um schnell zu merken, ob man auf dem richtigen Weg ist bevor zu viel Zeit vergangen ist.
-Deshalb wird zur Entwicklung des Teststands ein Prototyping Verfahren eingesetzt.
-Dabei wird ein Lösungsansatz ausprobiert. 
+% \section{Prototyping}
+%
+% Dies ist ein Teststand der ein isoliertes I2P-Netzwerk erstellt, welches mit Messpunkten für Performance-Messungen versehen werden kann.
+%
+% Um jedoch ein Experiment durchführen zu können benötigt es
+% eine Software. für die Ausarbeitung des Konzepts für den Teststand müssen einige Sachen erst in Software ausprobiert werden,
+% um schnell zu merken, ob man auf dem richtigen Weg ist bevor zu viel Zeit vergangen ist.
+% Deshalb wird zur Entwicklung des Teststands ein Prototyping Verfahren eingesetzt.
+% Dabei wird ein Lösungsansatz ausprobiert. 
 
 \parencite{helmut_balzert_wissenschaftliches_2017}
 
 
 % ------------------------------------- TEIL Ingenieurlastige Arbeiten ----------------------------------------------------
-\section{Projektinformationen}\label{sec:projektinformationen}
+\section{Projektmanagement}\label{sec:projektinformationen}
 
-In diesem Abschnitt wird aufgezeigt welches Vorgehensmodell und welche Methoden verwendet wurden zur Abwicklung dieses Projektes.
-Auch wird aufgezeigt wie das Projekt organisiert ist.
+In diesem Abschnitt wird aufgezeigt welches Vorgehensmodel verwendet wurde und wie das Projekt abgewickelt wurde.
+Auch wird aufgezeigt wie das Projekt organisiert ist, wie die Anforderungen ermittelt wurden und welche Anforderungen es gibt.
 
 \subsection{Vorgehensmodell}
 
- In den Besprechungen hat sich ergeben, dass wir inkrementell und iterativ arbeiten möchten
-(siehe Anhang~\ref{sec:meeting_03_03_2021}, Abschnitt ''Projektmanagementmethode).
-Das Projektmanagement soll schlank gehalten werden und nicht viel Aufwand erzeugen, auch da ich alleine an diesem Bericht arbeite.
-
-Dementsprechend habe ich als Vorgehensmodell wurde Kanban ausgewählt.
-
+In den Besprechungen hat sich ergeben, dass inkrementell und iterativ gearbeitet wird, so wie auch von der Aufgabenstellung vorgeschlagen (siehe Anhang~\ref{ch:assignment}).
+Das Projektmanagement soll schlank gehalten werden und nicht viel Aufwand erzeugen, da alleine an dem Bericht gearbeitet wird.
+Deshalb wurde Kanban als Vorgehensmodell ausgewählt.
 Folgendes sind einige Kernpraktiken von Kanban kurz erklärt:
 
 \begin{enumerate}
     \item \textbf{Arbeit sichtbar machen}: Arbeit muss sichtbar gemacht werden, um zu sehen wo der Arbeitsfluss im Gesamtsystem stockt.
         Auch arbeitet man bei Kanban nicht nach dem Push-Prinzip sondern dem Pull-Prinzip.
         Das heisst es wird keine Arbeit zugewiesen, sondern neue Arbeit wird abgeholt, sobald die letzte Aufgabe (oder Issue/Task) fertiggestellt wurde.
-    \item \textbf{Limitiere den Work in Progress (WIP)}: Es ist schwierig ständig zwischen Aufgaben zu wechseln. Deshalb soll nur an einer Aufgabe auf einmal gearbeitet werden.
-    Tritt ein Problem auf bei einer Aufgabe, legt man diese auf die Seite, um diese später mit jemandem anzuschauen, oder erledigt erst eine andere Aufgabe welche eine Voraussetzung ist.
+    \item \textbf{Limitiere den Work in Progress (WIP)}: Es ist schwierig ständig zwischen verschiedenen Aufgaben zu wechseln. Deshalb soll nur an einer Aufgabe auf einmal gearbeitet werden.
+    Tritt bei einer Aufgabe ein Problem auf, legt man diese auf die Seite, um diese später mit jemandem anzuschauen, oder erledigt erst eine andere Aufgabe welche eine Voraussetzung ist.
     \item \textbf{Manage Flow}: Arbeitsfluss ist wichtig in Kanban.
-    Es soll Aufmerksamkeit gelegt werden auf Engpässe oder gar Blockaden im System. Dabei hilft es zu unterscheiden was für verschiedene Arbeitstypen das Team erledigen muss und das verschiedene Arbeiten einen anderen Grad an Dringlichkeit haben.
-    \item \textbf{Explizite Prozessregeln}: Die Regeln sollen offen gelegt und explizit gemacht werden, damit man merkt wann diese gebrochen oder nicht mehr sinnvoll sind.
-    \item \textbf{Feedback Mechanismen}: Um die Arbeitsprozesse kontinuierlich verbessern zu können, benötigt es Feedback-Mechanismen. Dies kann z.B. an täglichen Stand-Ups oder an Retrospektiven. Dies sind Meetings wo darauf abgezielt wird dazuzulernen, den Arbeitsprozess zu reflektieren und  zu Verbessern.
+    Die Aufmerksamkeit soll auf Engpässe oder Blockaden im System gelegt werden.
+    Dabei hilft es zu unterscheiden was für verschiedene Arbeitstypen das Team erledigen muss und das verschiedene Arbeiten einen anderen Grad an Dringlichkeit haben.
+    \item \textbf{Explizite Prozessregeln}: Die Regeln sollen offen gelegt und explizit definiert werden, damit man merkt wann diese gebrochen oder nicht mehr sinnvoll sind.
+    \item \textbf{Feedback Mechanismen}: Um die Arbeitsprozesse kontinuierlich verbessern zu können, benötigt es Feedback-Mechanismen. Tägliche Stand-Ups oder Retrospektiven sind z.B. mögliche Gelegenheiten für Feedback. Dies sind Meetings wo darauf abgezielt wird dazuzulernen, den Arbeitsprozess zu reflektieren und sich zu verbessern.
 \end{enumerate}
 
 (\cite[p.~17-22]{siegfried_kaltenecker_kanban_2013})
@@ -92,6 +90,7 @@ Folgendes sind einige Kernpraktiken von Kanban kurz erklärt:
 Die folgende Tabelle~\ref{tab:projectmembers} listet alle Personen auf die an diesem Projekt beteiligt sind.
 
 \begin{table}[H]
+    \centering
     \begin{tabular}{l p{3.2cm}}
         \toprule
         \bfseries Person   & \bfseries Rollen \\
@@ -107,12 +106,13 @@ Die folgende Tabelle~\ref{tab:projectmembers} listet alle Personen auf die an di
         Moritz Küttel      & Student \\
         \bottomrule
     \end{tabular}
-    \caption{People involved in the project}\label{tab:projectmembers}
+    \caption{Im Projekt involvierte Personen}\label{tab:projectmembers}
 \end{table}
+\end{wraptable}
 
 \subsubsection{Quellcode}
 
-Der \LaTeX-Quellcode für diesen Bericht ist auf codeberg.org in diesem Repository zu finden:
+Der \LaTeX-Quellcode für diesen Bericht ist auf codeberg.org in diesem Repository zu finden:\\
 \url{https://codeberg.org/mkuettel/ba}
 
 %TODO: add links to all the source code
@@ -120,20 +120,13 @@ Der \LaTeX-Quellcode für diesen Bericht ist auf codeberg.org in diesem Reposito
 \subsubsection{Projektboard und Issue-Tracker}
 
 Die Abbildung~\ref{fig:projectboard} zeigt das Projektboard, welches für Projektmanagement und Controlling verwendet wird.
-Jede Karte auf dem Projektboard ist eine Aufgabe oder auch Issue aus dem folgenden Issue-Tracker:
-
+Jede Karte auf dem Projektboard ist eine Aufgabe oder auch Issue aus dem folgenden Issue-Tracker:\\
 \url{https://codeberg.org/mkuettel/ba/issues}
 
 Der Issue-Tracker ist zugleich ein Backlog. Issues können nach Bedarf aus dem Issue-Tracker entnommen werden und zum Projektboard hinzugefügt werden.
-
-Das Projektboard ist ein Kanban-Board und enthält drei Spalten: ''To Do'', ''In Progress'' und ''Done''.
-Diese Issues aus dem Issue-Tracker können dann je nach fortschritt in die Spalten einsortiert werden. 
-Ziel von Kanban ist es eines nach dem anderen zu machen und sich auf einen Task zu fokussieren. Man sollte also nie mehr als einen Issue in der Spalte ''In Progress'' haben.
-%TODO: definition of done
-% https://de.wikipedia.org/wiki/Kanban_(Softwareentwicklung)
-
-%TODO: describe how issues are categorized (labels, milestones, projects etc.)
-
+Das Projektboard ist ein Kanban-Board und enthält drei Spalten: ``To Do'', ``In Progress'' und ``Done''.
+Die Issues aus dem Issue-Tracker können dann je nach Fortschritt in die Spalten einsortiert werden.
+Man sollte also nie mehr als einen Issue in der Spalte ”In Progress” haben.
 Das Kanban-Board ist hier zu finden:
 
 \url{https://codeberg.org/mkuettel/BA/projects/125}
@@ -146,35 +139,16 @@ Das Kanban-Board ist hier zu finden:
 
 
 Ein einziger Issue sollte nie mehr Aufwand machen als acht Stunden Arbeit. Diese Regel hilft die Issues kleiner zu halten und genauere Aussagen treffen zu können, wo man im Projekt steht.
-
-Wird an einem Issue gearbeitet wird dies im Journal vermerkt \& in der Git-Historie hinterlegt.
+Wird an einem Issue gearbeitet wird dies im Journal vermerkt.
 Das Arbeitsjournal ist im Anhang~\ref{sec:journal} zu finden.
-
-
 Die Länge eines Sprints in Kanban ist nicht genau definiert, sondern der Sprint ist fertig wenn alle Arbeit für den jeweiligen Sprint erledigt wurde.
 
-\subsection{Ermittlung offener Projektrahmenbedingungen}
-\label{sub:RequirementsEngineering}
-
-Regelmässige Meetings finden jeweils am Mittwoch Morgen, am Start der Projektwoche, und am Freitag Morgen.
-Zweimal pro Woche trifft sich das Projektteam wo Fragen und das Weitere
-Vorgehen besprochen wird. Es wird jeweils ein Meeting-Protokoll erstellt (siehe
-Anhang~\ref{ch:meetingnotes}), worin festgehalten wird was besprochen wurde.
-
-Die Anforderungen entspringen nun aus diesen Diskussionen und Protokollen und sowie aus der Aufgabenstellung.
-Auch Vorgaben der Hochschule Luzern wurden als Anforderung aufgenommen.
-
-Fragen bezüglich Anforderungen werden jeweils als Traktanden für das nächste Meeting aufgenommen und dann Besprochen oder direkt mit dem Auftraggeber geklärt.
-
-Für die Liste von Anforderungen siehe Abschnitt~\ref{sec:Anforderungen}.
-
-
-\subsection{Projektanforderungen / Anforderungsanalyse}
+\subsection{Projektanforderungen}
 \label{sub:Anforderungen}
 
-Die Anforderungen an das Projekt haben sich aus der Aufgabenstellung (siehe Appendix~\ref{ch:assignment}) sowie aus dem Requirement Engineering (siehe Dazu den Abschnitt~\ref{sub:RequirementsEngineering}).
+Die Anforderungen an das Projekt haben sich aus der Aufgabenstellung (siehe Anhang~\ref{ch:assignment}) sowie aus dem Requirements-Engineering durch regelmässige Meetings und absprachen mit dem Auftraggeber. Die Vorgaben der Hochschule Luzern für Bachelorarbeiten wurden ebenfalls als Anforderungen aufgenommen.
 
-Die folgende Tabelle~\ref{tab:requirements} zeigt alle Anforderungen auf.
+Die folgende Tabelle~\ref{tab:requirements} zeigt alle ermittelten Anforderungen auf.
 Die erste Spalte ''Id'' gibt jeder Anforderung einen eindeutigen Kennzeichner, um diese einfacher zu Referenzieren.
 Die Anforderung selber ist in der Spalte ''Anforderung'' genauer beschrieben.
 Die Spalte ''Art'' gibt an, ob es sich bei der Anforderung um eine funktionale oder nicht-funktionale Anforderung handelt.
@@ -184,13 +158,13 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
     \toprule
     \multicolumn{1}{r}{\bfseries Id} & \bfseries Anforderung                                                                                                                                                           & \bfseries Art & \bfseries Optional \\ \midrule
     \endhead
-    \rid{SDTF}  & Der Stand der Technik/Forschung bezüglich I2P muss ermittelt werden und in den Bericht eingebunden werden.
+    \rid{SDTF}  & Der Stand der Technik/Forschung bezüglich I2P muss ermittelt und in den Bericht eingebunden werden.
                 & Nicht-funktional & Nein  \\ \midrule
 
 
-    \rid{TINF}  & Es ein Teststand muss aufgebaut werden welches es erlaubt verschiedene Performance-Messungen
-                  an einem Netzwerk bestehend mehreren i2pd-Knoten. & Funktional & Nein \\ \midrule
-    \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand, wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-funktional & Nein \\ \midrule
+    \rid{TINF}  & Es ein Teststand muss aufgebaut werden, welches es erlaubt verschiedene Performance-Messungen
+                  an einem Netzwerk bestehend mehreren i2pd-Knoten auszuführen. & Funktional & Nein \\ \midrule
+    \rid{TKON}  & Es soll ein Konzept erstellt werden für den Teststand. Dieser soll aufzeigen wie dieser aussehen soll, wie er funktioniert und was genau gemessen werden soll. & Nicht-funktional & Nein \\ \midrule
     \rid{TREP}  & Die am Teststand durchgeführten Messungen sollten so gut wie möglich reproduzierbar sein. Die gleiche Messung sollte soweit wie möglich dieselben Resultate liefern. & Nicht-funktional & Nein \\ \midrule
     \rid{TCNF}  & Gewisse Aspekte des Teststands und der i2pd-Knoten müssen konfigurierbar sein, damit verschiedene Messungen durchgeführt werden können.  & Funktional & Nein \\ \midrule
     \rid{TSCL}  & Der Teststand soll zwischen 8 bis maximal 256 i2pd-Knoten unterstützen. Dies muss konfigurierbar sein, um dass I2P-Testnetzwerk für verschiedene Tests zu skalieren zu können. & Funktional & Nein \\ \midrule
@@ -200,27 +174,19 @@ Nicht jede Anforderung muss zwingend erfüllt werden. Deshalb kennzeichnet die S
     \rid{TLIM}  & Es muss möglich sein im Teststand die verfügbare Bandbreite von einzelnen i2pd-Knoten einzustellen. & Funktional & Nein \\ \midrule
     \rid{TVRS}  & Man soll schnell (innerhalb von 2h) ein neues Experiment mit neuen Einstellungen starten können. & Nicht-funktional & Nein \\ \midrule
     \rid{EVAL}  & Die am Teststand durchgeführten Messungen müssen qualitativ evaluiert und aufgearbeitet werden.  & Nicht-funktional & Nein \\ \midrule
-    \rid{TPER}  & Man geht davon aus das die Messungen lange dauern könnten, da jeweils ein ganzes Netzwerk und dessen Traffic erstellt und gehandhabt werden muss. Es macht Sinn die Ausführungszeiten von Messungen kurz zu halten, damit mehr Messungen durchgeführt werden können. & Nicht-funktional & Ja \\ \midrule
-    \rid{DOCS}  & Am Ende des Projekts muss dieser Bachelorarbeit abgegeben werden. Dieser Bericht soll das Projekt, die verwendeten Methoden, Evaluationsprozesse, die Umsetzung und Resultate beschreiben.
+    \rid{TPER}  & Man geht davon aus, das die Messungen lange dauern können, da jeweils ein ganzes Netzwerk und dessen Traffic erstellt und gehandhabt werden muss. Es macht Sinn die Ausführungszeiten von Messungen kurz zu halten, damit mehr Messungen durchgeführt werden können. & Nicht-funktional & Ja \\ \midrule
+    \rid{DOCS}  & Am Ende des Projekts muss diese Bachelorarbeit abgegeben werden. Der Bericht soll das Projekt, die verwendeten Methoden, Evaluationsprozesse, die Umsetzung und Resultate beschreiben.
                 & Nicht-funktional & Nein \\ \midrule
-    \rid{ITER}  & Ein iteratives Projektmanagement wird bevorzugt für kurze Feedback-Zyklen. Da ich alleine am Projekt arbeite sollte so auch weniger Overhead entstehen. & Nicht-funktional & Ja \\ \midrule
-    \rid{PRES}  & Es muss eine Zwischenpräsentation gehalten werden, welche das Projekt und das weitere Vorgehen erklärt.
+    \rid{ITER}  & Ein iteratives Projektmanagement wird bevorzugt für kurze Feedback-Zyklen. & Nicht-funktional & Ja \\ \midrule
+    \rid{PRES}  & Es muss eine Zwischenpräsentation vorgetragen werden, welche das Projekt und das weitere Vorgehen erklärt.
                 & Nicht-funktional & Nein \\ \midrule
     \rid{WEBA}  & Es muss ein Web-Abstract erstellt werden, der das Projekt kurz zusammenfasst. Der Web-Abstract wird veröffentlicht und muss eine Woche vor Projektende vom Betreuer abgenommen werden.
                 & Nicht-funktional & Nein \\ \midrule
     \rid{PVID}  & Es muss ein 90 Sekunden Video erstellt werden, welches diese Bachelorarbeit kurz erklärt. Das Video wird am Start der Schlusspräsentation abgespielt.
                 & Nicht-funktional & Nein \\ \midrule
     \bottomrule
-    \caption{Requirements}\label{tab:requirements}
+    \caption{Anforderungen}\label{tab:anforderungen}
 \end{longtable}
-
-
-\subsection{Einschränkungen und Abgrenzungen}
-
-Es soll nur die Performance des I2P-Netzwerks mit der i2pd-Software (der C++ implementation) untersucht werden und nicht von darüberliegenden Applikationen.
-
-% TODO: Scope in der Einleitung
-% TODO: Scope definieren
 
 \subsection{Planung}
 \label{sec:Planung}
@@ -238,17 +204,13 @@ Die Meilensteine sind im Projektkalender (\fullref{tab:projektkalender}) hellbla
 \begin{enumerate}
     \item \textbf{Startdatum}: Mittwoch 24. Februar 2021, Kick-Off-Meeting
     \item \textbf{Zwischenpräsentation}: 21. April 2021, 14:00
-    \item \textbf{Abgabe Web-Abstract}: 21. Mai 2021
-    \item \textbf{Abgabedatum}: 4. Juni 2021
-    \item \textbf{Schlusspräsentation}: 26. Juni 2021, 14:00
+    \item \textbf{Abgabe Web-Abstract}: 28. Mai 2021
+    \item \textbf{Abgabedatum}: Ursprünglich 4. Juni 2021, verschoben auf 20. September, 12:00
+    \item \textbf{Schlusspräsentation}: Ursprünglich 26. Juni 2021, 14:00, verschoben auf 29. September, 16:00
 \end{enumerate}
 
 Die Meilensteine sollen ein Controlling-Mechanismus, um zu merken, wann das Projekt im Verzug ist.
-An den jeweiligen Meilensteine müssen folgende Resultate erzeugt worden sein:
-
-
 Diese Meilensteine wurden auch in den Issue-Tracker aufgenommen:
-
 \url{https://codeberg.org/mkuettel/BA/milestones}
 
 \subsubsection{Phasen}
@@ -258,10 +220,9 @@ Das Projekt wird in 4 Phasen durchgeführt, welche im \fullref{tab:projektkalend
 Dabei sind die Phasen jeweils durch Meilensteine voneinander abgegrenzt.
 
 \begin{enumerate}
-    \item \textbf{Konzeptionsphase}: Die Konzeptionsphase beginnt mit dem Kick-Off Meeting
+    \item \textbf{Konzeptionsphase}: Die Konzeptionsphase beginnt mit dem Kick-Off Meeting.
         In dieser Phase wird das Projekt geplant, recherchiert, der Bericht wird strukturiert, die Anforderungen werden eruiert und  ein Konzept für einen Teststand wird erstellt.
     \item \textbf{Aufbau des Teststands}: Ein Teststand aufbauen nach Konzept um Performance-Experimente und Messungen mit der i2pd-Software in einem Netzwerk machen zu können.
-Analyze what needs to be tested and determine testing criteria, create a test plan.
     \item \textbf{Auswertungsphase}: Verschiedene Performance-Experimente und Messungen werden in dieser Phase ausgeführt und ausgewertet.
     \item \textbf{Abschlussphase}: Vervollständigen des Berichts, Fazit erstellen, Korrekturlesen, Erstellung des Web-Abstracts.
 \end{enumerate}
@@ -324,6 +285,7 @@ Die Spalte ''PW'' gibt die Projektwoche an. Die Spalte ''KW'' die Kalenderwoche.
     \label{tab:projektkalender}
 \end{table}
 
-Es gilt zu beachten das dies eine Planung ist, wie das Projekt effektiv verlaufen ist ist ersichtlich aus dem Issue-Tracker und dem Arbeitsjournal im Anhang~\ref{sec:journal}.
+Es gilt zu beachten das dies eine Planung ist. Der effektive Projektverlauf ist ersichtlich im dem Issue-Tracker und dem Arbeitsjournal im Anhang~\ref{sec:journal}.
+Aus gesundheitlichen Gründen wurden die letzten Beiden Projektwochen in den September verschoben.
 
 

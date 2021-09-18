@@ -2,15 +2,11 @@
 \chapter{Ideen und Konzepte}
 \label{ch:ideen_und_konzepte}
 
-Dieses Kapitel soll Ideen aufzeigen, wie die Fragestellung gelöst werden soll.
-Es wird ein Konzept für einen Teststand vorgestellt, der den Anforderungen (siehe Abschnitt~\fullref{sub:Anforderungen}) gerecht werden soll.
-
-% Angefangen mit dem Abschnitt \ref{sec:grundidee} werden verschiedene Lösungsansätze für verschiedene Aspekte vorgestellt.
-
-% Spiel zwischen Testen und Hypothesen anpassen
+Dieses Kapitel zeigt Ideen auf, wie die Fragestellung angegangen wurde.
+Es wird ein Konzept für einen Teststand vorgestellt, der den Anforderungen (siehe Abschnitt~\fullref{sub:Anforderungen}) gerecht wird.
 
 
-\section{Grundidee}\label{sec:grundidee}
+
 % TODO Beschreibung wie das Problem im Ansatz gelöst werden soll
 
 % Hier geht es um die Fragestellung, wie Sie die formulierten Ziele der Arbeit erreichen wollen.
@@ -29,9 +25,10 @@ Es wird ein Konzept für einen Teststand vorgestellt, der den Anforderungen (sie
 % - Besteht z.B. ein wesentliches Ziel der Arbeit darin, eine passende Software-Architektur zu
 % evaluieren, dann gehören die entsprechenden Beschreibungen ins Kapitel 5.
 
-Grundsätzlich soll ein Teststand aufgebaut werden an dem empirische Performance Messungen an einem I2P-Testnetzwerk durchgeführt werden können \seereq{TINF}.
+Grundsätzlich soll ein Teststand aufgebaut werden, an dem empirische Performance Messungen an einem I2P-Testnetzwerk durchgeführt werden können \seereq{TINF}.
 Dabei gibt es verschiedene Herausforderungen und Aspekte die es zu beachten gilt.
 In den folgenden Abschnitten werden nun Ideen vorgestellt und genauer erläutert, wie diese Herausforderungen angegangen werden.
+In den folgenden Abschnitten werden verschiedene Lösungsansätze für verschiedene Teilprobleme und Aspekte vorgestellt.
 
 %TODO: Hyptohesen kann man testen, bestätigen, neue hyptothesen & und oder neue Tests
 %TODO: das empirische
@@ -42,23 +39,24 @@ In den folgenden Abschnitten werden nun Ideen vorgestellt und genauer erläutert
 
 \section{Reproduzierbarkeit}
 
-Um Messungen auf einem solchen Testnetzwerk wiederholbar und reproduzierbarer zu machen \seereq{TREP}, sind folgende zwei Ideen wichtig.
+Um Messungen auf einem solchen Testnetzwerk wiederholbar und so gut wie möglich reproduzierbar zu machen \seereq{TREP}, sind folgende zwei Ideen wichtig.
 Als erstes soll das Testnetzwerk isoliert werden, um äussere Einflüsse durch das Netzwerk (auch das öffentliche I2P-Netzwerk) zu vermeiden (siehe auch Abschnitt~\ref{sec:isolierung}).
 Zweiteres soll die Testinfrastruktur als Programmcode beschrieben werden (auch bekannt als \glstext{iac} (\glsname{iac})).
-Somit kann dasselbe Testnetzwerk später wieder erneut wieder aufgebaut werden, anhand der versionierten Infrastrukturdefinition (\glstext{}).
+Somit kann dasselbe Testnetzwerk später wieder erneut wieder aufgebaut werden, anhand der versionierten Infrastrukturdefinition.
 Mehr dazu im Abschnitt~\ref{sec:infrastructure}.
 
 \section{Infrastruktur}\label{sec:infrastructure}
 
 Wichtig für das Deployment der Infrastruktur für das Testnetzwerk ist, dass man schnell neue Messungen starten und neue Testnetzwerke erstellen kann \seereq{TPER}.
-Und dies mit verschiedenen Konfigurationseinstellungen \seereq{TCNF}.
+Dies auch mit der Möglichkeit verschiedene Konfigurationseinstellungen tätigen zu können \seereq{TCNF}.
 Die im Vorherigen Abschnitt bereits erwähnt, soll das Deployment auch reproduzierbar sein \seereq{TREP}.
 Es soll auch möglich sein verschieden grosse Testnetzwerke zu erstellen \seereq{TSCL}.
 
 \subsection{Container oder Virtuelle Maschinen}
 
-Um Ressourcen zu schonen aufgrund von kleinerem Overhead und Start-Up-Time von Containern im Gegensatz zu VMs sind diese wohl zu bevorzugen.
-Container erlauben es schneller tests durchzuführen \seereq{TPER} aufgrund der Start-Up/Deployment-Time
+Um Ressourcen zu schonen und aufgrund von kleinerem Overhead sowie Startup-Time von Containern im Gegensatz zu virtuellen Maschinen sind diese wohl zu bevorzugen.
+Zudem lassen sich Container schneller neu zu erstellen und zu deployen.
+Container erlauben es auch schneller Tests durchzuführen \seereq{TPER}. 
 aber auch Tests mit mehr Knoten zu machen, da weniger Ressourcen für einen einzelnen Knoten benötigt wird, da der Betriebssystemkernel geteilt wird.
 Dies ist der Fall weil bei Containerlösungen (oder auch OS-Virtualisierung) im Gegensatz zu Virtuellen Maschinen der Betriebssystemkernel zwischen den Instanzen geteilt wird.
 
@@ -66,22 +64,27 @@ Dies ist der Fall weil bei Containerlösungen (oder auch OS-Virtualisierung) im 
 
 %TODO: Dies ist eine realisierungsfrage
 
-Es gibt verschiedene Tools für deployment von Netzwerken wie z.B. \lstinline|docker-compose|, \lstinline|kubernetes|, \lstinline|terraform|, oder auch \lstinline|nixops|.
-
+Es gibt verschiedene Tools für das Deployment von gesamten Netzwerken, virtuellen Maschinen oder Container erlauben. 
+Diese sind z.B. Docker-Compose, Kubernetes, Teraform, oder auch NixOps.
+Wobei bereits Erfahrungen gemacht wurden mit NixOps und Docker-Compose.
+Aufgrund dessen wird eine Lösung diesen Tools angestrebt.
+Diese Tools erlauben ein reproduzierbares Deployment.
+Dies wird vor allem von NixOps als Feature angepriesen.
 
 \section{Konfigurierbarkeit}
 
-Mindestens folgendes soll im Teststand konfigurierbar sein (\reqref{TCNF}):
+Nach Absprache mit dem Auftraggeber soll mindestens folgendes soll im Teststand konfigurierbar sein (\reqref{TCNF}):
 
 \begin{itemize}
     \item Anzahl-Knoten im Testnetzwerk
-    \item Maximale Bandbreite der einzellnen Knoten
-    \item Hops (Länge der Tunnel)
+    \item Maximale Bandbreite der einzelnen Knoten
+    \item Anzahl Hops (Also die Länge der Tunnel)
     \item Ob im privaten oder öffentlichen Netzwerk getestet werden soll. (optional)
 \end{itemize}
 
-Nix als deklarative Konfigurationssprache würde es erlauben beliebige Aspekte des Setups konfigurierbar zu machen.
-Die meisten oben erwähnten Konfigurationsmöglichkeiten werden bereits durch verschiedene NixOS-Module (\lstinline|i2pd|, \lstinline|firewall|, ... ) angeboten. Als anderer Ansatz könnte eine JSON-Datei eingesetzt werden, da diese von vielen Programmiersprachen einfach eingelesen werden können.
+Nix als deklarative Konfigurationssprache erlaubt es beliebige Aspekte des Setups konfigurierbar zu machen.
+Die meisten oben erwähnten Konfigurationsmöglichkeiten werden bereits durch verschiedene NixOS-Module (\lstinline|i2pd|, \lstinline|firewall|, ... ) angeboten.
+Als anderer Ansatz kann eine JSON-Datei eingesetzt werden, da diese von vielen Programmiersprachen einfach eingelesen werden können.
 
 \section{Latenzmessung}
 
@@ -89,14 +92,14 @@ Um die Latenz oder Verzögerung einer Nachricht im Testnetzwerks zu messen \seer
 
 \indexequation{Latenz = Empfangszeitpunkt - Sendezeitpunkt}{Latenzberechnung}{Latenzberechnung}
 
-Jedoch muss so sichergestellt werden, dass die Uhrzeiten zwischen allen Knoten synchron ist.
-Grundlage für eine saubere Latenzmessung ist jedoch, dass man in keine Ressourcenengpässe gerät.
+Jedoch muss sichergestellt werden, dass die Uhrzeiten zwischen allen Knoten synchron ist.
+Grundlage für eine saubere Latenzmessung ist zudem, dass man in keine Ressourcenengpässe gerät.
 Dementsprechend ist das Überwachen der benötigen Ressourcen wichtig. Siehe dazu Abschnitt~\fullref{sec:ressourcenauslastung}.
 
 \section{Limitieren der Bandbreite}
 
 Die \lstinline|i2pd|-Software erlaubt es die Bandbreite eines Knotens \seereq{TLIM} mittels der \lstinline|bandwidth| Konfigurationseinstellung \seereq{TCNF} zu limitieren. \parencite{noauthor_i2p_nodate-3}
-Zusätzlich gäbe es auch Wege die Bandbreite zu limitieren.
+Zusätzlich gäbe es auch andere Wege die Bandbreite zu limitieren.
 Eine Möglichkeit wäre dies auf Netzwerkebene mittels dem ``Traffic Control Tool'' (kurz \lstinline|tc| zu lösen.
 
 \section{Isolierung des Testnetzwerks}
@@ -107,60 +110,46 @@ Um äussere Einflüsse zu vermeiden und eine idealisierte Testumgebung zu erscha
 Das Diagramm~\fullref{fig:i2p-testnetwork} zeigt den Aufbau des Testnetzwerks auf.
 Einerseits kann eine Isolation auf Ressourcenebene durch die verwendete virtuelle Maschine erreicht werden.
 Andererseits stellt dies auch automatisch eine Netzwerkisolation zur Verfügung, je nach dem wie die Virtuelle Maschine mit dem Host verbunden wird.
-Das Testnetzwerk soll standardmässig weder mit dem Internet verbunden noch mit dem System des Testers, um äussere Einflüsse zu verringern und durch Isolation bessere Reproduzierbarkeit zu erreichen.
+Das Testnetzwerk soll standardmässig weder mit dem Internet verbunden, noch mit dem System des Testers, um äussere Einflüsse zu verringern und somit durch Isolation bessere Reproduzierbarkeit zu erreichen.
 
 \begin{figure*}[ht]
   \includegraphics[width=1.0\textwidth]{i2p-testnetwork.png}
   \caption{I2P Testnetwork}\label{fig:i2p-testnetwork}
 \end{figure*}
 
-Bei der Firewall handelt es sich entweder um das Hostsystem (VM-Network) für das Testnetzwerk selber, welche die I2P-Knoten hostet, oder um einen extra Container der aller outgoing traffic kontrolliert.
+Bei der Firewall handelt es sich entweder um das Hostsystem (VM-Network) oder um das Testnetzwerk selber, welche die I2P-Knoten hostet.
 Wichtig ist das der Tester, welcher das Netzwerk erstellt und die Tests durchführt sich auch ausserhalb des Testnetzwerkes befindet, um ungewollte Einflüsse zu vermeiden.
-
 Die I2P-Knoten sind als Router dargestellt und befinden sich eigentlich alle in zwei Netzwerken gleichzeitig. Das normale IP Netzwerk und das I2P-Netzwerk.
-Am Ende des Tests müssen die Testresultate an einem sicheren Ort ausserhalb des Testnetzwerks abgelegt werden, damit diese später analysiert werden können (Result). (ResultDB)
+Am Ende des Tests müssen die Testresultate an einem sicheren Ort ausserhalb des Testnetzwerks abgelegt werden, damit diese später analysiert werden können.
 
-In der \lstinline|i2pd| Konfiguration gibt es zusätzlich das \lstinline|familiy| tag, welches die Knoten als zusammenhängend markieren würde, würden diese aus Versehen mit dem echten I2P Netzwerk reden. Dies ist auch interessant bezüglich Tests die am echten Netzwerk durchgeführt werden sollen.
+In der \lstinline|i2pd|-Konfiguration gibt es zusätzlich das \lstinline|familiy|-Tag, welches die Knoten als zusammenhängend markieren würde, würden diese aus Versehen mit dem echten I2P-Netzwerk reden. Dies ist auch interessant bezüglich Tests die am echten Netzwerk durchgeführt werden sollen.
 
 %TODO: fullmesh?
 
-\section{Bootstrapping und Verbindungsgrad der Knoten}
+\section{Bootstrapping}
 
-% TODO: in 3.2.1 Nötig weil isoliert
-Ganz zu Beginn, wenn ein Knoten dem I2P Netzwerk beitritt muss dieser Wissen wo mindestens ein anderer Knoten ist.
-Um die erste Liste von Knoten zu erhalten damit Knoten dem Netzwerk beitreten können, muss die liste von Knoten im Netzwerk zu beginn des Tests ''geseedet'' mit einer liste von Bekannten Knoten.
-Es wird also entweder ein Floodfill-Router benötigt oder ein separater Reseed-Server.
-
-Ohne einen Reseed server ist dies möglich mit einem floodfill reseed:
-
-\url{https://i2pd.readthedocs.io/en/latest/tutorials/floodfill-bootstrap/}
-
-Dies würde es auch erlauben ein Testnetzwerk zu erstellen, deren Knoten nicht von allen anderen Knoten Bescheid wissen.
-
-
-Um bessere empirische Aussagen machen zu können, sollte das Testnetzwerk so gut wie möglich das öffentliche I2P-Netzwerk abbilden \seereq{EVAL}.
-
+Wie im Abschnitt~\fullref{sec:bootstrapping} erklärt wird im privaten Testnetzwerk ein Bootstapping-Vorgang benötigt.
+Ganz zu Beginn, wenn ein Knoten dem I2P Netzwerk beitritt muss dieser wissen wo mindestens ein anderer Knoten ist.
+Um dies zu bewerkstelligen wird ein separater Container dem Testnetzwerk hinzugefügt der einen Reseed-Server mit sich bringt.
+Somit kann zu Beginn jeder Knoten eine Liste von anderen Knoten abfragen und so dem Netzwerk beitreten.
+Anhand dieser Liste kann auch der Verbindungsgrad der Knoten gesteuert werden.
+Man kann auch einen Floodfill-Router verwenden, um das Netzwerk zu bootstrappen \parencite{noauthor_bootstrapping_nodate}.
+Jedoch scheint der Ansatz mit einem Reseed-Server schöner zu sein, da sich somit nicht extra Knoten im Netzwerk befindet, der die Messung beeinflussen könnte.
 
 \section{Messen der Ressourcenauslastung}\label{sec:ressourcenauslastung}
 
 %TODO: in kapitel latenz
 
-Die Messung der Ressourcenauslastung der Knoten könnte sinnvoll sein aus mehreren Gründen.
-Gerät ein Knoten oder die Hostsysteme für das Testnetzwerk in Ressourcenengpässe beeinflusst dies auch die Resultate.
+Die Messung der Ressourcenauslastung der Knoten könnte aus mehreren Gründen sinnvoll sein.
+Gerät ein Knoten oder die Hostsysteme für das Testnetzwerk in Ressourcenengpässe, beeinflusst dies auch die Resultate.
 Dies ist insbesondere wichtig enorm wichtig bei Latenzmessungen, denn diese werden somit fehlerhaft und nicht reproduzierbar \seereq{TREP}.
+Auch kann sichergestellt werden, dass das Testnetzwerk nicht so gross skaliert wurde, bzw. wie weit es skaliert werden kann \seereq{TSCL}.
+Zudem kann die Test-Performance so gemessen werden \seereq{TPER}.
+Folgendes könnte gemessen werden:
 
 \begin{itemize}
-    \item Somit kann sichergestellt werden, dass das Testnetzwerk nicht so gross skaliert wurde, bzw. wie weit es skaliert werden kann \seereq{TSCL}.
-    \item Um sicherzustellen, dass ein Flaschenhals im Netzwerk nicht durch zu wenig Ressourcen verursacht sind \seereq{TPER}.
-    \item Äussere einflüsse wie Ressource-Exhaustion vermeiden, dies verbessert auch die Reproduzierbarkeit \seereq{TREP}.
-    \item Messung der Test-Performance
-\end{itemize}
-
-Gemessen werden sollte:
-
-\begin{itemize}
+    \item CPU Gebrauch (in Prozent)
     \item Netzwerkbandbreite (kbits/sec)
-    \item CPU gebrauch (in Prozent)
     \item RAM Verwendung (in Prozent)
     \item Disk I/O (read/write, kbits/sec)
     \item Freier Speicherplatz
@@ -168,4 +157,4 @@ Gemessen werden sollte:
 
 Es wird erwartet, dass der Workload von I2P vor allem Netzwerklastig (weiterleiten über mehrere Knoten) und Prozessorlastig (Verschlüsselung) ist.
 Da es sich hier um ein virtuelles Container-Netzwerk handelt, heisst dass die Last auf dem Netzwerk sich auch in der Prozessorlast zeigen wird.
-Zudem wird nicht wenig Arbeitsspeicher verwendet, um die benötigte Anzahl Container und Knoten zu betreiben.
+Um die benötigte Anzahl Container zu starten und die I2P-Knoten zu betreiben wird auch viel Arbeitsspeicher benötigt.
