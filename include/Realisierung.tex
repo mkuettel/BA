@@ -46,24 +46,24 @@ Schlussendlich wird beschrieben wie dies umgesetzt wurde, welche Lösungswege ei
 
 \section{Systemarchitektur}\label{sec:systemarchitektur}
 
-Wie im Kapitel~\fullref{ch:ideen_und_konzepte} wurde konzeptionell ausgeführt, wie der Teststand und die Messanlage für das I2P-Testnetzwerk aussehen soll.
-In diesem Abschnitt wird nun die resultierende Softwarearchitektur aufgezeigt.
+Im Kapitel~\fullref{ch:ideen_und_konzepte} wurde konzeptionell ausgeführt, wie der Teststand und die Messanlage für das I2P-Testnetzwerk aussehen soll.
+In diesem Abschnitt wird nun die resultierende Softwarearchitektur aufgezeigt und beschrieben.
+Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diagramm die Systemarchitektur auf.
 Die entwickelte Software besteht grob aus fünf Teilen:
 
 \begin{enumerate}
     \item \textbf{Deployment:} Hier ist die Deployment-Konfiguration für die Test-VM zu finden. Mittels NixOps kann dieselbe Test-VM reproduzierbar erstellt werden.
-    \item \textbf{Test-VM \& deren Deployment}: Die Test-VM stellt eine reproduzierbare und isolierte Umgebung zur Verfügung, um darin die Messungen durchführen zu können.
+    \item \textbf{Test-VM}: Die Test-VM stellt eine reproduzierbare und isolierte Umgebung zur Verfügung, um darin die Messungen durchführen zu können.
      Die Virtuelle Maschine grenzt die Ressourcen des Testnetzwerks klar ein.
-     Es handelt sich hier um ein Linux-System welches Docker installiert hat,
+     Es handelt sich hier um ein Linux-System, das Docker installiert hat,
 	 um darin die benötigen Container zu erstellen.
-    \item \textbf{Container-Deployment}: Dieser Bestandteil ist verantwortlich die anhand der Testkonfiguration das I2P-Testnetzwerk, inklusive den Shared-Volumes, mit Hilfe von Docker zu erstellen. Dazu wird das \lstinline|recompose|-Skript verwendet.
-	 Hierbei handelt es sich um einen Wrapper, der intern docker-compose verwendet.
-    \item \textbf{I2P-Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container. Dieser wird benötigt wird, um das Testnetzwerk zu bootstrappen.
-    \item \textbf{Messanlage:} Die Messanlage besteht aus einem TCP-Server und TCP-Client die zusätzlich in den i2pd-Containern angesiedelt sind.
-        Zudem gibt es ein Messskript welches den Nachrichtenversand vom TCP-Client zum TCP-Server anstossen kann und die Messresultate sammelt.
+    \item \textbf{Container-Deployment}: Dieser Bestandteil ist dafür verantwortlich, anhand der Testkonfiguration das I2P-Testnetzwerk, inklusive der Shared-Volumes, mit Hilfe von Docker zu erstellen. Dazu wird das Recompose-Skript verwendet.
+	 Hierbei handelt es sich um einen Wrapper, der intern Docker-compose verwendet.
+    \item \textbf{I2P-Testnetzwerk:} Das Testnetzwerk besteht aus i2pd-Containern sowie aus dem Reseed-Container. Dieser wird benötigt, um das Testnetzwerk zu bootstrappen.
+    \item \textbf{Messanlage:} Die Messanlage besteht aus einem TCP-Server und einen TCP-Client, die zusätzlich in den i2pd-Containern angesiedelt sind.
+        Zudem gibt es ein Messskript, welches den Nachrichtenversand vom TCP-Client zum TCP-Server anstossen kann und die Messresultate sammelt.
 \end{enumerate}
 
-Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diagram die Systemarchitektur auf.
 
 \begin{figure*}[htp]
   \includegraphics[width=1.1\textwidth]{include/uml/componentDiagram.png}
@@ -73,128 +73,121 @@ Die Abbildung~\fullref{fig:architektur-diagramm} zeigt in einem Komponenten-Diag
 
 \section{Komponentendesign}\label{sec:komponentendesign}
 
-In diesem Abschnitt werden die einzelnen Komponenten, wie aufgezeigt der Abbildung~\fullref{fig:architektur-diagramm}, genauer beschrieben.
+In diesem Abschnitt werden die einzelnen Komponenten, wie dargestellt der Abbildung~\fullref{fig:architektur-diagramm}, genauer beschrieben.
 
-\subsection{Deployment}
+\subsection{Deployment der Test-VM}
 
-NixOps erlaubt es mittlels einer NixOS-Systemkonfiguration ein komplettes Linux auf diverse Arten von Maschinen zu deployen. Dies kann physische Hardware oder wie auch in diesem Falle eine VM sein.
+NixOps erlaubt es, mittels einer NixOS-Systemkonfiguration ein komplettes Linux auf diverse Arten von Maschinen zu deployen. Dies kann physische Hardware oder,
+wie auch in diesem Falle, eine VM sein.
 Somit sind alle benötigen Abhängigkeiten in Code-Form abgelegt und eine Test-VM kann reproduzierbar erstellt werden.
 
-\subsection{Konfiguration}
+\subsection{Testkonfiguration}
 
-Die Konfiguration des Teststands kann mittels einer Json-Konfigurationsdatei einfach angepasst werden.
+Die Konfiguration des Teststands kann mittels einer JSON-Konfigurationsdatei einfach angepasst werden.
 Da es sich hier um eine JSON-Datei handelt, kann diese falls nötig einfach von verschiedenen Programmen gelesen werden.
 Einerseits wird diese vom Messkript gelesen, wie aber auch vom \lstinline|recompose| Skript.
-Wie diese Konfiguration genau aussieht kann
-
+Wie diese Konfiguration genau aussieht, wird im Abschnitt~\fullref{sec:konfigurationsoptionen} genauer erläutert.
 
 \subsection{Recompose-Skript}
 
 Das Recompose-Skript ist dafür verantwortlich das Docker-Netzwerk anhand der Konfiguration aufzubauen und zu verwalten.
 Es ist das Kernstück der entwickelten Software.
+Es handelt sich hierbei um einen Wrapper um Docker-compose.
+Einerseits sorgt der Wrapper dafür, dass das Containernetzwerk korrekt aufgebaut wird (siehe Abschnitt~\fullref{sec:netzwerkisolation}) .
+Andererseits generiert dieses die von Konfigurationsdateien für Docker-compose und managed die Shared-Volumes.
+Docker-Compose erlaubt das automatisierte Erstellen und Abbauen von Netzwerken bestehend aus mehreren Docker-Containern.
+Dazu liest Docker-compose jeweils eine oder mehrere YAML-Dateien.
+In diesen YAML-Dateien können die verschiedenen Container, Netzwerke und Volumes und diverse Optionen deklariert werden, welche das zu erstellende Containernetzwerk beschreiben.
+Im Benutzerhandbuch im Abschnitt~\fullref{sec:erstellen_des_testnetzwerks} wird kurz gezeigt, wie dieses Skript verwendet wird.
 
-Es handelt sich hier um einen Wrapper um \lstinlline|docker-compose|
+\subsection{i2pd-Container}
 
-Als wichtigster Punkt wird hier der 
+Hauptsächlich wird in diesem Container der \lstinline|i2pd|-Prozess ausgeführt.
+Der TCP-Client und TCP-Server, welche zur Messung benötigt werden, sind ebenfalls direkt in diesem Container angesiedelt.
+Diese sind in den Abschnitten \fullref{sec:tcpserver} und \fullref{sec:tcpclient} genauer beschrieben.
+Dies verletzt zwar das Prinzip, dass man nur einen Prozess in einem Docker-Container ausführen sollte,
+jedoch ist das Ziel, hiermit Messungenauigkeiten aufgrund eines zusätzlichen Containers zu vermeiden, sowie die Netzwerkkonfiguration zu vereinfachen.
 
-\subsection{Deployment der Knoten}
+\subsection{Reseed-Server}
 
-Die I2P-Knoten werden mittels docker-compose deployed.
-\lstinline|docker-compose| erlaubt das automatisierte erstellen und abbauen von Netzwerken bestehend aus mehreren Docker-Containern.
-Dazu liest \lstinline|docker-compose| jeweils eine oder mehrere YAML-Dateien.
-In diesen YAML-Dateien können die verschiedenen Container, Netzwerke und Volumes und diverse Optionen deklariert werden, welche das zu erstellende Container-Netzwerk beschreibt.
+Da das Testnetzwerk privat ist und somit nicht Teil des öffentlichen Netzwerks sein sollte \seereq{TISO}, wird ein Bootstrapping Prozess benötigt, da die öffentlichen Reseed-Server nicht erreichbar sind.
+Dieser wurde so implementiert, das ein zusätzlicher Container im Testnetzwerk gestartet wird, welcher einen sogenannten Reseed-Server beinhaltet.
+Die i2pd-Container fragen zu Beginn den Reseed-Server über HTTPS nach einer Liste von RouterInfos.
+Dieser Ansatz hat den Vorteil, das so das Testnetzwerk schnell komplett neu aufgebaut und gestartet werden kann.
+Weitere Details zum Bootstrapping-Vorgang sind im Abschnitt~\fullref{sec:umsetzung_bootstrap} zu finden.
 
-Anfangs wurde versucht die Knoten unter Verwendung des \lstinline|scale|-Features zu skalieren.
-Unter Verwendung dieses Feature muss der \lstinline|i2pd|-Knoten nur einmal deklariert werden und kann beim ausführen des \lstinline|docker-compose|-Befehls mehrfach instanziiert werden.
-Jedoch hat dieses Feature zu Problemen geführt, sodass die \lstinline|i2pd|-Knoten nicht untereinander kommunizieren konnten.
-Es kann gut sein das dieses Feature nicht für P2P-Netzwerke geeignet ist, da dieses normalerweise gebraucht wird um z.B. Datenbank- oder Webserverinstanzen zu skalieren.
-Diese müssen normalerweise auch nicht untereinander kommunizieren.
-Ausserdem verweist die Dokumentation auch immer mehr auf docker-swarm, um Knoten zu skalieren.
+\subsection{Messskript}
 
-Schlussendlich wurde eine Lösung für dieses Problem gefunden,
-indem das \lstinline|recompose|-Skript ein Teil der YAML-Konfiguration beim Ausführen generiert.
-Für jeden Knoten der im Netzwerk sein sollte wird ein neuer Knoten deklariert.
-
-% TODO: Referenziere generieren der Knoofen-Konifugrationen
-
-\subsection{Reseed-Server und Bootstrapping}
-
-Die I2P-Router im öffentlichem I2P-Netzwerk können sich hier einfach an den öffentlich verfügbaren Reseeder eine \lstinline|su3|-Datei via HTTPS herunterladen.
-Diese \lstinline|su3|-Datei beinhaltet RouterInfos. 
-Diese RouterInfos beinhalten die nötigen Informationen wie public-key und Netzwerkadresse, um die Kommunikation zu starten.
-
-Im privaten und abgeschotteten Testnetzwerk sind die öffentlichen Reseed-Server jedoch nicht erreichbar.
-Deshalb muss ein anderer Weg gefunden werden das private I2P-Netzwerk zu bootstrappen.
-
-Denn der Floodfill-Anstatz entspricht nicht unbedingt der Realität, denn die Reseeder-Knoten können liefern nicht allen I2P-Routern dieselbe Liste an Peers.
-
-Auch kann die Konfiguration des Reseeders eine wichtige Rolle spielen, denn dieser bestimmt mit der Liste an Peers die er den I2P-Routern liefert den Konnektivitätsgrad der Knoten.
+Das Messskript ist dafür verantwortlich, eine konfigurierte Anzahl an Nachrichten zur Latenzmessung durch das Testnetzwerk zu senden, damit Messdaten erstellt werden.
+Die Nachrichten zur Latenzmessung werden von einem zufälligem Knoten zu einem anderen zufälligen Knoten verschickt.
+Somit kann sichergestellt werden, dass die Latenzmessungen repräsentativ sind für das gesamte Netzwerk.
+Um das Netzwerk nicht zu überlasten, werden die Nachrichten sequentiell versendet und es wird nur eine Nachricht auf einmal versendet.
+Zudem wird nach jeder versendeter Nachricht einige Sekunden (je nachdem was konfiguriert wurde) gewartet. Genaueres dazu im Abschnitt~\fullref{sec:messkript}.
 
 \section{Umsetzung}\label{sec:umsetzung}
 
-In diesem Abschnitt wird nun beschrieben,
-wie die im vorherigen Abschnitt aufgezeigte \nameref{sec:systemarchitektur} und das dazugehörige \nameref{sec:komponentendesign} schlussendlich effektiv umgesetzt wurde.
-Zudem wird der Weg zur schlussendlichen Lösung genauer beschrieben.
-Zuerst wurde versucht ein Prototyp für das I2P-Testnetzwerk unter Verwendung von NixOS-Containern zu erstellen (siehe \nameref{sec:la1_nixos}).
-Jedoch wurde schlussendlich eine andere Lösung gefunden, welche den Anforderungen gerecht wurde, unter Verwendung von Docker-Compose.
-Der erzeugte Quellcode zur Erstellung des I2P-Testnetzwerk's sowie der Quellcode für die Messanlage ist im folgenden Repository zu finden:
-
+In folgendem Abschnitt wird nun beschrieben,
+wie die im vorherigen Abschnitt aufgezeigte Systemarchitektur und das dazugehörige Komponentendesign effektiv umgesetzt wurde.
+Zudem wird der Weg zur Lösung genauer beschrieben.
+Zuerst wurde versucht ein I2P-Testnetzwerk unter Verwendung von NixOS-Containern zu erstellen (siehe Abschnitt \fullref{sec:la1_nixos}).
+Jedoch wurde schlussendlich unter Verwendung von Docker-Compose eine andere Lösung gefunden, welche den Anforderungen gerecht wurde.
+Der erzeugte Quellcode zur Erstellung des I2P-Testnetzwerk's sowie der Quellcode für die Messanlage ist im folgenden Repository zu finden:\\
 \url{https://codeberg.org/mkuettel/i2p-testnet}
 
 \section{Lösungsansatz: NixOS-VMs und NixOS-Container}\label{sec:la1_nixos}
 
-Zu beginn des Projekts wurde versucht ein I2P-Testnetzwerk aufzubauen mit Hilfe von NixOps.
+Zu Beginn des Projekts wurde versucht, mit Hilfe von NixOps ein I2P-Testnetzwerk aufzubauen.
 NixOps ist ein Tool zum Deployment von Netzwerken bestehend aus NixOS-Maschinen.
-\cite{noauthor_nixops_nodate-5}
-% Für genauere Anweisungen und weitere Möglichkeiten welche durch nixops geboten werden, siehe das ``NixOps User's Guide''\footnote{\url{https://releases.nixos.org/nixops/nixops-1.5/manual/manual.html}}.
-
-NixOS ist eine Linux-Distribution basierend auf dem Paket-Manager Nix.
-Nix erlaubt es reproduzierbare Softwarepakete zu erzeugen und kann mit einer deklarativen und funktionalen Programmiersprache konfiguriert werden.
-% TODO: reference nix
+NixOS ist eine Linux-Distribution basierend auf dem Paket-Manager Nix,
+der es erlaubt es reproduzierbare Softwarepakete zu erzeugen.
+Er kann mit einer deklarativen und funktionalen Programmiersprache konfiguriert werden\footnote{Siehe die Webseite von NixOS für weiterführende Informationen: \url{https://nixos.org}}.
 Dieser Ansatz wurde zu Beginn aus mehreren Gründen ausgewählt.
-Einerseits setze ich auch selber NixOS seit mehreren Jahren ein und NixOps ist somit das native Deployment-Tool.
-Andererseits Nix legt enormen Wert auf Reproduzierbarkeit und das gesamte Netzwerk bis hin zum OS könnte anhand einer Nix-Konfiguration wiedererstellt werden.
+Einerseits setze ich auch selber NixOS seit mehreren Jahren ein und NixOps ist somit das dazugehörige Deployment-Tool.
+Andererseits legt Nix enormen Wert auf Reproduzierbarkeit.
+Das gesamte Netzwerk bis hin zum OS könnte anhand einer Nix-Konfiguration wiedererstellt werden.
 Auch könnten Konfigurationen für I2P-Knoten wiederverwendet werden, egal ob diese nun in Container,
 VMs oder auf echter Hardware deployed werden.
-Dies ist möglich da System-Konfigurationen oder Teile davon bei NixOS unabhängig von der Konfiguration der effektiven Infrastruktur sind.
-Ich habe angefangen mit NixOps ein Netzwerk bestehend aus einzelnen VirtualBox-VM zu erstellen.
-Um weniger Ressourcen-Overhead zu haben, habe ich dann angefangen mehrere I2P-Knoten als NixOS-Container innerhalb dieser VM zu erstellen.
-Auch habe ich damit angefangen eine Lösung für das Bootstrapping Problem zu finden.
-Jedoch bin ich mit diesem Ansatz immer wieder an verschiedenen Stellen auf Probleme gestossen:
+Dies ist möglich da, System-Konfigurationen oder Teile davon bei NixOS unabhängig von der Konfiguration der effektiven Infrastruktur sind.
+Angefangen wurde damit, dass mit NixOps ein Netzwerk bestehend aus einer einzelnen VirtualBox-VM erstellt wurde.
+Anschliessend wurden mehrere I2P-Knoten als NixOS-Container innerhalb dieser VM zu erstellt und es wurde versucht eine Lösung für das Bootstrapping Problem zu finden.
+Jedoch ist man mit diesem Ansatz immer wieder an verschiedenen Stellen auf Probleme gestossen:
 
 \begin{itemize}
-    \item \textbf{Netzwerkkonfiguration:} Die Knoten konnten nicht korrekt untereinander kommunizieren. Es war nicht möglich einen anderen Container mittels einem \lstinline|ping|-Befehl zu erreichen.
-        Es hat sich herausgestellt, dass das Routing zwischen den Containern sowie die Netzwerkmasken nicht korrekt konfiguriert wurden und es keine Option gab diese Routen richtig zu setzen innerhalb der Nix-Deklaration.
-        Aufgrund dessen habe ich das NixOS-Modul für NixOS-Container erst selbst angepasst.
-        Somit konnte ich die Routing-Probleme beheben und Optionen hinzufügen, um die Netzwerkmasken der Knoten korrekt zu setzen. %TODO: reference commit
-        Das NixOS-Container Modul scheint also nicht ausgereift zu sein.
-    \item \textbf{Docker-Kompatibilität:} Auch habe ich versucht anstatt von NixOS-Containern, Docker-Container auf NixOS zu erstellen.
-        Dies hätte es erlaubt die bestehenden Container von DIVA.EXCHANGE wiederzuverwenden. Jedoch schien der Support für Docker auch nicht ausgereift genug.
-        Ich konnte auf meinem Laptop keine Docker-Images bauen für das Testnetzwerk, da dies libvirt/QEMU-Support benötigt.
+    \item \textbf{Netzwerkkonfiguration:} Die Knoten konnten nicht korrekt untereinander kommunizieren. Es war nicht möglich einen anderen Container mittels eines \lstinline|ping|-Befehls zu erreichen.
+        Es hat sich herausgestellt, dass das Routing zwischen den Containern sowie die Netzwerkmasken nicht korrekt konfiguriert wurden und es keine Option gab,
+        diese Routen innerhalb der Nix-Deklaration richtig zu setzen.
+        Aufgrund dessen wurde das NixOS-Modul für NixOS-Container erst angepasst.
+        Somit konnte man die Routing-Probleme beheben und Optionen hinzufügen, um die Netzwerkmasken der Knoten korrekt zu setzen. %TODO: reference commit
+        Das NixOS-Container Modul sc erstelltheint also nicht ausgereift zu sein.
+    \item \textbf{Docker-Kompatibilität:} Auch hat man versucht anstatt von NixOS-Containern, Docker-Container auf NixOS zu erstellen.
+        Dies hätte es erlaubt, die bestehenden Container von DIVA.EXCHANGE wiederzuverwenden.
+        Jedoch schien der Support für Docker auch nicht ausgereift genug zu sein.
+        Man konnte auf meinem Laptop keine Docker-Images bauen für das Testnetzwerk, da dies libvirt/QEMU-Support benötigt.
         Dies war unter gleichzeitiger Verwendung von VirutalBox nicht möglich, da nur ein Hypervisor gleichzeitig ausgeführt werden kann.
-        Auch habe ich versucht den Hypervisor auf libvirt/QEMU zu wechseln, was aber schon am deployment der VM scheiterte.
-    \item \textbf{Skalierungsprobleme:} Während dem entwickeln habe ich jeweils 2 oder 8 Knoten auf einmal erstellt, um schnell ein Feedback zu erhalten.
-        Um den Reseeder zu testen hatte ich jedoch auf einmal versucht 103 Knoten zu erstellen.
-        Jedoch hat nur schon das generieren und auswerten der NixOS-Systemkonfigurationen für alle diese NixOS-Container extrem viel Arbeitsspeicher benötigt.
-        Meine 16GB Arbeitsspeicher in meinem Laptop wurden nach mehreren Sekunden gefüllt. Ich konnte somit die Knoten nicht einmal erstellen und deployen, da nur schon das berechnen der NixOS-Systemkonfigurationen zu ineffizent implementiert ist.
+        Man hat auch versucht den Hypervisor auf libvirt/QEMU zu wechseln, was aber schon am Deployment der VM scheiterte.
+    \item \textbf{Skalierungsprobleme:} Während dem Entwickeln hat man jeweils 2 oder 8 Knoten auf einmal erstellt, um schnell ein Feedback zu erhalten.
+        Um den Reseeder zu testen hat man jedoch versucht 103 Knoten auf einmal zu erstellen.
+        Jedoch hat nur schon das Generieren und Auswerten der NixOS-Systemkonfigurationen für alle diese NixOS-Container extrem viel Arbeitsspeicher benötigt.
+        Meine 16 GB Arbeitsspeicher in meinem Laptop waren nach mehreren Sekunden gefüllt.
+        Man konnte somit die Knoten nicht einmal erstellen und deployen, da nur schon das berechnen der NixOS-Systemkonfigurationen zu ineffizent implementiert ist.
 \end{itemize}
 Somit war klar das dieser Lösungsansatz nicht funktionieren konnte und es musste ein grundsätzlich anderer Ansatz zur Erstellung der Container gefunden werden.
 
 \section{Lösung mit Docker-Compose}
 
-Nachdem sich herausgestellt hat, das der Lösungsansatz mit NixOS-Container nicht funktioniert, wurde eine Container-Orchestration Lösung gesucht.
-Um unnötige Komplexität zu vermeiden wurde auf das einfache Tool \lstinline|docker-compose| gesetzt.
+Nachdem sich herausgestellt hat, dass der Lösungsansatz mit NixOS-Containern nicht funktioniert, wurde eine Container-Orchestration Lösung gesucht.
+Um unnötige Komplexität zu vermeiden wurde auf das einfachere Tool Docker-compose gesetzt.
 Zudem hat der Auftraggeber bereits Erfahrungen mit diesem Tool gemacht und es auch schon eingesetzt um i2pd-Netzwerke zu erstellen
 für die Entwicklung an der DIVA-Blockchain.
-Anhang \lstinline|docker-compose.yml|-Datei vom Auftraggeber,
+Anhand der \lstinline|docker-compose.yml|-Datei vom Auftraggeber,
 konnte ein kleines öffentliches I2P-Testnetzwerk mit acht festkodierten i2pd-Container werden.
 Dies wurde anschliessend als Ausgangspunkt verwendet.
 
 \subsection{Skalierung}\label{sec:scaling}
 
 Damit verschiedene Anzahl an I2P-Knoten im privaten Testnetzwerk getestet werden können, müssen diese skaliert werden können.
-Anfangs wurde versucht auf die Skalierungsfunktion von \lstinline|docker-compose| zurückzugreifen.
-Mittels der \lstinline|--scale|-Option des \lstinline|docker-compose up| Befehls, kann aus einem einzigen deklarierten Container mehrere Container instanziiert werden. Man kann diesen also nur einmal definieren, wie aufgezeigt in folgendem Listing:
+Anfangs wurde versucht auf die Skalierungsfunktion von Docker-compose zurückzugreifen.
+Mittels der \lstinline|--scale|-Option des \lstinline|docker-compose up| Befehls, können aus einem einzigen deklarierten Container mehrere Container instanziiert werden. Man kann diesen also nur einmal definieren, wie aufgezeigt in folgendem Listing:
 \begin{lstlisting}{language=yaml}
 # ... 
 services:
@@ -211,21 +204,22 @@ services:
 
 Jedoch bin ich mit diesem Ansatz auf Netzwerkprobleme gestossen,
 sodass die \lstinline|i2pd|-Container nie untereinander direkt kommunizieren konnten.
-Die Vermutung besteht, dass diese Skalierungsfunktion nicht für P2P-Netzwerke gedacht ist.
-Denn im Normalfall wird diese wohl verwendet ein Service auf einem Tier zu skalieren.
-Beispielsweise kann damit ein App-Server-Prozess skaliert werden, welche aber natürlich nie untereinander kommunizieren müssen.
+Die Vermutung besteht, dass diese Skalierungsfunktion nicht für P2P-Netzwerke geeignet ist,
+denn im Normalfall wird sie wohl verwendet einen Service auf einem Tier zu skalieren.
+Beispielsweise können damit Datenbank- oder Webserverinstanzen skaliert werden, die aber natürlich normalerweise nie untereinander kommunizieren müssen.
+Auch scheint die \lstinline|--scale|-Option veraltet zu sein und wird durch neuere Features wie \lstinline|docker swarm| ersetzt.
 Dieses Problem wurde schlussendlich so gelöst,
-dass nun dynamisch für jeden zu erstellenden Knoten eine\lstinline|i2pd|-Container-Deklaration anhand eines JSON-Template generiert wird.
+dass nun dynamisch für jeden zu erstellenden Knoten eine \lstinline|i2pd|-Container-Deklaration anhand eines JSON-Templates generiert wird.
 Dieses JSON-Template ist in \lstinline|docker/i2p-node-base.json| zu finden.
-Die fehlenden Werte, so wie z.B. eine statische IP, werden beim ausführen des \lstinline|recompose|-Skripts ausgefüllt.
+Die fehlenden Werte, so wie z.B. eine statische IP, werden beim ausführen des Recompose-Skripts ausgefüllt.
 Anschliessend werden die verschiedenen Deklarationen zusammengeführt und in eine generierte \lstinline|docker-compose.yml|-Datei abgelegt.
-Dies funktionierte wunderbar da YAML ein Superset von JSON ist. Vereinfacht gesagt: Jede JSON-Datei ist auch eine gültige welche: YAML-Datei.
+Dies funktionierte sehr gut da, YAML ein Superset von JSON ist. Vereinfacht gesagt: Jede JSON-Datei ist auch eine gültige YAML-Datei.
 
 Im folgenden Quellcodelisting sind die beiden relevanten Funktionen aus der Datei \lstinline|lib/compose.bash| aufgezeigt.
 Die Funktion \lstinline|generate_node_config| erstellt aus dem JSON-Template eine einzelne Service Konfiguration.
 Insbesondere werden in Zeile 69 die fehlenden Felder im JSON-Template ausgefüllt.
 Die Funktion \lstinline|generate_all_node_configs| erstellt die Datei,
-welche dann anschliessend von \lstinline|docker-compose| eingelesen werden kann.
+die dann anschliessend von Docker-compose eingelesen werden kann.
 
 \begin{lstlisting}[firstnumber=61]{language=bash}
 generate_node_config() {
@@ -275,14 +269,14 @@ generate_all_node_configs() {
 
 Da hiermit pro Knoten eine statische IP pro Container vergeben wird,
 konnte mit dieser Lösung nicht nur das Skalierungsproblem, sondern auch die Netzwerkprobleme gelöst werden.
-Die Konfigurierte Anzahl Container können nun direkt miteinander kommunizieren.
+Die konfigurierte Anzahl an Containern können nun direkt miteinander kommunizieren.
 
-Bei der Skalierung auf 128-Knoten auf einem einzelnen Rechner hat sich ein weiteres Problem herauskristallisiert,
+Die Skalierung auf 128 Knoten auf einem einzelnen Rechner hat sich als weiteres Problem herauskristallisiert,
 dass die Knoten nicht miteinander kommunizieren können.
 Nach einer Fehleranalyse hat sich herausgestellt, dass die ARP-Neighbor-Tabelle der
-Test-VM überlaufen waren.
-Dies ist so geschehen, da sich die Container eine einzelne ARP-Neighbor-Tabelle teilen, nämlich die des Hosts.
-Als Lösung wurden die ARP-Tabellen des Host einfach vergrössert.
+Test-VM überlaufen war.
+Dies ist geschehen, da sich die Container eine einzelne ARP-Neighbor-Tabelle teilen, nämlich die des Hosts.
+Als Lösung wurden die ARP-Neighbor-Tabelle des Hosts einfach vergrössert.
 Aus diesem Grund wurde ein zusätzliches Skript erstellt, welches Root-Rechte benötigt, da ein \lstinline|sysctl|-Befehl gebraucht wird um die Linux-Kernel-Parameter umzustellen.
 Hier der relevante Ausschnitt aus \lstinline|bin/networking-sysctls|, der die Grösse der ARP-Neighbor-Tabelle erhöht, abhängig von der konfigurierten Anzahl an Knoten:
 \begin{lstlisting}[firstnumber=9]{language=bash}
@@ -295,70 +289,72 @@ sysctl net.ipv4.neigh.default.gc_thresh2=$((arp_table_size * 2))
 sysctl net.ipv4.neigh.default.gc_thresh3=$((arp_table_size * 2))
 \end{lstlisting}
 
-\subsection{Bootstrapping und Reseed-Server}
+\subsection{Bootstrapping und Reseed-Server}\label{sec:umsetzung_bootstrap}
 
-Da das Testnetzwerk privat sein sollte und somit nicht Teil des öffentlichen Netzwerks sein sollte \seereq{TISO}, wird ein Boostrapping Prozess benötigt.
-Dies wurde so implementiert, das ein zusätzlicher Container gestartet wird welches einen sogenannten Reseed-Server beinhaltet.
-Dieser Ansatz hat den Vorteil, das so das Testnetzwerk schnell neu aufgebaut werden kann.
-Die \lstinline|i2pd|-Implementation beinhaltet selber keinen Reseed-Server, sondern eine zusätzliche Software ist von Nöten.
-
-Die Go-Implementation dieses Reseed-Servers ist hier in meinem Repository zu finden: \url{https://codeberg.org/mkuettel/i2p-tools}
-Diese basiert auf der Implemenation die auch von DIVA.EXCHANGE verwendet wird: \url{https://codeberg.org/diva.exchange/i2p-tools}
-Welche schlussendlich wiederum auf der folgenden Implementation auf GitHub basiert:  \url{https://github.com/MDrollette/i2p-tools}.
+Die \lstinline|i2pd|-Implementation beinhaltet selber keinen Reseed-Server, sondern es ist eine zusätzliche Software ist vonnöten.  
+Die Go-Implementation dieses Reseed-Servers ist hier in meinem Repository zu finden:\\ \url{https://codeberg.org/mkuettel/i2p-tools}\\
+Diese basiert auf der Implementation die auch von DIVA.EXCHANGE verwendet wird:\\ \url{https://codeberg.org/diva.exchange/i2p-tools}\\
+Welche schlussendlich wiederum auf der folgenden Implementation auf GitHub basiert:\\  \url{https://github.com/MDrollette/i2p-tools}\\
 
 Die Implementation aus meinem eigenen Repository wurde insofern angepasst,
-dass alle verfügbaren RouterInfos verwendet werden. Standardmässig werden nur 75\% davon überhaupt verwendet und bei einer Anfrage an die Knoten abgeliefert.
-Der Grund dafür ist leider unbekannt, jedoch macht dies für meinen Anwendungszweck Sinn im Testnetzwerk, man kann die numRi und su3 files option in der Konfiguration angepasst werden.
+dass alle verfügbaren RouterInfos verwendet werden. Standardmässig werden nur 75 \% davon überhaupt verwendet und bei einer Anfrage an die Knoten abgeliefert.
+Der Grund dafür ist leider unbekannt, jedoch macht dies für meinen Anwendungszweck im Testnetzwerk keinen Sinn. 
 Man braucht so nur unnötig mehr Knoten um das Netzwerk aufstarten zu können.
-
-%TODO: erkläre SU3-Dateien
+Deshalb wurden ich auch die Anzahl an RouterInfo-Dateien und die Anzahl an verschiedenen SU3-Dateien mit einem verschiedener Liste von RouterInfo--Dateien konfigurierbar gemacht.
+Die Konfiguration dieser Optionen kann eine wichtige Rolle spielen, denn diese bestimmen  die Liste an Peers die den I2P-Routern geliefert beim Start geliefert werden und somit den Konnektivitätsgrad der Knoten.
 
 \subsubsection{Ablauf}
 
-Der Bootstrapping-Vorgang im Testnetzwerk wird wie folgt abgehandelt (vgl. mit Abbildung~\fullref{fig:bootstrap-diagram}):
+Der Bootstrapping-Vorgang im Testnetzwerk wird wie folgt abgehandelt (vgl. Abbildung~\fullref{fig:bootstrap-diagram}):
 
 \begin{enumerate}
     \item Erstellen der Container für den Reseed-Sever und den I2P-Knoten
-    \item Der Reseed-Server erstellt die nötigen Schlüssel und Zertifikate, um einerseits später den HTTPS-Reseed-Server zu starten und andererseits die su3-Dateien zu signieren.
-    \item Der Reseed-Server-Container fängt an zu warten bis er alle RouterInfo's von allen I2P-Knoten erhalten hat
-    \item Die I2P-Router werden kurzzeitig gestartet, bis diese Ihre RouterInfo Datei erstellen. Die I2P-Router werden anschliessend wieder gestoppt, da der Reseed-Server im Moment noch nicht in Betrieb ist, da ihm die RouterInfos noch fehlen.
-    \item Die I2P-Knoten-Container warten anschliessend bis der HTTPS-Reseed-Server verfügbar ist.
+    \item Der Reseed-Server erstellt die nötigen Schlüssel und Zertifikate, um einerseits später den HTTPS-Reseed-Server zu starten und andererseits die SU3-Dateien zu signieren.
+    \item Der Reseed-Server-Container fängt an zu warten bis er alle RouterInfo's von allen I2P-Knoten erhalten hat, die im Hintergrund vom Recompose-Skript gesammelt werden.
+    \item Die I2P-Router werden kurzzeitig gestartet, bis sie Ihre RouterInfo Datei erstellen. Die I2P-Router werden anschliessend wieder gestoppt, da der Reseed-Server im Moment noch nicht in Betrieb ist, da ihm die RouterInfos noch fehlen.
+    \item Die I2P-Knoten-Container warten anschliessend, bis der HTTPS-Reseed-Server verfügbar ist.
     \item Auf der Test-VM kopiert ein Hintergrund-Job alle RouterInfos vom I2P-Container in die NetDb des Reseed-Server-Containers.
-    \item Nach kurzer Zeit hat der Reseed-Server-Container alle benötigten RouterInfos. Nun generiert dieser die su3-Datei aus den RouterInfos und startet anschliessend nun effektiv den HTTPS-Reseed-Server.
+    \item Nach kurzer Zeit hat der Reseed-Server-Container alle benötigten RouterInfos. Nun generiert dieser die SU3-Datei aus den RouterInfos und startet anschliessend effektiv den HTTPS-Reseed-Server.
     \item Die I2P-Knoten-Container können nun den HTTPS-Reseed-Server erreichen und somit wird der I2P-Router gestartet.
-    \item Die I2P-Router laden nun die su3-Datei herunter und können so die anderen Knoten ausfindig machen und Ihre Arbeit starten.
+    \item Die I2P-Router laden die SU3-Datei herunter und können so die anderen Knoten ausfindig machen und Ihre Arbeit starten.
 \end{enumerate}
 
-Welche Reseeder ein I2P-Router anfragt, kann mittels der \lstinline|i2pd|-Konfigurationsoption \lstinline|urls| festgelegt werden.
+Welche Reseed-Server ein I2P-Router anfragt, kann in der \lstinline|i2pd.conf| mittels der Konfigurationsoption \lstinline|urls| festgelegt werden.
 
 \begin{landscape}% Landscape page
 \begin{figure*}[ht]
   \includegraphics[height=0.85\textwidth]{bootstrap-diagram.png}
-  \caption{Der Bootstrapping Prozess}\label{fig:bootstrap-diagram}
+  \caption{Der Bootstrapping-Vorgang}\label{fig:bootstrap-diagram}
 \end{figure*}
 \end{landscape}% Landscape page
 
 \subsection{Konfigurationsoptionen}\label{sec:konfigurationsoptionen}
 
-Diverse Konfigurationsopitionen wurden implementiert um verschiedene Tests durchführen zu können.
-Jede der Optionen ist hier kurz beschrieben.
+Diverse Konfigurationsoptionen wurden implementiert um verschiedene Tests durchführen zu können und werden in der JSON-Datei \lstinline|config.json| im I2P-Testnet Repository abgelegt.
+Jede der Optionen ist ein Schlüssel in der JSON-Datei und ist in der folgenden Auflistung kurz beschrieben:
 
 \begin{itemize}
-    \item Knoten-Optionen:
+    \item Netzwerk-Optionen (\lstinline|network|):
         \begin{itemize}
-        \item Anzahl Knoten im Testnetzwerk. Diese Option bestimmt wie viele I2Pd-Knoten ins Testnetzwerk eingebunden werden.
-        \item Zu verwendendes I2Pd-Konfigurationsdatei.
+        \item \lstinline|name|: Name des Docker-Netzwerks.
+        \item \lstinline|private|: Wird auf \lstinline|true| gesetzt, wenn es sich um ein privates Testnetzwerk handeln soll. Die Einstellung \lstinline|false|, um dem öffentlichen I2P-Netzwerk beizutreten, wurde nicht komplett implementiert und nicht getestet.
         \end{itemize}
-    \item Reseeder Optionen:
+    \item Reseeder-Optionen (\lstinline|reseeder|):
         \begin{itemize}
-        \item Anzahl RouterInfos pro Su3-Datei. welcher Knoten beim starten des Netzwerks kennt.
-        \item Anzahl Verschiedene Su3-Dateien. Sets an RouterInfos. welcher Knoten beim starten des Netzwerks kennt.
+        \item \lstinline|num_router_infos_per_node|: Anzahl RouterInfos pro SU3-Datei. So viele Peers kennt ein Knoten beim Start des Netzwerks.
+        \item \lstinline|num_different_seed_files|: Anzahl Verschiedene SU3-Dateien. Der Reseed-Server wählt so viele verschiedene randomisierte Sets an RouterInfos aus.
         \end{itemize}
-    \item Mess-Optionen:
-        \begin{itemzie}
-        \item Mess-Interval: 
-        \item Anzahl Samples: 
-        \item Nachrichtengrösse:
+    \item Knoten-Optionen (\lstinline|nodes|):
+        \begin{itemize}
+        \item \lstinline|amount|: Anzahl Knoten im Testnetzwerk. Diese Option bestimmt wie viele i2pd-Knoten ins Testnetzwerk eingebunden werden.
+        \item \lstinline|config_file|: Relativer Pfad zur i2pd-Konfigurationsdatei (\lstinline|i2pd.conf|) für alle Knoten. Darin können alle \lstinline|i2pd|-Optionen gesetzt werden (z.B. Tunnellänge, Netzwerk-ID, etc.).
+        \item \lstinline|bandwidth|: Eine Liste von Zahlen. Dabei stellt jede Zahl eine Bandbreitenlimite (in kB) eines einzelnen Knotens dar. Das heisst die erste Zahl ist die Bandbreitenlimit des ersten Knotens, die zweite Zahl die Bandbreitenlimite des zweiten Knotens, usw. Sind zu wenige Zahlen in der Liste verfügbar wird wieder von Vorne angefangen. Wird nur eine Liste mit einer Zahl angegeben, so gilt dies also für alle Knoten.
+        \end{itemize}
+    \item Mess-Optionen (\lstinline|measurement|):
+        \begin{itemize}
+        \item \lstinline|message_size_kb|: Nachrichtengrösse (in kB).
+        \item \lstinline|num_messages|: Anzahl an sequentiellen Nachrichten die versandt werden. 
+        \item \lstinline|sleep_interval|: Wartezeit in Sekunden zwischen zwei sequentiellen Nachrichten.
         \end{itemize}
 \end{itemize}
 
@@ -387,17 +383,14 @@ Eine Beispiel \lstinline|config.json| könnte zum Beispiel so aussehen.
 }
 \end{lstlisting}
 
-
-
-
 \subsection{Netzwerkisolation}\label{sec:netzwerkisolation}
 
 Während unserer Tests wollen wir nur Traffic unserer eigenen Knoten im Netzwerk und äussere Einflüsse vermeiden.
-Dies um so gut wie mögliche und unbeeinflusste Messungen tätigen zu können.
-Docker-compose respektive Docker bietet eine Option ein internes Netzwerk zu erstellen,
+Dies, um bestmögliche und unbeeinflusste Messungen tätigen zu können.
+Docker-compose respektive Docker bietet eine Option, ein internes Netzwerk zu erstellen,
 welches einerseits vom Host nicht direkt erreichbar ist
 und zudem die Container nicht auf das Host-Netzwerk zugreifen können.
-Das folgende Quellcodelisting zeigt den Abschnitt für die Netzwerkkonfiguration wie deklariert in der \lstinline|docker-compose.yaml|.
+Das folgende Quellcodelisting zeigt den Abschnitt für die Netzwerkkonfiguration wie deklariert in der \lstinline|docker-compose.yml|.
 Wichtig sind hier die Optionen \lstinline|driver: bridge| und \lstinline|internal: true|, die ein internes Docker-Netzwerk erstellen.
 Die zusätzliche Option \lstinline|enable_icc| stellt sicher, das die Container jedoch untereinander kommunizieren können.
 \begin{lstlisting}{language=yaml}
@@ -416,35 +409,24 @@ networks:
 \end{lstlisting}
 
 Zusätzliche Optionen zur Abgrenzung vom öffentlichen I2P-Netzwerk können in der \lstinline|i2pd.conf| spezifiziert werden.
-Einerseits gibt es die Option \lstinline|netid|, diese ist Standardmässig auf die Nummer 2 gesetzt, da dies die Netzwerk-Id des öffentlichen I2P-Netzwerks ist.
+Einerseits gibt es die Option \lstinline|netid|; diese ist standardmässig auf die Nummer 2 gesetzt, da dies die Netzwerk-Id des öffentlichen I2P-Netzwerks ist.
 Diese Option ist im Testnetzwerk jedoch zur Abgrenzung auf die Nummer 23 gesetzt. 
-I2P-Router mit einer anderen Netzwerk-Id werden nie miteinander kommunizieren.
-Diese Netzwerk-Id wird auch in den Router-Infos abgelegt werden auch nicht vom Reseeder 
-
-Zudem gäbe es zum Testen im öffentlichen Netzwerk auch die 
-
-Die Konfigurationsoption \lstinline|netid| erlaubt es die Netzwerknummer zu definieren.
-Beim realen I2P-Netzwerk ist diese standardmässig auf \lstinline|2| gesetzt.
-
-Für tests mit dem öffentlichen Netzwerk gäbe es zusätzlich noch die Option \lstinline|family|.
-
-VM / Container, Konfigurationsoption \lstinline|nat|
-
+I2P-Router mit einer anderen Netzwerk-ID werden nie miteinander kommunizieren.
+Für Tests mit dem öffentlichen Netzwerk gäbe es zusätzlich noch die Option \lstinline|family| \parencite{noauthor_family_nodate}.
 
 \subsection{Adressbuch}
 
 Standardmässig wird jeder Destination eine b32-Adresse gegeben.
+Diese ist jedoch nicht einfach zu handhaben und stattdessen ist es einfacher, die Knoten direkt anhand ihrer Nummer zu adressieren.
+Diese Adressen werden dann automatisch vom Socks5-Proxy, der \lstinline|i2pd| mitliefert aufgelöst.
+Damit kann das Messskript vereinfacht werden, da es dann nicht die genauen Adressen zusammensuchen muss.
 
-Diese ist jedoch nicht einfach zu handhaben und anstatt es ist einfacher die Knoten direkt anhand ihrer Nummer zu adressieren.
-Diese Adressen werden dann automatisch vom Socks5-Proxy der \lstinline|i2pd| mitliefert aufgelöst.
-Damit kann das Messskript vereinfacht werden, da es dieses dann nicht die genauen Adressen zusammensuchen muss.
-
-Auch wird die Auswertung damit vereinfacht weil, der TCP-Client den verwendeten Namen des TCP-Servers auch in die Nachricht hineinpackt und der TCP-Server diesen als Messausgabe abspeichert.
+Auch wird die Auswertung damit vereinfacht, weil der TCP-Client den verwendeten Namen des TCP-Servers auch in die Nachricht hineinpackt und der TCP-Server diesen als Messausgabe abspeichert.
 Es wird beim Startvorgang des Netzwerks für jede erstellte Destination für den TCP-Server ein Adressbucheintrag erstellt.
 Dieses Adressbuch ist eine einfache CSV-Datei wird ebenfalls im Bootstrapvorgang an alle Knoten verteilt.
 Im Falle von acht Knoten im Netzwerk sieht diese Datei beispielsweise so aus:
 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]
 tcpsrv-1.i2p,b2cdodoyqg5v6go56bkaevvw777e2wyiflqh6zyyyxugy4cqlzuq
 tcpsrv-2.i2p,r6axddltht76mrtp5lrxtdxncilhgp7bcajkqtsj7l7fmoebgs3a
 tcpsrv-3.i2p,ddhznqpxtgac7qa6yg6uzfpd55xoa2zfc4dwg4rh4qucx7veswlq
@@ -455,20 +437,24 @@ tcpsrv-7.i2p,aat6wqge3o7k2nabpwxrcu2vbbiydf3mj6n5k2zrrtozkrrpyfoa
 tcpsrv-8.i2p,4wm4pqautqqb3a6yw3xif4zgwwu4v5tvpwv6onha27p5pkcqqepq
 \end{lstlisting}
 
-In der ersten Spalte ist der vereinfachte Name anzugeben und in der Zweiten Spalte die b32-Adresse, jedoch ohne die Endung \lstinline|.i2p|
+In der ersten Spalte ist der vereinfachte Name angegeben und in der zweiten Spalte die b32-Adresse, jedoch ohne die Endung \lstinline|.i2p|.
 
-\subsection{I2Pd-Container}
 
-Hauptsächlich wird in diesem Container der \lstinline|i2pd|-Prozess ausgeführt.
-Um andere Knoten zu kontaktieren zu können muss dieser zu Beginn den Reseed-Container anfragen nach einer Liste von RouterInfos.
-Der TCP-Client und TCP-Server sind ebenfalls in diesem Container angesiedelt.
-Dies verletzt zwar das Prinzip, dass man nur einen Prozess in einem Docker-Container ausführen sollte,
-jedoch ist das Ziel hiermit Messungenauigkeiten aufgrund eines zusätzlichen Container zu vermeiden, sowie die Netzwerkkonfiguration zu vereinfachen.
+\subsection{TCP-Server}\label{sec:tcpserver}
 
-\subsubsection{TCP Server Tunnel}
+Für Tests am Anfang wurde das Tool Netcat verwendet.
+Dies hat gut funktioniert, um die Konnektivität im Netzwerk zu testen,
+hat aber zur effektiven Messung nicht funktioniert, da es nicht geklappt hat die TCP-Verbindung nachdem eine Nachricht erhalten wurde zu schliessen, was dazu führte, das dass Messskript stecken blieb.
+Auch erlaubt es Netcat nicht mehrere TCP-Verbindungen anzunehmen und die Verbindungen korrekt zu schliessen.
+Deshalb wurde eine \lstinline|epoll|-basierte C-Implementation eines TCP-Servers erstellt, um die komplette Kontrolle über den Netzwerksocket zu bekommen.
+Dies erlaubt es die Latenz genauer zu messen und auch den TCP-Verbindungsaufbau nicht mitzumessen, sowie die Nachrichtenübermittlung auf Socket-Ebene kontrollieren zu können.
+Somit konnte die TCP-Verbindung nach Erhalt einer Nachricht korrekt geschlossen werden.
+Auch wurde C und nicht z.B. Python gewählt, um den Arbeitsspeicher und CPU-Gebrauch der Containers so tief wie möglich zu halten.
+Die Implementation des TCP-Servers ist in der Datei \lstinline|docker/i2p/messenger/epoll-server.c| zu finden.
 
-Diese Tunnel-Konfiguration führt dazu, dass I2P eine neue Destination mit einer .b32-Addresse erstellt.
+\subsubsection{TCP-Server Tunnel}
 
+Diese Tunnel-Konfiguration führt dazu, dass I2P eine neue Destination mit einer .b32-Adresse erstellt, damit der TCP-Server innerhalb des I2P-Netzwerks erreicht werden kann.
 Mit der folgenden Tunnel-Konfigurations-Datei wird der \lstinline|i2pd| konfiguriert, um einen TCP-Server-Tunnel zur Verfügung zu stellen:
 \begin{lstlisting}
 # serve some tcp service to others in the network
@@ -481,64 +467,23 @@ gzip = false
 enableuniquellocal = true
 \end{lstlisting}
 
-Hierbei gilt es zu beachten, dass die Schlüssel angegeben mit der \lstinline|keys|-Option, beim Aufstarten generiert werden.
-Auch wurde mittels der Option \lstinline|gzip| die Komprimierung-Deaktiviert, damit auch wirklich die richtigen Nachrichten-Grössen übermittelt werden.
+Hierbei gilt es zu beachten, dass die Schlüssel für die Destination, angegeben mit der \lstinline|keys|-Option, beim Aufstarten generiert werden.
+Auch wurde mittels der Option \lstinline|gzip| die Komprimierung deaktiviert, damit auch wirklich die richtigen Nachrichten-Grössen übermittelt werden.
+Die Option \lstinline|enableuniquellocal| wurde ursprünglich aktiviert, um die Auswertung zu vereinfachen. Denn diese führt dazu das der TCP-Server nicht immer dieselbe Ausgangsadresse \lstinline|127.0.0.1| bekommt, sondern je nach Sender der Nachricht eine andere \lstinline|127.0.0.0/8|-Adresse anhand der ersten Bytes des Public-Keys erhält. Jedoch wurde schlussendlich nicht auf diese Möglichkeit die Knoten zu identifizieren zurückgegriffen, da die Knoten einfacher mithilfe des Adressbuch identifiziert werden konnten.
 
-Die Option\lstinline|enableuniquellocal| wurde noch aktiviert, um die Auswertung zu vereinfachen. Denn diese führt dazu das der TCP-Server nicht immer dieselbe Ausgangsadresse \lstinline|127.0.0.1| bekommt, sondern je nach Sender der Nachricht eine andere \lstinline|127.0.0.0/8|-Adresse anhand der ersten Bytes des Public-Keys erhält. Jedoch wurde schlussendlich nicht auf diese Möglichkeit die Knoten zu identifizieren zurückgegriffen, da das Adressbuch 
+\subsection{TCP-Client}\label{sec:tcpclient}
 
-%TODO: Reference config, especiallfor for enableuniquellocal.
-
-
-\subsubsection{Socks5-Proxy für den TCP-Client}
-
-Dieser Socks5-Proxy ist der Gateway um innerhalb des I2P-Overlaynetzwerk zu kommunizieren.
-
-Der folgende Ausschnitt aus der \lstinline|i2pd.conf| zeigt auf wie der Socks5-Proxy konfiguriert wurde:
-
-\begin{lstlisting}
-[socksproxy]
-## Uncomment and set to 'false' to disable SOCKS Proxy
-enabled = true
-## Address and port service will listen on, like 127.0.0.1
-address = 127.0.0.1
-port = 4445
-\end{lstlisting}
-
-Zusätzlich wird in diesem Abschnitt auch die Länge der Tunnels bestimmt.
-
-\subsection{TCP-Server}
-
-Für Tests am Anfang wurde das Tool Netcat (kurz \lstinline|nc|) verwendet.
-Dies hat gut funktioniert um die Konnektivität im Netzwerk zu testen. Hat aber zur effektiven messung einen Nachteil.
-
-Um genauere Messresultate zu erhalten wurde eine e-poll basierte C-Implementation eines TCP-Servers erstellt, um die komplette Kontrolle über die Netzwerksocket zu bekommen.
-Auch wurde C und nicht z.B. Python gewählt um den Arbeitsspeicher und CPU Gebrauch des Containers so tief wie möglich zu halten.
-Dies erlaubt es die Latenz genauer zu messen und auch den TCP-Verbindungsaufbau nicht mitzumessen
-
-Wie auch die Verbindung sofort nach Erhalt einer Nachricht wieder zu schliessen.
-
-Auch erlaubt es nc nicht mehrere TCP-Verbindungen anzunehmen und die Verbindungen korrekt zu schliessen.
-
-Der TCP-Server nimmt jeweils eine einzelne Verbindungen
-
-
-\lstinline|docker/i2p/messenger/epoll-server.c|
-
-
-\subsection{TCP-Client}
-
-Damit der TCP-Client in das I2P-Overlaynetzwerk verbinden kann, muss dieser fähig sein mit einem Socks5-Proxy zu kommunizieren.
-Zudem gilt es den Socks5-Proxy richtig zu konfigurieren.
-Denn die Namensauflösung muss auch über I2P-Netzwerk abgehandelt werden.
-Nur so können die \lstinline|.b32.i2p|-Adressen aufgelöst werden.
-Ist diese im Addressbuch und hat diese eine zugehörige \lstinline|.b32.i2p|-Adresse.
-Anhand einer \lstinline|.b32.i2p|-Adresse kann die netDb nach einem zugehörigen LeaseSet abgefragt werden, welches Zugriff auf die gewünschte Destination bietet.
-Der TCP-Client ist ein kleines C-Programm welches in der 
-i2p-testnet Repository in der Datei \lstinline|docker/i2p/messenger/client.c| zu finden ist.
+Damit der TCP-Client sich mit dem I2P-Overlaynetzwerk verbinden kann, muss er fähig sein mit einem Socks5-Proxy zu kommunizieren.
+Zudem gilt es den Socks5-Proxy richtig zu konfigurieren,
+denn die Namensauflösung muss auch über das I2P-Netzwerk abgehandelt werden.
+Nur so können die b32-Adressen aufgelöst werden, sofern diese im Adressbuch vorhanden ist.
+Anhand einer \lstinline|.b32.i2p|-Adresse kann die NetDB nach einem zugehörigen LeaseSet abgefragt werden, welches Zugriff auf die gewünschte Destination bietet.
+Der TCP-Client ist ein kleines C-Programm, welches in der 
+in der Datei \lstinline|docker/i2p/messenger/client.c| zu finden ist.
 Zusammengefasst macht es nichts anderes als
-eine Verbindung mit einem Socks5-Proxy aufzubauen, und eine TCP-Nachricht der definierten Grösse durch den Proxy versendet.
-
-Es bietet folgende Kommandozeilenoptionen:
+eine Verbindung mit einem Socks5-Proxy aufzubauen, und eine TCP-Nachricht der definierten Grösse mit ein durch den Proxy an die richtige Destination zu versenden.
+Wie diese Nachricht aufgebaut ist wird im Abschnitt~\fillref{sec:nachricht_latenzmessung} genauer erläutert.
+Das TCP-Client Programm bietet folgende Kommandozeilen-Optionen:
 
 \begin{lstlisting}
 Usage:  messenger [-h] [-S proxy_server] [-P proxy_port] [-d destination] [-p dest_port]
@@ -556,139 +501,152 @@ Description:
 This client is used to send messages to measure the latency of the i2p network
 \end{lstlisting}
 
-\subsection{Nachrichten}
+\subsubsection{Socks5-Proxy für den TCP-Client}
+
+Dieser Socks5-Proxy ist der Gateway um mit dem I2P-Overlaynetzwerk zu kommunizieren.
+Der folgende Ausschnitt aus der \lstinline|i2pd.conf| zeigt auf wie der Socks5-Proxy konfiguriert wurde:
+
+\begin{lstlisting}
+[socksproxy]
+## Uncomment and set to 'false' to disable SOCKS Proxy
+enabled = true
+## Address and port service will listen on, like 127.0.0.1
+address = 127.0.0.1
+port = 4445
+\end{lstlisting}
+
+Zusätzlich könnte in diesem Abschnitt auch die Länge der Tunnels bestimmt.
+
+\subsection{TCP-Nachricht zur Latenzmessung}\label{sec:nachricht_latenzmessung}
 
 Die darüberliegende Blockchain-Schicht von DIVA.EXCHANGE versendet mittels eines Gossip-Protokolls die neuen Blocks der Blockchain an alle Knoten.
 %TODO: add gossip protocol to glossary
 Diese 64KB grossen Blocks werden über eine Web-Socket-Verbindung an die Nachbarknoten übermittelt.
-Die Nachbarknoten leiten diese dann wieder weiter an ihre jeweiligen Nachbarknoten.
+Die Nachbarknoten leiten diese dann wiederum an ihre jeweiligen Nachbarknoten weiter.
 Dieser Prozess wird solange wiederholt bis alle Knoten im Netzwerk den neuen Block erhalten haben.
 Nach Absprache mit dem Auftraggeber wird dies im Testnetzwerk mittels versenden von TCP-Nachrichten nachgestellt.
 Bei Web-Sockets handelt es sich vereinfacht ausgedrückt wiederum um eine TCP-ähnliche Verbindung über HTTP. Zudem verwendet HTTP auch TCP auch als Transportschicht.
 
-Eine Nachricht besteht nun aus folgenden Elementen
+Eine Nachricht welche vom TCP-Client zum Server übermittelt wird, besteht aus folgenden Elementen:
 
 \begin{itemize}
     \item Zufällige Daten (standardmässig 64KB, konfigurierbar)
     \item Knoten Nummer des Senders
     \item Destination-Adresse des Empfängers vom Adressbuch (beinhaltet auch die Knoten Nummer des Empfängers)
     \item Grösse der versendeten Nachricht in Bytes (standardmässig 63255)
-    \item Versandzeitpunkt in des Versands in Nanosekunden seit 1.1.1970 
-    \item Empfangszeitpunkt in des Versands in Nanosekunden seit 1.1.1970 
+    \item Versandzeitpunkt in Nanosekunden seit dem 1.1.1970
+    \item Empfangszeitpunkt in Nanosekunden seit dem 1.1.1970
 \end{itemize}
+
+Der TCP-Server legt alle erhaltenen Nachrichten im I2P-Container in einem Nachrichten-Log ab.
 
 \subsection{Das Messskript}\label{sec:messskript}
 
-Das Messskript ist dafür verantwortlich Nachrichten durch das Testnetzwerk zu senden, damit Messdaten erstellt werden.
-Die Nachrichten werden von einem zufälligem Knoten zu einem anderen zufälligen Knoten verschickt.
-Somit kann sichergestellt werden, dass die Latenzmessungen repräsentativ sind für das gesamte Netzwerk.
-Um das Netzwerk nicht zu überlasten (siehe (TODO: ref)) werden die Nachrichten sequentiell versendet und es wird nur eine Nachricht auf einmal versendet.
-Zudem wird nach jeder versendeter Nachricht wird 10 Sekunden gewartet.
-
-Die Nachrichten werden versendet unter Verwendung von \lstinline|docker exec|.
-Damit wird innerhalb des zufällig ausgewählten I2Pd-Containers ein TCP-Client-Prozess gestartet.
+Die Nachrichten zur Latenzmessung werden versendet unter Verwendung des \lstinline|docker exec|-Befehls.
+Damit wird innerhalb des zufällig ausgewählten i2pd-Containers ein TCP-Client-Prozess gestartet.
 Dieser verbindet dann auf den Socks5-Proxy im gleichen Container.
 Anschliessend schickt der TCP-Client die Nachricht der gewählten Grösse ins I2P Netzwerk.
 
 Bevor das Messskript gestartet werden kann, müssen jedoch einige Bedingungen erfüllt werden.
 Erstens muss mittels dem Recompose-Skript das Testnetzwerk in Betrieb genommen werden.
 Zweitens muss gewartet werden, bis der Bootstrapping-Vorgang im Testnetzwerk abgeschlossen wurde.
-Zu guter letzt muss noch einige Zeit gewartet werden und sichergestellt werden, dass das Netzwerk 
+Zu guter Letzt muss noch einige Zeit gewartet werden und sichergestellt werden, dass das Netzwerk bereit ist und die Exploratory-Tunnels aufgebaut sind.
 Dies ist um sicherzustellen, dass keine Messungenauigkeiten auftreten.
-Einerseits gehen so keine Messpakete verloren. Andererseits könnten die Latenzmessungen verfälscht werden, wenn die Tunnels erst noch aufgebaut werden müssen.
-
-Das Messskript ist in der i2p-testnet Repository in der Datei \lstinline|bin/measure-message-latency| zu finden.
+Einerseits gehen so keine Messpakete verloren, andererseits könnten die Latenzmessungen verfälscht werden, wenn die Tunnels erst noch aufgebaut werden müssen.
+Das Messskript ist in der Repository in der Datei \lstinline|bin/measure-message-latency| zu finden.
 
 \section{Testing}
 
-Da ein gesammtes Netzwerk simuliert wurde mit dynamisch vielen Containern, konnte nicht automatisch mit unter Verwendung von \glstext{ci} getestet werden.
-Viele \glsname{CI} Lösungen (wie z.B. das angebotete GitLab im EnterpriseLab der HSLU) verwenden eine andere Syntax zur Definition von Containern als \lstinline|docker-compose| und die definierten Container lassen sich nicht skalieren.
+Da ein gesamtes Netzwerk simuliert wurde mit dynamisch vielen Containern, konnte nicht automatisch unter Verwendung von \glstext{ci} getestet werden.
+Viele \glsname{CI} Lösungen (wie zum Beispiel das angebotene GitLab im EnterpriseLab der HSLU) verwenden eine andere Syntax zur Definition von Containern als Docker-compose und die definierten Container lassen sich nicht skalieren.
 Somit musste oft auf manuelles Testen zurückgegriffen werden.
-Jedoch hat sich während dem Entwickeln herausgestellt, dass man oft dieselben Befehle auf der Kommandozeile wiederholt hatte.
+Jedoch hat sich während des Entwickelns herausgestellt, dass man oft dieselben Befehle auf der Kommandozeile wiederholt hatte.
 Deshalb hat man im Unterordner
-\lstinline|tests/| in der \lstinline|i2p-testnet|-Repository einige Tests geschrieben in Bash abgelegt, um gewisse Grundfunktionalitäten zu Testen.
-Diese Tests verwenden das Bash Automated Testing System (BATS) und eine Testsuite kann zum Beispiel folgendermassen gestartet werden:
+\lstinline|tests/| in der Repository einige Tests geschrieben in Bash abgelegt, um gewisse Grundfunktionalitäten zu testen.
+Diese Tests verwenden das Bash Automated Testing System (BATS)
+Eine Testsuite kann zum Beispiel folgendermassen gestartet werden:
 
-\begin{lstlisting}{language=bash}
+\begin{lstlisting}[numbers=none]{language=bash}
 $ bats tests/networking.bats
 \end{lstlisting}
 
-Diese Test-Suite wurde erstellt um schnell zu prüfen, ob das Netzwerk korrekt konfiguriert wurde. Das heisst, dass die I2P-Knoten das Internet nicht erreichen können, jedoch den Reseeder und die anderen Container schon.
+Diese Testsuite wurde erstellt um schnell zu prüfen, ob das Netzwerk korrekt konfiguriert wurde. Das heisst, dass die I2P-Knoten das Internet nicht erreichen können, jedoch den Reseeder und die anderen Container schon.
 Diese Tests sind im Verzeichnis.
 
-Da dieser Bericht mit Hilfe von \LaTeX umgesetzt wurde 
-und es sich handelt sich dementsprechend auch eine Art Programm handelt mit einem Build-Vorgang.
+Dieser Bericht wurde mit Hilfe von LaTeX umgesetzt.
+Dabei handelt es sich bei dem Text um eine Art Programm mit einem Build-Vorgang der ein PDF erzeugt.
 Dieser Build-Vorgang wurde mit dem GitLab CI Service vom EnterpriseLab automatisiert.
 
 \section{Benutzerhandbuch}
 
-Dieser Abschnitt erklärt wie ein Tester selber neue Testnetzwerke erstellen, die Tests-Konfigurieren und selber Messungen tätigen kann.
+Dieser Abschnitt erklärt, wie ein Tester selber neue Testnetzwerke erstellen, die Tests-konfigurieren und Messungen tätigen kann.
 
 \subsection{Deployment der Test-VM}
 
-Wird NixOps verwendet kann die VirtualBox Test-VM wie folgt erstellt werden:
+Wird NixOps verwendet, kann die VirtualBox Test-VM wie folgt erstellt werden:
 
-\begin{lstlisting}{language=bash}
+\begin{lstlisting}[numbers=none]{language=bash}
 $ nixops create single-vm-testnetwork.nix deployment/vbox-containers.nix
 $ nixops deploy -d vbox-i2p-testnet
 \end{lstlisting}
 
 Anschliessend kann mittels ssh auf die Test-VM zugegriffen werden.
 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none]{language=bash}
 $ nixops ssh vbox-i2p-testnet
 \end{lstlisting}
 
-
+Für genauere Anweisungen und weitere Features, welche durch NixOps geboten werden, siehe das ``NixOps User's Guide''\footnote{\url{https://releases.nixos.org/nixops/nixops-1.5/manual/manual.html}}.
 Alternativ kann auch jede andere Linux-Distribution mit oder ohne VM verwendet werden.
-Wichtig zu beachten ist das folgende Software-Pakete installiert sind und mindestens die angegebenen Versionen (wo spezifiziert) verwendet werden:
+Wichtig ist, dass folgende Software-Pakete installiert sind und mindestens die angegebenen Versionen (wo spezifiziert) verwendet werden:
 
 \begin{itemize}
     \item docker-compose >= 1.28.2, verwendet für Container-Orchestration
     \item docker >= 20.10, verwendete Container-Technologie
-    \item bash, benötigt da das \lstinline|recompose|-Skript und das Messskript in Bash geschrieben sind
-    \item jq, Utility zum verarbeiten von JSON-Dateien
-    \item moreutils, Weitere Shell-Utilities die vom \lstinline|recompose|-Skript verwendet werden (z.B. \lstinline|sponge|).
+    \item bash, benötigt da das Recompose-Skript und das Messskript in Bash geschrieben sind
+    \item jq, Utility zum Verarbeiten von JSON-Dateien
+    \item moreutils, Weitere Shell-Utilities die vom Recompose-Skript verwendet werden (z.B. \lstinline|sponge|).
     \item bats, optional, wird benötigt um Selbsttests auszuführen
-    \item sysstat, wird benötigt vom Messskript um die Ressourcenauslastung zu messen
+    \item sysstat, wird vom Messskript benötigt, um die Ressourcenauslastung zu messen
 \end{itemize}
 
 
 \subsection{Konfiguration einer Messung}
 
-Nachdem die \lstinline|i2p-testnet|-Repository in der Test-VM heruntergeladen wurde. Kann bereits mit der Konfiguration der Messung gestartet werden.
-Die Konfiguration der Messung kann in der \lstinline|config.json| angepasst werden.
+Nachdem die \lstinline|i2p-testnet|-Repository in der Test-VM heruntergeladen wurde, kann bereits mit der Konfiguration der Messung gestartet werden.
+Die Konfiguration der Messung kann in der Datei \lstinline|config.json| angepasst werden.
 
-\subsection{Erstellen des Testnetzwerkes}
+\subsection{Erstellen des Testnetzwerkes}\label{sec:erstellen_des_testnetzwerks}
 
-Für alle folgenden Befehle wird davon ausgegangen, das ein Benutzer verwendet wird der Teil der \lstinline|docker| Gruppe ist und somit die Docker-Befehle ohne \lstinline|sudo| absetzen kann.
+Für alle folgenden Befehle wird davon ausgegangen, dass ein Benutzer verwendet wird der Teil der \lstinline|docker| Gruppe ist.
 
 Das Testnetzwerk kann mit folgenden Befehl gestartet werden:
 
-\begin{lstlisting}{language=bash}
+\begin{lstlisting}[numbers=none]{language=bash}
 $ bin/recompose
 \end{lstlisting}
 
-Wird gewünscht bei einer Messung von einem  sollte folgender Befehl verwendet werden.
+Wird gewünscht bei einer Messung mit einem komplett frischen Netzwerk zu starten
+sollte folgender Befehl verwendet werden.
 
-\begin{lstlisting}{language=bash}
+\begin{lstlisting}[numbers=none]{language=bash}
 $ bin/recompose -c
 \end{lstlisting}
 
-\textbf{Achtung:} Dieser Befehl löscht alle bestehenden Docker-Volumes sowie Logs und Messresultate von laufenden Messungen welche noch nicht im \lstinline|results/|-Ordner abgelegt wurden.
+\textbf{Achtung:} Dieser Befehl löscht alle bestehenden Docker-Volumes sowie Logs und Messresultate von laufenden Messungen welche noch nicht vom Messskript in den \lstinline|results/|-Ordner abgelegt wurden.
 
 \subsection{Ausführen einer Messung}
 
-Wird eine Messung mit 64 Knoten oder mehr durchgeführt muss die ARP-Neighbor-Tabelle des Hosts vergrössert werden, da der Standardwert  (siehe Schluss des Abschnitts~\fullref{sec:scaling}). Dies benötigt zwingend Root-Rechte da Kernel-Parameter verändert werden:
+Wird eine Messung mit 64 Knoten oder mehr durchgeführt, muss die ARP-Neighbor-Tabelle des Hosts vergrössert werden, da der Standardwert  (siehe Schluss des Abschnitts~\fullref{sec:scaling}). Dies benötigt zwingend Root-Rechte, da Kernel-Parameter verändert werden:
 
-\begin{lstlisting}{language=bash}
-# bin/networking-sysctls
+\begin{lstlisting}[numbers=none]{language=bash}
+$ sudo bin/networking-sysctls
 \end{lstlisting}
 
 Eine Messung kann wie folgt ausgeführt werden:
 
-\begin{lstlisting}{language=bash}
+\begin{lstlisting}[numbers=none]{language=bash}
 $ bin/measure-message-latency
 \end{lstlisting}
 
-Die Messresultate können anschliessend im \lstinline|results/|-Ordner aufgefunden werden. Darin sind alle von den I2P-Knoten erstellten Daten deren sowie Docker-Logs zu finden. Zudem gibt es eine Datei \lstinline|resource-usage| in der die Ressourcenauslastung des Testnetzwerks geloggt wurde. Zudem gibt es in jedem I2P-Daten Ordner eine Datei namens \lstinline|i2p-data-<ID>/messagelogs/msglog.csv| zu finden, welche alle Nachrichten geloggt hat welche der jeweilige Knoten mit erhalten hat.
+Die Messresultate können anschliessend im \lstinline|results/|-Ordner aufgefunden werden. Darin sind alle von den I2P-Knoten erstellten Daten deren sowie Docker-Logs zu finden. Zudem gibt es eine Datei \lstinline|resource-usage| in der die Ressourcenauslastung des Testnetzwerks geloggt wurde. Darüber hinaus ist in jedem I2P-Daten Ordner eine Datei namens \lstinline|i2p-data-<ID>/messagelogs/msglog.csv| zu finden, welche alle Nachrichten geloggt hat die der jeweilige Knoten mit erhalten hat.

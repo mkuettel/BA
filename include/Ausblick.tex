@@ -7,42 +7,43 @@ In dieser Grundlagenforschung hat sich herausgestellt,
 dass sich die Mindestlatenz bei Skalierung des Netzwerks,
 wenn alle Knoten dieselbe Bandbreitenbeschränkung haben,
 nicht markant verändert.
-Das Messresultat für 256 Knoten war jedoch überraschend und dies könnte auf ein Problem mit der Testinfrastruktur zusammenhängen.
-In Zukunft könnte die Testinfrastruktur diesbezüglich verbessert werden.
-Anstatt das man die Knoten nur horizontal auf einer einzelnen Maschine skaliert würde es Sinn machen diese auf mehrere Maschinen zu verteilen.
+Das Messresultat für 256 Knoten war jedoch überraschend und dies deutet wahrscheinlich auf ein Problem mit der Testinfrastruktur hin.
+Zukünftig könnte die Testinfrastruktur diesbezüglich verbessert werden.
+Anstatt das man die Knoten nur horizontal auf einer einzelnen Maschine skaliert, würde es Sinn ergeben, diese auf mehrere Maschinen zu verteilen.
 % Diese Arbeit konnte mit dem erstellen eines I2P-Testnetzwerks nun einen Grundstein legen für weitere Untersuchungen.
-Jedoch bieten die getätigten Experimente aber eine wichtige Grundlage und Referenz für weitere Experimente und Messungen die in Zukunft durchgeführt werden können.
-Es konnten aus Zeitgründen keine Tests mit Bandbreitenlimite durchgeführt werden.
-Es könnte aber in Zukunft ein Experiment gestartet werden worin die Knoten jeweils eine normalverteilte Bandbreitenlimite konfiguriert hätten. 
-Würde dies aufzeigen, dass sich die Latenz verbessert bei verdoppeln der Knoten, könnte die Hypothese bestätigt werden.
-Die Hypothese \ref{hyp:first} konnte somit weder komplett bestätigt noch widerlegt werden.
+Jedoch bieten die getätigten Experimente eine wichtige Grundlage und Referenz für weitere Experimente und Messungen, die in Zukunft durchgeführt werden können.
+Es konnten aus Zeitgründen keine Tests mit Bandbreitenlimite durchgeführt werden, obwohl dieses Feature implementiert wurde.
+Zukünftig könnte aber ein Experiment gestartet werden, worin die Knoten jeweils eine normalverteilte Bandbreitenlimite konfiguriert hätten. 
+Würde dies aufzeigen, dass sich die Latenz bei Verdoppeln der Knoten verbessert, könnte die Hypothese \ref{hyp:first} bestätigt werden.
+Die Hypothese \ref{hyp:first} konnte bisher weder komplett bestätigt noch widerlegt werden.
 
-Zusätzlich gäbe es einige weitere I2P-Spezifische technische Ideen die zur Verbesserung der Latenz führen könnten:
-
+Zusätzlich gäbe es einige weitere I2P-spezifische technische Ideen, die zur Verbesserung der Latenz führen könnten:
 \begin{itemize}
- \item Die ausgewählte Tunnellänge von \lstinline|3| könnte eventuell auch auf Kosten der Anonymität auf \lstinline|2| verringert werden. Alle Knoten die auch Teil des DIVA.EXCHANGE Netzwerkes hätten standardmässig dieselbe Einstellung.
-Zudem wird immer ein Inbound- und ein Outbound-Tunnel miteinander verbunden und so kann trotzdem ein hoher Anonymitätsgrad erreicht werden.
-Jedoch könnte ein Knoten der ein Deanonymisierungsangriff durchführen will die Tunnellänge auf \lstinline|0| setzen.
-  \item Aufgrund des Verhalten der im Garlic-Routing verwendeten Cloves wäre es auch interessant in Zukunft gleichzeitig Nachrichten über das Testnetzwerk zu versenden. Es könnte sein, dass sich diese ''Grundlatenz'' von 5 Sekunden bildet, weil ein Router darauf wartet, das dieser mehrere Nachrichten Miteinander verpacken kann.
-  \item Neben dem Socks5-Proxy der \lstinline|i2pd| anbietet, gibt es weitere Möglichkeiten Nachrichten über das I2P-Netzwerk zu verschicken.
-    Unter anderem gäbe es das SAM-Protokoll. Es könnte möglich sein bessere Performance mit diesem Protokoll zu erreichen anstatt einen SOCKS5 oder HTTP-Proxy zu verwenden. \cite{noauthor_sam_nodate}
+  \item Die ausgewählte Tunnellänge von 3 könnte eventuell auch auf Kosten der Anonymität auf 2 verringert werden. Alle Knoten die auch Teil des DIVA.EXCHANGE Netzwerkes sind, hätten standardmässig dieselbe Einstellung.
+    Zudem wird immer ein Inbound- und ein Outbound-Tunnel miteinander verbunden, wodurch trotzdem ein hoher Anonymitätsgrad erreicht werden kann.
+    Jedoch könnte ein Knoten, der ein Deanonymisierungsangriff durchführen will die Tunnellänge auf 0 setzen.
+  \item Aufgrund des Verhalten der im Garlic-Routing verwendeten Cloves wäre es auch interessant in Zukunft gleichzeitig Nachrichten über das Testnetzwerk zu versenden. Es könnte sein, dass sich diese ''Grundlatenz'' von 5 Sekunden bildet, weil ein Router darauf wartet, dass er mehrere Nachrichten miteinander verpacken kann oder dies zur Verbesserung der Anonymität Nachrichten extra verzögert.
+  \item Neben dem Socks5-Proxy, der \lstinline|i2pd| anbietet, gibt es weitere Möglichkeiten Nachrichten über das I2P-Netzwerk zu verschicken.
+    Unter anderem gäbe es das SAM-Protokoll \parencite{noauthor_sam_nodate}.
+    Es könnte möglich sein, bessere Performanz mit diesem Protokoll zu erreichen, anstatt einen Socks5 oder HTTP-Proxy zu verwenden. 
     Der Nachteil bestände jedoch darin, dass die darüberliegende Datenhaltungsschicht dieses Protokoll implementieren müsste und fest an I2P gekoppelt wäre.
 \end{itemize}
 
 
-\section{Projekt Fazit}
+\section{Projektfazit}
 % TODO Das Fazit des Projektes, auch eine Unterteilung in \subsection mit persönlichem und Projektfazit ist möglich
 
-Aus Sicht des Auftraggebers ist das Projekt ein Erfolg. Es konnten empirische Daten gesammelt werden bezüglich und die Testinfrastruktur kann in Zukunft wiederverwendet werden. Es können nun einfacher weitere Experimente durchgeführt werden.
-
-TODO: Erster Lösungsweg der nicht funktioniert hat erwähnen.
+Aus Sicht des Auftraggebers ist das Projekt ein Erfolg:
+Es konnten empirische Daten gesammelt werden bezüglich der Latenzzeiten von I2P und die Testinfrastruktur kann in Zukunft wiederverwendet werden, sodass nun einfacher weitere Experimente durchgeführt werden können.
+Auch wenn der erst eingeschlagene Lösungsweg mit NixOS nicht wie erhofft funktioniert hat, konnte trotzdem eine passende Lösung gefunden werden.
 
 
 \section{Persönliches Fazit}
 
-Als ich diese Projektidee auf der Projektschiene der Hochschule Luzern gefunden habe, habe ich mich enorm gefreut dies als meine Bachelorarbeit auswählen zu können.
-Die Thematik von Anonymisierungsnetzwerken hat mich schon immer interessiert und packt mich immer wieder erneut mit Faszination.
-Die Umsetzungsarbeit war extrem interessant, auch wenn man manchmal mit Frustration zu kämpfen hat und ein Lösungsweg den man einschlägt nicht funktioniert.
-Auch habe ich mich oft habe ich mich übernommen und habe überstürzt Ideen ausprobiert.
+Als ich diese Projektidee auf der Projektschiene der Hochschule Luzern gefunden habe, habe ich mich enorm gefreut, sie als meine Bachelorarbeit auswählen zu können.
+Die Thematik von Anonymisierungsnetzwerken hat mich schon immer interessiert und erfüllt mich immer wieder neu mit Faszination.
+Die Umsetzungsarbeit war extrem interessant, auch wenn ich manchmal mit Frustration zu kämpfen hatte und ein Lösungsweg, den ich einschlägt nicht funktioniert.
+Auch habe ich mich oft übernommen und habe überstürzt Ideen ausprobiert.
 Ich hatte Mühe mit dem fertigstellen des Berichts und der Schreibarbeit und bin auch an meine Grenzen gestossen.
-Auch wäre ich gerne zu mehr aussagekräftigen Resultaten gekommen, jedoch ist dies nicht immer möglich und ich musste erkennen, dass man nicht alles in der gegebenen Zeit möglich ist und das jedes Resultat ein gutes Resultat ist.
+Auch wäre ich gerne zu mehr aussagekräftigen Resultaten gekommen.
+Jedoch ist dies nicht immer möglich und ich musste erkennen, dass nicht alles in der gegebenen Zeit untersucht werden kann aber dass schlussendlich jedes Resultat ein gutes Resultat ist.
