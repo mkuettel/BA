@@ -233,7 +233,7 @@
 
 Der Verein DIVA.EXCHANGE entwickelt einen Software-Prototypen für eine Handelsplattform, um digitale Werte auszutauschen.
 Die Handelsplattform soll \glstext{fullydistributed} sein und es sollen
-digitale Werte ausgetauscht werden können, ohne dass sich die Benutzer gegenseitig kennen oder vertrauen zu müssen.
+digitale Werte ausgetauscht werden können, ohne dass sich die Benutzer gegenseitig kennen oder vertrauen müssen.
 Um dies umzusetzen, wurde auf das Anonymisierungsnetzwerk ``The Invisible Internet Protocol'' (I2P) als Grundstein auf der Netzwerkebene gesetzt.
 Jedoch hat die Anonymität, Privatsphäre und Sicherheit, die durch I2P geboten wird, ihren Preis: Performanz.
 In dieser Arbeit soll empirisch untersucht werden, unter welchen Umständen sich die Performanz des I2P-Netzwerks verbessert.
@@ -243,13 +243,13 @@ Damit die Performance-Messungen empirisch durchgeführt werden konnten, wurde ei
 In einem privaten I2P-Netzwerk konnten Latenzmessungen ohne äussere Einflüsse durchgeführt werden.
 Damit konnte ein Testnetzwerk bestehend aus bis zu 256 I2P-Knoten erstellt werden.
 Somit konnten Latenzmessungen durchgeführt werden, welche aufgezeigt haben,
-das sich entgegen unserer Erwartungen die Latenz bei einem grösseren Netzwerk nicht unbedingt verbessert.
-Die genauen Gründe sind jedoch unklar.
+dass sich entgegen unserer Erwartungen die Latenz bei einem grösseren Netzwerk, worin alle Knoten jeweils dieselbe Bandbreitenlimite haben, nicht gleich bleibt, sondern verschlechtert.
+Grund dafür könnte die verwendete Testinfrastruktur sein, die nur horizontal skaliert.
 
-Die gewonnenen Resultate dienen jedoch als Grundlage und Referenz für zukünftige Messungen und Experimente.
+Die gewonnenen Resultate dienen aber als Grundlage und Referenz für zukünftige Messungen und Experimente.
 Anhand des entwickelten Teststands können nun weitere Messungen getätigt und miteinander verglichen werden.
 Grundsätzlich können so auch verschiedene I2P-Konfigurationen miteinander verglichen werden.
-Es sind aber in Zukunft auch Tests mit anderen Protokollen oder Nachrichtentypen möglich.
+In Zukunft könnte die Testinfrastruktur so erweitert werden, dass nicht nur horizontal sondern auch vertikal skaliert wird.
 
 \end{abstract}
 
@@ -284,7 +284,7 @@ Es sind aber in Zukunft auch Tests mit anderen Protokollen oder Nachrichtentypen
 
 \glsaddall
 \printglossary
-
+\clearpage
 \listoffigures
 
 \listoftables

@@ -2,17 +2,12 @@
 % \newacronym{RFID}{RFID}{Radio-Frequency Identification}
 % \newglossaryentry{HF}{name={HF},description={High Frequency, RFID Tags im Frequenzbereich von 3-30MHz}}
 \newglossaryentry{p2p}                 { name={Peer-to-Peer},                  text={Peer-to-Peer},           description={{
-    Peer-to-Peer ist
+    Bei Peer-to-Peer-Netzwerk handelt es sich um eine verteile Architektur. Alle Peers sind dabei gleichberechtigte Teilnehmer. Peers oder Netzwerkteilnehmer stellen ein Teil ihrer Ressourcen dem Netzwerk zur Verfügung.
     %TODO: define Peer-to-Peer
 }}}
-\newglossaryentry{fullydistributed} { name={Vollständig Verteilt},                   text={vollständig verteilt},            description={{
+\newglossaryentry{fullydistributed} { name={Vollständig verteilt},                   text={vollständig verteilt},            description={{
     Ein vollständig verteiltes Netzwerk zeichnet sich dadurch aus, das jeder Knoten
-    im Netzwerk komplett selbstständig ist und seine eigene Daten verwaltet und verarbeitet. Es gibt also im klassischen Sinne keine Server oder Clients.
-}}}
-\newglossaryentry{refactoring}         { name={Refactoring},                   text={refactoring},            description={{
-    ``The process of changing a software system in such a way that it does
-        not alter the external behavior of the code yet improves its internal
-        structure'' ---\cite{fowler_refactoring_2018}
+    im Netzwerk komplett selbstständig ist und seine eigene Daten verwaltet. Es gibt also im klassischen Sinne keine Server oder Clients.
 }}}
 \newglossaryentry{ci}                  { name={CI},        text={Continuous Integration}, description={{
     ``Continuous Integration is a software development practice where members
@@ -22,10 +17,7 @@
     errors as quickly as possible.'' -- \cite{fowler_continuos_2014}
 }}}
 \newglossaryentry{dht}                 { name={DHT},        text={Distributed Hashed Table},                    description={{
-    Eine ``Distributed Hashed Table'' ist eine auf verschiedenen Knoten oder Rechnern verteilte Key-Value Datenbank.
-}}}
-\newglossaryentry{e2e}                 { name={E2E},        text={End-to-End Encryption},                     description={{
-    Von Endgerät zu Endgerät verschlüsselt. Das heisst ein Man-in-the-Middle Angreifer könnte nur verschlüsselten Traffic mitlesen.
+    Eine ``Distributed Hashed Table'' ist eine auf verschiedenen Knoten oder Rechnern verteilte Key-Value-Datenbank.
 }}}
 \newglossaryentry{tor}                 { name={TOR},        text={The Onion Router},                          description={{
     Softwarepaket für anonyme Kommunikation. Es verwendet ein globales Overlay-Netzwerk bestehend aus Relays, um die Benutzer vor Netzwerküberwachung 
@@ -37,9 +29,5 @@
     Das Verwalten und Bereitstellen von Infrastruktur wie Netzwerke, Dienste physische und virtuelle Maschinen unter Verwendung von maschinenlesbaren Definitionen oder Programmcode.
     Somit kann die Infrastruktur automatisiert aufgebaut werden und Versionierungssysteme können einfach eingesetzt werden.
 }}}
-\newglossaryentry{nixos-container}    { name={nixos-container}, text={NixOS Container}, description={{
-    Containertechnologie ähnlich wie docker.
-    Wichtig dabei ist, dass es sich hierbei nicht um einen Docker-Container, sondern um NixOS-Container handelt technologie handelt, welche auf systemd-nspawn Containern basiert..
-    Im Hintergrund brauchen jedoch beide Container-Arten die gleichen Linux-Kernel-Features (namespaces, cgroups, ... ).
-}}}
 % \newglossaryentry{socks5}
+% gossip protocol

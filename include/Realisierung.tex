@@ -119,10 +119,10 @@ Weitere Details zum Bootstrapping-Vorgang sind im Abschnitt~\fullref{sec:umsetzu
 \subsection{Messskript}
 
 Das Messskript ist dafür verantwortlich, eine konfigurierte Anzahl an Nachrichten zur Latenzmessung durch das Testnetzwerk zu senden, damit Messdaten erstellt werden.
-Die Nachrichten zur Latenzmessung werden von einem zufälligem Knoten zu einem anderen zufälligen Knoten verschickt.
+Die Nachrichten zur Latenzmessung werden vom TCP-Client eines zufälligen Knotens zum TCP-Server eines anderen zufälligen Knotens verschickt.
 Somit kann sichergestellt werden, dass die Latenzmessungen repräsentativ sind für das gesamte Netzwerk.
 Um das Netzwerk nicht zu überlasten, werden die Nachrichten sequentiell versendet und es wird nur eine Nachricht auf einmal versendet.
-Zudem wird nach jeder versendeter Nachricht einige Sekunden (je nachdem was konfiguriert wurde) gewartet. Genaueres dazu im Abschnitt~\fullref{sec:messkript}.
+Zudem wird nach jeder versendeter Nachricht einige Sekunden (je nachdem was konfiguriert wurde) gewartet. Genaueres dazu im Abschnitt~\fullref{sec:messskript}.
 
 \section{Umsetzung}\label{sec:umsetzung}
 
@@ -517,7 +517,7 @@ port = 4445
 
 Zusätzlich könnte in diesem Abschnitt auch die Länge der Tunnels bestimmt.
 
-\subsection{TCP-Nachricht zur Latenzmessung}\label{sec:nachricht_latenzmessung}
+\subsection{Nachricht zur Latenzmessung}\label{sec:nachricht_latenzmessung}
 
 Die darüberliegende Blockchain-Schicht von DIVA.EXCHANGE versendet mittels eines Gossip-Protokolls die neuen Blocks der Blockchain an alle Knoten.
 %TODO: add gossip protocol to glossary

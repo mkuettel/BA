@@ -7,7 +7,7 @@ In dieser Grundlagenforschung hat sich herausgestellt,
 dass sich die Mindestlatenz bei Skalierung des Netzwerks,
 wenn alle Knoten dieselbe Bandbreitenbeschränkung haben,
 nicht markant verändert.
-Das Messresultat für 256 Knoten war jedoch überraschend und dies deutet wahrscheinlich auf ein Problem mit der Testinfrastruktur hin.
+Das Messresultat für 256 Knoten war jedoch überraschend und dies deutet auf ein Problem mit der Testinfrastruktur hin.
 Zukünftig könnte die Testinfrastruktur diesbezüglich verbessert werden.
 Anstatt das man die Knoten nur horizontal auf einer einzelnen Maschine skaliert, würde es Sinn ergeben, diese auf mehrere Maschinen zu verteilen.
 % Diese Arbeit konnte mit dem erstellen eines I2P-Testnetzwerks nun einen Grundstein legen für weitere Untersuchungen.
@@ -22,7 +22,7 @@ Zusätzlich gäbe es einige weitere I2P-spezifische technische Ideen, die zur Ve
   \item Die ausgewählte Tunnellänge von 3 könnte eventuell auch auf Kosten der Anonymität auf 2 verringert werden. Alle Knoten die auch Teil des DIVA.EXCHANGE Netzwerkes sind, hätten standardmässig dieselbe Einstellung.
     Zudem wird immer ein Inbound- und ein Outbound-Tunnel miteinander verbunden, wodurch trotzdem ein hoher Anonymitätsgrad erreicht werden kann.
     Jedoch könnte ein Knoten, der ein Deanonymisierungsangriff durchführen will die Tunnellänge auf 0 setzen.
-  \item Aufgrund des Verhalten der im Garlic-Routing verwendeten Cloves wäre es auch interessant in Zukunft gleichzeitig Nachrichten über das Testnetzwerk zu versenden. Es könnte sein, dass sich diese ''Grundlatenz'' von 5 Sekunden bildet, weil ein Router darauf wartet, dass er mehrere Nachrichten miteinander verpacken kann oder dies zur Verbesserung der Anonymität Nachrichten extra verzögert.
+  \item Aufgrund des Verhaltens der im Garlic-Routing verwendeten Cloves wäre es auch interessant in Zukunft gleichzeitig Nachrichten über das Testnetzwerk zu versenden. Es könnte sein, dass sich die ''Grundlatenz'' von 5 Sekunden bildet, weil ein Router darauf wartet, dass er mehrere Nachrichten miteinander verpacken kann oder zur Verbesserung der Anonymität Nachrichten extra verzögert.
   \item Neben dem Socks5-Proxy, der \lstinline|i2pd| anbietet, gibt es weitere Möglichkeiten Nachrichten über das I2P-Netzwerk zu verschicken.
     Unter anderem gäbe es das SAM-Protokoll \parencite{noauthor_sam_nodate}.
     Es könnte möglich sein, bessere Performanz mit diesem Protokoll zu erreichen, anstatt einen Socks5 oder HTTP-Proxy zu verwenden. 
@@ -30,13 +30,15 @@ Zusätzlich gäbe es einige weitere I2P-spezifische technische Ideen, die zur Ve
 \end{itemize}
 
 
+\clearpage
+
 \section{Projektfazit}
 % TODO Das Fazit des Projektes, auch eine Unterteilung in \subsection mit persönlichem und Projektfazit ist möglich
 
 Aus Sicht des Auftraggebers ist das Projekt ein Erfolg:
 Es konnten empirische Daten gesammelt werden bezüglich der Latenzzeiten von I2P und die Testinfrastruktur kann in Zukunft wiederverwendet werden, sodass nun einfacher weitere Experimente durchgeführt werden können.
 Auch wenn der erst eingeschlagene Lösungsweg mit NixOS nicht wie erhofft funktioniert hat, konnte trotzdem eine passende Lösung gefunden werden.
-
+Gegen Ende des Projekts wurde jedoch zu viel Zeit in die Testinfrastruktur investiert, sodass nicht mehr viel Zeit für die Messungen und zum Fertigstellen des Berichts übrig war. Dies hätte besser geplant werden sollen und es hätten früher Abstriche gemacht werden sollen.
 
 \section{Persönliches Fazit}
 

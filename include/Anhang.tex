@@ -17,11 +17,11 @@
 \chapter{Resultate}\label{ch:resultate}
 
 Die folgende Tabelle~\fullref{tab:resultate} beschreibt Resultate und Unterresultate die während dieser Bachelorarbeit erarbeitet werden sollen.
-Diese Tabelle wurde zu Beginn des Projekts zusammengestellt anhand der Anforderungen im Abschnitt~\ref{sec:Anforderungen}.
- Diese Liste von Resultaten wurde aus Planungsgründen erstellt, um etwa einschätzen zu können, wie viel Aufwand welche Teile der Arbeit mit sich bringen und den Umfang abzugrenzen.
+Diese Tabelle wurde zu Beginn des Projekts zusammengestellt anhand der Anforderungen im Abschnitt~\ref{sub:Anforderungen}.
+Sie wurde aus Planungsgründen erstellt, um etwa einschätzen zu können, wie viel Aufwand welche Teile der Arbeit mit sich bringen und den Umfang abzugrenzen.
 Jedes Resultat hat einen eindeutigen Identifier in  der Spalte ''Nr'' aufgelistet.
 Die Spalte ``Anforderung'' bezieht sich darauf, welche Anforderungen für das jeweilige Resultat massgebend sind.
-In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Projekts abgeschätzt wie viel Arbeitsaufwand (in Stunden) das Resultat verursacht.
+In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Projekts abgeschätzt, wie viel Arbeitsaufwand (in Stunden) das Resultat verursacht.
 
 \begin{longtable}{p{0.8cm} l p{3.5cm} p{2cm}}
     \toprule
@@ -56,7 +56,7 @@ In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Proje
     R.4.3        & \; -- Bandbreite                                     &       &  2h  \\
     R.4.4        & \; -- Latenz                                         &       &  2h  \\
     R.5          & \; Deployment von Testnetzwerken                    &       &  4h  \\
-    R.6          & \; Beschreibung der Wissenschaftlichen Methode      &       &  2h  \\
+    R.6          & \; Beschreibung der wissenschaftlichen Methode      &       &  2h  \\
     R.7          & \; Metriken für die Auswertung                      & \reqref{TPER} \reqref{TISO} \reqref{TREP}  &  6h  \\
     \midrule                                                               
     K            & \textbf{Testkonzept          }                               & \reqref{TKON} \reqref{DOCS}  & \textbf{Total 46h}  \\
@@ -64,7 +64,7 @@ In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Proje
     K.1          & \; Beschreibung Ideen / Konzepte                    &       &  4h  \\
     K.2          & \; Anforderungen an den Teststand                   &       &  4h  \\
     K.3          & \; Teststrategie                                    &       &  4h  \\
-    K.4          & \; Architektur Teststand                            &     f &  4h  \\
+    K.4          & \; Architektur Teststand                            &       &  4h  \\
     K.5          & \; Komponentendiagramm                              &       &  2h  \\
     K.6          & \; Beschreibung was gemessen werden soll            &       &  8h  \\
     K.7.1        & \; -- Bandbreite                                     & \reqref{TLIM} &  2h  \\
@@ -72,10 +72,10 @@ In der letzten Spalte ''Geschätzter Arbeitsaufwand'', wurde zu beginn des Proje
     K.7.1        & \; -- Latenz von Nachrichten                         & \reqref{TLAT}    &  2h  \\
     K.7.1        & \; -- Ressourcenauslastung eines Knotens             & \reqref{TPER}    &  2h  \\
     K.8          & \; Beschreibung wie gemessen wird                   &       & 10h  \\
-    K.8.1        & \; -- Isolation des Netzwerks                        & \reqref{ORDR}    &  2h  \\
-    K.8.1        & \; -- Verschiedene Netzwerksegmente                  & \reqref{ORDR}    &  2h  \\
-    K.8.2        & \; -- Latenz                                         & \reqref{ORDR}    &  2h  \\
-    K.8.3        & \; -- Bandbreite                                     &       &  2h  \\
+    K.8.1        & \; -- Isolation des Netzwerks                        & \reqref{TISO}    &  2h  \\
+    K.8.1        & \; -- Verschiedene Netzwerksegmente                  & \reqref{TISO}    &  2h  \\
+    K.8.2        & \; -- Latenz                                         & \reqref{TLAT}    &  2h  \\
+    K.8.3        & \; -- Bandbreite                                     & \reqref{TLIM}      &  2h  \\
     K.8.4        & \; -- Konfigurationsmöglichkeiten                    & \reqref{TCNF} &  2h  \\
     K.9.5        & \; \glsname{ci}                                     & \reqref{TVRS} &  6h  \\
     K.9.6        & \; Beschreibung der Auswertungsmethode              &               &  4h  \\
